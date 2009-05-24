@@ -1,10 +1,14 @@
-# Django settings for elevenbits project.
+#
+# elevenbits.com
+#
+
+import os.path
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Jan Willems', 'jw@elevenbits.com'),
+    ('Jan Willems', 'jw@elevenbits.com'),
 )
 
 MANAGERS = ADMINS
@@ -40,7 +44,7 @@ MEDIA_URL = ''
 ADMIN_MEDIA_PREFIX = '/media/'
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '0u^l=%@(2_imjz(4gt2^)bn0%)8496m9!ahi3rf-j+sdwxesq1'
+SECRET_KEY = '0u^l=%@(2_imjz(4gt2^)bn0%)8496m9!asshisqdf3rf-j+sdwxesq1'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -50,6 +54,7 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'django.middleware.gzip.GZipMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -58,9 +63,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'elevenbits.urls'
 
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+    os.path.join(os.path.dirname(__file__), 'templates').replace('\\','/'),
 )
 
 INSTALLED_APPS = (
@@ -70,4 +73,5 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.admindocs',
+    'elevenbits.blog',
 )
