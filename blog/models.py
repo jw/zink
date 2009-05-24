@@ -24,13 +24,18 @@ class Entry(models.Model):
                                 help_text="Is this entry viewable on site?")
     
     posted = models.DateTimeField('posted',
-                                  help_text='Date and time when this entry went public')
+                                  help_text='Date and time when this entry went public',
+                                  blank=True)
     
     tags = models.ManyToManyField(Tag, blank=True)
     
+    class Meta:
+        ordering = ['posted']
+
     def __unicode__(self):
         return self.title
 
+# Comments
 class Comment(models.Model):
 
     created = models.DateTimeField('created',

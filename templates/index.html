@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}[ElevenBits] Blog{% endblock %}
+
+{% block content %}
+{% if latest_entry_list %}
+    <ul>
+    {% for entry in latest_entry_list %}
+        <li>{{ entry.title }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No blog entries are available.</p>
+{% endif %}
+{% endblock %}
+
