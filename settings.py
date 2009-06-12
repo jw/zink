@@ -2,7 +2,7 @@
 # elevenbits.com
 #
 
-import os.path
+import os.path # for the templates join
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -29,14 +29,9 @@ SITE_ID = 1
 # to load the internationalization machinery.
 USE_I18N = True
 
-# Absolute path to the directory that holds media.
-# Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = ''
-
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash if there is a path component (optional in other cases).
-# Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = ''
+# Update this setting when going to a production site
+MEDIA_URL = 'http://localhost/'
+MEDIA_ROOT = os.path.join(os.path.dirname(__file__), "media")
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
@@ -44,7 +39,7 @@ MEDIA_URL = ''
 ADMIN_MEDIA_PREFIX = '/media/'
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '0u^l=%@(2_imjz(4gt2^)bn0%)8496m9!asshisqdf3rf-j+sdwxesq1'
+SECRET_KEY = '0u^l=%@(2_imjrza(c4hgitd2a^)bn0%)8496m9!asshisqdf3rf-j+sdwxesq1'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -58,13 +53,19 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
+
+INTERNAL_IPS = ('127.0.0.1',)
 
 ROOT_URLCONF = 'elevenbits.urls'
 
 TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(__file__), 'templates').replace('\\','/'),
+    os.path.join(os.path.dirname(__file__), '../python/django-debug').replace('\\','/'),
 )
+
+SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -73,5 +74,9 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.admindocs',
+    'django.contrib.markup',
+    'debug_toolbar',
     'elevenbits.blog',
+    'elevenbits.menu',
+    'elevenbits',
 )

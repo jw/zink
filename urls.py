@@ -12,6 +12,9 @@ urlpatterns = patterns('',
     # Hello world
     ('^$', home),
     
+    # menu
+    (r'^menu/$', 'elevenbits.menu.views.index'),
+
     # blog
     (r'^blog/$', 'elevenbits.blog.views.index'),
 

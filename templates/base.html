@@ -1,14 +1,22 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="{{ LANGUAGE_CODE }}" xml:lang="{{ LANGUAGE_CODE }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
     <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}/default.css" />
+	{% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
 </head>
 <body>
-    <h1>My helpful timestamp site</h1>
-    {% block content %}{% endblock %}
-    {% block footer %}
-    <hr>
-    <p>Thanks for visiting my site.</p>
-    {% endblock %}
+	<div class="main">
+		{% block header %}{% endblock %}
+		{% block menu %}{% endblock %}
+    	{% block content %}{% endblock %}
+    	{% block footer %}
+    	<div class="footer">
+			{% load revision %}
+			<div class="left">[11.06.2009, 2238hrs, release: {% revision %}]</div>
+			<div class="right">© copyright 2004-2009, m8n</div>
+		</div>
+    	{% endblock %}
+    </div>
 </body>
 </html>

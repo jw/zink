@@ -31,6 +31,7 @@ class Entry(models.Model):
     
     class Meta:
         ordering = ['posted']
+        verbose_name_plural = 'Entries'
 
     def __unicode__(self):
         return self.title
@@ -45,6 +46,10 @@ class Comment(models.Model):
     
     entry = models.ForeignKey(Entry)
     
+    class Meta:
+        verbose_name = 'Comment'
+        verbose_name_plural = 'Comments'
+
     def __unicode__(self):
         return self.body
     

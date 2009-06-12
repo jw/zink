@@ -1,16 +1,48 @@
 {% extends "base.html" %}
 
-{% block title %}[ElevenBits] Blog{% endblock %}
+{% block title %}[{{ host }}] {{ title }} {% endblock %}
+
+{% block menu %}
+    <div class="menu"><ul>
+    	{% for menu in menu_list %}
+    		<li>
+	       		<a href={{menu.link}}>{{ menu.name }}</a>
+	       	</li>
+    	{% endfor %}
+	</ul></div>
+{% endblock%}
 
 {% block content %}
+	
+	{% load markup %}
+	
+	<div class="content">
+	
+		<div class="logo">
+			<img title="m8n" alt="m8n" src="{{MEDIA_URL}}images/m8n.png"/>
+		</div>
+
 {% if latest_entry_list %}
-    <ul>
+	<h1>[ElevenBits]</h1>
+	<h2>Welcome!</h2>
+	
     {% for entry in latest_entry_list %}
-        <li>{{ entry.title }}</li>
+    	
+        <div class="entry">
+	        <h3>{{ entry.title }}</h3>
+			<h4>{{ entry.posted|date:"l, nS F Y, Hi\h\r\s" }}</h4>
+        	<div class="entry.body">
+	        	{{ entry.body|restructuredtext }}
+        	</div>
+        </div>
+
     {% endfor %}
-    </ul>
+
 {% else %}
     <p>No blog entries are available.</p>
 {% endif %}
+
+	</div>
+
 {% endblock %}
 
