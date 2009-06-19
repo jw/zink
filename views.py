@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 from django.http import HttpResponse
 
 def home(request):

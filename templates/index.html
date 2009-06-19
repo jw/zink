@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}[{{ host }}] {{ title }} {% endblock %}
+{% block title %}[{{ page.title }}] {{ page.header }} {% endblock %}
 
 {% block menu %}
     <div class="menu"><ul>
@@ -14,8 +14,6 @@
 
 {% block content %}
 	
-	{% load markup %}
-	
 	<div class="content">
 	
 		<div class="logo">
@@ -23,17 +21,30 @@
 		</div>
 
 {% if latest_entry_list %}
-	<h1>[ElevenBits]</h1>
-	<h2>Welcome!</h2>
+	<h1>[{{ page.title }}]</h1>
+	<h2>{{ page.header }}</h2>
 	
     {% for entry in latest_entry_list %}
     	
         <div class="entry">
+
 	        <h3>{{ entry.title }}</h3>
 			<h4>{{ entry.posted|date:"l, nS F Y, Hi\h\r\s" }}</h4>
-        	<div class="entry.body">
-	        	{{ entry.body|restructuredtext }}
+			
+			{% if entry.tags.all %}
+			<div class="tags"> 
+				{% for tag in entry.tags.all %}
+					<a href="blog/tag/all/{{tag.tag}}">{{tag.tag}}</a>
+					{% if not forloop.last %} | {% endif %}
+				{% endfor %}
+			</div>
+			{% endif %}
+
+        	<div class="body">
+        		{% load markup %}
+	        	{{ entry.body|markdown:"codehilite(force_linenos=True)" }}
         	</div>
+
         </div>
 
     {% endfor %}

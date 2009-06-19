@@ -83,7 +83,7 @@ body {
 }
 
 .menu ul li a {
-	background: url("http://www.yttrium.be/images/menu/right.png") no-repeat;
+	background: url("http://localhost/images/right.png") no-repeat;
 	width: 180px;
 	height: 2em;
 	/*border-top: 1px solid #EDEEE8;*/
@@ -103,7 +103,7 @@ body {
 }
 
 .menu ul ul li a {
-	background: url("http://www.yttrium.be/images/menu/sub.png") no-repeat;
+	background: url("http://localhost/images/sub.png") no-repeat;
 	width: 180px;
 	height: 2em;
 	border-bottom: 1px dotted #BCBEB1;
@@ -122,7 +122,7 @@ body {
 
 .menu ul li a:hover {
 	color: #4B6060;
-	background: url("http://www.yttrium.be/images/menu/right.png") no-repeat;
+	background: url("http://localhost/images/right.png") no-repeat;
 	border-top-width: 1px;
 	border-right-width: 0px;
 	border-bottom-width: 1px;
@@ -137,7 +137,7 @@ body {
 .menu ul ul li a:hover {
 	text-indent: 40px;
 	color: #4B6060;
-	background: url("http://www.yttrium.be/images/menu/sub.png") no-repeat;
+	background: url("http://localhost/images/sub.png") no-repeat;
 	border-top-width: 1px;
 	border-bottom-width: 1px;
 	border-left-width: 1px;
@@ -291,9 +291,12 @@ body {
 	color: #c30;
 }
 
+/* TODO: why is this here? */
 td, th {
+	/*
 	padding: 5px 5px 5px 5px;
 	height: 25px;
+	*/
 }
 
 
@@ -303,6 +306,28 @@ td, th {
 
 .content .box .next {
 	text-align: right;
+}
+
+/*
+ * the blog entries
+ */
+ 
+.entry {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.entry .body {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	/* background-color: red;*/
+}
+
+.entry .tags {
+	color:#41423C;
+	font-size:12px;
+	margin:0;
+	/* background-color: green; */
 }
 
 /*
@@ -429,56 +454,3 @@ h6 {
 	border-bottom-style: dotted;
 	border-bottom-color: #464c4c;
 }		
-
-/*
- * commented out stuff
- */
-
-/*
-pre {
-	margin: 10px;
-	text-align: left;
-	font-size: 100%;
-    padding: 5px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #cc3300;
-    background-color: #ffffff;
-    overflow: auto;
-}
-*/
-
-
-/*
-hr {
-	width: 100%;
-    height: 1px;
-    background-color: grey;
-    border-width: 0px;
-    padding: 0px;
-    color: grey;
-}
-*/		
-
-/*
-#link {
-	text-decoration: none;
-	font-weight: bold;
-}
-*/
-
-/*
- * error tag
- */
-/*
-#error {
-	color: #cc3300;
-	font-weight: bold;
-}
-*/
-
-/*
-tt {
-   font-family: "Courier New", Courier, monospace;
-}
-*/
