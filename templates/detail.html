@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}[{{ page.title }}] {{ page.header }} {% endblock %}
+
+{% block menu %}
+    <div class="menu"><ul>
+    	{% for menu in menu_list %}
+    		<li>
+	       		<a href={{menu.link}}>{{ menu.name }}</a>
+	       	</li>
+    	{% endfor %}
+	</ul></div>
+{% endblock%}
+
+{% block content %}
+	
+<div class="content">
+
+	<div class="logo">
+		<img title="m8n" alt="m8n" src="{{MEDIA_URL}}images/m8n.png"/>
+	</div>
+
+<h1>[{{ page.title }}]</h1>
+<h2>{{ page.header }}</h2>
+	
+	<div class="entry">
+
+		{% include "entry.html" %}
+
+    </div>
+
+</div>
+
+{% endblock %}
+

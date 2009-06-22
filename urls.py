@@ -17,6 +17,10 @@ urlpatterns = patterns('',
 
     # blog
     (r'^blog/$', 'elevenbits.blog.views.index'),
+    (r'^blog/(?P<id>\d+)/$', 'elevenbits.blog.views.detail'),
+
+    # tags
+    (r'^tag/$', 'elevenbits.blog.views.index'),
 
     # admin
     (r'^admin/(.*)', admin.site.root),

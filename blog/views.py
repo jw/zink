@@ -1,5 +1,6 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.shortcuts import render_to_response, get_object_or_404
 
 from elevenbits.blog.models import Entry
 from elevenbits.menu.models import Menu
@@ -19,4 +20,17 @@ def index(request):
                                'latest_entry_list': latest_entry_list},
                               context_instance=RequestContext(request))
 
+def detail(request, id):
+    page = Page.objects.get(title="ElevenBits")
+    menu_list = Menu.objects.all()
+    entry = get_object_or_404(Entry, pk=id)
+    return render_to_response('detail.html', 
+                              {'page': page,
+                               'menu_list': menu_list, 
+                               'entry': entry},
+                              context_instance=RequestContext(request))
+    
 
+
+#def tags(request):
+    

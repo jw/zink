@@ -1,0 +1,27 @@
+
+{% comment %}
+	Here the entry is shown to the user together with the related
+	tags.  The entry.blog is hilited using Pygments.  See elevenbits.com
+	for more information on this.
+{% endcomment %}
+
+<div class="entry">
+
+	<h3>{{ entry.title }}</h3>
+	<h4>{{ entry.posted|date:"l, nS F Y, Hi\h\r\s" }}</h4>
+	
+	{% if entry.tags.all %}
+		<div class="tags"> 
+			{% for tag in entry.tags.all %}
+				<a href="blog/tag/all/{{tag.tag}}">{{tag.tag}}</a>
+				{% if not forloop.last %} | {% endif %}
+			{% endfor %}
+		</div>
+	{% endif %}
+
+    <div class="body">
+    	{% load markup %}
+       	{{ entry.body|markdown:"codehilite(force_linenos=True)" }}
+    </div>
+
+</div>

@@ -291,15 +291,6 @@ body {
 	color: #c30;
 }
 
-/* TODO: why is this here? */
-td, th {
-	/*
-	padding: 5px 5px 5px 5px;
-	height: 25px;
-	*/
-}
-
-
 .content .box .previous {
 	text-align: left;
 }
@@ -320,15 +311,18 @@ td, th {
 .entry .body {
 	margin-top: 10px;
 	margin-bottom: 10px;
-	/* background-color: red;*/
 }
 
 .entry .tags {
-	color:#41423C;
-	font-size:12px;
-	margin:0;
-	/* background-color: green; */
+	color: #41423C;
+	font-size: 12px;
+	margin: 0;
 }
+
+.entry .body p img {
+	border: solid 2px #53554B;
+	width: 500px;
+} 
 
 /*
  * at last! the footer
