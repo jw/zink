@@ -30,7 +30,13 @@ def detail(request, id):
                                'entry': entry},
                               context_instance=RequestContext(request))
     
-
-
-#def tags(request):
+def tags(request, tag):
+    page = Page.objects.get(title="ElevenBits")
+    menu_list = Menu.objects.all()
+    latest_entry_list = Entry.objects.filter(tags__tag=tag).reverse()
+    return render_to_response('index.html', 
+                              {'page': page,
+                               'menu_list': menu_list, 
+                               'latest_entry_list': latest_entry_list},
+                              context_instance=RequestContext(request))
     

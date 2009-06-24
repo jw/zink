@@ -20,7 +20,7 @@ urlpatterns = patterns('',
     (r'^blog/(?P<id>\d+)/$', 'elevenbits.blog.views.detail'),
 
     # tags
-    (r'^tag/$', 'elevenbits.blog.views.index'),
+    (r'^tag/(?P<tag>\w+)/$', 'elevenbits.blog.views.tags'),
 
     # admin
     (r'^admin/(.*)', admin.site.root),
