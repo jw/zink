@@ -17,7 +17,7 @@
 	{% if entry.tags.all %}
 		<div class="tags"> 
 			{% for tag in entry.tags.all %}
-				<a href="tag/all/{{tag.tag}}">{{tag.tag}}</a>
+				<a href="/tag/{{tag.pk}}">{{tag.tag}}</a>
 				{% if not forloop.last %} | {% endif %}
 			{% endfor %}
 		</div>

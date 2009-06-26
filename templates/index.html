@@ -1,35 +1,16 @@
 {% extends "base.html" %}
 
-{% block title %}[{{ page.title }}] {{ page.header }} {% endblock %}
-
 {% block menu %}
     {% include "menu.html" %}
 {% endblock%}
 
-{% block content %}
-	
-	<div class="content">
-	
-		<div class="logo">
-			<img title="m8n" alt="m8n" src="{{MEDIA_URL}}/images/m8n.png"/>
-		</div>
-
-{% if latest_entry_list %}
-
-	<h1>[{{ page.title }}]</h1>
-	<h2>{{ page.header }}</h2>
-	
-    {% for entry in latest_entry_list %}
-    	
-		{% include "entry.html" %}
-
-    {% endfor %}
-
-{% else %}
-    <p>No blog entries are available.</p>
-{% endif %}
-
-	</div>
-
+{% block body %}
+	{% if latest_entry_list %}
+	    {% for entry in latest_entry_list %}
+			{% include "entry.html" %}
+	    {% endfor %}
+	{% else %}
+    	<p>No blog entries are available.</p>
+	{% endif %}
 {% endblock %}
 

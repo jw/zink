@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="{{ LANGUAGE_CODE }}" xml:lang="{{ LANGUAGE_CODE }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block page_title %}[{{ page.title }}] {{ page.header }}{% endblock %}</title>
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
     <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}/default.css" />
     <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}/style.css" />
@@ -12,7 +12,29 @@
 	<div class="main">
 		{% block header %}{% endblock %}
 		{% block menu %}{% endblock %}
-    	{% block content %}{% endblock %}
+    	{% block content %}
+    		<div class="content">
+    			{% block logo %}
+    				<div class="logo">
+						<img title="m8n" alt="m8n" src="{{MEDIA_URL}}/images/m8n.png"/>
+					</div>
+    			{% endblock %}
+    			{% block title %}
+					<h1>[{{ page.title }}]</h1>
+					<h2>{{ page.header }}</h2>
+    			{% endblock %}
+    			{% block message %}
+    			    {% if messages %}
+    			    	<div class="messages">
+		    				{% for message in messages %}
+								<div class="message">{{message}}</div>
+						    {% endfor %}
+						</div>
+					{% endif %}
+    			{% endblock %}
+    			{% block body %}{% endblock %}
+    		</div>
+    	{% endblock %}
     	{% block footer %}
     	<div class="footer">
 			{% load revision %}
