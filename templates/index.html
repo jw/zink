@@ -3,13 +3,7 @@
 {% block title %}[{{ page.title }}] {{ page.header }} {% endblock %}
 
 {% block menu %}
-    <div class="menu"><ul>
-    	{% for menu in menu_list %}
-    		<li>
-	       		<a href={{menu.link}}>{{ menu.name }}</a>
-	       	</li>
-    	{% endfor %}
-	</ul></div>
+    {% include "menu.html" %}
 {% endblock%}
 
 {% block content %}
@@ -17,7 +11,7 @@
 	<div class="content">
 	
 		<div class="logo">
-			<img title="m8n" alt="m8n" src="{{MEDIA_URL}}images/m8n.png"/>
+			<img title="m8n" alt="m8n" src="{{MEDIA_URL}}/images/m8n.png"/>
 		</div>
 
 {% if latest_entry_list %}

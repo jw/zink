@@ -28,7 +28,7 @@ LANGUAGE_CODE = 'en-BE'
 USE_I18N = True
 
 # Update this setting when going to a production site
-MEDIA_URL = 'http://www.elevenbits.com/media/'
+MEDIA_URL = 'http://www.elevenbits.com/media'
 MEDIA_ROOT = os.path.join(os.path.dirname(__file__), "media")
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a

@@ -3,13 +3,7 @@
 {% block title %}[{{ page.title }}] {{ page.header }} {% endblock %}
 
 {% block menu %}
-    <div class="menu"><ul>
-    	{% for menu in menu_list %}
-    		<li>
-	       		<a href="{{menu.link}}">{{ menu.name }}</a>
-	       	</li>
-    	{% endfor %}
-	</ul></div>
+    {% include "menu.html" %}
 {% endblock%}
 
 {% block content %}
