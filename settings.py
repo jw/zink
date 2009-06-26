@@ -28,7 +28,7 @@ LANGUAGE_CODE = 'en-BE'
 USE_I18N = True
 
 # Update this setting when going to a production site
-MEDIA_URL = 'http://localhost/'
+MEDIA_URL = 'http://www.elevenbits.com/'
 MEDIA_ROOT = os.path.join(os.path.dirname(__file__), "media")
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
@@ -43,7 +43,6 @@ SECRET_KEY = '0u^l=%@(2_imjrza(c4hgitd2a^)bn0%)8496m9!asshisqdf3rf-j+sdwxesq1'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.load_template_source',
     'django.template.loaders.app_directories.load_template_source',
-#     'django.template.loaders.eggs.load_template_source',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -51,10 +50,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    #'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
-
-#INTERNAL_IPS = ('127.0.0.1',)
 
 ROOT_URLCONF = 'elevenbits.urls'
 
@@ -72,7 +68,6 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.markup',
-#    'debug_toolbar',
     'elevenbits.page',
     'elevenbits.blog',
     'elevenbits.menu',
