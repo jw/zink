@@ -2,7 +2,7 @@
 # elevenbits.com
 #
 
-import os.path # for the templates join
+import os.path # for the joins
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -28,7 +28,7 @@ LANGUAGE_CODE = 'en-BE'
 USE_I18N = True
 
 # Update this setting when going to a production site
-MEDIA_URL = 'http://www.elevenbits.com/'
+MEDIA_URL = 'http://www.elevenbits.com/media/'
 MEDIA_ROOT = os.path.join(os.path.dirname(__file__), "media")
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
@@ -56,7 +56,6 @@ ROOT_URLCONF = 'elevenbits.urls'
 
 TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(__file__), 'templates').replace('\\','/'),
-    os.path.join(os.path.dirname(__file__), '../python/django-debug').replace('\\','/'),
 )
 
 SITE_ROOT = os.path.dirname(os.path.realpath(__file__))

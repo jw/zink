@@ -1,8 +1,9 @@
 #!/bin/bash
-rmdir /tmp/elevenbits
+cd /home/jw/python/workspace/elevenbits
+rm -rf /tmp/elevenbits
 mkdir /tmp/elevenbits
-svn export . /svn/elevenbits
-scp -r /svn/elevenbits jw@elevenbits.com:/home/jw/
+svn export . /tmp/elevenbits --force
+scp -r /tmp/elevenbits jw@elevenbits.com:/home/jw/
 
 
  
