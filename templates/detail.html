@@ -5,12 +5,12 @@
 {% endblock%}
 
 {% block body %}
-	{% if latest_entry_list %}
+	{% if entry %}
 		<div class="entry">
 			{% include "entry.html" %}
 	    </div>
 	{% else %}
-	    <p>No blog entries are available.</p>
+	    <p>No entry is available.</p>
 	{% endif %}
 {% endblock %}
 

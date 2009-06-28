@@ -7,6 +7,9 @@ from elevenbits.blog.models import Tag
 from elevenbits.menu.models import Menu
 from elevenbits.page.models import Page
 
+from elevenbits.guest.decorators import guest_allowed, login_required
+
+@guest_allowed
 def index(request):
     page = Page.objects.get(title="ElevenBits")
     menu_list = Menu.objects.all()
@@ -21,6 +24,7 @@ def index(request):
                                'latest_entry_list': latest_entry_list},
                               context_instance=RequestContext(request))
 
+@guest_allowed
 def detail(request, id):
     page = Page.objects.get(title="ElevenBits")
     menu_list = Menu.objects.all()
