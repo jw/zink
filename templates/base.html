@@ -38,8 +38,12 @@
     	{% block footer %}
     	<div class="footer">
 			{% load revision %}{% load users %}
-			<div class="left">[11.06.2009, 2238hrs, release: {% revision %}, users: {% all_users %} = {% authenticated_users %} {% unauthenticated_users %}]</div>
-			<div class="right">© copyright 2004-2009, m8n</div>
+			<div class="left">
+				[11.06.2009, 2238hrs, release: {% revision %}, current users: {% all_users %}]
+			</div>
+			<div class="right">
+				© copyright 2004-2009, m8n
+			</div>
 		</div>
     	{% endblock %}
     </div>
