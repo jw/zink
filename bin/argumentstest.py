@@ -1,0 +1,70 @@
+import random
+import unittest
+
+from arguments import Source
+from arguments import Destination
+
+class TestArguments(unittest.TestCase):
+
+    def testsource(self):
+        s = Source("https://jw|secret@172.16.18.203:/home/jw")
+        self.assertEqual(s.schema, "https")
+        self.assertEqual(s.username, "jw")
+        self.assertEqual(s.password, "secret")
+        self.assertEqual(s.host, "172.16.18.203")
+        self.assertEqual(s.path, "/home/jw")
+        s = Source("jw|secret@172.16.18.203:/home/jw")
+        self.assertEqual(s.schema, None)
+        self.assertEqual(s.username, "jw")
+        self.assertEqual(s.password, "secret")
+        self.assertEqual(s.host, "172.16.18.203")
+        self.assertEqual(s.path, "/home/jw")
+        s = Source("jw@172.16.18.203:/home/jw")
+        self.assertEqual(s.schema, None)
+        self.assertEqual(s.username, "jw")
+        self.assertEqual(s.password, None)
+        self.assertEqual(s.host, "172.16.18.203")
+        self.assertEqual(s.path, "/home/jw")
+        s = Source("172.16.18.203:/home/jw")
+        self.assertEqual(s.schema, None)
+        self.assertEqual(s.username, None)
+        self.assertEqual(s.password, None)
+        self.assertEqual(s.host, "172.16.18.203")
+        self.assertEqual(s.path, "/home/jw")
+        s = Source("https://172.16.18.203:/home/jw")
+        self.assertEqual(s.schema, "https")
+        self.assertEqual(s.username, None)
+        self.assertEqual(s.password, None)
+        self.assertEqual(s.host, "172.16.18.203")
+        self.assertEqual(s.path, "/home/jw")
+        s = Source("/home/jw")
+        self.assertEqual(s.username, None)
+        self.assertEqual(s.password, None)
+        self.assertEqual(s.host, None)
+        self.assertEqual(s.path, "/home/jw")
+
+    def testdestination(self):
+        d = Destination("jw|secret@172.16.18.203:/home/jw")
+        self.assertEqual(d.username, "jw")
+        self.assertEqual(d.password, "secret")
+        self.assertEqual(d.host, "172.16.18.203")
+        self.assertEqual(d.path, "/home/jw")
+        d = Destination("jw@172.16.18.203:/home/jw")
+        self.assertEqual(d.username, "jw")
+        self.assertEqual(d.password, None)
+        self.assertEqual(d.host, "172.16.18.203")
+        self.assertEqual(d.path, "/home/jw")
+        d = Destination("172.16.18.203:/home/jw")
+        self.assertEqual(d.username, None)
+        self.assertEqual(d.password, None)
+        self.assertEqual(d.host, "172.16.18.203")
+        self.assertEqual(d.path, "/home/jw")
+        d = Destination("/home/jw")
+        self.assertEqual(d.username, None)
+        self.assertEqual(d.password, None)
+        self.assertEqual(d.host, None)
+        self.assertEqual(d.path, "/home/jw")
+
+if __name__ == '__main__':
+    suite = unittest.TestLoader().loadTestsFromTestCase(TestArguments)
+    unittest.TextTestRunner(verbosity=5).run(suite)
