@@ -51,8 +51,7 @@ class Deployer:
                           help="Make lots of noise.")
         parser.add_option("--version", type="string", default="1.0.0", 
                           help="Set the version of the deployed system [default: %default].")
-        parser.add_option("--tag", action="store_true", default=False, 
-                          help="Tag the Subversion tree.")
+        parser.add_option("--tag", help="Tag the Subversion tree.")
         parser.add_option("--port", type="int", default="22",
                           help="The SSH port on the destination host [default: %default].")
         (options, args) = parser.parse_args()
@@ -183,6 +182,33 @@ class Deployer:
             print "Exported " + trunk + " to this machine successfully."
         return True
     
+    def tag_it(self):
+        """
+            Tags the source after checking the users properties.
+            Returns True when success, False otherwise.
+        """
+        url = self.source.schema + "://" + self.source.host + self.source.path
+        source_url = join(url, "trunk")
+        destination_url = join(url, "tags", self.tag)
+        
+        log_message = "Deployer updated the tree with tag " + self.tag + "."
+        def get_log_message():
+            return True, log_message
+
+        self.client.callback_get_log_message = get_log_message
+
+        logging.debug("Tagging " + source_url + " -> " + destination_url)
+
+        try:
+            self.client.copy(source_url, destination_url)
+        except pysvn.ClientError as (e):
+            for message, code in e.args[1]:
+                logging.warn(str(message) + " [" + str(code) + ":" + __svn_errors[code] + "] ")
+                print "Could not tag the tree - " + str(message) + " [" + str(code) + ":" + __svn_errors[code] + "]"
+            return False            
+        
+        return True
+    
     def update_export(self):
         """
             Updates the exported source file.
@@ -217,7 +243,7 @@ class Deployer:
             return True
         else:
             logging.warn("Oops: django.wsgi does not exist!")
-        print "warning: could not properly update the django.wsgi.  Trying to continue..."
+        print "Warning: could not properly update the django.wsgi.  Trying to continue..."
         return False
 
     def exists_remotely(self, name):
@@ -304,7 +330,7 @@ class Deployer:
     
     def cleanup(self):
         """
-            All the files that are still open ar closed.
+            All the files that are still open are closed.
             And all the temporary directories are removed.
         """
         self.disconnect()
@@ -314,36 +340,48 @@ class Deployer:
         """
             Deploys source to destination while addressing the given properties. 
         """
-                
+             
         try:
+
+            errors = False
 
             if self.is_proper_svn():
                 logging.debug(str(self.source) + " can be deployed to " + str(self.destination))
             else:
                 logging.warn(str(self.source) + " can not be used as deployment basis.")
+                errors = True
                 
             if self.export_source_to_temp():
                 logging.debug("Exported system successfully.")
             else:
                 logging.warn("Could not export the system.")
+                errors = True
                 
             if self.update_export():
                 logging.debug("Updated the source successfully.")
             else:
                 logging.warn("Could not update the source properly.")
+                errors = True
     
             if self.send_temp_to_destination():
                 logging.debug("Sent the updated source to the destination successfully.")
             else:
                 logging.warn("Could send the updated source the system.")
-                
-            # TODO: tag the Subversion repository
-            # TODO: add the release to the tag of specified
+                errors = True
 
+            if self.tag is not None:
+                if self.tag_it():
+                    print "Tagged " + str(self.source) + " with " + str(self.tag)
+                else:
+                    errors = True
+                    
         finally:
             self.cleanup()
             
-        print "Deployed the project to " + self.destination.host + self.destination.path + " successfully." 
+        if errors:
+            print "Deployed the project to " + self.destination.host + self.destination.path + ".  Some errors occurred."
+        else:
+            print "Deployed the project to " + self.destination.host + self.destination.path + " successfully." 
                 
 if __name__ == "__main__":
     deployer = Deployer() 

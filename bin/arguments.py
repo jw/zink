@@ -7,7 +7,10 @@ class Source:
     
     def __init__(self, request):
         '''
-           Parses a source request.  The request string will be parsed as 
+           Parses a source request.  This is a Subversion location.  Currently
+           the 'head' is always selected.
+                      
+           The request string will be parsed as 
            <schema>[username[|password]@][host:]path where
            protocol: can be http, https, file, svn or svn+ssh all followed by a '://'
            username: the name of the user
