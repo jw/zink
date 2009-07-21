@@ -15,6 +15,7 @@ from optparse import OptionParser
 
 import sys
 import shutil
+from stat import S_ISDIR
 
 import util
 
@@ -231,6 +232,26 @@ class Deployer:
             return False
         else:
             raise RuntimeError, "Error checking file status for %s on remote host" % (name)
+        
+    def empty_remote(self, remote_path):
+        """
+            Empties the remote path.
+        """
+        logging.debug("Removing " + remote_path)
+        if self.exists_remotely(remote_path):
+            logging.debug("Preparing to remove: " + str(self.sftp.listdir(remote_path)))
+            list = self.sftp.listdir(remote_path)
+            for file in list:
+                full = join(remote_path, file)
+                remote_stat = self.sftp.stat(full)                
+                if (S_ISDIR(remote_stat.st_mode)):
+                    logging.debug("Removing files in " + full + "...")
+                    self.empty_remote(full)
+                    logging.debug("Removing dir...")
+                    self.sftp.rmdir(full)
+                else:
+                    logging.debug("Removing file...")
+                    self.sftp.remove(full)
 
     def send_temp_to_destination(self):
         
@@ -239,8 +260,10 @@ class Deployer:
             # prepare the root
             self.sftp.chdir(self.destination.path)
             root = join(self.dir, "trunk")
-            
-            # TODO: empty the root file
+
+            self.empty_remote(self.destination.path)
+            if self.verbose:
+                print "Emptied the remote deploy location."
             
             # get all the files and directories
             def send(args, dirname, filenames):
@@ -268,7 +291,7 @@ class Deployer:
                             print "Sending " + join(dirname, file) + " to " + join(path, file) + "..."
                         self.sftp.put(source, join(path, file), None)
                     else:
-                        logging.warn("oops: " + join(dirname, file) + " is not a file - discarding")
+                        logging.warn("Oops: " + join(dirname, file) + " is not a file - discarding")
             
             # walk over the full tree
             walk(root, send, None)
