@@ -8,7 +8,7 @@ import ConfigParser
 import paramiko
 from paramiko import SSHClient
 
-from os import listdir, makedirs
+from os import listdir, makedirs, removedirs, rmdir
 from os.path import exists, join, basename, walk, isfile
 
 from optparse import OptionParser
@@ -333,6 +333,8 @@ class Deployer:
             All the files that are still open are closed.
             And all the temporary directories are removed.
         """
+        util.removedirs(self.dir)
+        rmdir(self.dir)
         self.disconnect()
         return True
         
@@ -340,9 +342,8 @@ class Deployer:
         """
             Deploys source to destination while addressing the given properties. 
         """
-             
         try:
-
+            
             errors = False
 
             if self.is_proper_svn():
