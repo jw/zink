@@ -9,6 +9,7 @@
  * @version 1.1.0 [28.05.2005, 2000hrs]
  * @version 1.2.0 [02.07.2006, 2300hrs]
  * @version 1.3.0 [11.06.2009, 2236hrs]
+ * @version 1.3.1 [01.08.2009, 1123hrs]
  *
  */
 
@@ -83,7 +84,7 @@ body {
 }
 
 .menu ul li a {
-	background: url("http://localhost/images/right.png") no-repeat;
+	background: url("http://www.elevenbits.com/media/images/right.png") no-repeat;
 	width: 180px;
 	height: 2em;
 	/*border-top: 1px solid #EDEEE8;*/
@@ -103,7 +104,7 @@ body {
 }
 
 .menu ul ul li a {
-	background: url("http://localhost/images/sub.png") no-repeat;
+	background: url("http://www.elevebits.com/media/images/sub.png") no-repeat;
 	width: 180px;
 	height: 2em;
 	border-bottom: 1px dotted #BCBEB1;
@@ -122,7 +123,7 @@ body {
 
 .menu ul li a:hover {
 	color: #4B6060;
-	background: url("http://localhost/images/right.png") no-repeat;
+	background: url("http://www.elevenbits.com/media/images/right.png") no-repeat;
 	border-top-width: 1px;
 	border-right-width: 0px;
 	border-bottom-width: 1px;
@@ -137,7 +138,7 @@ body {
 .menu ul ul li a:hover {
 	text-indent: 40px;
 	color: #4B6060;
-	background: url("http://localhost/images/sub.png") no-repeat;
+	background: url("http://www.elevebits.com/media/images/sub.png") no-repeat;
 	border-top-width: 1px;
 	border-bottom-width: 1px;
 	border-left-width: 1px;
@@ -325,6 +326,31 @@ body {
 } 
 
 /*
+ * Next and previous page
+ */
+
+.page {
+	width: 500px;
+	font-size: 14px;
+	boder: 0 0 0 0;
+	margin: 0 0 0 0;
+}
+
+.newer {
+	float: left;
+	width: 230px;
+	text-align: left;
+        margin: 5px 5px 5px 5px;
+}
+
+.older {
+        float: right;
+        width: 230px;
+	text-align: right;
+	margin: 5px 5px 5px 5px;
+}
+
+/*
  * at last! the footer
  */
 
@@ -333,8 +359,7 @@ body {
 	border-top-style: dotted;
 	border-top-color: #485F5F;
 	display: block;
-	margin: 2px 2px 2px 2px;
-	padding: 2px 2px 25px 2px;
+	margin: 10px 2px 2px 2px;
 	clear: both;
 	font-size: 12px;
 }

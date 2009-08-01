@@ -5,6 +5,7 @@
 {% endblock%}
 
 {% block body %}
+	
 	{% if latest_entry_list %}
 	    {% for entry in latest_entry_list %}
 			{% include "entry.html" %}
@@ -12,5 +13,21 @@
 	{% else %}
     	<p>No blog entries are available.</p>
 	{% endif %}
+	
+	<div class="page">
+		<div class="newer">
+			<div class="no">
+			{% if newer_page %}
+				<a href="/page/{{newer}}">« newer page</a>
+			{% endif %}   
+			</div>
+		</div>
+		<div class="older">
+			{% if older_page %}
+				<a href="/page/{{older}}">older page »</a>
+			{% endif %}  
+		</div>
+	</div>
+
 {% endblock %}
 

@@ -9,18 +9,20 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     
-    # Hello world
-    ('^$', home),
-    
-    # menu
+    # menu - seems quite useless to me
     (r'^menu/$', 'elevenbits.menu.views.index'),
 
     # blog
-    (r'^blog/$', 'elevenbits.blog.views.index'),
-    (r'^blog/(?P<id>\d+)/$', 'elevenbits.blog.views.detail'),
+    ('^$', 'elevenbits.blog.views.index'),
+    (r'^page/(?P<page>\d+)/$', 'elevenbits.blog.views.index'),
+    (r'^page/$', 'elevenbits.blog.views.index'),
+    (r'^detail/(?P<id>\d+)/$', 'elevenbits.blog.views.detail'),
 
     # tags
     (r'^tag/(?P<tag>\w+)/$', 'elevenbits.blog.views.tags'),
+
+    # about
+    (r'^about/', 'elevenbits.about.views.index'),
 
     # admin
     (r'^admin/(.*)', admin.site.root),
