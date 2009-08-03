@@ -15,10 +15,10 @@ import logging
 def index(request, page=0):
     p = Page.objects.get(title="ElevenBits")
     menu_list = Menu.objects.all()
-    last_page = Entry.objects.all().count()/5
-    logging.info("0 | page | last_page")
-    logging.info("0 | " + str(page) + " | " + str(last_page))
-    latest_entry_list = Entry.objects.all().reverse()[int(page)*5:int(page)*5+5]
+    last_page = Entry.objects.filter(active=True).count()/5
+    logging.debug("0 | page | last_page")
+    logging.debug("0 | " + str(page) + " | " + str(last_page))
+    latest_entry_list = Entry.objects.filter(active=True).reverse()[int(page)*5:int(page)*5+5]
     attributes = {'page': p,
                   'menu_list': menu_list, 
                   'current_page': page,
@@ -27,10 +27,10 @@ def index(request, page=0):
                   'latest_entry_list': latest_entry_list}
     # TODO: refactor this!
     if (int(page) != 0):
-        logging.info("is not first page - adding newer")
+        logging.debug("is not first page - adding newer")
         attributes.update(newer_page=True)
     if (int(page) != int(last_page)):
-        logging.info("is not last page - adding older")
+        logging.debug("is not last page - adding older")
         attributes.update(older_page=True)
     logging.info(attributes)
     
