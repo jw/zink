@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="{{ LANGUAGE_CODE }}" xml:lang="{{ LANGUAGE_CODE }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
-    <title>{% block page_title %}[{{ page.title }}] {{ page.header }}{% endblock %}</title>
+    <title>{% block page_title %}[{{ static.title }}] {{ static.header }}{% endblock %}</title>
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
     <meta name="verify-v1" content="Fd+gEgP3mrH4jDTQ6JcMgjkgtI6eNa6Bya5OXvWP+K8=" />
     <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}/default.css" />
@@ -12,7 +12,7 @@
 <body>
 	<div class="main">
 		{% block header %}{% endblock %}
-		{% block menu %}{% endblock %}
+		{% block menu %}{% include "menu.html" %}{% endblock %}
     	{% block content %}
     		<div class="content">
     			{% block logo %}
@@ -21,8 +21,8 @@
 					</div>
     			{% endblock %}
     			{% block title %}
-					<h1>[{{ page.title }}]</h1>
-					<h2>{{ page.header }}</h2>
+					<h1>[{{ static.title }}]</h1>
+					<h2>{{ static.header }}</h2>
     			{% endblock %}
     			{% block message %}
     			    {% if messages %}
@@ -40,10 +40,10 @@
     	<div class="footer">
 			{% load revision %}{% load users %}
 			<div class="left">
-				[11.06.2009, 2238hrs, release: {% revision %}, current users: {% all_users %}]
+				[{{static.deployment_time}}, release: {% revision %}, current users: {% all_users %}]
 			</div>
 			<div class="right">
-				&#169; copyright 2004-2009, m8n
+				{{static.copyright}}
 			</div>
 		</div>
     	{% endblock %}

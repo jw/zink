@@ -70,6 +70,7 @@ INSTALLED_APPS = (
     'django.contrib.markup',
     'elevenbits.page',
     'elevenbits.blog',
+    'elevenbits.static',
     'elevenbits.menu',
     'elevenbits.guest',
     'elevenbits',

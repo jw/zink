@@ -6,6 +6,7 @@ from elevenbits.blog.models import Entry
 from elevenbits.blog.models import Tag
 from elevenbits.menu.models import Menu
 from elevenbits.page.models import Page
+from elevenbits.static.models import Static
 
 from elevenbits.guest.decorators import guest_allowed, login_required
 
@@ -14,12 +15,17 @@ import logging
 @guest_allowed
 def index(request, page=0):
     p = Page.objects.get(title="ElevenBits")
+    static = {}
+    static['title'] = Static.objects.get(name="index.title").value
+    static['header'] = Static.objects.get(name="index.header").value
+    static['deployment_time'] = Static.objects.get(name="deployment.time").value
     menu_list = Menu.objects.all()
-    last_page = Entry.objects.filter(active=True).count()/5
+    logging.debug("total: " + str(Entry.objects.filter(active=True).count()))
+    last_page = (Entry.objects.filter(active=True).count() - 1)/5
     logging.debug("0 | page | last_page")
     logging.debug("0 | " + str(page) + " | " + str(last_page))
     latest_entry_list = Entry.objects.filter(active=True).reverse()[int(page)*5:int(page)*5+5]
-    attributes = {'page': p,
+    attributes = {'static': static,
                   'menu_list': menu_list, 
                   'current_page': page,
                   'older': int(page)+1,

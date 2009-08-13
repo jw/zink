@@ -1,17 +1,11 @@
 from django.conf.urls.defaults import *
 
-# the elevenbits pages
-from elevenbits.views import home
-
 # enable the admin
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
     
-    # menu - seems quite useless to me
-    (r'^menu/$', 'elevenbits.menu.views.index'),
-
     # blog
     ('^$', 'elevenbits.blog.views.index'),
     (r'^page/(?P<page>\d+)/$', 'elevenbits.blog.views.index'),
@@ -27,5 +21,8 @@ urlpatterns = patterns('',
     # admin
     (r'^admin/(.*)', admin.site.root),
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
+
+    # menu - seems quite useless to me
+    (r'^menu/$', 'elevenbits.menu.views.index'),
 
 )
