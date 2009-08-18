@@ -1,9 +1,5 @@
-{% if menu_list %}
-	<div class="menu"><ul>
-   		{% for menu in menu_list %}
-   			<li>
-       			<a href="{{menu.link}}">{{ menu.name }}</a>
-       		</li>
-    	{% endfor %}
-	</ul></div>
-{% endif %}
+
+<div class="menu"><ul>
+	{% load tree_menu_tags %}
+	{% show_menu "root" "ordered-list" %}
+</ul></div>

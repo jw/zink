@@ -4,7 +4,6 @@ from django.shortcuts import render_to_response, get_object_or_404
 
 from elevenbits.blog.models import Entry
 from elevenbits.blog.models import Tag
-from elevenbits.menu.models import Menu
 from elevenbits.page.models import Page
 from elevenbits.static.models import Static
 
@@ -19,14 +18,12 @@ def index(request, page=0):
     static['title'] = Static.objects.get(name="index.title").value
     static['header'] = Static.objects.get(name="index.header").value
     static['deployment_time'] = Static.objects.get(name="deployment.time").value
-    menu_list = Menu.objects.all()
     logging.debug("total: " + str(Entry.objects.filter(active=True).count()))
     last_page = (Entry.objects.filter(active=True).count() - 1)/5
     logging.debug("0 | page | last_page")
     logging.debug("0 | " + str(page) + " | " + str(last_page))
     latest_entry_list = Entry.objects.filter(active=True).reverse()[int(page)*5:int(page)*5+5]
     attributes = {'static': static,
-                  'menu_list': menu_list, 
                   'current_page': page,
                   'older': int(page)+1,
                   'newer': int(page)-1,
@@ -51,18 +48,15 @@ def index(request, page=0):
 @guest_allowed
 def detail(request, id):
     page = Page.objects.get(title="ElevenBits")
-    menu_list = Menu.objects.all()
     entry = get_object_or_404(Entry, pk=id)
     page.header = entry.title
     return render_to_response('detail.html', 
                               {'page': page,
-                               'menu_list': menu_list, 
                                'entry': entry},
                               context_instance=RequestContext(request))
     
 def tags(request, tag):
     page = Page.objects.get(title="ElevenBits")
-    menu_list = Menu.objects.all()
     latest_entry_list = Entry.objects.filter(tags__pk=tag).reverse()
     try:
         tag = Tag.objects.get(id=tag)
@@ -72,7 +66,6 @@ def tags(request, tag):
         page.header = "Tag with id " + tag + " not found."
     return render_to_response('index.html', 
                               {'page': page,
-                               'menu_list': menu_list, 
                                'latest_entry_list': latest_entry_list},
                               context_instance=RequestContext(request))
     

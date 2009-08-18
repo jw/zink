@@ -71,9 +71,9 @@ INSTALLED_APPS = (
     'elevenbits.page',
     'elevenbits.blog',
     'elevenbits.static',
-    'elevenbits.menu',
     'elevenbits.guest',
     'elevenbits',
+    'treemenus',
 #    'fccv',
 )
 
