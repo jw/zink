@@ -68,7 +68,6 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.markup',
-    'elevenbits.page',
     'elevenbits.blog',
     'elevenbits.static',
     'elevenbits.guest',
@@ -76,6 +75,10 @@ INSTALLED_APPS = (
     'treemenus',
 #    'fccv',
 )
+
+#
+# log properly
+#
 
 import logging
 logging.basicConfig(

@@ -16,13 +16,16 @@ urlpatterns = patterns('',
     (r'^tag/(?P<tag>\w+)/$', 'elevenbits.blog.views.tags'),
 
     # about
-    (r'^about/', 'elevenbits.about.views.index'),
+    #(r'^about/', 'elevenbits.about.views.index'),
+
+    # elevenbits
+    (r'^elevenbits/clients/', 'elevenbits.firm.views.clients'),
+    (r'^elevenbits/projects/', 'elevenbits.firm.views.projects'),
+    (r'^elevenbits/about/', 'elevenbits.firm.views.about'),
+    (r'^elevenbits/contact/', 'elevenbits.firm.views.contact'),
 
     # admin
     (r'^admin/(.*)', admin.site.root),
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # menu - seems quite useless to me
-    (r'^menu/$', 'elevenbits.menu.views.index'),
 
 )

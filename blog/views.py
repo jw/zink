@@ -4,24 +4,26 @@ from django.shortcuts import render_to_response, get_object_or_404
 
 from elevenbits.blog.models import Entry
 from elevenbits.blog.models import Tag
-from elevenbits.page.models import Page
 from elevenbits.static.models import Static
 
 from elevenbits.guest.decorators import guest_allowed, login_required
 
 import logging
-    
+
+def get_static():
+    static = {}
+    static['deployment_time'] = Static.objects.get(name="deployment.time").value
+    static['copyright'] = Static.objects.get(name="copyright").value
+    return static
+
 @guest_allowed
 def index(request, page=0):
-    p = Page.objects.get(title="ElevenBits")
-    static = {}
+    static = get_static()
     static['title'] = Static.objects.get(name="index.title").value
     static['header'] = Static.objects.get(name="index.header").value
-    static['deployment_time'] = Static.objects.get(name="deployment.time").value
-    logging.debug("total: " + str(Entry.objects.filter(active=True).count()))
+    logging.debug("There are " + str(Entry.objects.filter(active=True).count()) + " active log entries.")
     last_page = (Entry.objects.filter(active=True).count() - 1)/5
-    logging.debug("0 | page | last_page")
-    logging.debug("0 | " + str(page) + " | " + str(last_page))
+    logging.debug("position: 0 | " + str(page) + " | " + str(last_page))
     latest_entry_list = Entry.objects.filter(active=True).reverse()[int(page)*5:int(page)*5+5]
     attributes = {'static': static,
                   'current_page': page,
@@ -45,27 +47,32 @@ def index(request, page=0):
                               attributes,
                               context_instance=RequestContext(request))
 
-@guest_allowed
+#@guest_allowed
 def detail(request, id):
-    page = Page.objects.get(title="ElevenBits")
+    static = get_static()
+    static['title'] = Static.objects.get(name="index.title").value
+    static['header'] = Static.objects.get(name="index.header").value
     entry = get_object_or_404(Entry, pk=id)
-    page.header = entry.title
     return render_to_response('detail.html', 
-                              {'page': page,
+                              {'static': static,
                                'entry': entry},
-                              context_instance=RequestContext(request))
+                               context_instance=RequestContext(request))
     
 def tags(request, tag):
-    page = Page.objects.get(title="ElevenBits")
+    static = get_static()
+    static['title'] = Static.objects.get(name="tags.title").value
     latest_entry_list = Entry.objects.filter(tags__pk=tag).reverse()
     try:
         tag = Tag.objects.get(id=tag)
         # TODO: refactor this!
-        page.header = str(latest_entry_list.count()) + " entries tagged with '" + tag.tag + "'"
+        static['header'] = str(latest_entry_list.count()) + " entries tagged with '" + tag.tag + "'"
     except Tag.DoesNotExist:
-        page.header = "Tag with id " + tag + " not found."
+        static['header'] = "Tag with id " + tag + " not found."
     return render_to_response('index.html', 
-                              {'page': page,
+                              {'current_page': 1,
+                               'older': 1,
+                               'newer': 1,
+                               'static': static,
                                'latest_entry_list': latest_entry_list},
                               context_instance=RequestContext(request))
     
