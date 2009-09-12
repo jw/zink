@@ -26,7 +26,7 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 	position: relative; 
-	width: 700px; 
+	width: 800px; 
 	height: auto; 
 	visibility: visible; 
 	display: block;
@@ -104,7 +104,7 @@ body {
 }
 
 .menu ul ul li a {
-	background: url("http://www.elevebits.com/media/images/sub.png") no-repeat;
+	background: url("http://www.elevenbits.com/media/images/sub.png") no-repeat;
 	width: 180px;
 	height: 2em;
 	border-bottom: 1px dotted #BCBEB1;
@@ -138,7 +138,7 @@ body {
 .menu ul ul li a:hover {
 	text-indent: 40px;
 	color: #4B6060;
-	background: url("http://www.elevebits.com/media/images/sub.png") no-repeat;
+	background: url("http://www.elevenbits.com/media/images/sub.png") no-repeat;
 	border-top-width: 1px;
 	border-bottom-width: 1px;
 	border-left-width: 1px;
@@ -154,7 +154,8 @@ body {
  */
 
 .content {
-	width: 500px;
+	width: 600px;
+	max-width: 600px;
 	float: right;
 	text-align: left;	
 	display: block;
@@ -322,7 +323,7 @@ body {
 
 .entry .body p img {
 	border: solid 2px #53554B;
-	width: 500px;
+	width: 600px;
 } 
 
 /*
@@ -402,10 +403,16 @@ h3 {
 }
 
 h4 {
- 	font-size: 12px;
+ 	font-size: 13px;
 	/* font-style: italic; */
  	color: #41423c;
  	margin: 0px 0px 0px 0px;
+}
+
+strong {
+        font-size: 14px;
+        color: #41423c;
+        margin: 0px 0px 0px 0px;
 }
 
 h5 {

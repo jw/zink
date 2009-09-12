@@ -1,29 +1,30 @@
-.codehilitetable {
-	layout: fixed;
-	width: 500px;
-	padding: 0px 0px 0px 0px;
-	margin: 10px 0px 10px 0px;
-	border-color: #333366;
-	border-top-style: solid;
-	border-top-width: 1px;
-	border-bottom-style: solid;
-	border-bottom-width: 1px;
+
+/*
+ * The style sheet for pygmented markdown on the m8n/ElevenBits home page.
+ * Please note that this is copyrighted material.
+ *
+ * @author  <a href="mailto:jw@m8n.be">Jan Willems</a>
+ * @version 1.0.0 [12.09.2009, 2307hrs]
+ *
+ */
+
+.codehilite {
+	background: #F0F3F3 none repeat scroll 0 0;
+	width: 600px;
+	overflow: auto;
+        padding: 0px 0px 0px 0px;
+        margin: 10px 0px 10px 0px;
+        border-color: #333366;
+        border-top-style: solid;
+        border-top-width: 1px;
+        border-bottom-style: solid;
+        border-bottom-width: 1px;
 }
 
-td {
-	width: 500px;
-}
-	
-.linenos {
-	width: 20px;
-}
-	
-pre {
-	padding: 0px 0px 0px 0px;
-	margin: 5px 5px 5px 5px;
+.codehilite pre {
+        margin: 5px 5px 5px 5px;
 }
 
-.codehilite  { /* background: #f8f8f8; */ }
 .codehilite .c { color: #408080; font-style: italic } /* Comment */
 .codehilite .err { border: 1px solid #FF0000 } /* Error */
 .codehilite .k { color: #008000; font-weight: bold } /* Keyword */
@@ -83,3 +84,4 @@ pre {
 .codehilite .vg { color: #19177C } /* Name.Variable.Global */
 .codehilite .vi { color: #19177C } /* Name.Variable.Instance */
 .codehilite .il { color: #666666 } /* Literal.Number.Integer.Long */
+

@@ -211,17 +211,50 @@ class Deployer:
     
     def update_export(self):
         """
-            Updates the exported source file.
+            Updates some of the exported source files.
         """
+        success = True
+        # make temporary directory
+        temp_directory = join(self.dir, "temp")
+        makedirs(temp_directory)
+        #
+        # settings.py
+        #
+        # find DEBUG = True and replace it with DEBUG = False
+        #
+        settings = join(self.dir, "trunk", "settings.py")
+        if (exists(settings)):
+            input = open(settings)
+            # make temporary settings.py
+            temp_file = join(self.dir, "temp", "settings.py")
+            output = open(temp_file, 'w') 
+            # update the python path 
+            for s in input:
+                logging.info(s)
+                if (s.startswith("DEBUG =")):
+                    output.write("DEBUG = False\n")
+                else:
+                    output.write(s)
+            # close
+            output.close()
+            input.close()
+            # copy the updated file over the original file
+            shutil.copy(temp_file, settings)
+            if self.verbose:
+                print "Updated the " + settings + "." 
+        else:
+            logging.warn("Oops: settings.py does not exist!  That is very weird.")
+            success = False
+        #
+        # django.wsgi
+        #
+        # find sys.path.append('<something>') and replace it with
+        # sys.path.append('<self.destination.path>').
+        #
         wsgi = join(self.dir, "trunk", "django.wsgi")
         if (exists(wsgi)):
-            # find sys.path.append('<something>') and replace it with
-            # sys.path.append('<self.destination.path>').
-            good = "sys.path.append('" + self.destination.path + "')\n"
+            good = "sys.path.append('/var')\n"
             input = open(wsgi)
-            # make temporary directory
-            temp_directory = join(self.dir, "temp")
-            makedirs(temp_directory)
             # make temporary django.wsgi
             temp_file = join(self.dir, "temp", "django.wsgi")
             output = open(temp_file, 'w') 
@@ -240,11 +273,15 @@ class Deployer:
             shutil.copy(temp_file, wsgi)
             if self.verbose:
                 print "Updated the " + wsgi + "." 
-            return True
         else:
             logging.warn("Oops: django.wsgi does not exist!")
-        print "Warning: could not properly update the django.wsgi.  Trying to continue..."
-        return False
+            success = False
+            
+        if (not success):
+            print "Warning: could not properly update the settings.py or the django.wsgi files.  Trying to continue..."
+            return False
+        else:
+            return True
 
     def exists_remotely(self, name):
         """
