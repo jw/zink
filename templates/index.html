@@ -6,28 +6,32 @@
 
 {% block body %}
 	
-	{% if latest_entry_list %}
-	    {% for entry in latest_entry_list %}
+	{% if entries %}
+
+	    {% for entry in entries.object_list %}
 			{% include "entry.html" %}
 	    {% endfor %}
+
+		<table><tr>
+		    <td>
+				<div class="previous">
+			        {% if entries.has_previous %}
+	    		        <a href="/page/{{ entries.previous_page_number }}">« previous page</a>
+	        		{% endif %}
+        	   </div>
+        	</td>
+        	<td>
+	        	<div class="next">
+			        {% if entries.has_next %}
+		    	        <a href="/page/{{ entries.next_page_number }}">next page »</a>
+			        {% endif %}
+	        	</div>
+        	</td>
+		</tr></table>
+
 	{% else %}
     	<p>No blog entries are available.</p>
 	{% endif %}
 	
-	<div class="page">
-		<div class="newer">
-			<div class="no">
-			{% if newer_page %}
-				<a href="/page/{{newer}}">« newer page</a>
-			{% endif %}   
-			</div>
-		</div>
-		<div class="older">
-			{% if older_page %}
-				<a href="/page/{{older}}">older page »</a>
-			{% endif %}  
-		</div>
-	</div>
-
 {% endblock %}
 

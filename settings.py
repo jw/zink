@@ -2,7 +2,7 @@
 # elevenbits.com
 #
 
-import os.path # for the joins
+from os.path import join, dirname, realpath
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -29,7 +29,7 @@ USE_I18N = True
 
 # Update this setting when going to a production site
 MEDIA_URL = 'http://www.elevenbits.com/media'
-MEDIA_ROOT = os.path.join(os.path.dirname(__file__), "media")
+MEDIA_ROOT = join(dirname(__file__), "media")
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
@@ -56,10 +56,10 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'elevenbits.urls'
 
 TEMPLATE_DIRS = (
-    os.path.join(os.path.dirname(__file__), 'templates').replace('\\','/'),
+    join(dirname(__file__), 'templates').replace('\\','/'),
 )
 
-SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
+SITE_ROOT = dirname(realpath(__file__))
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -75,6 +75,8 @@ INSTALLED_APPS = (
     'treemenus',
 #    'fccv',
 )
+
+BLOG_PAGE_SIZE = 4
 
 #
 # log properly
