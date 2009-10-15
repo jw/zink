@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block menu %}
+    {% include "menu.html" %}
+{% endblock%}
+
+{% block body %}
+	
+	{% if entries %}
+
+	    {% for entry in entries.object_list %}
+			{% include "entry.html" %}
+	    {% endfor %}
+
+		<table><tr>
+		    <td>
+				<div class="previous">
+			        {% if entries.has_previous %}
+                        <a href="/tag/{{ id }}/page/{{ entries.previous_page_number }}">« previous page</a>
+	        		{% endif %}
+        	   </div>
+        	</td>
+        	<td>
+	        	<div class="next">
+			        {% if entries.has_next %}
+			            <a href="/tag/{{ id }}/page/{{ entries.next_page_number }}">next page »</a>
+			        {% endif %}
+	        	</div>
+        	</td>
+		</tr></table>
+
+	{% else %}
+    	<p>No blog entries are available.</p>
+	{% endif %}
+	
+{% endblock %}
+

@@ -13,10 +13,8 @@ urlpatterns = patterns('',
     (r'^detail/(?P<id>\d+)/$', 'elevenbits.blog.views.detail'),
 
     # tags
-    (r'^tag/(?P<tag>\w+)/$', 'elevenbits.blog.views.tags'),
-
-    # about
-    #(r'^about/', 'elevenbits.about.views.index'),
+    (r'^tag/(?P<tag>\w+)/page/(?P<page>\d+)$', 'elevenbits.blog.views.tags'),
+    (r'^tag/(?P<tag>\w+)', 'elevenbits.blog.views.tags'),
 
     # elevenbits
     (r'^elevenbits/clients/', 'elevenbits.firm.views.clients'),

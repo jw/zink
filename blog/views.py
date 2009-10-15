@@ -21,7 +21,6 @@ def get_static():
 @guest_allowed
 def index(request, page=1):
     
-    # get the statics
     static = get_static()
     static['title'] = Static.objects.get(name="index.title").value
     static['header'] = Static.objects.get(name="index.header").value
@@ -49,7 +48,7 @@ def index(request, page=1):
     attributes = {'static': static,
                   'entries': entries}
 
-    # the context_instance will make sure that the defaultW
+    # the context_instance will make sure that the default
     # TEMPLATE_CONTEXT_PROCESSORS are executed, among which
     # the django.core.context_processors.media.  That way
     # the MEDIA_URL will become part of the session.
@@ -59,29 +58,62 @@ def index(request, page=1):
 
 #@guest_allowed
 def detail(request, id):
+    
     static = get_static()
     static['title'] = Static.objects.get(name="index.title").value
     static['header'] = Static.objects.get(name="index.header").value
+    
     entry = get_object_or_404(Entry, pk=id)
+
     return render_to_response('detail.html', 
                               {'static': static,
                                'entry': entry},
                                context_instance=RequestContext(request))
     
-def tags(request, tag):
+def tags(request, tag, page=1):
+    
     static = get_static()
     static['title'] = Static.objects.get(name="tags.title").value
-    latest_entry_list = Entry.objects.filter(tags__pk=tag).reverse()
+    
+    entry_list = Entry.objects.filter(tags__pk=tag).reverse()
+    
+    # create the header
     try:
         tag = Tag.objects.get(id=tag)
-        static['header'] = str(latest_entry_list.count()) + " entries tagged with '" + tag.tag + "'"
+        static['header'] = str(entry_list.count()) + " entries tagged with '" + tag.tag + "'"
     except Tag.DoesNotExist:
         static['header'] = "Tag with id " + tag + " not found."
-    return render_to_response('index.html', 
-                              {'current_page': 1,
-                               'older': 1,
-                               'newer': 1,
-                               'static': static,
-                               'latest_entry_list': latest_entry_list},
+
+    try:
+        size = settings.BLOG_PAGE_SIZE
+    except AttributeError:
+        size = 5
+    paginator = Paginator(entry_list, size)
+    
+    # Make sure page request is an int. If not, deliver first page.
+    try:
+        page = int(page)
+    except ValueError:
+        page = 1
+
+    # If page is out of range, deliver last page.
+    try:
+        entries = paginator.page(page)
+    except (EmptyPage, InvalidPage):
+        entries = paginator.page(paginator.num_pages)
+
+    attributes = {'static': static,
+                  'id': tag.id,
+                  'entries': entries}
+
+    return render_to_response('tagged.html', 
+                              attributes,
                               context_instance=RequestContext(request))
+
+
+
+
+
+
+
     

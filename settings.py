@@ -76,6 +76,10 @@ INSTALLED_APPS = (
 #    'fccv',
 )
 
+#
+# ElevenBits constants
+#
+
 BLOG_PAGE_SIZE = 4
 
 #
