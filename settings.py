@@ -27,13 +27,10 @@ LANGUAGE_CODE = 'en-BE'
 # to load the internationalization machinery.
 USE_I18N = True
 
-# Update this setting when going to a production site
+# The css and images location
 MEDIA_URL = 'http://www.elevenbits.com/media'
 MEDIA_ROOT = join(dirname(__file__), "media")
-
-# URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
-# trailing slash.
-# Examples: "http://foo.com/media/", "/media/".
+# It might be better to place this in '/admin/'
 ADMIN_MEDIA_PREFIX = '/media/'
 
 # Make this unique, and don't share it with anybody.
