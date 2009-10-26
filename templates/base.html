@@ -12,6 +12,17 @@
     <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}/style.css" />
     <link type="image/x-icon" href="favicon.ico" rel="icon"/>
     <link type="image/x-icon" href="favicon.ico" rel="shortcut icon"/>
+    <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+        try {
+            var pageTracker = _gat._getTracker("UA-10023347-1");
+            pageTracker._setDomainName(".elevenbits.com");
+            pageTracker._trackPageview();
+        } catch(err) {}
+    </script>
 	{% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
 </head>
 <body>
