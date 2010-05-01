@@ -70,6 +70,7 @@ INSTALLED_APPS = (
     'elevenbits.guest',
     'elevenbits',
     'treemenus',
+    'photologue',
 #    'fccv',
 )
 

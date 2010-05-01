@@ -6,6 +6,9 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     
+    # photologue
+    (r'^photologue/', include('photologue.urls')),
+
     # blog
     ('^$', 'elevenbits.blog.views.index'),
     (r'^page/(?P<page>\d+)/$', 'elevenbits.blog.views.index'),
