@@ -1,0 +1,7 @@
+<uwsgi>
+    <pythonpath>/var/www/elevenbits</pythonpath>
+    <pythonpath>/var/www/</pythonpath>
+    <app mountpoint="/">
+        <script>django_wsgi</script>
+    </app>
+</uwsgi>
