@@ -1,0 +1,16 @@
+
+requirements:
+
+python-psycopg2
+https://github.com/jphalip/django-treemenus/downloads
+
+database:
+
+1) Make sure you own the database engine
+ALTER USER postgres WITH PASSWORD '<your password>';
+
+2) Create a django database
+create user django with password 'Reinhardt';
+create database django owner django;
+
+
