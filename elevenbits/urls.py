@@ -26,7 +26,7 @@ urlpatterns = patterns('',
     url(r'^elevenbits/contact/', 'elevenbits.firm.views.contact'),
 
     # admin
-    url(r'^admin/(.*)', include(admin.site.urls)),
+    url(r'^admin/', include(admin.site.urls)),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
 )
