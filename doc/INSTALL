@@ -1,16 +1,23 @@
 
 requirements:
 
-python-psycopg2
-https://github.com/jphalip/django-treemenus/downloads
+- Django 1.4: sudo pip install Django
+- python-psycopg2: sudo apt-get install python-psycopg2
+- https://github.com/jphalip/django-treemenus/downloads: unzip, sudo python setup.py install
+- markdown (not version 2): sudo pip install markdown
 
 database:
 
+0) sudo -u postgres psql
+
 1) Make sure you own the database engine
-ALTER USER postgres WITH PASSWORD '<your password>';
+postgres=# ALTER USER postgres WITH PASSWORD '<your password>';
 
 2) Create a django database
-create user django with password 'Reinhardt';
-create database django owner django;
+postgres=# create user django with password 'Reinhardt';
+postgres=# create database django owner django;
 
-
+environments:
+- development: your machine
+- staging: staging.elevenbits.org
+- production: www.elevenbits.org
