@@ -1,7 +1,8 @@
 <uwsgi>
+    <socket>127.0.0.1:3031</socket>
+    <chdir>/var/www/elevenbits</chdir>
+    <pythonpath>..</pythonpath>
+    <module>elevenbits.django_wsgi</module>
     <pythonpath>/var/www/elevenbits</pythonpath>
     <pythonpath>/var/www/</pythonpath>
-    <app mountpoint="/">
-        <script>django_wsgi</script>
-    </app>
 </uwsgi>
