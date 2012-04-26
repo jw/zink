@@ -43,7 +43,7 @@ USE_TZ = True
 #### tbd: start: needs to be checked with Django 1.4
 
 # The css and images location
-MEDIA_URL = 'http://www.elevenbits.com/media'
+#MEDIA_URL = 'http://www.elevenbits.com/media'
 MEDIA_ROOT = join(dirname(__file__), "media")
 # It might be better to place this in '/admin/'
 ADMIN_MEDIA_PREFIX = '/media/'
@@ -60,11 +60,12 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'tracking.middleware.BannedIPMiddleware',
     'django.middleware.gzip.GZipMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'elevenbits.guest.middleware.GuestMiddleware',
+    'tracking.middleware.VisitorTrackingMiddleware',
 )
 
 ROOT_URLCONF = 'elevenbits.urls'
@@ -90,6 +91,7 @@ INSTALLED_APPS = (
     'elevenbits.guest',
     'elevenbits',
     'treemenus',
+    'tracking',
 #    'photologue',
 #    'fccv',
 )
