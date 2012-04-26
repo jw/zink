@@ -106,9 +106,13 @@ BLOG_PAGE_SIZE = 4
 
 #### TODO: update the logging part
 import logging
-logging.basicConfig(
-    level = logging.DEBUG,
-    format = "%(asctime)s - %(levelname)s - %(message)s",
-    filename =  '/tmp/elevenbits.log',
-    filemode = 'w'
-)
+try:
+    logging.basicConfig(
+        level = logging.DEBUG,
+        format = "%(asctime)s - %(levelname)s - %(message)s",
+        filename =  '/tmp/elevenbits.log',
+        filemode = 'w'
+    )
+except IOError:
+    print("No logging possible - please update the log environment.")
+    print("Please check the /tmp/elevenbits.log permissions.")
