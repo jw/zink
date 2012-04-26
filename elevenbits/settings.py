@@ -43,7 +43,7 @@ USE_TZ = True
 #### tbd: start: needs to be checked with Django 1.4
 
 # The css and images location
-#MEDIA_URL = 'http://www.elevenbits.com/media'
+MEDIA_URL = '/elevenbits/elevenbits/media'
 MEDIA_ROOT = join(dirname(__file__), "media")
 # It might be better to place this in '/admin/'
 ADMIN_MEDIA_PREFIX = '/media/'
@@ -88,7 +88,6 @@ INSTALLED_APPS = (
     'django.contrib.markup',
     'elevenbits.blog',
     'elevenbits.static',
-    'elevenbits.guest',
     'elevenbits',
     'treemenus',
     'tracking',
