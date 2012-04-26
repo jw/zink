@@ -1,5 +1,5 @@
 #
-# elevenbits.com
+# elevenbits.org (and later elevenbits.com and m8n.be)
 #
 
 from os.path import join, dirname, realpath
@@ -76,7 +76,7 @@ TEMPLATE_DIRS = (
     join(dirname(__file__), 'templates').replace('\\','/'),
 )
 
-SITE_ROOT = dirname(realpath(__file__))
+SITE_ROOT = dirname(realpath(join(__file__, "..")))
 
 INSTALLED_APPS = (
     'django.contrib.auth',

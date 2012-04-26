@@ -1,6 +1,7 @@
 """
-Creates a template tag called {% revision %} that returns the current svn version.
-Requires svnversion.
+Creates a template tag called {% revision %} that returns the 
+current hg (or svn) version.  The svnversion or hg libraries are
+required - when not there 'unknown' is returned.
 """
  
 import sys, os
@@ -44,10 +45,30 @@ def get_svn_revision(path=None):
         return u'%s' % rev
     return u'unknown'
 
+def get_hg_revision(path=None):
+
+    import mercurial.ui
+    import mercurial.hg
+    from django.conf import settings
+    
+    rev = None
+    if path is None:
+        path = settings.SITE_ROOT
+
+    if os.path.exists(path):
+        myui = mercurial.ui.ui()
+        myrepo = mercurial.hg.repository(myui, path)
+        ps = mercurial.localrepo.localrepository.parents(myrepo)
+        rev = str(ps[0].rev()) + ":" + str(ps[0])
+
+    return rev
+
+
 @register.simple_tag
 def revision():
     """
         displays the revision number
         {% revision %}
     """
-    return get_svn_revision()
+    #return get_hg_revision("/home/jw/python/workspace/elevenbits.org/")
+    return get_hg_revision()
