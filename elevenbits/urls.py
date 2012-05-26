@@ -1,4 +1,5 @@
 from django.conf.urls.defaults import patterns, include, url
+#from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 # enable the admin
 from django.contrib import admin
@@ -6,9 +7,6 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     
-    # photologue - not for now...
-    #(r'^photologue/', include('photologue.urls')),
-
     # blog
     url('^$', 'elevenbits.blog.views.index'),
     url(r'^page/(?P<page>\d+)/$', 'elevenbits.blog.views.index'),
@@ -25,6 +23,7 @@ urlpatterns = patterns('',
     url(r'^elevenbits/about/', 'elevenbits.firm.views.about'),
     url(r'^elevenbits/contact/', 'elevenbits.firm.views.contact'),
 
+    # users tracking
     url(r'^tracking/', include('tracking.urls')),
 
     # admin
@@ -32,3 +31,6 @@ urlpatterns = patterns('',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
 )
+
+# only for local development (DEBUG needs to be true for this to work) 
+#urlpatterns += staticfiles_urlpatterns()
