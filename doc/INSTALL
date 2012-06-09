@@ -5,6 +5,7 @@ requirements:
 - python-psycopg2: sudo apt-get install python-psycopg2
 - https://github.com/jphalip/django-treemenus/downloads: unzip, sudo python setup.py install
 - markdown (not version 2): sudo pip install markdown
+- tracking: sudo pip install django-tracking
 
 database:
 

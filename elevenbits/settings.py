@@ -87,6 +87,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'tracking.middleware.VisitorTrackingMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware'
 )
 
 ROOT_URLCONF = 'elevenbits.urls'
