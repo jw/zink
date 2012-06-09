@@ -8,8 +8,6 @@ from elevenbits.blog.models import Entry
 from elevenbits.blog.models import Tag
 from elevenbits.static.models import Static
 
-from elevenbits.guest.decorators import guest_allowed, login_required
-
 import logging
 
 def get_static():
@@ -18,7 +16,6 @@ def get_static():
     static['copyright'] = Static.objects.get(name="copyright").value
     return static
 
-@guest_allowed
 def index(request, page=1):
     
     static = get_static()
@@ -56,7 +53,6 @@ def index(request, page=1):
                               attributes,
                               context_instance=RequestContext(request))
 
-#@guest_allowed
 def detail(request, id):
     
     static = get_static()

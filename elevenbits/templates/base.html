@@ -8,8 +8,8 @@
     <title>{% block page_title %}[{{ static.title }}] {{ static.header }}{% endblock %}</title>
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
     <meta name="verify-v1" content="Fd+gEgP3mrH4jDTQ6JcMgjkgtI6eNa6Bya5OXvWP+K8=" />
-    <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}/default.css" />
-    <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}/style.css" />
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/css/default.css" />
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/css/style.css" />
     <link type="image/x-icon" href="/favicon.ico" rel="icon"/>
     <link type="image/x-icon" href="/favicon.ico" rel="shortcut icon"/>
     <script src="http://www.google.com/jsapi?key=ABQIAAAAQiu2dP0rBPaNZ41BG5gXQhTu8qfDeT7FWr0somHfW1Iw7FdZpBQS1stiDXgZnlDhLmaVghileL5AqA" type="text/javascript"></script>
@@ -36,7 +36,7 @@
     				<div class="logo">
 						<img title="ElevenBits" 
 						     alt="ElevenBits" 
-						     src="{{MEDIA_URL}}/images/m8n.png"/>
+						     src="{{ STATIC_URL }}/images/m8n.png"/>
 					</div>
     			{% endblock %}
     			{% block title %}
@@ -57,9 +57,10 @@
     	{% endblock %}
     	{% block footer %}
     	<div class="footer">
-			{% load revision %}{% load users %}
+			{% load revision %}{% load tracking_tags %}
+			{% visitors_on_site as visitors %}
 			<div class="left">
-				[{{static.deployment_time}}, release: {% revision %}, current users: {% all_users %}]
+				[{{static.deployment_time}}, release: {% revision %},     {{ visitors }} active user{{ visitors|pluralize }}]
 			</div>
 			<div class="right">
 				{{static.copyright}}

@@ -1,0 +1,114 @@
+[
+    {
+        "pk": 1, 
+        "model": "static.static", 
+        "fields": {
+            "name": "tags.title", 
+            "value": "Tags"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "static.static", 
+        "fields": {
+            "name": "tags.header", 
+            "value": "Tags"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "static.static", 
+        "fields": {
+            "name": "clients.header", 
+            "value": "Current and past customers"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "static.static", 
+        "fields": {
+            "name": "clients.title", 
+            "value": "Clients"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "static.static", 
+        "fields": {
+            "name": "projects.title", 
+            "value": "ElevenBits projects"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "static.static", 
+        "fields": {
+            "name": "projects.header", 
+            "value": "ElevenBits projects"
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "static.static", 
+        "fields": {
+            "name": "contact.header", 
+            "value": "How to reach us..."
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "static.static", 
+        "fields": {
+            "name": "contact.title", 
+            "value": "Contact"
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "static.static", 
+        "fields": {
+            "name": "index.title", 
+            "value": "ElevenBits"
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "static.static", 
+        "fields": {
+            "name": "about.header", 
+            "value": "About ElevenBits"
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "static.static", 
+        "fields": {
+            "name": "about.title", 
+            "value": "About"
+        }
+    }, 
+    {
+        "pk": 14, 
+        "model": "static.static", 
+        "fields": {
+            "name": "index.header", 
+            "value": "Welcome!"
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "static.static", 
+        "fields": {
+            "name": "copyright", 
+            "value": "\u00a9 copyright 2004-2012, m8n and ElevenBits"
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "static.static", 
+        "fields": {
+            "name": "deployment.time", 
+            "value": "22.04.2012, 0951hrs"
+        }
+    }
+]
