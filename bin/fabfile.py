@@ -6,14 +6,14 @@ from fabric.operations import require
 """
 Base configuration
 """
-#env.project_name = '$(project)'
+env.project_name = "elevenbits"
 #env.database_password = '$(db_password)'
 #env.site_media_prefix = "site_media"
 #env.admin_media_prefix = "admin_media"
 #env.newsapps_media_prefix = "na_media"
 #env.path = '/home/newsapps/sites/%(project_name)s' % env
-#env.log_path = '/home/newsapps/logs/%(project_name)s' % env
-#env.env_path = '%(path)s/env' % env
+env.log_path = '/home/newsapps/logs/%(project_name)s' % env
+env.env_path = '%(path)s/env' % env
 #env.repo_path = '%(path)s/repository' % env
 #env.apache_config_path = '/home/newsapps/sites/apache/%(project_name)s' % env
 #env.python = 'python2.6'
@@ -111,6 +111,8 @@ def setup():
 
     print(green("Fabricating " + env.branch + " in " + env.settings + " environment..."))
     
+    setup_directories()
+
     """
     setup_directories()
     setup_virtualenv()
@@ -130,11 +132,18 @@ def setup_directories():
     """
     Create directories necessary for deployment.
     """
+    print('mkdir -p %(path)s' % env)
+    print('mkdir -p %(env_path)s' % env)
+    print('mkdir -p %(log_path)s;' % env)
+    print('chgrp -R www-data %(log_path)s; chmod -R g+w %(log_path)s;' % env)
+    print('ln -s %(log_path)s %(path)s/logs' % env)
+    """
     run('mkdir -p %(path)s' % env)
     run('mkdir -p %(env_path)s' % env)
     run ('mkdir -p %(log_path)s;' % env)
     sudo('chgrp -R www-data %(log_path)s; chmod -R g+w %(log_path)s;' % env)
     run('ln -s %(log_path)s %(path)s/logs' % env)
+    """
     
 def setup_virtualenv():
     """

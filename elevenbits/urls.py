@@ -5,6 +5,8 @@ from django.conf.urls.defaults import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
+print("Processing")
+
 urlpatterns = patterns('',
     
     # blog
@@ -24,7 +26,7 @@ urlpatterns = patterns('',
     url(r'^elevenbits/contact/', 'elevenbits.firm.views.contact'),
 
     # users tracking
-    url(r'^tracking/', include('tracking.urls')),
+    #url(r'^tracking/', include('tracking.urls')),
 
     # admin
     url(r'^admin/', include(admin.site.urls)),

@@ -1,5 +1,5 @@
-import os
-import django.core.handlers.wsgi
+from os import environ
+from django.core.handlers.wsgi import WSGIHandler
 
-os.environ['DJANGO_SETTINGS_MODULE'] = 'elevenbits.settings'
-application = django.core.handlers.wsgi.WSGIHandler()
+environ['DJANGO_SETTINGS_MODULE'] = 'elevenbits.settings'
+application = WSGIHandler()

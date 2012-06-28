@@ -44,7 +44,7 @@ USE_TZ = False
 
 # The statics (css and images) location
 STATICFILES_DIRS = (
-    "/home/jw/python/workspace/elevenbits/elevenbits/media",
+    "",
 )
 
 STATICFILES_FINDERS = (
@@ -52,7 +52,7 @@ STATICFILES_FINDERS = (
 #    "django.contrib.staticfiles.finders.AppDirectoriesFinder"
 )
 
-STATIC_URL = join(dirname(__file__), 'media')
+STATIC_URL = "http://static/"
 STATIC_ROOT = '/tmp/statics'
 
 MEDIA_URL = ''
@@ -87,6 +87,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'tracking.middleware.VisitorTrackingMiddleware',
+    'tracking.middleware.VisitorCleanUpMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware'
 )
 
@@ -126,15 +127,39 @@ BLOG_PAGE_SIZE = 4
 # log properly
 #
 
+LOGGING = { 
+   'version': 1,
+   'disable_existing_loggers': True,
+   'formatters': {
+       'simple': {
+           'format': '%(levelname)s %(message)s',
+       },  
+   },  
+   'handlers': {
+       'console':{
+           'level':'DEBUG',
+           'class':'logging.StreamHandler',
+           'formatter': 'simple'
+       },  
+   },  
+   'loggers': {
+       'django': {
+           'handlers': ['console'],
+           'level': 'DEBUG',
+       },  
+   }   
+}
+
 #### TODO: update the logging part
-import logging
-try:
-    logging.basicConfig(
-        level = logging.DEBUG,
-        format = "%(asctime)s - %(levelname)s - %(message)s",
-        filename =  '/tmp/elevenbits.log',
-        filemode = 'w'
-    )
-except IOError:
-    print("No logging possible - please update the log environment.")
-    print("Please check the /tmp/elevenbits.log permissions.")
+#import logging
+#try:
+#    logging.basicConfig(
+#        level = logging.DEBUG,
+#        format = "%(asctime)s - %(levelname)s - %(message)s",
+#        filename =  '/tmp/elevenbits.log',
+#        filemode = 'w'
+#    )
+#except IOError:
+#    print("No logging possible - please update the log environment.")
+#    print("Please check the /tmp/elevenbits.log permissions.")
+
