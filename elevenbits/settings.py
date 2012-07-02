@@ -1,5 +1,6 @@
+
 #
-# elevenbits.org (and later elevenbits.com and m8n.be)
+# settings for elevenbits.org, elevenbits.com and m8n.be
 #
 
 from os.path import join, dirname, realpath

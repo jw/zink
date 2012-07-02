@@ -1,19 +1,27 @@
 from fabric.api import run, env
 from fabric.decorators import task
 from fabric.colors import red, green, yellow
-from fabric.operations import require
+from fabric.operations import require, sudo
+from fabric.context_managers import show
 
 """
 Base configuration
 """
-env.project_name = "elevenbits"
+env.project = "elevenbits"
+env.repo = "https://hg.elevenbits.org"
+env.path = '/var/www/%(project)s' % env
+
+#
+# old stuff
+#
+
 #env.database_password = '$(db_password)'
 #env.site_media_prefix = "site_media"
 #env.admin_media_prefix = "admin_media"
 #env.newsapps_media_prefix = "na_media"
 #env.path = '/home/newsapps/sites/%(project_name)s' % env
-env.log_path = '/home/newsapps/logs/%(project_name)s' % env
-env.env_path = '%(path)s/env' % env
+#env.log_path = '/home/newsapps/logs/%(project_name)s' % env
+#env.env_path = '%(path)s/env' % env
 #env.repo_path = '%(path)s/repository' % env
 #env.apache_config_path = '/home/newsapps/sites/apache/%(project_name)s' % env
 #env.python = 'python2.6'
@@ -48,6 +56,7 @@ def _add_properties(config, section):
         env.password = config.get(section, "user.password")
         env.dbuser = config.get(section, "db.username")
         env.dbpassword = config.get(section, "db.password")
+        env.dbname = config.get(section, "db.name")
         env.hosts = [ config.get(section, "host") ]
         return True
     except NoOptionError as noe:
@@ -85,14 +94,14 @@ Where the source code is.
 @task
 def tip():
     """
-    Work on the tip.
+    Delpoy the tip.
     """
     env.branch = 'tip'
 
 @task
-def revision(revision):
+def revision(revision="tip"):
     """
-    Work on a revision in the hg.
+    Deploy a certain revision.  Default is the tip.
     """
     env.branch = revision
 
@@ -102,8 +111,8 @@ Commands - setup
 @task
 def setup():
     """
-    Setup a new website by installing everything we need, and fire up 
-    the database.  Does NOT perform the functions of deploy().
+        Setup a new website by installing everything we need, and fire up 
+        the database.  Does NOT perform the functions of deploy().
     """
     
     require('settings', provided_by=[production, staging, development])
@@ -111,94 +120,80 @@ def setup():
 
     print(green("Fabricating " + env.branch + " in " + env.settings + " environment..."))
     
-    setup_directories()
-
-    """
-    setup_directories()
-    setup_virtualenv()
-    clone_repo()
-    checkout_latest()
-    destroy_database()
-    create_database()
-    load_data()
+    setup_directories()    
+    if (env.branch == "tip"):
+        checkout_latest()
+    else:
+        checkout_revision(env.branch)
     install_requirements()
-    install_apache_conf()
-    deploy_requirements_to_s3()
-    """
-    print("hello!")
-    
+    update_database()
+
+    print(green("Setup complete."))
     
 def setup_directories():
     """
-    Create directories necessary for deployment.
+        Create directories necessary for deployment.
     """
-    print('mkdir -p %(path)s' % env)
-    print('mkdir -p %(env_path)s' % env)
-    print('mkdir -p %(log_path)s;' % env)
-    print('chgrp -R www-data %(log_path)s; chmod -R g+w %(log_path)s;' % env)
-    print('ln -s %(log_path)s %(path)s/logs' % env)
-    """
-    run('mkdir -p %(path)s' % env)
-    run('mkdir -p %(env_path)s' % env)
-    run ('mkdir -p %(log_path)s;' % env)
-    sudo('chgrp -R www-data %(log_path)s; chmod -R g+w %(log_path)s;' % env)
-    run('ln -s %(log_path)s %(path)s/logs' % env)
-    """
+    sudo("rm -rf %(path)s" % env)
+    sudo("mkdir -p %(path)s" % env)
+    sudo("chown www-data:www-data %(path)s" % env)
     
-def setup_virtualenv():
-    """
-    Setup a fresh virtualenv.
-    """
-    run('virtualenv -p %(python)s --no-site-packages %(env_path)s;' % env)
-    run('source %(env_path)s/bin/activate; easy_install -U setuptools; easy_install pip;' % env)
-
-def clone_repo():
-    """
-    Do initial clone of the git repository.
-    """
-    run('git clone git@tribune.unfuddle.com:tribune/%(project_name)s.git %(repo_path)s' % env)
-
 def checkout_latest():
     """
-    Pull the latest code on the specified branch.
+        Get latest version from repository.
     """
-    run('cd %(repo_path)s; git checkout %(branch)s; git pull origin %(branch)s' % env)
+    sudo('hg clone %(repo)s/elevenbits %(path)s' % env, user="www-data")
+
+def checkout_revision(revision):
+    """
+        Clone a revision.
+    """
+    sudo('hg clone -r %(branch)s %(repo)s/elevenbits %(path)s' % env, user="www-data")
 
 def install_requirements():
     """
-    Install the required packages using pip.
+        Todo: install the required packages using pip.
     """
-    run('source %(env_path)s/bin/activate; pip install -E %(env_path)s -r %(repo_path)s/requirements.txt' % env)
+    print(orange("Not installing requirements yet.  Need to do this yourself for now..."))
+    #run('source %(env_path)s/bin/activate; pip install -E %(env_path)s -r %(repo_path)s/requirements.txt' % env)
 
-def install_apache_conf():
+def update_database():
     """
-    Install the apache site config file.
+        Creates a user and a database.
     """
-    sudo('cp %(repo_path)s/%(project_name)s/configs/%(settings)s/%(project_name)s %(apache_config_path)s' % env)
 
-def deploy_requirements_to_s3():
-    """
-    Deploy the latest newsapps and admin media to s3.
-    """
-    run('s3cmd del --recursive s3://%(s3_bucket)s/%(project_name)s/%(admin_media_prefix)s/' % env)
-    run('s3cmd -P --guess-mime-type sync %(env_path)s/src/django/django/contrib/admin/media/ s3://%(s3_bucket)s/%(project_name)s/%(site_media_prefix)s/' % env)
-    run('s3cmd del --recursive s3://%(s3_bucket)s/%(project_name)s/%(newsapps_media_prefix)s/' % env)
-    run('s3cmd -P --guess-mime-type sync %(env_path)s/src/newsapps/newsapps/na_media/ s3://%(s3_bucket)s/%(project_name)s/%(newsapps_media_prefix)s/' % env)
+    # check if user is already there
+    output = run('echo "SELECT 1 FROM pg_roles WHERE rolname=\'%(dbuser)s\';" | psql postgres -tA' % env)
+    if (output == "1"):
+        print(green("Good.  User '%(dbuser)s' exists." % env))
+    else:
+        # if not, create it
+        print(green("Creating user '%(dbuser)s'." % env))
+        output = run('echo "CREATE USER %(dbuser)s WITH PASSWORD \'%(dbpassword)s\';" | psql postgres -tA' % env)
+        if (output == "CREATE DATABASE"):
+            print(green("Created user successfully."))
+        else:
+            print(red("Could not create user."))
+            abort("User creation error.")
 
-@task
-def create_database():
-    """
-    Creates the user and database for this project.
-    """
-    run('echo "CREATE USER %(project_name)s WITH PASSWORD \'%(database_password)s\';" | psql postgres' % env)
-    run('createdb -O %(project_name)s %(project_name)s -T template_postgis' % env)
+    # check if the database is already there 
+    output = run('echo "SELECT 1 from pg_database WHERE datname=\'%(dbname)s\';" | psql postgres -tA' % env)
+    if (output == "1"):
+        print(green("Good.  Database '%(dbname)s' exists." % env))
+    else:
+        # if not, create it
+        print(green("Creating database '%(dbname)s'..." % env))
+        output = run('echo "CREATE DATABASE %(dbname)s OWNER %(dbuser)s;" | psql postgres -tA' % env)
+        if (output == "CREATE DATABASE"):
+            print(green("Created database successfully."))
+        else:
+            print(red("Could not create database."))
+            abort("Database creation error.")
 
-@task
 def destroy_database():
     """
-    Destroys the user and database for this project.
-    
-    Will not cause the fab to fail if they do not exist.
+        Destroys the user and database for this project.
+        Will not cause the fab to fail if they do not exist.
     """
     with settings(warn_only=True):
         run('dropdb %(project_name)s' % env)
@@ -206,31 +201,19 @@ def destroy_database():
         
 def load_data():
     """
-    Loads data from the repository into PostgreSQL.
+        Loads data from the repository into PostgreSQL.
     """
     run('psql -q %(project_name)s < %(path)s/repository/data/psql/dump.sql' % env)
     run('psql -q %(project_name)s < %(path)s/repository/data/psql/finish_init.sql' % env)
     
-def pgpool_down():
-    """
-    Stop pgpool so that it won't prevent the database from being rebuilt.
-    """
-    sudo('/etc/init.d/pgpool stop')
-    
-def pgpool_up():
-    """
-    Start pgpool.
-    """
-    sudo('/etc/init.d/pgpool start')
-
-
-
 def deploy_static():
     with cd(env.project_root):
         run('./manage.py collectstatic -v0 --noinput')
         
 def deploy():
-    "Deploys the website to elevenbits.org"
+    """
+        Deploys the website
+    """
     create_database()
     populate_database()
     get_current_trunk_and_tag_it()
@@ -238,11 +221,4 @@ def deploy():
     deploy()
     check()
     push_back()
-
-@task()
-def foo():
-    """start a shell within the current context"""
-    #_create_environment("foo", "development")
-    _create_environment("fabfile.properties", "development")
-    
     

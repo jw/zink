@@ -1,0 +1,17 @@
+
+There are four deployment areas:
+
+[1] Local, via django
+Use python manage.py runserver to deploy this website
+
+[2] Local, via fabric
+Use fab with the development task: 
+fab -k tip development deploy
+
+[3] Staging, via fabric
+Use fab with the development task: 
+fab -k tip staging deploy
+
+[4] Production, via fabric
+Use fab with the development task: 
+fab -k revision=42 production deploy

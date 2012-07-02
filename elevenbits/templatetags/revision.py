@@ -52,6 +52,7 @@ def get_hg_revision(path=None):
     from django.conf import settings
     
     rev = None
+
     if path is None:
         path = settings.SITE_ROOT
 
