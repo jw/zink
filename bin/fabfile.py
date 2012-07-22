@@ -2,7 +2,7 @@ from fabric.api import run, env
 from fabric.decorators import task
 from fabric.colors import red, green, yellow
 from fabric.operations import require, sudo
-from fabric.context_managers import show
+from fabric.context_managers import show, settings, cd
 
 """
 Base configuration
@@ -11,23 +11,8 @@ env.project = "elevenbits"
 env.repo = "https://hg.elevenbits.org"
 env.path = '/var/www/%(project)s' % env
 
-#
-# old stuff
-#
-
-#env.database_password = '$(db_password)'
-#env.site_media_prefix = "site_media"
-#env.admin_media_prefix = "admin_media"
-#env.newsapps_media_prefix = "na_media"
-#env.path = '/home/newsapps/sites/%(project_name)s' % env
-#env.log_path = '/home/newsapps/logs/%(project_name)s' % env
-#env.env_path = '%(path)s/env' % env
-#env.repo_path = '%(path)s/repository' % env
-#env.apache_config_path = '/home/newsapps/sites/apache/%(project_name)s' % env
-#env.python = 'python2.6'
-
 """
-Some config stuff.
+Some config utility methods
 """
 def _create_environment(filename, environment):
     """
@@ -89,30 +74,30 @@ def development():
     _create_environment("fabfile.properties", "development")
 
 """
-Where the source code is.
+Where to get the code.
 """
 @task
 def tip():
     """
-    Delpoy the tip.
+        Deploy the tip.
     """
     env.branch = 'tip'
 
 @task
 def revision(revision="tip"):
     """
-    Deploy a certain revision.  Default is the tip.
+        Deploy a certain revision.  Default is the tip.
     """
     env.branch = revision
 
 """
-Commands - setup
+Deploy
 """
 @task
-def setup():
+def deploy():
     """
         Setup a new website by installing everything we need, and fire up 
-        the database.  Does NOT perform the functions of deploy().
+        the database.  Then deploys the site.
     """
     
     require('settings', provided_by=[production, staging, development])
@@ -121,15 +106,26 @@ def setup():
     print(green("Fabricating " + env.branch + " in " + env.settings + " environment..."))
     
     setup_directories()    
+
     if (env.branch == "tip"):
         checkout_latest()
     else:
         checkout_revision(env.branch)
+    
     install_requirements()
-    update_database()
+
+    drop_database()
+    create_database()
+    populate_database()
+
+    update_webserver()
 
     print(green("Setup complete."))
     
+"""
+Tasks to help in deployment
+"""
+
 def setup_directories():
     """
         Create directories necessary for deployment.
@@ -154,15 +150,16 @@ def install_requirements():
     """
         Todo: install the required packages using pip.
     """
-    print(orange("Not installing requirements yet.  Need to do this yourself for now..."))
+    print(yellow("Not installing requirements yet.  You still need to do this yourself for now..."))
     #run('source %(env_path)s/bin/activate; pip install -E %(env_path)s -r %(repo_path)s/requirements.txt' % env)
 
-def update_database():
+def create_database():
     """
         Creates a user and a database.
     """
 
     # check if user is already there
+    print('echo "SELECT 1 FROM pg_roles WHERE rolname=\'%(dbuser)s\';" | psql postgres -tA' % env)
     output = run('echo "SELECT 1 FROM pg_roles WHERE rolname=\'%(dbuser)s\';" | psql postgres -tA' % env)
     if (output == "1"):
         print(green("Good.  User '%(dbuser)s' exists." % env))
@@ -190,35 +187,29 @@ def update_database():
             print(red("Could not create database."))
             abort("Database creation error.")
 
-def destroy_database():
+def drop_database():
     """
         Destroys the user and database for this project.
         Will not cause the fab to fail if they do not exist.
     """
     with settings(warn_only=True):
-        run('dropdb %(project_name)s' % env)
-        run('dropuser %(project_name)s' % env)
-        
-def load_data():
+        run('dropdb %(dbname)s' % env)
+        run('dropuser %(dbuser)s' % env)
+
+def populate_database():
     """
-        Loads data from the repository into PostgreSQL.
+        Loads data in the database.
     """
-    run('psql -q %(project_name)s < %(path)s/repository/data/psql/dump.sql' % env)
-    run('psql -q %(project_name)s < %(path)s/repository/data/psql/finish_init.sql' % env)
+    with cd(env.path):
+        run('./manage.py loaddata statics.json')
+        run('./manage.py loaddata treemenus.json')
+        run('./manage.py loaddata blog.json')
     
-def deploy_static():
-    with cd(env.project_root):
-        run('./manage.py collectstatic -v0 --noinput')
-        
-def deploy():
+def update_webserver():
     """
-        Deploys the website
+        TODO: Updates the Cherokee webserver
     """
-    create_database()
-    populate_database()
-    get_current_trunk_and_tag_it()
-    deploy_statics()
-    deploy()
-    check()
-    push_back()
+    print(yellow("Not updating the Cherokee webserver yet.  You still need to do this yourself for now..."))
+    
+
     

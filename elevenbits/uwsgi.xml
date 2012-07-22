@@ -1,10 +1,6 @@
 <uwsgi>
 	<socket>127.0.0.1:3031</socket>
-	<!--  <chdir>/var/www/elevenbits</chdir> -->
-	<chdir>/home/jw/python/workspace/elevenbits</chdir>
-	<!--  <pythonpath>..</pythonpath> -->
+	<chdir>/var/www/elevenbits</chdir>
 	<module>elevenbits.django_wsgi</module>
-	<pythonpath>/home/jw/python/workspace/elevenbits</pythonpath>
 	<pythonpath>/var/www/elevenbits</pythonpath>
-	<pythonpath>/var/www/</pythonpath>
 </uwsgi>
