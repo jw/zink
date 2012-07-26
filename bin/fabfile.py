@@ -3,6 +3,7 @@ from fabric.decorators import task
 from fabric.colors import red, green, yellow
 from fabric.operations import require, sudo
 from fabric.context_managers import show, settings, cd
+from fabric.utils import abort
 
 """
 Base configuration
@@ -114,7 +115,7 @@ def deploy():
     
     install_requirements()
 
-    drop_database()
+    #drop_database()
     create_database()
     populate_database()
 
@@ -158,16 +159,21 @@ def create_database():
         Creates a user and a database.
     """
 
+    print("user: %(user)s" % env)
+    print("dbuser: %(dbuser)s" % env)
+    print("dbpassword: %(dbpassword)s" % env)
+
     # check if user is already there
     print('echo "SELECT 1 FROM pg_roles WHERE rolname=\'%(dbuser)s\';" | psql postgres -tA' % env)
     output = run('echo "SELECT 1 FROM pg_roles WHERE rolname=\'%(dbuser)s\';" | psql postgres -tA' % env)
+    print("output: " + output)
     if (output == "1"):
         print(green("Good.  User '%(dbuser)s' exists." % env))
     else:
-        # if not, create it
+        # if not, create the user
         print(green("Creating user '%(dbuser)s'." % env))
-        output = run('echo "CREATE USER %(dbuser)s WITH PASSWORD \'%(dbpassword)s\';" | psql postgres -tA' % env)
-        if (output == "CREATE DATABASE"):
+        output = run('echo "CREATE ROLE %(dbuser)s WITH PASSWORD \'%(dbpassword)s\';" | psql postgres -tA' % env)
+        if (output == "CREATE DATABASE" or output == "CREATE ROLE"):
             print(green("Created user successfully."))
         else:
             print(red("Could not create user."))

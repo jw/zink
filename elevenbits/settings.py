@@ -4,6 +4,7 @@
 #
 
 from os.path import join, dirname, realpath
+from os import uname
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -53,7 +54,7 @@ STATICFILES_FINDERS = (
 #    "django.contrib.staticfiles.finders.AppDirectoriesFinder"
 )
 
-STATIC_URL = "http://static/"
+STATIC_URL = "http://static." + uname()[1]
 STATIC_ROOT = '/tmp/statics'
 
 MEDIA_URL = ''
