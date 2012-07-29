@@ -60,7 +60,7 @@
 			{% load revision %}{% load tracking_tags %}
 			{% visitors_on_site as visitors %}
 			<div class="left">
-				[{{static.deployment_time}}, release: {% revision %},     {{ visitors }} active user{{ visitors|pluralize }}]
+				[{{static.deployment_time}}, release: {% revision %}, {{ visitors }} active user{{ visitors|pluralize }}]
 			</div>
 			<div class="right">
 				{{static.copyright}}

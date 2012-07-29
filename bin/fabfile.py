@@ -5,6 +5,8 @@ from fabric.operations import require, sudo
 from fabric.context_managers import show, settings, cd
 from fabric.utils import abort
 
+from datetime import datetime
+
 """
 Base configuration
 """
@@ -159,10 +161,6 @@ def create_database():
         Creates a user and a database.
     """
 
-    print("user: %(user)s" % env)
-    print("dbuser: %(dbuser)s" % env)
-    print("dbpassword: %(dbpassword)s" % env)
-
     # check if user is already there
     print('echo "SELECT 1 FROM pg_roles WHERE rolname=\'%(dbuser)s\';" | psql postgres -tA' % env)
     output = run('echo "SELECT 1 FROM pg_roles WHERE rolname=\'%(dbuser)s\';" | psql postgres -tA' % env)
@@ -202,6 +200,17 @@ def drop_database():
         run('dropdb %(dbname)s' % env)
         run('dropuser %(dbuser)s' % env)
 
+@task
+def _set_deployment_time():
+    now = datetime.now()
+    deployment_time = now.strftime("%d.%m.%Y, %H%Mhrs");
+    print("Deployment time is " + deployment_time)
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "elevenbits.settings")
+    from elevenbits.static.models import Static
+    dt = Static.objects.get(name="deployment.time")
+    dt.value=deployment_time
+    dt.save()
+
 def populate_database():
     """
         Loads data in the database.
@@ -210,12 +219,13 @@ def populate_database():
         run('./manage.py loaddata statics.json')
         run('./manage.py loaddata treemenus.json')
         run('./manage.py loaddata blog.json')
+    # add the deployment time
+    _set_deployment_time()
+    
     
 def update_webserver():
     """
         TODO: Updates the Cherokee webserver
     """
     print(yellow("Not updating the Cherokee webserver yet.  You still need to do this yourself for now..."))
-    
-
     
