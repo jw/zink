@@ -4,8 +4,7 @@ from fabric.colors import red, green, yellow
 from fabric.operations import require, sudo
 from fabric.context_managers import show, settings, cd
 from fabric.utils import abort
-
-from datetime import datetime
+from fabric.contrib import django
 
 """
 Base configuration
@@ -200,16 +199,41 @@ def drop_database():
         run('dropdb %(dbname)s' % env)
         run('dropuser %(dbuser)s' % env)
 
-@task
-def _set_deployment_time():
+def update_deployment_time():
+    # get date and time
+    from datetime import datetime
     now = datetime.now()
     deployment_time = now.strftime("%d.%m.%Y, %H%Mhrs");
     print("Deployment time is " + deployment_time)
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "elevenbits.settings")
+    # first get Django access
+    from os import environ
+    from sys import path
+    path.append(env.path)
+    environ.setdefault("DJANGO_SETTINGS_MODULE", "elevenbits.settings")
+    # update the development time
     from elevenbits.static.models import Static
-    dt = Static.objects.get(name="deployment.time")
-    dt.value=deployment_time
-    dt.save()
+    static = Static.objects.get(name="deployment.time")
+    static.value=deployment_time
+    static.save()  
+
+@task
+def update_deployment_time():
+    # get date and time
+    from datetime import datetime
+    now = datetime.now()
+    deployment_time = now.strftime("%d.%m.%Y, %H%Mhrs");
+    print("Deployment time is " + deployment_time)
+    # first get Django access
+    from os import environ
+    from sys import path
+    path.append(env.path)
+    environ.setdefault("DJANGO_SETTINGS_MODULE", "elevenbits.settings")
+    # update the development time
+    with cd(env.path):
+        from elevenbits.static.models import Static
+        static = Static.objects.get(name="deployment.time")
+        static.value=deployment_time
+        static.save()
 
 def populate_database():
     """
@@ -219,8 +243,9 @@ def populate_database():
         run('./manage.py loaddata statics.json')
         run('./manage.py loaddata treemenus.json')
         run('./manage.py loaddata blog.json')
-    # add the deployment time
-    _set_deployment_time()
+    # update the deployment time
+    with cd(env.path + "/bin"):
+        run('fab update_deployment_time')
     
     
 def update_webserver():
