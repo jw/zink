@@ -11,21 +11,6 @@ env.project = "elevenbits"
 env.repo = "https://hg.elevenbits.org"
 env.path = '/var/www/%(project)s' % env
 
-#
-# old stuff
-#
-
-#env.database_password = '$(db_password)'
-#env.site_media_prefix = "site_media"
-#env.admin_media_prefix = "admin_media"
-#env.newsapps_media_prefix = "na_media"
-#env.path = '/home/newsapps/sites/%(project_name)s' % env
-#env.log_path = '/home/newsapps/logs/%(project_name)s' % env
-#env.env_path = '%(path)s/env' % env
-#env.repo_path = '%(path)s/repository' % env
-#env.apache_config_path = '/home/newsapps/sites/apache/%(project_name)s' % env
-#env.python = 'python2.6'
-
 """
 Some config stuff.
 """
