@@ -121,6 +121,9 @@ def deploy():
     populate_database()
 
     update_webserver()
+    
+    restart_database()
+    restart_webserver()
 
     print(green("Setup complete."))
     
@@ -218,6 +221,11 @@ def update_deployment_time():
 
 @task
 def update_deployment_time():
+    """
+        There is a static name value pair which contains the deployment
+        time.  It is displayed in the footer of each page.  This method 
+        updates that static in the database.  But it really looks very bad.
+    """
     # get date and time
     from datetime import datetime
     now = datetime.now()
@@ -246,8 +254,13 @@ def populate_database():
     # update the deployment time
     with cd(env.path + "/bin"):
         run('fab update_deployment_time')
+
+def restart_webserver():
+    sudo("/etc/init.d/cherokee restart")
     
-    
+def restart_database():
+    sudo("/etc/init.d/postgresql restart")
+
 def update_webserver():
     """
         TODO: Updates the Cherokee webserver
