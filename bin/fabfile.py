@@ -123,9 +123,9 @@ def deploy():
     
     update_webserver()
     restart_webserver()
-
-    print(green("Setup complete."))
     
+    print(green("Setup complete."))
+
 """
 Tasks to help in deployment
 """
@@ -236,7 +236,7 @@ def update_deployment_time():
         static = Static.objects.get(name="deployment.time")
         static.value=deployment_time
         static.save()
-
+        
 def populate_database():
     """
         Loads data in the database.

@@ -6,7 +6,11 @@
 from os.path import join, dirname, realpath
 from os import uname
 
-DEBUG = True
+if (uname()[1] == "elevenbits.org"):
+    DEBUG = False
+else:
+    DEBUG = True
+    
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
