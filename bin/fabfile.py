@@ -119,8 +119,10 @@ def deploy():
     #drop_database()
     create_database()
     populate_database()
-
+    restart_database()
+    
     update_webserver()
+    restart_webserver()
 
     print(green("Setup complete."))
     
@@ -246,7 +248,12 @@ def populate_database():
     # update the deployment time
     with cd(env.path + "/bin"):
         run('fab update_deployment_time')
+
+def restart_database():
+    sudo("/etc/init.d/postgresql restart")
     
+def restart_webserver():
+    sudo("/etc/init.d/cherokee restart")
     
 def update_webserver():
     """
