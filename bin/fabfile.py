@@ -119,10 +119,9 @@ def deploy():
     #drop_database()
     create_database()
     populate_database()
+    restart_database()
 
     update_webserver()
-    
-    restart_database()
     restart_webserver()
 
     print(green("Setup complete."))
@@ -248,6 +247,7 @@ def populate_database():
         Loads data in the database.
     """
     with cd(env.path):
+        run('./manage.py syncdb')
         run('./manage.py loaddata statics.json')
         run('./manage.py loaddata treemenus.json')
         run('./manage.py loaddata blog.json')

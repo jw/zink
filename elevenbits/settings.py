@@ -6,7 +6,11 @@
 from os.path import join, dirname, realpath
 from os import uname
 
-DEBUG = True
+if (uname()[1] == "elevenbits.org"):
+    DEBUG = False
+else:
+    DEBUG = True
+    
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -42,8 +46,6 @@ USE_L10N = True
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = False
 
-#### tbd: start: needs to be checked with Django 1.4
-
 # The statics (css and images) location
 STATICFILES_DIRS = (
     "",
@@ -56,13 +58,6 @@ STATICFILES_FINDERS = (
 
 STATIC_URL = "http://static." + uname()[1]
 STATIC_ROOT = '/tmp/statics'
-
-MEDIA_URL = ''
-MEDIA_ROOT = join(dirname(__file__), "media")
-# It might be better to place this in '/admin/'
-ADMIN_MEDIA_PREFIX = '/media/'
-
-#### tbd: stop: needs to be checked with Django 1.4
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '0u^l=%@(2_imjrza(c4hgitd2a^)bn0%)8496m9!asshisqdf3rf-j+sdwxesq1'
