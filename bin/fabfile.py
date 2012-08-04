@@ -242,6 +242,7 @@ def populate_database():
         Loads data in the database.
     """
     with cd(env.path):
+        run('./manage.py syncdb')
         run('./manage.py loaddata statics.json')
         run('./manage.py loaddata treemenus.json')
         run('./manage.py loaddata blog.json')
