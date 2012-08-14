@@ -222,7 +222,7 @@ def update_deployment_time():
         
 def populate_database():
     """
-        Loads data in the database.
+        Loads (mostly fixture) data in the database.
     """
     with cd(env.path):
         run('./manage.py syncdb')
