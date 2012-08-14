@@ -201,23 +201,6 @@ def drop_database():
         run('dropdb %(dbname)s' % env)
         run('dropuser %(dbuser)s' % env)
 
-def update_deployment_time():
-    # get date and time
-    from datetime import datetime
-    now = datetime.now()
-    deployment_time = now.strftime("%d.%m.%Y, %H%Mhrs");
-    print("Deployment time is " + deployment_time)
-    # first get Django access
-    from os import environ
-    from sys import path
-    path.append(env.path)
-    environ.setdefault("DJANGO_SETTINGS_MODULE", "elevenbits.settings")
-    # update the development time
-    from elevenbits.static.models import Static
-    static = Static.objects.get(name="deployment.time")
-    static.value=deployment_time
-    static.save()  
-
 @task
 def update_deployment_time():
     # get date and time

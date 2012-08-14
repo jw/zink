@@ -6,7 +6,9 @@
 from os.path import join, dirname, realpath
 from os import uname
 
-if (uname()[1] == "elevenbits.org"):
+SITE_ROOT = dirname(realpath(join(__file__, "..")))
+
+if (uname()[1] == "elevenbits.org" or uname()[1] == "elevenbits.com"):
     DEBUG = False
 else:
     DEBUG = True
@@ -59,6 +61,8 @@ STATICFILES_FINDERS = (
 STATIC_URL = "http://static." + uname()[1]
 STATIC_ROOT = '/tmp/statics'
 
+FIXTURE_DIRS = (join(SITE_ROOT, 'fixtures'),)
+
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '0u^l=%@(2_imjrza(c4hgitd2a^)bn0%)8496m9!asshisqdf3rf-j+sdwxesq1'
 
@@ -90,14 +94,11 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'elevenbits.urls'
 
-# Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'elevenbits.wsgi.application'
 
 TEMPLATE_DIRS = (
     join(dirname(__file__), 'templates').replace('\\','/'),
 )
-
-SITE_ROOT = dirname(realpath(join(__file__, "..")))
 
 INSTALLED_APPS = (
     'django.contrib.auth',
