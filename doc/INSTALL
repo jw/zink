@@ -27,3 +27,11 @@ Handled via fabfile:
 - development: your machine
 - staging: staging.elevenbits.org
 - production: www.elevenbits.org
+
+Create fixtures:
+
+python manage.py dumpdata --indent 4 treemenus > /home/jw/treemenus.json
+python manage.py dumpdata --indent 4 blog > /home/jw/blog.json
+python manage.py dumpdata --indent 4 static > /home/jw/static.json
+
+

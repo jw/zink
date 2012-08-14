@@ -226,7 +226,7 @@ def populate_database():
     """
     with cd(env.path):
         run('./manage.py syncdb')
-        run('./manage.py loaddata statics.json')
+        run('./manage.py loaddata static.json')
         run('./manage.py loaddata treemenus.json')
         run('./manage.py loaddata blog.json')
     # update the deployment time

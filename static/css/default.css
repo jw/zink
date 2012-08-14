@@ -3,7 +3,7 @@
  * Default style sheet for the m8n/ElevenBits home page.
  * Please note that this is copyrighted material.
  *
- * @author  <a href="mailto:jw@m8n.be">Jan Willems</a> 
+ * @author  <a href="mailto:jw@elevenbits.com">Jan Willems</a> 
  * @version 0.9.1 [21.11.2004, 1145hrs]
  * @version 1.0.0 [26.02.2005, 2115hrs]
  * @version 1.1.0 [28.05.2005, 2000hrs]
@@ -11,6 +11,7 @@
  * @version 1.3.0 [11.06.2009, 2236hrs]
  * @version 1.3.1 [01.08.2009, 1123hrs]
  * @version 1.3.2 [20.09.2009, 2228hrs]
+ * @version 1.3.3 [14.08.2012, 1254hrs]
  *
  */
 
@@ -85,7 +86,7 @@ body {
 }
 
 .menu ul li a {
-	background: url("http://www.elevenbits.com/media/images/right.png") no-repeat;
+	background: url("http://static.elevenbits.org/menu/right.png") no-repeat;
 	width: 180px;
 	height: 2em;
 	/*border-top: 1px solid #EDEEE8;*/
@@ -105,7 +106,7 @@ body {
 }
 
 .menu ul ul li a {
-	background: url("http://www.elevenbits.com/media/images/sub.png") no-repeat;
+	background: url("http://static.elevenbits.org/menu/sub.png") no-repeat;
 	width: 180px;
 	height: 2em;
 	border-bottom: 1px dotted #BCBEB1;
@@ -124,7 +125,7 @@ body {
 
 .menu ul li a:hover {
 	color: #4B6060;
-	background: url("http://www.elevenbits.com/media/images/right.png") no-repeat;
+	background: url("http://static.elevenbits.org/menu/right.png") no-repeat;
 	border-top-width: 1px;
 	border-right-width: 0px;
 	border-bottom-width: 1px;
@@ -139,7 +140,7 @@ body {
 .menu ul ul li a:hover {
 	text-indent: 40px;
 	color: #4B6060;
-	background: url("http://www.elevenbits.com/media/images/sub.png") no-repeat;
+	background: url("http://static.elevenbits.org/menu/sub.png") no-repeat;
 	border-top-width: 1px;
 	border-bottom-width: 1px;
 	border-left-width: 1px;
