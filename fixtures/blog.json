@@ -84,13 +84,6 @@
         }
     },
     {
-        "pk": 16,
-        "model": "blog.tag",
-        "fields": {
-            "tag": "cherokee"
-        }
-    },
-    {
         "pk": 17,
         "model": "blog.tag",
         "fields": {
@@ -293,6 +286,21 @@
             "created": "2011-03-28T22:44:37",
             "active": true,
             "posted": "2011-03-28T22:44:52"
+        }
+    },
+    {
+        "pk": 21,
+        "model": "blog.entry",
+        "fields": {
+            "body": "The [cherokee-admin](http://www.cherokee-project.com/doc/other_bundle_cherokee-admin.html) binds only to local loopback by default. There are some workarounds:\r\n\r\n#####Tunneling\r\nCreate an SSH tunnel. This is the recommended way. In order to do so you must issue the following command:\r\n\r\n    :::::console\r\n    user@box:~$ ssh -L 9090:localhost:9090 remote_IP\r\n\r\nAfter that your terminal will be logged in the remote machine.  There you can start the admin.  From then on you can access this remote interface through http://localhost:9090.  Every request will be forwarded to the remote IP running cherokee-admin.\r\n\r\n#####The -b parameter\r\nLaunch cherokee-admin with the -b parameter in order to force it to listen to all the network interfaces.\r\n\r\n#####Copy and paste\r\nFinally you could always install cherokee on your local host, configure it there and then copy the generated cherokee.conf file to the device running the cherokee instance you wanted to set up.",
+            "title": "How to access cherokee-admin from a remote machine",
+            "tags": [
+                6,
+                17
+            ],
+            "created": "2012-08-15T08:31:44",
+            "active": true,
+            "posted": "2012-08-15T08:35:15"
         }
     }
 ]
