@@ -172,8 +172,8 @@ def update_fixtures():
             sudo('python manage.py dumpdata --indent 4 static > %(path)s/fixtures/static.json' % env, user="www-data")
             sudo('python manage.py dumpdata --indent 4 treemenus > %(path)s/fixtures/treemenus.json' % env, user="www-data")
             sudo('python manage.py dumpdata --indent 4 blog > %(path)s/fixtures/blog.json' % env, user="www-data")
-            sudo('hg commit -m "Automatically committed latest content to repo when deploying"' % env, user="www-data")
-            sudo('hg push https://%(user)s:%(password)s@%(repo)s/elevenbits')
+            sudo('hg commit -u %(user)s -m "Automatically committed latest content to repo when deploying"' % env, user="www-data")
+            sudo('hg push https://%(user)s:%(password)s@%(repo)s/elevenbits' % env)
 
 def create_database():
     """
