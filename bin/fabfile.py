@@ -107,13 +107,14 @@ def deploy():
 
     print(green("Fabricating " + env.branch + " in " + env.settings + " environment..."))
 
+    install_requirements()
+
     # when deploying to production, first get the latest 
     # content and store it in the repo
     if (env.branch == "tip" and env.settings == "production"):
         update_fixtures()
     
     setup_directories()    
-    install_requirements()
 
     if (env.branch == "tip"):
         checkout_latest()
@@ -136,7 +137,7 @@ Tasks to help in deployment
 
 def setup_directories():
     """
-        Create directories necessary for deployment.
+        First remove, then create the necessary directories.
     """
     sudo("rm -rf %(path)s" % env)
     sudo("mkdir -p %(path)s" % env)
@@ -166,12 +167,13 @@ def update_fixtures():
     """
         Dumping the latest content of the portal and adding it to the repo
     """
-    with cd(env.path):
-        sudo('python manage.py dumpdata --indent 4 static > %(path)s/fixtures/static.json' % env, user="www-data")
-        sudo('python manage.py dumpdata --indent 4 treemenus > %(path)s/fixtures/treemenus.json' % env, user="www-data")
-        sudo('python manage.py dumpdata --indent 4 blog > %(path)s/fixtures/blog.json' % env, user="www-data")
-        sudo('hg commit -m "Automatically committed latest content to repo when deploying"' % env, user="www-data")
-        sudo('hg push https://%(user)s:%(password)s@%(repo)s/elevenbits')
+    with settings(warn_only=True):
+        with cd(env.path):
+            sudo('python manage.py dumpdata --indent 4 static > %(path)s/fixtures/static.json' % env, user="www-data")
+            sudo('python manage.py dumpdata --indent 4 treemenus > %(path)s/fixtures/treemenus.json' % env, user="www-data")
+            sudo('python manage.py dumpdata --indent 4 blog > %(path)s/fixtures/blog.json' % env, user="www-data")
+            sudo('hg commit -m "Automatically committed latest content to repo when deploying"' % env, user="www-data")
+            sudo('hg push https://%(user)s:%(password)s@%(repo)s/elevenbits')
 
 def create_database():
     """
@@ -219,6 +221,10 @@ def drop_database():
 
 @task
 def update_deployment_time():
+    """
+        This task updates the deployment time remotely.
+        TODO: This needs to be cleaned up.  Maybe create a deployment app?
+    """
     # get date and time
     from datetime import datetime
     now = datetime.now()
@@ -235,9 +241,9 @@ def update_deployment_time():
         static = Static.objects.get(name="deployment.time")
         static.value = deployment_time
         static.save()
-        datetime = Static.objects.get(name="deployment.days")
-        static.value = now.toordinal()
-        static.save()
+        #datetime = Static.objects.get(name="deployment.days")
+        #static.value = now.toordinal()
+        #static.save()
         
 def populate_database():
     """
