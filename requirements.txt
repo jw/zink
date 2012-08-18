@@ -1,0 +1,11 @@
+
+uwsgi
+markdown
+psycopg2
+django
+#pygment
+#https://github.com/jphalip/django-treemenus/downloads: unzip, sudo python setup.py install
+#tracking: hg clone http://bitbucket.org/janwillems/django-tracking and python setup.py install
+#hg
+#postgres
+

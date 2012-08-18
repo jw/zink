@@ -107,7 +107,8 @@ def deploy():
 
     print(green("Fabricating " + env.branch + " in " + env.settings + " environment..."))
 
-    # get the latest content from production and save it in the repo
+    # when deploying to production, first get the latest 
+    # content and store it in the repo
     if (env.branch == "tip" and env.settings == "production"):
         update_fixtures()
     
@@ -116,8 +117,6 @@ def deploy():
 
     if (env.branch == "tip"):
         checkout_latest()
-        if (env.settings == "production"):
-            update_fixtures()
     else:
         checkout_revision(env.branch)
 
