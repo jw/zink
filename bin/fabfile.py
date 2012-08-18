@@ -10,7 +10,7 @@ from fabric.contrib import django
 Base configuration
 """
 env.project = "elevenbits"
-env.repo = "https://hg.elevenbits.org"
+env.repo = "hg.elevenbits.org"
 env.path = '/var/www/%(project)s' % env
 
 """
@@ -142,13 +142,13 @@ def checkout_latest():
     """
         Get latest version from repository.
     """
-    sudo('hg clone %(repo)s/elevenbits %(path)s' % env, user="www-data")
+    sudo('hg clone https://%(user)s:%(password)s@%(repo)s/elevenbits %(path)s' % env, user="www-data")
 
 def checkout_revision(revision):
     """
         Clone a revision.
     """
-    sudo('hg clone -r %(branch)s %(repo)s/elevenbits %(path)s' % env, user="www-data")
+    sudo('hg clone -r %(branch)s https://%(user)s:%(password)s@%(repo)s/elevenbits %(path)s' % env, user="www-data")
 
 def install_requirements():
     """
@@ -217,7 +217,10 @@ def update_deployment_time():
     with cd(env.path):
         from elevenbits.static.models import Static
         static = Static.objects.get(name="deployment.time")
-        static.value=deployment_time
+        static.value = deployment_time
+        static.save()
+        datetime = Static.objects.get(name="deployment.days")
+        static.value = now.toordinal()
         static.save()
         
 def populate_database():
