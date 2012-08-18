@@ -106,15 +106,20 @@ def deploy():
     require('branch', provided_by=[tip, revision])
 
     print(green("Fabricating " + env.branch + " in " + env.settings + " environment..."))
+
+    # get the latest content from production and save it in the repo
+    if (env.branch == "tip" and env.settings == "production"):
+        update_fixtures()
     
     setup_directories()    
+    install_requirements()
 
     if (env.branch == "tip"):
         checkout_latest()
+        if (env.settings == "production"):
+            update_fixtures()
     else:
         checkout_revision(env.branch)
-    
-    install_requirements()
 
     #drop_database()
     create_database()
@@ -152,10 +157,22 @@ def checkout_revision(revision):
 
 def install_requirements():
     """
-        Todo: install the required packages using pip.
+        Install the required packages using pip.
     """
-    print(yellow("Not installing requirements yet.  You still need to do this yourself for now..."))
-    #run('source %(env_path)s/bin/activate; pip install -E %(env_path)s -r %(repo_path)s/requirements.txt' % env)
+    sudo('pip install -r %(path)s/requirements.txt' % env)
+    print(yellow("Most likely only installed some of the required packages.  You still need to do check this yourself for now..."))
+
+@task
+def update_fixtures():
+    """
+        Dumping the latest content of the portal and adding it to the repo
+    """
+    with cd(env.path):
+        sudo('python manage.py dumpdata --indent 4 static > %(path)s/fixtures/static.json' % env, user="www-data")
+        sudo('python manage.py dumpdata --indent 4 treemenus > %(path)s/fixtures/treemenus.json' % env, user="www-data")
+        sudo('python manage.py dumpdata --indent 4 blog > %(path)s/fixtures/blog.json' % env, user="www-data")
+        sudo('hg commit -m "Automatically committed latest content to repo when deploying"' % env, user="www-data")
+        sudo('hg push https://%(user)s:%(password)s@%(repo)s/elevenbits')
 
 def create_database():
     """
