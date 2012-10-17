@@ -230,11 +230,12 @@ def update_deployment_time():
     from os import environ
     from sys import path
     path.append(env.path)
-    environ.setdefault("DJANGO_SETTINGS_MODULE", "elevenbits.settings")
+    #environ.setdefault("DJANGO_SETTINGS_MODULE", "elevenbits.settings")
+    django.settings_module('elevenbits.settings')
     with cd(env.path):
         # get the version
         from elevenbits.templatetags import revision
-        version = revision.get_gh_revision()
+        version = revision.get_hg_revision()
         # TODO: get tag
         tag = "n/a"
         # add this development
