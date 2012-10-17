@@ -113,12 +113,13 @@ def deploy():
         update_fixtures()
     
     setup_directories()    
-    install_requirements()
 
     if (env.branch == "tip"):
         checkout_latest()
     else:
         checkout_revision(env.branch)
+
+    install_requirements()
 
     #drop_database()
     create_database()
@@ -158,6 +159,7 @@ def install_requirements():
     """
         Install the required packages using pip.
     """
+    
     sudo('pip install -r %(path)s/requirements.txt' % env)
     print(yellow("Most likely only installed some of the required packages.  You still need to do check this yourself for now..."))
 
@@ -229,15 +231,16 @@ def update_deployment_time():
     from sys import path
     path.append(env.path)
     environ.setdefault("DJANGO_SETTINGS_MODULE", "elevenbits.settings")
-    # update the development time
     with cd(env.path):
-        from elevenbits.static.models import Static
-        static = Static.objects.get(name="deployment.time")
-        static.value = deployment_time
-        static.save()
-        datetime = Static.objects.get(name="deployment.days")
-        static.value = now.toordinal()
-        static.save()
+        # get the version
+        from elevenbits.templatetags import revision
+        version = revision.get_gh_revision()
+        # TODO: get tag
+        tag = "n/a"
+        # add this development
+        from elevenbits.deployment.models import Deployment
+        deployment = Deployment(tag=tag, timestamp=now, version=version, deployer='Deployed via Fabric.')
+        deployment.save()
         
 def populate_database():
     """

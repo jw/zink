@@ -110,6 +110,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'elevenbits.blog',
     'elevenbits.static',
+    'elevenbits.deployment',
     'elevenbits',
     'treemenus',
     'tracking',

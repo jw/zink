@@ -57,10 +57,10 @@
     	{% endblock %}
     	{% block footer %}
     	<div class="footer">
-			{% load revision %}{% load tracking_tags %}
+			{% load tracking_tags %}
 			{% visitors_on_site as visitors %}
 			<div class="left">
-				[{{static.deployment_time}}, release: {% revision %}, {{ visitors }} active user{{ visitors|pluralize }}]
+				[{{deployment.timestamp|date:"d.m.Y, Hi\h\r\s"}}, release: {{deployment.version}}, {{ visitors }} active user{{ visitors|pluralize }}]
 			</div>
 			<div class="right">
 				{{static.copyright}}

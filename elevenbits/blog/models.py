@@ -10,7 +10,7 @@ class Tag(models.Model):
     def get_absolute_url(self):
         return '%stag/%s/' % (settings.BLOG_ROOT, self.slug)
 
-# the entry
+# The entry
 class Entry(models.Model):
     
     created = models.DateTimeField('created',
@@ -36,7 +36,7 @@ class Entry(models.Model):
     def __unicode__(self):
         return self.title
 
-# Comments
+# Comments on an entry
 class Comment(models.Model):
 
     created = models.DateTimeField('created',
