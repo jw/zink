@@ -114,6 +114,7 @@ INSTALLED_APPS = (
     'elevenbits',
     'treemenus',
     'tracking',
+    'south',
 )
 
 #

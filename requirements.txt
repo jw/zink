@@ -1,11 +1,15 @@
+Django==1.4.2
+Markdown==2.2.0
+Pygments==1.5
+South==0.7.6
+argparse==1.2.1
+mercurial==2.4-rc
+psycopg2==2.4.5
+uWSGI==1.3
+wsgiref==0.1.2
 
-uwsgi
-markdown
-psycopg2
-django
-#pygment
-#https://github.com/jphalip/django-treemenus/downloads: unzip, sudo python setup.py install
-#tracking: hg clone http://bitbucket.org/janwillems/django-tracking and python setup.py install
-#hg
-#postgres
+# tracking is at https://hg.elevenbits.org/tracking
+django-tracking==0.4.0
 
+# treemenus is at https://hg.elevenbits.org/treemenus
+django-treemenus==0.8.8-pre
