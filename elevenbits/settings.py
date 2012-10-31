@@ -37,15 +37,9 @@ LANGUAGE_CODE = 'en-BE'
 
 SITE_ID = 1
 
-# If you set this to False, Django will make some optimizations so as not
-# to load the internationalization machinery.
+# use i18n, l10n and make dates time zone aware
 USE_I18N = True
-
-# If you set this to False, Django will not format dates, numbers and
-# calendars according to the current locale.
 USE_L10N = True
-
-# If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = False
 
 # The statics (css and images) location

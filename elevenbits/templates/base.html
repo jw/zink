@@ -58,9 +58,10 @@
     	{% block footer %}
     	<div class="footer">
 			{% load tracking_tags %}
+			{% load relative_time %}
 			{% visitors_on_site as visitors %}
 			<div class="left">
-				[{{deployment.timestamp|date:"d.m.Y, Hi\h\r\s"}}, release: {{deployment.version}}, {{ visitors }} active user{{ visitors|pluralize }}]
+				[{{deployment.timestamp|relative_time}}, {{deployment.timestamp|timesince}}, {{deployment.timestamp|date:"d.m.Y, Hi\h\r\s"}}, release: {{deployment.version}}, {{ visitors }} active user{{ visitors|pluralize }}]
 			</div>
 			<div class="right">
 				{{static.copyright}}
