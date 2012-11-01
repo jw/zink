@@ -61,7 +61,7 @@
 			{% load relative_time %}
 			{% visitors_on_site as visitors %}
 			<div class="left">
-				[{{deployment.timestamp|relative_time}}, {{deployment.timestamp|timesince}}, {{deployment.timestamp|date:"d.m.Y, Hi\h\r\s"}}, release: {{deployment.version}}, {{ visitors }} active user{{ visitors|pluralize }}]
+				[release: {{deployment.version}}, deployed {{deployment.timestamp|relative_time}}, {{ visitors }} active user{{ visitors|pluralize }}]
 			</div>
 			<div class="right">
 				{{static.copyright}}
