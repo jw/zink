@@ -159,10 +159,11 @@ def install_requirements():
     """
         Install the required packages using pip.
     """
-    
     sudo('pip install -r %(path)s/requirements.txt' % env)
-    print(yellow("Most likely only installed some of the required packages.  You still need to do check this yourself for now..."))
-
+    print(green("Some required packages are installed."))
+    print(yellow("Some packages might be missing."))
+    print(yellow("You still need to do check this yourself for now..."))
+    
 @task
 def update_fixtures():
     """
@@ -227,10 +228,8 @@ def update_deployment_time():
     deployment_time = now.strftime("%d.%m.%Y, %H%Mhrs");
     print("Deployment time is " + deployment_time)
     # first get Django access
-    from os import environ
     from sys import path
     path.append(env.path)
-    #environ.setdefault("DJANGO_SETTINGS_MODULE", "elevenbits.settings")
     django.settings_module('elevenbits.settings')
     with cd(env.path):
         # get the version
@@ -260,11 +259,18 @@ def restart_database():
     sudo("/etc/init.d/postgresql restart")
     
 def restart_webserver():
-    sudo("/etc/init.d/cherokee restart")
-    
+    sudo("/etc/init.d/nginx restart")
+    sudo("/etc/init.d/uwsgi restart")
+
+@task    
 def update_webserver():
-    """
-        TODO: Updates the Cherokee webserver
-    """
-    print(yellow("Not updating the Cherokee webserver yet.  You still need to do this yourself for now..."))
+    # remove default first
+    with settings(warn_only=True):
+        sudo("rm /etc/nginx/sites-enabled/default")
+    # update nginx
+    sudo("cp %(path)s/conf/%(host)s.conf /etc/nginx/sites-available" % env)
+    sudo("ln -s %(path)s/conf/%(host)s.conf /etc/nginx/sites-enabled/%(host)s.conf" % env)
+    # update uwsgi
+    sudo("cp %(path)s/conf/uwsgi.ini /etc/uwsgi/app-available" % env)
+    sudo("ln -s %(path)s/conf/uwsgi.ini /etc/uwsgi/sites-enabled/uwsgi.ini" % env)
     

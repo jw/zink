@@ -49,16 +49,16 @@ STATICFILES_DIRS = (
 
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
-#    "django.contrib.staticfiles.finders`.AppDirectoriesFinder"
+#    "django.contrib.staticfiles.finders.AppDirectoriesFinder"
 )
 
-STATIC_URL = "http://static." + uname()[1]
+STATIC_URL = "/static/"
 STATIC_ROOT = '/tmp/statics'
 
 FIXTURE_DIRS = (join(SITE_ROOT, 'fixtures'),)
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '0u^l=%@(2_imjrza(c4hgitd2a^)bn0%)8496m9!asshisqdf3rf-j+sdwxesq1'
+SECRET_KEY = '0u^l=%@(2_imjrza(c4hgitd2a^)bn0%)s8496m9!aoshfisqef3rf-j+sdxesq1'
 
 CONTEXT_PREPROCESSORS = (
     "django.contrib.auth.context_processors.auth",
@@ -118,6 +118,7 @@ INSTALLED_APPS = (
 BLOG_PAGE_SIZE = 4
 
 #
+# TODO: update the logging part
 # log properly
 #
 
@@ -144,8 +145,6 @@ LOGGING = {
    }   
 }
 
-#### TODO: update the logging part
-#import logging
 #try:
 #    logging.basicConfig(
 #        level = logging.DEBUG,
