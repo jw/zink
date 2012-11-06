@@ -259,8 +259,8 @@ def restart_database():
     sudo("/etc/init.d/postgresql restart")
     
 def restart_webserver():
-    sudo("/etc/init.d/nginx restart")
-    sudo("/etc/init.d/uwsgi restart")
+    sudo("service nginx restart")
+    sudo("service uwsgi restart")
 
 @task    
 def update_webserver():
@@ -269,8 +269,8 @@ def update_webserver():
         sudo("rm /etc/nginx/sites-enabled/default")
     # update nginx
     sudo("cp %(path)s/conf/%(host)s.conf /etc/nginx/sites-available" % env)
-    sudo("ln -s %(path)s/conf/%(host)s.conf /etc/nginx/sites-enabled/%(host)s.conf" % env)
+    sudo("ln -sf %(path)s/conf/%(host)s.conf /etc/nginx/sites-enabled/%(host)s.conf" % env)
     # update uwsgi
-    sudo("cp %(path)s/conf/uwsgi.ini /etc/uwsgi/app-available" % env)
-    sudo("ln -s %(path)s/conf/uwsgi.ini /etc/uwsgi/sites-enabled/uwsgi.ini" % env)
+    sudo("cp %(path)s/conf/uwsgi.ini /etc/uwsgi/apps-available" % env)
+    sudo("ln -sf %(path)s/conf/uwsgi.ini /etc/uwsgi/apps-enabled/uwsgi.ini" % env)
     
