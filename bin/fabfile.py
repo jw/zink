@@ -251,18 +251,18 @@ def populate_database():
         run('./manage.py loaddata static.json')
         run('./manage.py loaddata treemenus.json')
         run('./manage.py loaddata blog.json')
+    # TODO: migrate!
     # update the deployment time
     with cd(env.path + "/bin"):
         run('fab update_deployment_time')
 
 def restart_database():
-    sudo("/etc/init.d/postgresql restart")
+    sudo("service postgresql restart")
     
 def restart_webserver():
     sudo("service nginx restart")
     sudo("service uwsgi restart")
 
-@task    
 def update_webserver():
     # remove default first
     with settings(warn_only=True):
