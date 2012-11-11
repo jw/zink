@@ -108,11 +108,12 @@ def deploy():
     print(green("Fabricating " + env.branch + " in " + env.settings + " environment..."))
 
     # when deploying to production, first get the latest 
-    # content and store it in the repo
+    # content and store it in the repo, then drop database
     if (env.branch == "tip" and env.settings == "production"):
         update_fixtures()
+        drop_database()
     
-    setup_directories()    
+    setup_directories()
 
     if (env.branch == "tip"):
         checkout_latest()
@@ -121,7 +122,6 @@ def deploy():
 
     install_requirements()
 
-    #drop_database()
     create_database()
     populate_database()
     restart_database()
@@ -190,7 +190,7 @@ def create_database():
     else:
         # if not, create the user
         print(green("Creating user '%(dbuser)s'." % env))
-        output = run('echo "CREATE ROLE %(dbuser)s WITH PASSWORD \'%(dbpassword)s\';" | psql postgres -tA' % env)
+        output = run('echo "CREATE ROLE %(dbuser)s WITH LOGIN PASSWORD \'%(dbpassword)s\';" | psql postgres -tA' % env)
         if (output == "CREATE DATABASE" or output == "CREATE ROLE"):
             print(green("Created user successfully."))
         else:
@@ -248,10 +248,10 @@ def populate_database():
     """
     with cd(env.path):
         run('./manage.py syncdb')
+        run('./manage.py migrate')
         run('./manage.py loaddata static.json')
         run('./manage.py loaddata treemenus.json')
         run('./manage.py loaddata blog.json')
-    # TODO: migrate!
     # update the deployment time
     with cd(env.path + "/bin"):
         run('fab update_deployment_time')
