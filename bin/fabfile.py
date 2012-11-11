@@ -107,12 +107,6 @@ def deploy():
 
     print(green("Fabricating " + env.branch + " in " + env.settings + " environment..."))
 
-    # when deploying to production, first get the latest 
-    # content and store it in the repo, then drop database
-    if (env.branch == "tip" and env.settings == "production"):
-        update_fixtures()
-        drop_database()
-    
     setup_directories()
 
     if (env.branch == "tip"):
@@ -165,16 +159,23 @@ def install_requirements():
     print(yellow("You still need to do check this yourself for now..."))
     
 @task
-def update_fixtures():
+def backup():
     """
-        Dumping the latest content of the portal and adding it to the repo
+        Dump the latest content of the portal and add it to the repository.
     """
     with cd(env.path):
-        sudo('python manage.py dumpdata --indent 4 static > %(path)s/fixtures/static.json' % env, user="www-data")
-        sudo('python manage.py dumpdata --indent 4 treemenus > %(path)s/fixtures/treemenus.json' % env, user="www-data")
-        sudo('python manage.py dumpdata --indent 4 blog > %(path)s/fixtures/blog.json' % env, user="www-data")
-        sudo('hg commit -m "Automatically committed latest content to repo when deploying"' % env, user="www-data")
-        sudo('hg push https://%(user)s:%(password)s@%(repo)s/elevenbits')
+        sudo('python manage.py dumpdata --indent 4 static > %(path)s/fixtures/static.json' % env)
+        sudo('python manage.py dumpdata --indent 4 treemenus > %(path)s/fixtures/treemenus.json' % env)
+        sudo('python manage.py dumpdata --indent 4 blog > %(path)s/fixtures/blog.json' % env)
+        # TODO: handle this properly
+        with settings(warn_only=True):
+            result = sudo('hg commit -u %(user)s -m "Automatically committed latest content to repo when deploying"' % env)
+            if (result.failed and result.return_code == 1):
+                print(yellow("Nothing changed - leaving as is"))
+            else:
+                result = sudo('hg push https://%(user)s:%(password)s@%(repo)s/elevenbits' % env)
+                if (result.failed):
+                    print(red("Could not push the latest commit - please check."))
 
 def create_database():
     """
@@ -271,6 +272,6 @@ def update_webserver():
     sudo("cp %(path)s/conf/%(host)s.conf /etc/nginx/sites-available" % env)
     sudo("ln -sf %(path)s/conf/%(host)s.conf /etc/nginx/sites-enabled/%(host)s.conf" % env)
     # update uwsgi
-    sudo("cp %(path)s/conf/uwsgi.ini /etc/uwsgi/apps-available" % env)
-    sudo("ln -sf %(path)s/conf/uwsgi.ini /etc/uwsgi/apps-enabled/uwsgi.ini" % env)
+    sudo("cp %(path)s/conf/django.ini /etc/uwsgi/apps-available" % env)
+    sudo("ln -sf %(path)s/conf/djnago.ini /etc/uwsgi/apps-enabled/django.ini" % env)
     
