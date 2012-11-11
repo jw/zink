@@ -86,7 +86,7 @@ body {
 }
 
 .menu ul li a {
-	background: url("http://static.elevenbits.org/menu/right.png") no-repeat;
+	background: url("/static/menu/right.png") no-repeat;
 	width: 180px;
 	height: 2em;
 	/*border-top: 1px solid #EDEEE8;*/
@@ -106,7 +106,7 @@ body {
 }
 
 .menu ul ul li a {
-	background: url("http://static.elevenbits.org/menu/sub.png") no-repeat;
+	background: url("/static//menu/sub.png") no-repeat;
 	width: 180px;
 	height: 2em;
 	border-bottom: 1px dotted #BCBEB1;
@@ -125,7 +125,7 @@ body {
 
 .menu ul li a:hover {
 	color: #4B6060;
-	background: url("http://static.elevenbits.org/menu/right.png") no-repeat;
+	background: url("/static/menu/right.png") no-repeat;
 	border-top-width: 1px;
 	border-right-width: 0px;
 	border-bottom-width: 1px;
@@ -140,7 +140,7 @@ body {
 .menu ul ul li a:hover {
 	text-indent: 40px;
 	color: #4B6060;
-	background: url("http://static.elevenbits.org/menu/sub.png") no-repeat;
+	background: url("/static/menu/sub.png") no-repeat;
 	border-top-width: 1px;
 	border-bottom-width: 1px;
 	border-left-width: 1px;
