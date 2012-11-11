@@ -35,22 +35,22 @@ def relative_time(obj):
         if (difference.seconds < HALF_MINUTE):
             string = 'moments ago'
         elif (difference.seconds < TWO_MINUTES):
-            string = 'about ' + str(difference.seconds) + ' seconds ago'
+            string = str(difference.seconds) + ' seconds ago'
         elif (difference.seconds < TWO_HOURS):
-            string = 'about ' + str(difference.seconds / MINUTE) + ' minutes ago'
+            string = str(difference.seconds / MINUTE) + ' minutes ago'
         elif (difference.seconds < FOURTY_EIGHT_HOURS):
-            string = 'about ' + str(difference.seconds / HOUR) + ' hours ago'
+            string = str(difference.seconds / HOUR) + ' hours ago'
         else:
-            string = 'about ' + str(difference.seconds / ONE_DAY)  + ' days ago'
+            string = str(difference.seconds / ONE_DAY)  + ' days ago'
     else:
         if (difference.days < THREE_WEEKS):
-            string = 'about ' + str(difference.days)  + ' days ago'
+            string = str(difference.days)  + ' days ago'
         elif (difference.days < THREE_MONTHS):
-            string = 'about ' + str(difference.days / ONE_WEEK)  + ' weeks ago'
+            string = str(difference.days / ONE_WEEK)  + ' weeks ago'
         elif (difference.days < FIFTEEN_MONTHS):
-            string = 'about ' + str(difference.days / ONE_MONTH) + ' months ago'
+            string = str(difference.days / ONE_MONTH) + ' months ago'
         else:
-            string = 'about ' + str(difference.days / ONE_YEAR) + ' years ago'
+            string = str(difference.days / ONE_YEAR) + ' years ago'
     return string
     
 register.filter(relative_time)

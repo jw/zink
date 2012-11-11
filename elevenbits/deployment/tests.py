@@ -47,7 +47,7 @@ class RelativeTimeTest(TestCase):
                 "{% load relative_time %}"
                 "{{deployment.timestamp|relative_time}}"
             ).render(Context({'deployment':self.fourtytwosecondsago}))
-        self.assertEqual(out, "about 42 seconds ago")
+        self.assertEqual(out, "42 seconds ago")
 
     def test_relative_time_threeminutesago(self):
         "After three minutes, the relative_time tag should just show 'about 3 minutes ago'"
@@ -55,7 +55,7 @@ class RelativeTimeTest(TestCase):
                 "{% load relative_time %}"
                 "{{deployment.timestamp|relative_time}}"
             ).render(Context({'deployment':self.threeminutesago}))
-        self.assertEqual(out, "about 3 minutes ago")
+        self.assertEqual(out, "3 minutes ago")
 
     def test_relative_time_threehoursago(self):
         "After 3 hours, the relative_time tag should just show 'about 3 hours ago'"
@@ -63,7 +63,7 @@ class RelativeTimeTest(TestCase):
                 "{% load relative_time %}"
                 "{{deployment.timestamp|relative_time}}"
             ).render(Context({'deployment':self.threehoursago}))
-        self.assertEqual(out, "about 3 hours ago")
+        self.assertEqual(out, "3 hours ago")
 
     def test_relative_time_fiftyhoursago(self):
         "After 50 hours, the relative_time tag should just show 'about 2 days ago'"
@@ -71,7 +71,7 @@ class RelativeTimeTest(TestCase):
                 "{% load relative_time %}"
                 "{{deployment.timestamp|relative_time}}"
             ).render(Context({'deployment':self.fiftyhoursago}))
-        self.assertEqual(out, "about 2 days ago")
+        self.assertEqual(out, "2 days ago")
 
     def test_relative_time_twoweeksago(self):
         "After two weeks, the relative_time tag should just show 'about 14 days ago'"
@@ -79,7 +79,7 @@ class RelativeTimeTest(TestCase):
                 "{% load relative_time %}"
                 "{{deployment.timestamp|relative_time}}"
             ).render(Context({'deployment':self.twoweeksago}))
-        self.assertEqual(out, "about 14 days ago")
+        self.assertEqual(out, "14 days ago")
 
     def test_relative_time_fourweeksago(self):
         "After four weeks, the relative_time tag should just show 'about 4 weeks ago'"
@@ -87,7 +87,7 @@ class RelativeTimeTest(TestCase):
                 "{% load relative_time %}"
                 "{{deployment.timestamp|relative_time}}"
             ).render(Context({'deployment':self.fourweeksago}))
-        self.assertEqual(out, "about 4 weeks ago")
+        self.assertEqual(out, "4 weeks ago")
 
     def test_relative_time_fourmonthsago(self):
         "After four months, the relative_time tag should just show 'about 4 months ago'"
@@ -95,7 +95,7 @@ class RelativeTimeTest(TestCase):
                 "{% load relative_time %}"
                 "{{deployment.timestamp|relative_time}}"
             ).render(Context({'deployment':self.fourmonthsago}))
-        self.assertEqual(out, "about 4 months ago")
+        self.assertEqual(out, "4 months ago")
 
     def test_relative_time_twoyearsago(self):
         "After two years, the relative_time tag should just show 'about 2 years ago'"
@@ -103,4 +103,4 @@ class RelativeTimeTest(TestCase):
                 "{% load relative_time %}"
                 "{{deployment.timestamp|relative_time}}"
             ).render(Context({'deployment':self.twoyearsago}))
-        self.assertEqual(out, "about 2 years ago")
+        self.assertEqual(out, "2 years ago")
