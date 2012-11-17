@@ -5,8 +5,6 @@ from django.conf.urls.defaults import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
-print("Processing")
-
 urlpatterns = patterns('',
     
     # blog
@@ -31,7 +29,7 @@ urlpatterns = patterns('',
     # admin
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
+    
 )
 
 # only for local development (DEBUG needs to be true for this to work) 
