@@ -1,6 +1,7 @@
 
 this application runs on nginx with uwsgi.
 Note: these uswgi plugins were installed: admin, python, ping, echo
+Note: make sure to create /etc/website/processes.properties
 
 There are four deployment areas:
 

@@ -3,4 +3,4 @@
 SHELL=/bin/sh
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
-*/10 * * * *  root  /usr/bin/python /var/www/elevenbits/bin/processes.py --properties /var/www/elevenbits/bin/processes.properties >> /tmp/processes.log 2>&1
+*/10 * * * *  root  /usr/bin/python /var/www/elevenbits/bin/processes.py --properties /etc/website/processes.properties >> /tmp/processes.log 2>&1
