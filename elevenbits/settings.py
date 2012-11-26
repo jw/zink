@@ -8,6 +8,7 @@ from os import uname
 
 SITE_ROOT = dirname(realpath(join(__file__, "..")))
 
+# @TODO: improve (or fix?) this
 if (uname()[1] == "elevenbits.org" or uname()[1] == "elevenbits.com"):
     DEBUG = False
 else:

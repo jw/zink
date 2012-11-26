@@ -123,11 +123,19 @@ def deploy():
     update_webserver()
     restart_webserver()
     
+    add_cronjob()
+    
     print(green("Setup complete."))
 
 """
 Tasks to help in deployment
 """
+
+def add_cronjob():
+    """
+        Add a cronjob which checks for the correct processes to be running.
+    """
+    sudo("cp %(path)s/conf/processes /etc/cron.d/processes" % env)
 
 def setup_directories():
     """
