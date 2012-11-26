@@ -281,5 +281,5 @@ def update_webserver():
     sudo("ln -sf %(path)s/conf/%(host)s.conf /etc/nginx/sites-enabled/%(host)s.conf" % env)
     # update uwsgi
     sudo("cp %(path)s/conf/django.ini /etc/uwsgi/apps-available" % env)
-    sudo("ln -sf %(path)s/conf/djnago.ini /etc/uwsgi/apps-enabled/django.ini" % env)
+    sudo("ln -sf %(path)s/conf/django.ini /etc/uwsgi/apps-enabled/django.ini" % env)
     
