@@ -19,4 +19,3 @@ class Deployment(models.Model):
         ordering = ['timestamp']
         get_latest_by = 'timestamp'
         verbose_name_plural = 'Deployments'
-        

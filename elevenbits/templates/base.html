@@ -59,10 +59,14 @@
     	<div class="footer">
 			{% load tracking_tags %}
 			{% load relative_time %}
+            {% load version %}
 			{% visitors_on_site as visitors %}
 			<div class="left">
 				[release: {{deployment.version}}, 
-				 deployed {{deployment.timestamp|relative_time}}, 
+				 deployed {{deployment.timestamp|relative_time}},
+                 django {%  version "django" %},
+                 uwsgi {%  version "uwsgi" %},
+                 nginx 1.2.1
 				 {{ visitors }} active user{{ visitors|pluralize }}]
 			</div>
 			<div class="right">
