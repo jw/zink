@@ -64,9 +64,11 @@
 			<div class="left">
 				[release: {{deployment.version}}, 
 				 deployed {{deployment.timestamp|relative_time}},
-                 django {%  version "django" %},
-                 uwsgi {%  version "uwsgi" %},
-                 nginx 1.2.1
+                 <div class="versions">
+                     django {%  version "django" %},
+                     uwsgi {%  version "uwsgi" %},
+                     nginx 1.2.1
+                 </div>
 				 {{ visitors }} active user{{ visitors|pluralize }}]
 			</div>
 			<div class="right">

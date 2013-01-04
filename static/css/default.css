@@ -445,6 +445,16 @@ h6 {
 	text-align: left;
 }
 
+.left .version {
+    position: absolute;
+    right: 10px;
+    display: none;
+}
+
+.left:hover .version {
+    display: block;
+}
+
 .center {
 	text-align: center;
 }
