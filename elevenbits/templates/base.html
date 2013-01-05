@@ -61,14 +61,10 @@
 			{% load relative_time %}
             {% load version %}
 			{% visitors_on_site as visitors %}
-			<div class="left">
+			<div class="left"
+                 title="django {%  version "django" %}, uwsgi {%  version "uwsgi" %}, nginx 1.2.1">
 				[release: {{deployment.version}}, 
 				 deployed {{deployment.timestamp|relative_time}},
-                 <div class="versions">
-                     django {%  version "django" %},
-                     uwsgi {%  version "uwsgi" %},
-                     nginx 1.2.1
-                 </div>
 				 {{ visitors }} active user{{ visitors|pluralize }}]
 			</div>
 			<div class="right">
