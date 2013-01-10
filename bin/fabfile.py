@@ -6,12 +6,16 @@ from fabric.context_managers import show, settings, cd
 from fabric.utils import abort
 from fabric.contrib import django
 
+from os.path import join, dirname, realpath
+
 """
 Base configuration
 """
 env.project = "elevenbits"
 env.repo = "hg.elevenbits.org"
-env.path = '/var/www/%(project)s' % env
+env.prefix = '/var/www'
+env.path = "%(prefix)s/%(project)s" % env
+env.local = dirname(realpath(join(__file__, "..")))
 
 """
 Some config utility methods
@@ -109,10 +113,17 @@ def deploy():
 
     setup_directories()
 
-    if (env.branch == "tip"):
-        checkout_latest()
+    if (env.settings == "development"):
+        print(green("Since in development, just copying local files..."))
+        copy_current()
     else:
-        checkout_revision(env.branch)
+        # TODO: make a backup of the staging|production database environment
+        # TODO: create a new revision
+        print(green("Getting files from repository..."))
+        if (env.branch == "tip"):
+            checkout_latest()
+        else:
+            checkout_revision(env.branch)
 
     install_requirements()
 
@@ -142,9 +153,12 @@ def setup_directories():
         Create directories necessary for deployment.
     """
     sudo("rm -rf %(path)s" % env)
-    sudo("mkdir -p %(path)s" % env)
-    sudo("chown www-data:www-data %(path)s" % env)
-    
+    sudo("mkdir -p %(path)s" % env, user='www-data')
+    sudo("chown www-data:www-data %(path)s" % env, user='www-data')
+
+def copy_current():
+    sudo('cp -r %(local)s %(prefix)s' % env)
+
 def checkout_latest():
     """
         Get latest version from repository.
@@ -235,7 +249,7 @@ def update_deployment_time():
     from datetime import datetime
     now = datetime.now()
     deployment_time = now.strftime("%d.%m.%Y, %H%Mhrs");
-    print("Deployment time is " + deployment_time)
+    print(green("Deployment time is " + deployment_time + "."))
     # first get Django access
     from sys import path
     path.append(env.path)
