@@ -1,75 +1,172 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" 
-      lang="{{ LANGUAGE_CODE }}" 
-      xml:lang="{{ LANGUAGE_CODE }}" 
-      {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+<!DOCTYPE html>
+<!--[if IE 7 ]><html class="ie ie7" lang="en"><![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"><![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"><!--<![endif]-->
 <head>
+
+    <meta charset="utf-8">
+
     <title>{% block page_title %}[{{ static.title }}] {{ static.header }}{% endblock %}</title>
-    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
-    <meta name="verify-v1" content="Fd+gEgP3mrH4jDTQ6JcMgjkgtI6eNa6Bya5OXvWP+K8=" />
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/css/default.css" />
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/css/style.css" />
-    <link type="image/x-icon" href="/favicon.ico" rel="icon"/>
-    <link type="image/x-icon" href="/favicon.ico" rel="shortcut icon"/>
-    <script src="http://www.google.com/jsapi?key=ABQIAAAAQiu2dP0rBPaNZ41BG5gXQhTu8qfDeT7FWr0somHfW1Iw7FdZpBQS1stiDXgZnlDhLmaVghileL5AqA" type="text/javascript"></script>
-    <script type="text/javascript">
-        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-    </script>
-    <script type="text/javascript">
-        try {
-            var pageTracker = _gat._getTracker("UA-10023347-1");
-            pageTracker._setDomainName(".elevenbits.com");
-            pageTracker._trackPageview();
-        } catch(err) {}
-    </script>
-	{% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
+
+    <!-- Mobile Specific -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/css/style.css">
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/css/boxed.css" id="layout">
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/css/colors/green.css" id="colors">
+
+    <!-- Java Script -->
+    <script src="{{ STATIC_URL }}/js/jquery-1.7.1.min.js"></script>
+    <script src="{{ STATIC_URL }}/js/custom.js"></script>
+    <script src="{{ STATIC_URL }}/js/selectnav.js"></script>
+    <script src="{{ STATIC_URL }}/js/flexslider.js"></script>
+    <script src="{{ STATIC_URL }}/js/twitter.js"></script>
+    <script src="{{ STATIC_URL }}/js/tooltip.js"></script>
+    <script src="{{ STATIC_URL }}/js/effects.js"></script>
+    <script src="{{ STATIC_URL }}/js/fancybox.js"></script>
+    <script src="{{ STATIC_URL }}/js/carousel.js"></script>
+    <script src="{{ STATIC_URL }}/js/isotope.js"></script>
+
+    <!-- Styles Switcher -->
+    <link rel="stylesheet" type="text/css" href="css/switcher.css">
+    <script src="{{ STATIC_URL }}/js/switcher.js"></script>
+
+    <!-- TODO: check bot management -->
+    {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
+
 </head>
+<!--
+    TODO: google analytics
+-->
 <body>
-	<div class="main">
-		{% block header %}{% endblock %}
-		{% block menu %}{% include "menu.html" %}{% endblock %}
-    	{% block content %}
-    		<div class="content">
-    			{% block logo %}
-    				<div class="logo">
-						<img title="ElevenBits" 
-						     alt="ElevenBits" 
-						     src="{{ STATIC_URL }}/images/m8n.png"/>
-					</div>
-    			{% endblock %}
-    			{% block title %}
-					<h1>[{{ static.title }}]</h1>
-					<h2>{{ static.header }}</h2>
-    			{% endblock %}
-    			{% block message %}
-    			    {% if messages %}
-    			    	<div class="messages">
-		    				{% for message in messages %}
-								<div class="message">{{message}}</div>
-						    {% endfor %}
-						</div>
-					{% endif %}
-    			{% endblock %}
-    			{% block body %}{% endblock %}
-    		</div>
-    	{% endblock %}
-    	{% block footer %}
-    	<div class="footer">
-			{% load tracking_tags %}
-			{% load relative_time %}
-			{% visitors_on_site as visitors %}
-			<div class="left">
-				[release: {{deployment.version}}, 
-				 deployed {{deployment.timestamp|relative_time}}, 
-				 {{ visitors }} active user{{ visitors|pluralize }}]
-			</div>
-			<div class="right">
-				{{static.copyright}}
-			</div>
-		</div>
-    	{% endblock %}
-    </div>
+
+    <div id="wrapper">
+
+        <!-- Menu bar -->
+        <div class="container ie-dropdown-fix">
+        <div class="sixteen columns">
+
+            <div id="navigation">
+
+                <ul id="nav">
+
+                    <li><a href="#">Home</a></li>
+
+                    <li><a href="#">Projects</a>
+                        <ul>
+                            <li><a href="klink.html">Klink</a></li>
+                            <li><a href="yttrium.html">Yttrium</a></li>
+                            <li><a href="website.html">Website</a></li>
+
+                            <li><a href="#">Vonk</a>
+                                <ul>
+                                    <li><a href="sidebar_right.html">Usage</a></li>
+                                    <li><a href="sidebar_left.html">Hello</a></li>
+                                    <li><a href="blog_post.html">There</a></li>
+                                    <li><a href="single_project.html">Single Project</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li><a href="#">Services</a></li>
+
+                    <li><a href="#">Clients</a>
+                        <ul>
+                            <li><a href="21net.html">21Net</a></li>
+                            <li><a href="ericsson.html">Ericsson</a></li>
+                            <li><a href="eircom.html">Eircom</a></li>
+                            <li><a href="eircell.html">Eircell</a></li>
+                        </ul>
+                    </li>
+
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+
+                </ul>
+
+                <!-- Search Form -->
+                <div class="search-form">
+                    <form method="get" action="#">
+                        <input type="text" class="search-text-box" />
+                    </form>
+                </div>
+
+            </div>
+            <div class="clear"></div>
+
+        </div> <!-- Menu bar-->
+        </div> <!-- 960 Container -->
+
+        <!-- Content -->
+        {% block body %}{% endblock %}
+
+    </div> <!-- Wrapper -->
+
+    <div id="footer">
+
+        <div class="container">
+
+            <!-- About -->
+            <div class="four columns">
+                <div class="footer-headline"><h4>About ElevenBits</h4></div>
+                {{ static.short }}
+            </div>
+
+            <!-- Useful Links -->
+            <div class="four columns">
+                <div class="footer-headline"><h4>Useful Links</h4></div>
+                <!-- TODO: get this from a Django model -->
+                <ul class="links-list">
+                    <li><a href="#">Jira</a></li>
+                    <li><a href="#">m8n</a></li>
+                    <li><a href="#">Vonk</a></li>
+                    <li><a href="#">21Net</a></li>
+                    <li><a href="#">Cookies</a></li>
+                </ul>
+            </div>
+
+            <!-- Photo Stream -->
+            <div class="four columns">
+                <div class="footer-headline"><h4>Photo Stream</h4></div>
+                <!-- TODO: find a photo steam to add - g+? -->
+                <!--
+               <div class="flickr-widget">
+                   <script type="text/javascript" src="http://www.flickr.com/badge_code_v2.gne?count=6&amp;display=latest&amp;size=s&amp;layout=x&amp;source=user&amp;user=36587311@N08"></script>
+                   <div class="clear"></div>
+               </div>
+               -->
+            </div>
+
+            <!-- Latest News -->
+            <div class="four columns">
+                <div class="footer-headline"><h4>Latest Events</h4></div>
+                <!-- TODO: add latest code updates, blog updates, tweets, g+ updates -->
+                <ul id="twitter"></ul>
+                <!--
+                <script type="text/javascript">
+                    jQuery(document).ready(function($){
+                        $.getJSON('http://api.twitter.com/1/statuses/user_timeline/envato.json?count=2&callback=?', function(tweets){
+                            $("#twitter").html(tz_format_twitter(tweets));
+                        }); });
+                </script>
+                -->
+                <div class="clear"></div>
+            </div>
+
+            <!-- Footer / Bottom -->
+            <div class="sixteen columns">
+                <div id="footer-bottom">
+                    {{static.copyright}}
+                    <div id="scroll-top-top"><a href="#"></a></div>
+                </div>
+            </div>
+
+        </div> <!-- Container -->
+
+    </div> <!-- Footer -->
+
 </body>
 </html>
+

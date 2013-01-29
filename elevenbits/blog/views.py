@@ -37,7 +37,9 @@ def index(request, page=1):
     static = get_static()
     static['title'] = Static.objects.get(name="index.title").value
     static['header'] = Static.objects.get(name="index.header").value
-    
+
+    static['short'] = Static.objects.get(name="about.short.1").value
+
     entry_list = Entry.objects.filter(active=True).reverse()
     
     try:
@@ -66,7 +68,7 @@ def index(request, page=1):
     # TEMPLATE_CONTEXT_PROCESSORS are executed, among which
     # the django.core.context_processors.media.  That way
     # the MEDIA_URL will become part of the session.
-    return render_to_response('index.html', 
+    return render_to_response('blog.html',
                               attributes,
                               context_instance=RequestContext(request))
 

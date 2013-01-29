@@ -8,6 +8,10 @@ requirements:
 - tracking: hg clone http://bitbucket.org/janwillems/django-tracking and python setup.py install
 - Mercurial
 - uWSGI: sudo pip install uwsgi
+- openssh-server
+- python-pip
+- python-dev
+- postgresqg-server-dev-9.1
 
 database:
 
@@ -17,6 +21,7 @@ database:
 postgres=# ALTER USER postgres WITH PASSWORD '<your password>';
 
 2) Create a django database
+postgres=# create user <username> with password '<your password>';
 postgres=# create user django with password 'Reinhardt';
 postgres=# create database django owner django;
 
