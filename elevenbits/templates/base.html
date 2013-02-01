@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <!--[if IE 7 ]><html class="ie ie7" lang="en"><![endif]-->
 <!--[if IE 8 ]><html class="ie ie8" lang="en"><![endif]-->
@@ -15,9 +16,10 @@
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/css/style.css">
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/css/boxed.css" id="layout">
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/css/colors/green.css" id="colors">
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/css/highlite.css">
 
     <!-- Java Script -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="{{ STATIC_URL }}/js/jquery-1.7.1.min.js"></script>
     <script src="{{ STATIC_URL }}/js/custom.js"></script>
     <script src="{{ STATIC_URL }}/js/selectnav.js"></script>
     <script src="{{ STATIC_URL }}/js/flexslider.js"></script>
@@ -41,29 +43,29 @@
 -->
 <body>
 
-    <div id="wrapper">
+<div id="wrapper">
 
-        <!-- Menu bar -->
-        <div class="container ie-dropdown-fix">
+    <!-- Menu bar -->
+    <div class="container ie-dropdown-fix">
         <div class="sixteen columns">
 
             <div id="navigation">
 
                 <ul id="nav">
 
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Home</a></li>
 
                     <li><a href="#">Projects</a>
                         <ul>
-                            <li><a href="vonk.html">Klink</a></li>
+                            <li><a href="klink.html">Klink</a></li>
                             <li><a href="yttrium.html">Yttrium</a></li>
                             <li><a href="website.html">Website</a></li>
 
                             <li><a href="#">Vonk</a>
                                 <ul>
-                                    <li><a href="sidebar_right.html">Sidebar Right</a></li>
-                                    <li><a href="sidebar_left.html">Sidebar Left</a></li>
-                                    <li><a href="blog_post.html">Single Post</a></li>
+                                    <li><a href="sidebar_right.html">Usage</a></li>
+                                    <li><a href="sidebar_left.html">Hello</a></li>
+                                    <li><a href="blog_post.html">There</a></li>
                                     <li><a href="single_project.html">Single Project</a></li>
                                 </ul>
                             </li>
@@ -96,89 +98,47 @@
             </div>
             <div class="clear"></div>
 
-        </div> <!-- Menu bar / End -->
-        </div> <!-- 960 Container / End -->
+        </div> <!-- Menu bar-->
+    </div> <!-- 960 Container -->
 
-        <!-- Content -->
+    <!-- Content -->
+    {% block body %}{% endblock %}
 
-        <!-- 960 Container -->
-        <div class="container">
+</div> <!-- Wrapper -->
 
-            <div class="sixteen columns">
+<div id="footer">
 
-                <!-- Page Title -->
-                <div id="page-title">
-                    <h2>{{ static.title }} <span>/ {{ static.header }}</span></h2>
-                    <div id="bolded-line"></div>
-                </div>
-                <!-- Page Title / End -->
-
-            </div>
-        </div>
-        <!-- 960 Container / End -->
-
-        <div class="container">
-            {% block content %}
-                <div class="content">
-                    {% block logo %}
-                        <div class="logo">
-                            <img title="ElevenBits"
-                                 alt="ElevenBits"
-                                 src="{{ STATIC_URL }}/images/m8n.png"/>
-                        </div>
-                    {% endblock %}
-                    {% block title %}
-                        <h1>[{{ static.title }}]</h1>
-                        <h2>{{ static.header }}</h2>
-                    {% endblock %}
-                    {% block message %}
-                        {% if messages %}
-                            <div class="messages">
-                                {% for message in messages %}
-                                    <div class="message">{{message}}</div>
-                                {% endfor %}
-                            </div>
-                        {% endif %}
-                    {% endblock %}
-                    {% block body %}{% endblock %}
-                </div>
-            {% endblock %}
-        </div>
-
-    </div>
-    <!-- Wrapper / End -->
-
-    <div id="footer">
-    <!-- 960 Container -->
     <div class="container">
 
         <!-- About -->
         <div class="four columns">
-            <div class="footer-headline"><h4>About Us</h4></div>
-            {{ about.short }}
+            <div class="footer-headline"><h4>About ElevenBits</h4></div>
+            {{ static.short }}
         </div>
 
         <!-- Useful Links -->
         <div class="four columns">
             <div class="footer-headline"><h4>Useful Links</h4></div>
+            <!-- TODO: get this from a Django model -->
             <ul class="links-list">
-                <li><a href="#">Service Updates</a></li>
-                <li><a href="#">Community Forum</a></li>
-                <li><a href="#">Help Desk</a></li>
-                <li><a href="#">Terms of Use</a></li>
-                <li><a href="#">Validate License</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Knowledgebase</a></li>
+                <li><a href="#">Jira</a></li>
+                <li><a href="#">m8n</a></li>
+                <li><a href="#">Vonk</a></li>
+                <li><a href="#">21Net</a></li>
+                <li><a href="#">Cookies</a></li>
             </ul>
         </div>
 
         <!-- Photo Stream -->
         <div class="four columns">
             <div class="footer-headline"><h4>Photo Stream</h4></div>
-            <div class="flickr-widget">
-                <script type="text/javascript" src="http://www.flickr.com/badge_code_v2.gne?count=6&amp;display=latest&amp;size=s&amp;layout=x&amp;source=user&amp;user=36587311@N08"></script>
-                <div class="clear"></div>
-            </div>
+            <!-- TODO: find a photo steam to add - g+? -->
+            <!--
+           <div class="flickr-widget">
+               <script type="text/javascript" src="http://www.flickr.com/badge_code_v2.gne?count=6&amp;display=latest&amp;size=s&amp;layout=x&amp;source=user&amp;user=36587311@N08"></script>
+               <div class="clear"></div>
+           </div>
+           -->
         </div>
 
         <!-- Latest News -->
@@ -186,12 +146,14 @@
             <div class="footer-headline"><h4>Latest Events</h4></div>
             <!-- TODO: add latest code updates, blog updates, tweets, g+ updates -->
             <ul id="twitter"></ul>
+            <!--
             <script type="text/javascript">
                 jQuery(document).ready(function($){
                     $.getJSON('http://api.twitter.com/1/statuses/user_timeline/envato.json?count=2&callback=?', function(tweets){
                         $("#twitter").html(tz_format_twitter(tweets));
                     }); });
             </script>
+            -->
             <div class="clear"></div>
         </div>
 
@@ -203,11 +165,10 @@
             </div>
         </div>
 
-    </div>
-    <!-- 960 Container / End -->
+    </div> <!-- Container -->
 
-</div>
-        <!-- Footer / End -->
+</div> <!-- Footer -->
+
 </body>
 </html>
 
@@ -223,7 +184,7 @@
 			{% visitors_on_site as visitors %}
 			<div class="left"
                  title="django {%  version "django" %}, uwsgi {%  version "uwsgi" %}, nginx 1.2.1">
-				[release: {{deployment.version}}, 
+				[release: {{deployment.version}},
 				 deployed {{deployment.timestamp|relative_time}},
 				 {{ visitors }} active user{{ visitors|pluralize }}]
 			</div>

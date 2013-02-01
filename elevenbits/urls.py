@@ -6,7 +6,10 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    
+
+    # index
+    #url('^$', 'elevenbits.index.views.index'),
+
     # blog
     url('^$', 'elevenbits.blog.views.index'),
     url(r'^page/(?P<page>\d+)/$', 'elevenbits.blog.views.index'),
