@@ -7,7 +7,7 @@ mercurial==2.4-rc
 psycopg2==2.4.5
 uWSGI==1.3
 wsgiref==0.1.2
-django-grappelli==2.4.3
+#django-grappelli==2.4.3
 
 # tracking is at https://hg.elevenbits.org/tracking
 django-tracking==0.4.0

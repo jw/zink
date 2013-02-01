@@ -46,13 +46,13 @@ def index(request, page=1):
         size = 5
     paginator = Paginator(entry_list, size)
     
-    # Make sure page request is an int. If not, deliver first page.
+    # make sure page request is an int - if not, deliver first page
     try:
         page = int(page)
     except ValueError:
         page = 1
 
-    # If page is out of range, deliver last page.
+    # if page is out of range, deliver last page
     try:
         entries = paginator.page(page)
     except (EmptyPage, InvalidPage):
@@ -62,11 +62,7 @@ def index(request, page=1):
                   'static': static,
                   'entries': entries}
 
-    # the context_instance will make sure that the default
-    # TEMPLATE_CONTEXT_PROCESSORS are executed, among which
-    # the django.core.context_processors.media.  That way
-    # the MEDIA_URL will become part of the session.
-    return render_to_response('index.html', 
+    return render_to_response('index.html',
                               attributes,
                               context_instance=RequestContext(request))
 

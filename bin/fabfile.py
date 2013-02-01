@@ -113,7 +113,7 @@ def deploy():
 
     setup_directories()
 
-    if (env.settings == "development"):
+    if (env.settings == "development" and env.branch == "tip"):
         print(green("Since in development, just copying local files..."))
         copy_current()
     else:
@@ -124,18 +124,17 @@ def deploy():
             checkout_latest()
         else:
             checkout_revision(env.branch)
+        install_requirements()
 
-    install_requirements()
-
-    create_database()
-    populate_database()
-    restart_database()
+        create_database()
+        populate_database()
+        restart_database()
     
-    update_webserver()
+        update_webserver()
+
+        add_cronjob()
+
     restart_webserver()
-    
-    add_cronjob()
-    
     print(green("Setup complete."))
 
 """

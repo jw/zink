@@ -1,19 +1,27 @@
 
 #
-# settings for elevenbits.org, elevenbits.com and m8n.be
+# settings for [www.]elevenbits.org, [www.]elevenbits.com, vonk.elevenbits.org and m8n.be
 #
 
 from os.path import join, dirname, realpath
-from os import uname
+from socket import gethostname
 
 SITE_ROOT = dirname(realpath(join(__file__, "..")))
 
-# @TODO: improve (or fix?) this
-if (uname()[1] == "elevenbits.org" or uname()[1] == "elevenbits.com"):
-    DEBUG = False
+# derive the site
+if (gethostname().startswith("vonk")):
+    SITE_NAME = "vonk"
+elif ("elevenbits" in gethostname()):
+    SITE_NAME = "elevenbits"
+elif ("m8n" in gethostname()):
+    SITE_NAME = "m8n"
 else:
+    print("Invalid hostname - please check settings.py; using elevenbits as default")
+    SITE_NAME = "elevenbits"
+
+DEBUG = False
+if (gethostname() == "antwerp"):
     DEBUG = True
-    
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
