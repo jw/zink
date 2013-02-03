@@ -171,27 +171,3 @@
 
 </body>
 </html>
-
-<!--
-    <div class="main">
-		{% block header %}{% endblock %}
-		{% block menu %}{% include "menu.html" %}{% endblock %}
-    	{% block footer %}
-    	<div class="footer">
-			{% load tracking_tags %}
-			{% load relative_time %}
-            {% load version %}
-			{% visitors_on_site as visitors %}
-			<div class="left"
-                 title="django {%  version "django" %}, uwsgi {%  version "uwsgi" %}, nginx 1.2.1">
-				[release: {{deployment.version}},
-				 deployed {{deployment.timestamp|relative_time}},
-				 {{ visitors }} active user{{ visitors|pluralize }}]
-			</div>
-			<div class="right">
-				{{static.copyright}}
-			</div>
-		</div>
-    	{% endblock %}
-    </div>
--->

@@ -8,10 +8,10 @@ admin.autodiscover()
 urlpatterns = patterns('',
 
     # index
-    #url('^$', 'elevenbits.index.views.index'),
+    url('^$', 'elevenbits.index.views.index'),
 
     # blog
-    url('^$', 'elevenbits.blog.views.index'),
+    url(r'^blog', 'elevenbits.blog.views.index'),
     url(r'^page/(?P<page>\d+)/$', 'elevenbits.blog.views.index'),
     url(r'^page/$', 'elevenbits.blog.views.index'),
     url(r'^detail/(?P<id>\d+)/$', 'elevenbits.blog.views.detail'),

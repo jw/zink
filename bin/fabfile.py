@@ -111,30 +111,35 @@ def deploy():
 
     print(green("Fabricating " + env.branch + " in " + env.settings + " environment..."))
 
-    setup_directories()
+    remove_previous_releases()
+    create_prefix_directory()
 
     if (env.settings == "development" and env.branch == "tip"):
-        print(green("Since in development, just copying local files..."))
-        copy_current()
+        print(green("Since in development, just symbolically linking..."))
+        link_local_files()
     else:
+        create_root_directory()
+
         # TODO: make a backup of the staging|production database environment
         # TODO: create a new revision
+
         print(green("Getting files from repository..."))
         if (env.branch == "tip"):
             checkout_latest()
         else:
             checkout_revision(env.branch)
+
         install_requirements()
 
         create_database()
         populate_database()
         restart_database()
-    
-        update_webserver()
 
-        add_cronjob()
+        add_cronjob() # checks existence of some core processes
 
+    update_webserver()
     restart_webserver()
+
     print(green("Setup complete."))
 
 """
@@ -147,16 +152,24 @@ def add_cronjob():
     """
     sudo("cp %(path)s/conf/processes /etc/cron.d/processes" % env)
 
-def setup_directories():
+def remove_previous_releases():
+    sudo("rm -rf %(path)s" % env)
+
+def create_prefix_directory():
+    sudo("mkdir -p %(prefix)s" % env)
+
+def create_root_directory():
     """
         Create directories necessary for deployment.
     """
-    sudo("rm -rf %(path)s" % env)
-    sudo("mkdir -p %(path)s" % env, user='www-data')
-    sudo("chown www-data:www-data %(path)s" % env, user='www-data')
+    sudo("mkdir -p %(path)s" % env)
+    sudo("chown www-data:www-data %(path)s" % env)
 
 def copy_current():
     sudo('cp -r %(local)s %(prefix)s' % env)
+
+def link_local_files():
+    sudo('ln -s %(local)s %(path)s' % env)
 
 def checkout_latest():
     """
@@ -290,9 +303,11 @@ def update_webserver():
     with settings(warn_only=True):
         sudo("rm /etc/nginx/sites-enabled/default")
     # update nginx
+    sudo("mkdir -p /etc/nginx/sites-available" % env)
     sudo("cp %(path)s/conf/%(host)s.conf /etc/nginx/sites-available" % env)
     sudo("ln -sf %(path)s/conf/%(host)s.conf /etc/nginx/sites-enabled/%(host)s.conf" % env)
     # update uwsgi
+    sudo("mkdir -p /etc/uwsgi/apps-available" % env)
+    sudo("mkdir -p /etc/uwsgi/apps-enabled" % env)
     sudo("cp %(path)s/conf/django.ini /etc/uwsgi/apps-available" % env)
     sudo("ln -sf %(path)s/conf/django.ini /etc/uwsgi/apps-enabled/django.ini" % env)
-    

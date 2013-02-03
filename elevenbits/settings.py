@@ -64,6 +64,10 @@ STATICFILES_FINDERS = (
 STATIC_URL = "/static/"
 STATIC_ROOT = '/tmp/statics'
 
+#MEDIA_ROOT = "/home/jw/python/projects/elevenbits/static/"
+MEDIA_ROOT = "/var/www/elevenbits/static/"
+MEDIA_URL = "http://localhost/static/"
+
 FIXTURE_DIRS = (join(SITE_ROOT, 'fixtures'),)
 
 # Make this unique, and don't share it with anybody.
@@ -111,6 +115,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'django.contrib.markup',
     'django.contrib.staticfiles',
+    'elevenbits.index',
     'elevenbits.blog',
     'elevenbits.static',
     'elevenbits.deployment',
