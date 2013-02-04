@@ -115,7 +115,9 @@ def deploy():
     create_prefix_directory()
 
     if (env.settings == "development" and env.branch == "tip"):
-        print(green("Since in development, just symbolically linking..."))
+        print(green("Since in development and deploying tip, just symbolically linking..."))
+        create_user()
+        create_database()
         link_local_files()
     else:
         create_root_directory()
