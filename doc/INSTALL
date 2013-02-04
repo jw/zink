@@ -1,13 +1,14 @@
 
-requirements:
+INSTALL
 
-- Django 1.4: sudo pip install Django
+First install the required packages.
+
+These need to be installed first, using apt-get and via hg, so best to ensure mercurial is installed too:
+- postgresql: sudo apt-get install postgresql
 - python-psycopg2: sudo apt-get install python-psycopg2
-- https://github.com/jphalip/django-treemenus/downloads: unzip, sudo python setup.py install
-- markdown (not version 2): sudo pip install markdown
-- tracking: hg clone http://bitbucket.org/janwillems/django-tracking and python setup.py install
-- Mercurial
-- uWSGI: sudo pip install uwsgi
+- tracking: hg clone https://hg.elevenbits.org/tracking and sudo python setup.py install
+- treemenus: hg clone https://hg.elevenbits.org/treemenus and sudo python setup.py install
+Later, the pip install -r requirements will install the other packages/libraries
 
 database:
 

@@ -211,19 +211,24 @@ def backup():
                 if (result.failed):
                     print(red("Could not push the latest commit - please check."))
 
-def create_database():
+def user_exists():
     """
-        Creates a user and a database.
+        Check if the user exists.
     """
-
-    # check if user is already there
     print('echo "SELECT 1 FROM pg_roles WHERE rolname=\'%(dbuser)s\';" | psql postgres -tA' % env)
     output = run('echo "SELECT 1 FROM pg_roles WHERE rolname=\'%(dbuser)s\';" | psql postgres -tA' % env)
     print("output: " + output)
     if (output == "1"):
         print(green("Good.  User '%(dbuser)s' exists." % env))
+        return True
     else:
-        # if not, create the user
+        return False
+
+def create_user():
+    """
+        Creates a user.
+    """
+    if not user_exists():
         print(green("Creating user '%(dbuser)s'." % env))
         output = run('echo "CREATE ROLE %(dbuser)s WITH LOGIN PASSWORD \'%(dbpassword)s\';" | psql postgres -tA' % env)
         if (output == "CREATE DATABASE" or output == "CREATE ROLE"):
@@ -232,12 +237,19 @@ def create_database():
             print(red("Could not create user."))
             abort("User creation error.")
 
-    # check if the database is already there 
+def database_exists():
+    """
+        Check if the database exists.
+    """
     output = run('echo "SELECT 1 from pg_database WHERE datname=\'%(dbname)s\';" | psql postgres -tA' % env)
     if (output == "1"):
         print(green("Good.  Database '%(dbname)s' exists." % env))
+        return True
     else:
-        # if not, create it
+        return False
+
+def create_database():
+    if not database_exists():
         print(green("Creating database '%(dbname)s'..." % env))
         output = run('echo "CREATE DATABASE %(dbname)s OWNER %(dbuser)s;" | psql postgres -tA' % env)
         if (output == "CREATE DATABASE"):
@@ -249,7 +261,6 @@ def create_database():
 def drop_database():
     """
         Destroys the user and database for this project.
-        Will not cause the fab to fail if they do not exist.
     """
     with settings(warn_only=True):
         run('dropdb %(dbname)s' % env)
