@@ -64,11 +64,12 @@ STATICFILES_FINDERS = (
 STATIC_URL = "/static/"
 STATIC_ROOT = '/tmp/statics'
 
-#MEDIA_ROOT = "/home/jw/python/projects/elevenbits/static/"
 MEDIA_ROOT = "/var/www/elevenbits/static/"
 MEDIA_URL = "http://localhost/static/"
 
 FIXTURE_DIRS = (join(SITE_ROOT, 'fixtures'),)
+
+ITERNAL_IPS = ( '127.0.0.1', )
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '0u^l=%@(2_imjrza(c4hgitd2a^)bn0%)s8496m9!aoshfisqef3rf-j+sdxesq1'
@@ -96,7 +97,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'tracking.middleware.VisitorTrackingMiddleware',
     'tracking.middleware.VisitorCleanUpMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware'
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 ROOT_URLCONF = 'elevenbits.urls'
@@ -123,6 +125,7 @@ INSTALLED_APPS = (
     'treemenus',
     'tracking',
     'south',
+    'debug_toolbar',
 )
 
 #

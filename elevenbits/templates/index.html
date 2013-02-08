@@ -2,43 +2,36 @@
 
 {% block body %}
 
+    <!-- image slider -->
     <div class="container">
 
-        <!-- Flexslider -->
-        <div class="sixteen columns">
-            <section class="slider">
-                <div class="flexslider home">
-                    <ul class="slides">
-
-                        <li>
-                            <img src="images/slider-img-01.jpg" alt="" />
-                            <div class="slide-caption">
-                                <h3>This is a caption</h3>
-                                <p>Donec scelerisque aliquet mi, non venenatis urnas iaculis. Utea id nila ante. Cras est massa, interdum  ateal imperdiet etean, gravida eu quame. Aeneana volutpat hendrerit posuere.</p>
-                            </div>
-                        </li>
-
-                        <li>
-                            <img src="images/slider-img-02.jpg" alt="" />
-                            <div class="slide-caption">
-                                <h3>This is a caption</h3>
-                                <p>Donec scelerisque aliquet mi, non venenatis urnas iaculis. Utea id nila ante. Cras est massa, interdum  ateal imperdiet etean, gravida eu quame. Aeneana volutpat hendrerit posuere.</p>
-                            </div>
-                        </li>
-
-                        <li>
-                            <img src="images/slider-img-03.jpg" alt="" />
-                        </li>
-
-                    </ul>
-                </div>
-            </section>
-        </div>
-        <!-- Flexslider / End -->
+        {% if images %}
+            <div class="sixteen columns">
+                <section class="slider">
+                    <div class="flexslider home">
+                        <ul class="slides">
+                            {% for image in images %}
+                                <li>
+                                    <img src="{{ MEDIA_URL }}{{ image.file }}" alt="" />
+                                    {% if image.title or image.caption %}
+                                        <div class="slide-caption">
+                                            {% if image.title %}
+                                                <h3>{{ image.title }}</h3>
+                                            {% endif %}
+                                            {% if image.caption %}
+                                                <p>{{ image.caption }}</p>
+                                            {% endif %}
+                                        </div>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        {% endif %}
 
     </div>
-    <!-- 960 Container / End -->
-
 
     <!-- 960 Container -->
     <div class="container">

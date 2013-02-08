@@ -16,6 +16,7 @@ env.repo = "hg.elevenbits.org"
 env.prefix = '/var/www'
 env.path = "%(prefix)s/%(project)s" % env
 env.local = dirname(realpath(join(__file__, "..")))
+env.upload = "%(prefix)s/%(project)s/static/upload" % env
 
 """
 Some config utility methods
@@ -118,7 +119,8 @@ def deploy():
         print(green("Since in development and deploying tip, just symbolically linking..."))
         create_user()
         create_database()
-        link_local_files()
+        #link_local_files()
+        copy_current()
     else:
         create_root_directory()
 
@@ -138,6 +140,10 @@ def deploy():
         restart_database()
 
         add_cronjob() # checks existence of some core processes
+
+    #create_upload_directory()
+
+    create_uwsgi_upstart()
 
     update_webserver()
     restart_webserver()
@@ -169,9 +175,20 @@ def create_root_directory():
 
 def copy_current():
     sudo('cp -r %(local)s %(prefix)s' % env)
+    sudo("chown www-data:www-data --recursive %(path)s" % env)
 
 def link_local_files():
     sudo('ln -s %(local)s %(path)s' % env)
+    sudo("chown www-data:www-data --recursive %(path)s" % env)
+
+def create_upload_directory():
+    """
+        allow write access by group on upload directory
+    """
+    sudo("mkdir -p %(upload)s" % env)
+    sudo("chown www-data:www-data --recursive %(upload)s" % env)
+    sudo("chmod 777 %(upload)s" % env)
+    sudo("ls -al %(upload)s" % env)
 
 def checkout_latest():
     """
@@ -193,7 +210,7 @@ def install_requirements():
     print(green("Some required packages are installed."))
     print(yellow("Some packages might be missing."))
     print(yellow("You still need to do check this yourself for now..."))
-    
+
 @task
 def backup():
     """
@@ -324,3 +341,8 @@ def update_webserver():
     sudo("mkdir -p /etc/uwsgi/apps-enabled" % env)
     sudo("cp %(path)s/conf/django.ini /etc/uwsgi/apps-available" % env)
     sudo("ln -sf %(path)s/conf/django.ini /etc/uwsgi/apps-enabled/django.ini" % env)
+
+def create_uwsgi_upstart():
+    # TODO: first check if it already exists
+    sudo("cp %(path)s/conf/uwsgi.conf /etc/init" % env)
+    sudo("initctl reload uwsgi")
