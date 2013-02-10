@@ -3,17 +3,16 @@
 {% block body %}
 
     <!-- image slider -->
-    <div class="container">
-
-        {% if images %}
+    {% if slider_images %}
+        <div class="container">
             <div class="sixteen columns">
                 <section class="slider">
                     <div class="flexslider home">
                         <ul class="slides">
-                            {% for image in images %}
+                            {% for image in slider_images %}
                                 <li>
                                     <img src="{{ MEDIA_URL }}{{ image.file }}" alt="" />
-                                    {% if image.title or image.caption %}
+                                    {% if image.stitle or image.caption %}
                                         <div class="slide-caption">
                                             {% if image.title %}
                                                 <h3>{{ image.title }}</h3>
@@ -29,9 +28,8 @@
                     </div>
                 </section>
             </div>
-        {% endif %}
-
-    </div>
+        </div>
+    {% endif %}
 
     <!-- 960 Container -->
     <div class="container">
@@ -123,24 +121,23 @@
     <!-- 960 Container / End -->
 
 
-    <!-- 960 Container -->
-    <div class="container">
-        <div class="sixteen columns">
+    <!-- clients -->
+    {% if client_images %}
+        <div class="container">
+            <div class="sixteen columns">
 
-            <!-- Headline -->
-            <div class="headline no-margin"><h3>Our Clients</h3></div>
+                <!-- Headline -->
+                <div class="headline no-margin"><h3>Our Clients</h3></div>
 
-            <ul class="client-list">
-                <li><img src="images/logo-01.png" alt=""/></li>
-                <li><img src="images/logo-02.png" alt=""/></li>
-                <li><img src="images/logo-03.png" alt=""/></li>
-                <li><img src="images/logo-04.png" alt=""/></li>
-                <li><img src="images/logo-05.png" alt=""/></li>
-            </ul>
+                <ul class="client-list">
+                    {% for image in client_images %}
+                        <li><img src="{{ MEDIA_URL }}{{ image.file }}" alt=""/></li>
+                    {% endfor %}
+                </ul>
 
+            </div>
         </div>
-    </div>
-    <!-- 960 Container / End -->
+    {%  endif %}
 
 {% endblock %}
 

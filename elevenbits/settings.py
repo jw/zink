@@ -20,9 +20,23 @@ else:
     SITE_NAME = "elevenbits"
 
 DEBUG = False
-if (gethostname() == "antwerp"):
+if (gethostname() in ["antwerp", "localhost"]):
     DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+
+DEBUG_TOOLBAR_PANELS = (
+    'debug_toolbar.panels.version.VersionDebugPanel',
+    'debug_toolbar.panels.timer.TimerDebugPanel',
+    'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
+    'debug_toolbar.panels.headers.HeaderDebugPanel',
+    'debug_toolbar.panels.profiling.ProfilingDebugPanel',
+    'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
+    'debug_toolbar.panels.sql.SQLDebugPanel',
+    'debug_toolbar.panels.template.TemplateDebugPanel',
+    'debug_toolbar.panels.cache.CacheDebugPanel',
+    'debug_toolbar.panels.signals.SignalDebugPanel',
+    'debug_toolbar.panels.logger.LoggingPanel',
+)
 
 ADMINS = (
     ('Jan Willems', 'jw@elevenbits.com'),
@@ -69,7 +83,11 @@ MEDIA_URL = "http://localhost/static/"
 
 FIXTURE_DIRS = (join(SITE_ROOT, 'fixtures'),)
 
-ITERNAL_IPS = ( '127.0.0.1', )
+INTERNAL_IPS = ( '127.0.0.1', )
+
+DEBUG_TOOLBAR_CONFIG = {
+    'INTERCEPT_REDIRECTS': False,
+}
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '0u^l=%@(2_imjrza(c4hgitd2a^)bn0%)s8496m9!aoshfisqef3rf-j+sdxesq1'
@@ -128,6 +146,12 @@ INSTALLED_APPS = (
     'debug_toolbar',
 )
 
+# FIXME: dirty hack
+def show_toolbar(request):
+    return True
+
+SHOW_TOOLBAR_CALLBACK = show_toolbar
+
 #
 # ElevenBits constants
 #
@@ -173,3 +197,40 @@ LOGGING = {
 #    print("No logging possible - please update the log environment.")
 #    print("Please check the /tmp/elevenbits.log permissions.")
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+    },
+    'handlers': {
+        'null': {
+            'level':'DEBUG',
+            'class':'django.utils.log.NullHandler',
+        },
+        'console':{
+            'level':'DEBUG',
+            'class':'logging.StreamHandler',
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers':['null'],
+            'propagate': True,
+            'level':'DEBUG',
+        },
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django.db.backends': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    }
+}
