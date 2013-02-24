@@ -9,6 +9,7 @@ class Type(models.Model):
         Type of an image.  Could be something like 'blog', or 'clients'.
         Also 'slider' can be used.
     """
+
     name = models.CharField(max_length=255, unique=True)
 
     def __unicode__(self):
@@ -24,7 +25,7 @@ class Image(models.Model):
 
     name = models.CharField(max_length=256, help_text="The name of the image.")
 
-    file = models.ImageField(upload_to="upload", help_text="The image file.")
+    file = models.ImageField(upload_to=".", help_text="The image file.")
 
     title = models.CharField(max_length=256, help_text="The caption title.", blank=True)
 

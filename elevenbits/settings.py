@@ -8,28 +8,40 @@ from socket import gethostname
 
 SITE_ROOT = dirname(realpath(join(__file__, "..")))
 
-# derive the site
+# get the hostname
 if (gethostname().startswith("vonk")):
-    SITE_NAME = "vonk"
+    HOSTNAME = "vonk"
 elif ("elevenbits" in gethostname()):
-    SITE_NAME = "elevenbits"
+    HOSTNAME = "elevenbits"
+elif ("antwerp" in gethostname()):
+    HOSTNAME = "antwerp"
 elif ("m8n" in gethostname()):
-    SITE_NAME = "m8n"
+    HOSTNAME = "m8n"
 else:
-    print("Invalid hostname - please check settings.py; using elevenbits as default")
-    SITE_NAME = "elevenbits"
+    print(gethostname() + " is an unknown hostname; using localhost as default")
+    HOSTNAME = "localhost"
 
 DEBUG = False
-if (gethostname() in ["antwerp", "localhost"]):
+if (HOSTNAME in ["antwerp", "localhost"]):
     DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+#
+# Debug toolbar
+#
+
+INTERNAL_IPS = ('127.0.0.1',)
+
+DEBUG_TOOLBAR_CONFIG = {
+    'INTERCEPT_REDIRECTS': False,
+}
+
+# Note: never add 'debug_toolbar.middleware.DebugToolbarMiddleware' to the debug panel!
 DEBUG_TOOLBAR_PANELS = (
     'debug_toolbar.panels.version.VersionDebugPanel',
     'debug_toolbar.panels.timer.TimerDebugPanel',
     'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
     'debug_toolbar.panels.headers.HeaderDebugPanel',
-    'debug_toolbar.panels.profiling.ProfilingDebugPanel',
     'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
     'debug_toolbar.panels.sql.SQLDebugPanel',
     'debug_toolbar.panels.template.TemplateDebugPanel',
@@ -38,11 +50,18 @@ DEBUG_TOOLBAR_PANELS = (
     'debug_toolbar.panels.logger.LoggingPanel',
 )
 
+#
+# Administrators
+#
+
 ADMINS = (
     ('Jan Willems', 'jw@elevenbits.com'),
 )
-
 MANAGERS = ADMINS
+
+#
+# Database
+#
 
 DATABASES = {
     'default': {
@@ -60,7 +79,7 @@ LANGUAGE_CODE = 'en-BE'
 
 SITE_ID = 1
 
-# use i18n, l10n and make dates time zone aware
+# use i18n, l10n and make dates time zone
 USE_I18N = True
 USE_L10N = True
 USE_TZ = False
@@ -70,37 +89,35 @@ STATICFILES_DIRS = (
     "",
 )
 
+# TODO: read up on this
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
-#    "django.contrib.staticfiles.finders.AppDirectoriesFinder"
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder"
 )
 
-STATIC_URL = "/static/"
-STATIC_ROOT = '/tmp/statics'
+# static location
+STATIC_ROOT = '/var/www/elevenbits/static/'
+STATIC_URL = "http://localhost/static/"
 
-MEDIA_ROOT = "/var/www/elevenbits/static/"
-MEDIA_URL = "http://localhost/static/"
+# upload location
+MEDIA_ROOT = "/var/www/elevenbits/media/"
+MEDIA_URL = "http://localhost/media/"
 
 FIXTURE_DIRS = (join(SITE_ROOT, 'fixtures'),)
-
-INTERNAL_IPS = ( '127.0.0.1', )
-
-DEBUG_TOOLBAR_CONFIG = {
-    'INTERCEPT_REDIRECTS': False,
-}
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '0u^l=%@(2_imjrza(c4hgitd2a^)bn0%)s8496m9!aoshfisqef3rf-j+sdxesq1'
 
-CONTEXT_PREPROCESSORS = (
-    "django.contrib.auth.context_processors.auth",
-    "django.core.context_processors.debug",
-    "django.core.context_processors.i18n",
-    "django.core.context_processors.media",
-    "django.core.context_processors.static",
-    "django.core.context_processors.tz",
-    "django.contrib.messages.context_processors.messages",
-)
+# TODO: read up on this
+#CONTEXT_PREPROCESSORS = (
+#    "django.contrib.auth.context_processors.auth",
+#    "django.core.context_processors.debug",
+#    "django.core.context_processors.i18n",
+#    "django.core.context_processors.media",
+#    "django.core.context_processors.static",
+#    "django.core.context_processors.tz",
+#    "django.contrib.messages.context_processors.messages",
+#)
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -108,15 +125,21 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    'tracking.middleware.BannedIPMiddleware',
-    'django.middleware.gzip.GZipMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'tracking.middleware.VisitorTrackingMiddleware',
-    'tracking.middleware.VisitorCleanUpMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+#    'tracking.middleware.BannedIPMiddleware',
+#    'django.middleware.gzip.GZipMiddleware',
+#    'django.middleware.common.CommonMiddleware',
+#    'django.contrib.sessions.middleware.SessionMiddleware',
+#    'django.contrib.auth.middleware.AuthenticationMiddleware',
+#    'tracking.middleware.VisitorTrackingMiddleware',
+#    'tracking.middleware.VisitorCleanUpMiddleware',
+
+#    'django.contrib.messages.middleware.MessageMiddleware',
 )
 
 ROOT_URLCONF = 'elevenbits.urls'
@@ -140,17 +163,11 @@ INSTALLED_APPS = (
     'elevenbits.static',
     'elevenbits.deployment',
     'elevenbits',
-    'treemenus',
-    'tracking',
+    #'treemenus',
+    #'tracking',
     'south',
     'debug_toolbar',
 )
-
-# FIXME: dirty hack
-def show_toolbar(request):
-    return True
-
-SHOW_TOOLBAR_CALLBACK = show_toolbar
 
 #
 # ElevenBits constants
@@ -160,7 +177,6 @@ BLOG_PAGE_SIZE = 4
 
 #
 # TODO: update the logging part
-# log properly
 #
 
 LOGGING = { 
@@ -186,51 +202,3 @@ LOGGING = {
    }   
 }
 
-#try:
-#    logging.basicConfig(
-#        level = logging.DEBUG,
-#        format = "%(asctime)s - %(levelname)s - %(message)s",
-#        filename =  '/tmp/elevenbits.log',
-#        filemode = 'w'
-#    )
-#except IOError:
-#    print("No logging possible - please update the log environment.")
-#    print("Please check the /tmp/elevenbits.log permissions.")
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': True,
-    'formatters': {
-        'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
-        },
-    },
-    'handlers': {
-        'null': {
-            'level':'DEBUG',
-            'class':'django.utils.log.NullHandler',
-        },
-        'console':{
-            'level':'DEBUG',
-            'class':'logging.StreamHandler',
-            'formatter': 'verbose'
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers':['null'],
-            'propagate': True,
-            'level':'DEBUG',
-        },
-        'django.request': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-        'django.db.backends': {
-            'handlers': ['console'],
-            'level': 'INFO',
-            'propagate': False,
-        },
-    }
-}

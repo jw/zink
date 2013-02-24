@@ -8,9 +8,10 @@ from fabric.contrib import django
 
 from os.path import join, dirname, realpath
 
-"""
-Base configuration
-"""
+#
+# Base configuration first
+#
+
 env.project = "elevenbits"
 env.repo = "hg.elevenbits.org"
 env.prefix = '/var/www'
@@ -18,9 +19,10 @@ env.path = "%(prefix)s/%(project)s" % env
 env.local = dirname(realpath(join(__file__, "..")))
 env.upload = "%(prefix)s/%(project)s/static/upload" % env
 
-"""
-Some config utility methods
-"""
+#
+# Some config utility methods
+#
+
 def _create_environment(filename, environment):
     """
         Creates the correct env keys for an environment using a given
@@ -42,6 +44,9 @@ def _create_environment(filename, environment):
         return False
     
 def _add_properties(config, section):
+    """
+        Gets the entries of a section from a config parser.
+    """
     from ConfigParser import NoOptionError
     try:
         env.user = config.get(section, "user.username")
@@ -56,9 +61,9 @@ def _add_properties(config, section):
               "' key in the '" + noe.section + "' section."))
         return False
 
-"""
-The three environments.
-"""
+#
+# The three environments.
+#
 @task
 def production():
     """
@@ -80,9 +85,10 @@ def development():
     """
     _create_environment("fabfile.properties", "development")
 
-"""
-Where to get the code.
-"""
+#
+# At last. Where to get the tasks.
+#
+
 @task
 def tip():
     """
@@ -97,9 +103,6 @@ def revision(revision="tip"):
     """
     env.branch = revision
 
-"""
-Deploy
-"""
 @task
 def deploy():
     """
@@ -150,9 +153,9 @@ def deploy():
 
     print(green("Setup complete."))
 
-"""
-Tasks to help in deployment
-"""
+#
+# Tasks to help in deployment
+#
 
 def add_cronjob():
     """
