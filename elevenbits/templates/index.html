@@ -31,118 +31,79 @@
         </div>
     {% endif %}
 
-    <!-- 960 Container -->
     <div class="container">
 
-        <!-- Icon Boxes -->
         <div class="icon-box-container">
 
-            <!-- Icon Box Start -->
+            <!-- Believes -->
             <div class="one-third column">
                 <div class="icon-box">
-                    <i class="ico-display" style="margin-left: -10px;"></i>
-                    <h3>What ElevenBits does</h3>
-                    <p>ElevenBits blah blah blie blie bloe bloe!</p>
+                    <i class="{% if believe.icon %}{{believe.icon}}{% else %}icon-box{% endif %}"
+                       style="margin-left: -10px;"></i>
+                    <h3>{{ believe.title|safe }}</h3>
+                    <p>{{ believe.body|safe }}</p>
                 </div>
             </div>
-            <!-- Icon Box End -->
 
-            <!-- Icon Box Start -->
+            <!-- Tools -->
             <div class="one-third column">
                 <div class="icon-box">
-                    <i class="ico-cogwheel"></i>
-                    <h3>Tools</h3>
-                    <p>
-                        At ElevenBits we believe in open, proven tools.
-                        <a href="http://www.djangoproject.com">Django</a> is a high-level Python Web
-                        framework that encourages rapid development and clean, pragmatic design.
-                        We are experts at it.
-                    </p>
+                    <i class="{% if tool.icon %}{{tool.icon}}{% else %}ico-cogwheel{% endif %}"></i>
+                    <h3>{{ tool.title|safe }}</h3>
+                    <p>{{ tool.body|safe }}</p>
                 </div>
             </div>
-            <!-- Icon Box End -->
 
-            <!-- Icon Box Start -->
+            <!-- About -->
             <div class="one-third column">
                 <div class="icon-box">
                     <i class="ico-circle-info"></i>
-                    <h3>About us</h3>
-                    <p>ElevenBits is a one person company, founded in 2000.</p>
+                    <h3>About ElevenBits</h3>
+                    <p>{{ about.string|safe }}</p>
                 </div>
             </div>
-            <!-- Icon Box End -->
 
-        </div>
-        <!-- Icon Boxes / End -->
-
-    </div>
-    <!-- 960 Container / End -->
-
-    <!-- 960 Container -->
-    <div class="container">
-
-        <div class="sixteen columns">
-            <!-- Headline -->
-            <div class="headline no-margin"><h3>Recent Work</h3></div>
-        </div>
-
-        <!-- Project -->
-        <div class="four columns">
-            <div class="picture"><a href="single_project.html"><img src="images/portfolio/portoflio-09.jpg" alt=""/><div class="image-overlay-link"></div></a></div>
-            <div class="item-description">
-                <h5><a href="#">Touch Gestures</a></h5>
-                <p>Mauris sit amet ligula est, eget conseact etur lectus maecenas hendrerit suscipit.</p>
-            </div>
-        </div>
-
-        <!-- Project -->
-        <div class="four columns">
-            <div class="picture"><a href="images/portfolio/portoflio-08-large.jpg" rel="image" title="Coffee Time"><img src="images/portfolio/portoflio-08.jpg" alt=""/><div class="image-overlay-zoom"></div></a></div>
-            <div class="item-description">
-                <h5><a href="#">Coffee Time</a></h5>
-                <p>Amet sit lorem ligula est, eget conseact etur lectus hendrerit suscipit maecenas.</p>
-            </div>
-        </div>
-
-        <!-- Project -->
-        <div class="four columns">
-            <div class="picture"><a href="single_project.html"><img src="images/portfolio/portoflio-10.jpg" alt=""/><div class="image-overlay-link"></div></a></div>
-            <div class="item-description">
-                <h5><a href="#">Surfing The Web</a></h5>
-                <p>Lorem sit amet ligula est, eget conseact etur lectus maecenas hendrerit suscipit.</p>
-            </div>
-        </div>
-
-        <!-- Project -->
-        <div class="four columns">
-            <div class="picture"><a href="single_project.html"><img src="images/portfolio/portoflio-07.jpg" alt=""/><div class="image-overlay-link"></div></a></div>
-            <div class="item-description">
-                <h5><a href="#">Wireless Keyboard</a></h5>
-                <p>Ligula mauris sit amet est eget consat etur lectus maecenas hendrerit suscipit.</p>
-            </div>
         </div>
 
     </div>
-    <!-- 960 Container / End -->
-
 
     <!-- clients -->
-    {% if client_images %}
+    {% if clients %}
+
         <div class="container">
             <div class="sixteen columns">
 
                 <!-- Headline -->
-                <div class="headline no-margin"><h3>Our Clients</h3></div>
-
-                <ul class="client-list">
-                    {% for image in client_images %}
-                        <li><img src="{{ MEDIA_URL }}{{ image.file }}" alt=""/></li>
-                    {% endfor %}
-                </ul>
+                <div class="headline no-margin">
+                    <h3>Some Of Our Clients</h3>
+                </div>
 
             </div>
         </div>
+
+
+        <div class="container">
+
+            <div class="sixteen columns">
+
+                 <ul class="client-list" style="width: {{ width }}px;">
+
+                    {% for client in clients %}
+                        <li>
+                            <a href="{{ client.url }}">
+                                <img src="{{ MEDIA_URL }}{{ client.image }}"
+                                     alt="{{ client.name }} ({{ client.image.width }})"/>
+                            </a>
+                        </li>
+                    {% endfor %}
+
+                 </ul>
+                </div>
+
+            </div>
+
+        </div>
+
     {%  endif %}
 
 {% endblock %}
-

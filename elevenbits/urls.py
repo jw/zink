@@ -1,8 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic.simple import direct_to_template
 
-#from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-
 # enable the admin
 from django.contrib import admin
 admin.autodiscover()
@@ -37,7 +35,7 @@ urlpatterns = patterns('',
     # admin
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    
+
 )
 
 # only for local development (DEBUG needs to be true for this to work) 

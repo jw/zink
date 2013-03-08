@@ -174,7 +174,7 @@ INSTALLED_APPS = (
 #
 
 BLOG_PAGE_SIZE = 4
-
+CLIENT_LOGO_MARGIN = 20
 #
 # TODO: update the logging part
 #

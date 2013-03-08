@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <!--[if IE 7 ]><html class="ie ie7" lang="en"><![endif]-->
 <!--[if IE 8 ]><html class="ie ie8" lang="en"><![endif]-->
@@ -113,19 +112,16 @@
         <!-- About -->
         <div class="four columns">
             <div class="footer-headline"><h4>About ElevenBits</h4></div>
-            {{ static.short }}
+            {{ static.message }}
         </div>
 
         <!-- Useful Links -->
         <div class="four columns">
             <div class="footer-headline"><h4>Useful Links</h4></div>
-            <!-- TODO: get this from a Django model -->
             <ul class="links-list">
-                <li><a href="#">Jira</a></li>
-                <li><a href="#">m8n</a></li>
-                <li><a href="#">Vonk</a></li>
-                <li><a href="#">21Net</a></li>
-                <li><a href="#">Cookies</a></li>
+                {% for link in links %}
+                    <li><a href="{{ link.link }}">{{ link.description }}</a></li>
+                {% endfor %}
             </ul>
         </div>
 
@@ -160,7 +156,7 @@
         <!-- Footer / Bottom -->
         <div class="sixteen columns">
             <div id="footer-bottom">
-                {{static.copyright}}
+                {{ static.copyright }}
                 <div id="scroll-top-top"><a href="#"></a></div>
             </div>
         </div>
