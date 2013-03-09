@@ -62,7 +62,7 @@ def index(request, page=1):
                   'static': static,
                   'entries': entries}
 
-    return render_to_response('index.html',
+    return render_to_response('blog.html',
                               attributes,
                               context_instance=RequestContext(request))
 

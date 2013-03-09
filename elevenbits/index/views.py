@@ -1,9 +1,27 @@
 from elevenbits.static.models import Static
 from elevenbits.index.models import Image, Believe, About, Tool, Client, Link
+from elevenbits.deployment.models import Deployment
 
 from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
 from django.conf import settings
+
+# get latest deployment
+def get_deployment():
+    deployment = {}
+    try:
+        last = Deployment.objects.all().reverse()[0]
+        deployment['tag'] = last.tag
+        deployment['timestamp'] = last.timestamp
+        deployment['version'] = last.version
+        deployment['deployer'] = last.deployer
+    except IndexError:
+        from datetime import datetime
+        deployment['tag'] = "unknown"
+        deployment['timestamp'] = datetime.now()
+        deployment['version'] = "unknown"
+        deployment['deployer'] = "unknown"
+    return deployment
 
 def index(request):
 
@@ -14,13 +32,14 @@ def index(request):
 
     slider_images = Image.objects.filter(types__name="slider")
 
-    # selects one from a list at random
+    # selects a believe, a tool or an about message at random
     believe = Believe.objects.order_by('?')[0]
     tool = Tool.objects.order_by('?')[0]
     about = About.objects.order_by('?')[0]
 
-    # get 6 random clients
+    # gets 6 random clients
     clients = Client.objects.all().order_by('?')[:6]
+    # this is a small hack to center the clients
     width = 0
     for client in clients:
         width += client.image.width + settings.CLIENT_LOGO_MARGIN
@@ -28,15 +47,17 @@ def index(request):
     # bottom part
     static['message'] = Static.objects.get(name="about.message").value
     links = Link.objects.all().order_by('description')
+    deployment = get_deployment()
 
     attributes = {'static': static,
+                  'slider_images': slider_images,
                   'believe': believe,
                   'tool': tool,
                   'about': about,
-                  'links': links,
-                  'slider_images': slider_images,
                   'clients': clients,
-                  'width': width}
+                  'width': width,
+                  'links': links,
+                  'deployment': deployment}
 
     return render_to_response('index.html',
                               attributes,

@@ -1,5 +1,4 @@
 from django import template
-from django.template.defaultfilters import pluralize
 from django.utils import timezone
 
 register = template.Library()
@@ -7,7 +6,7 @@ register = template.Library()
 @register.simple_tag
 def relative_time(obj):
     """
-        Convert datetime objects into relative t
+        Convert datetime objects into relative time.
     """
     
     now = timezone.now()
@@ -29,7 +28,8 @@ def relative_time(obj):
     THREE_MONTHS = 3 * ONE_MONTH
     FIFTEEN_MONTHS = 15 * ONE_MONTH
     ONE_YEAR = 365
-    
+
+    # TODO: use pluralise to handle 1 second vs 2+ secondS
     string = ''
     if (difference.days < 2):
         if (difference.seconds < HALF_MINUTE):

@@ -8,7 +8,7 @@ register = template.Library()
 def version(module):
     """
         displays the version number of the given module
-        {% version("django" %}
+        {% version("django") %}
     """
     version = "unknown"
     try:

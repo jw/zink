@@ -96,11 +96,11 @@ STATICFILES_FINDERS = (
 )
 
 # static location
-STATIC_ROOT = '/var/www/elevenbits/static/'
+STATIC_ROOT = '/var/www/zink/static/'
 STATIC_URL = "http://localhost/static/"
 
 # upload location
-MEDIA_ROOT = "/var/www/elevenbits/media/"
+MEDIA_ROOT = "/var/www/zink/media/"
 MEDIA_URL = "http://localhost/media/"
 
 FIXTURE_DIRS = (join(SITE_ROOT, 'fixtures'),)
@@ -131,13 +131,13 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-#    'tracking.middleware.BannedIPMiddleware',
+    'tracking.middleware.BannedIPMiddleware',
 #    'django.middleware.gzip.GZipMiddleware',
 #    'django.middleware.common.CommonMiddleware',
 #    'django.contrib.sessions.middleware.SessionMiddleware',
 #    'django.contrib.auth.middleware.AuthenticationMiddleware',
-#    'tracking.middleware.VisitorTrackingMiddleware',
-#    'tracking.middleware.VisitorCleanUpMiddleware',
+    'tracking.middleware.VisitorTrackingMiddleware',
+    'tracking.middleware.VisitorCleanUpMiddleware',
 
 #    'django.contrib.messages.middleware.MessageMiddleware',
 )
@@ -164,7 +164,7 @@ INSTALLED_APPS = (
     'elevenbits.deployment',
     'elevenbits',
     #'treemenus',
-    #'tracking',
+    'tracking',
     'south',
     'debug_toolbar',
 )
@@ -175,6 +175,7 @@ INSTALLED_APPS = (
 
 BLOG_PAGE_SIZE = 4
 CLIENT_LOGO_MARGIN = 20
+
 #
 # TODO: update the logging part
 #

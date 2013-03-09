@@ -1,31 +1,46 @@
 
 {% comment %}
 
-	This is a view of a blog entry.
-	
-	Note:
-	The entry.blog is hilited using Pygments.  
-	See elevenbits.com for more information on this.
+	This is the content of a blog entry.
 
 {% endcomment %}
 
 <div class="entry">
 
-	<h3>{{ entry.title }}</h3>
-	<h4>{{ entry.posted|date:"l, jS F Y, Hi\h\r\s" }}</h4>
-	
+    <div class="post">
+        <!--
+        <div class="post-img picture">
+            <a href="blog_post.html">
+                <img src="images/blog-img-01.jpg" alt="" />
+                <div class="image-overlay-link"></div>
+            </a>
+        </div>
+        -->
+        <a href="#" class="post-icon standard"></a>
+        <div class="post-content">
+            <div class="post-title"><h2><a href="blog_post.html">{{ entry.title }}</a></h2></div>
+            <div class="post-meta"><span><i class="mini-ico-calendar"></i>{{ entry.posted|date:"l, jS F Y, Hi\h\r\s" }}</span> <span><i class="mini-ico-user"></i>By <a href="#">jw</a></span> <!--<span><i class="mini-ico-comment"></i>With <a href="#">12 Comments</a></span>--></div>
+            <div class="post-description">
+                {% load markup %}
+                <p>
+                {{ entry.body|markdown:"codehilite" }}
+                </p>
+            </div>
+            <a class="post-entry" href="blog_post.html">Continue Reading</a>
+        </div>
+    </div>
+
+	<h3></h3>
+	<h4></h4>
+
+<!--
 	{% if entry.tags.all %}
 		<div class="tags"> 
 			{% for tag in entry.tags.all %}
 				<a href="/tag/{{tag.pk}}">{{tag.tag}}</a>
-				{% if not forloop.last %} | {% endif %}
 			{% endfor %}
 		</div>
 	{% endif %}
+-->
 
-    <div class="body">
-    	{% load markup %}
-       	{{ entry.body|markdown:"codehilite" }}
-    </div>
-
-</div>
+</div> <!-- entry -->

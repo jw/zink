@@ -12,7 +12,7 @@ from os.path import join, dirname, realpath
 # Base configuration first
 #
 
-env.project = "elevenbits"
+env.project = "zink"
 env.repo = "hg.elevenbits.org"
 env.prefix = '/var/www'
 env.path = "%(prefix)s/%(project)s" % env
