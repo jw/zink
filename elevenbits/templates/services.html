@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+    <div class="container">
+
+    	<div class="sixteen columns">
+
+            <div id="page-title">
+                <h2>Services</h2>
+                <div id="bolded-line"></div>
+            </div>
+
+    	</div>
+    </div>
+
+    <div class="container">
+
+        <div class="sixteen columns">
+            <div class="notification success closeable" style="margin: 5px 0 25px 0;">
+                <p>If you're looking for service which isn't listed below, please send us a message!</p>
+                <a class="close" href="#"></a>
+            </div>
+        </div>
+
+        <div class="two-thirds column">
+            <div class="headline no-margin"><h4>Methodology</h4></div>
+
+            <div class="one-third column alpha">
+                <p>Donec rutrum erat non arcu gravida porttitor. Nunc et magna nisi.Aliquam at erat in purus aliquet mollis. Fusce elementum velit vel dolor iaculis egestas. Maecenas ut nulla quis eros scelerisque posuere vel vitae nibh. Proin id condimentum sem. Morbi vitae dui in magna vestibulum suscipit vitae vel nunc. </p>
+            </div>
+
+            <div class="one-third column alpha">
+                <p>Nunc et rutrum consetetur sadipscing elitr, sed diam nonumy at volutpat. Sed consectetur suscipit lorem nunc.adipiscing elit. Integer commodo tristique odio, quis fringilla ligula aliquet ut. Maecenas sed justo varius velit imperdietAliquam at erat in purus aliquet mollis. Fusce elementum velit vel dolor iaculis.</p>
+            </div>
+        </div>
+
+        <div class="one-third column">
+            <div class="headline no-margin"><h4>Features</h4></div>
+
+            <ul class="check_list">
+                <li>Quick and convenient Localization Support</li>
+                <li>Compatible with the latest W3C standards</li>
+                <li>Flexible, Responsive Layout</li>
+                <li>Compatible with Major Browsers</li>
+                <li>Attuned to Smartphones and Tablet PCs</li>
+            </ul>
+            </p>
+        </div>
+
+        <div class="sixteen columns">
+            <div class="headline low-margin"><h4>Services</h4></div>
+        </div>
+
+        <!-- Icon Box Container -->
+        <div class="icon-boxes-container">
+
+            <!-- Icon Box Start -->
+            <div class="eight columns">
+                <div class="icon-box">
+                    <i class="ico-stats" style="margin-left: -12px;"></i>
+                    <h3>Web Usability</h3>
+                    <p>Proin iaculis purus consequat sem cure digni ssim. Donec porttitora entum suscipit aenean rhoncus posuere odio in tincidunt. Mauris ut ligula tortorea lorem ipsum dolor sit amet gorbi vel nulla eget quam porttitor gravida.</p>
+                </div>
+            </div>
+            <!-- Icon Box End -->
+
+            <!-- Icon Box Start -->
+            <div class="eight columns">
+                <div class="icon-box">
+                    <i class="ico-thumbs-up"></i>
+                    <h3>Social Marketing</h3>
+                    <p>Proin iaculis purus consequat sem cure digni ssim. Donec porttitora entum suscipit aenean rhoncus posuere odio in tincidunt. Mauris ut ligula tortorea lorem ipsum dolor sit amet gorbi vel nulla eget quam porttitor gravida.</p>
+                </div>
+            </div>
+            <!-- Icon Box End -->
+
+        </div>
+        <!-- Icon Box Container / End -->
+
+        <!-- Icon Box Container -->
+        <div class="icon-boxes-container">
+
+            <!-- Icon Box Start -->
+            <div class="eight columns">
+                <div class="icon-box">
+                    <i class="ico-display" style="margin-left: -10px;"></i>
+                    <h3>Web Design</h3>
+                    <p>Proin iaculis purus consequat sem cure digni ssim. Donec porttitora entum suscipit aenean rhoncus posuere odio in tincidunt. Mauris ut ligula tortorea lorem ipsum dolor sit amet gorbi vel nulla eget quam porttitor gravida.</p>
+                </div>
+            </div>
+            <!-- Icon Box End -->
+
+            <!-- Icon Box Start -->
+            <div class="eight columns">
+                <div class="icon-box">
+                    <i class="ico-film"></i>
+                    <h3>Video Recording</h3>
+                    <p>Proin iaculis purus consequat sem cure digni ssim. Donec porttitora entum suscipit aenean rhoncus posuere odio in tincidunt. Mauris ut ligula tortorea lorem ipsum dolor sit amet gorbi vel nulla eget quam porttitor gravida.</p>
+                </div>
+            </div>
+            <!-- Icon Box End -->
+
+        </div>
+        <!-- Icon Box Container / End -->
+
+
+    </div>
+    <!-- 960 Container End -->
+
+    <!-- clients -->
+    {% if clients %}
+
+        <div class="container">
+            <div class="sixteen columns">
+
+                <div class="headline no-margin">
+                    <h3>Some Of Our Clients</h3>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="container">
+
+            <div class="sixteen columns">
+
+                <ul class="client-list" style="width: {{ width }}px;">
+
+                    {% for client in clients %}
+                        <li>
+                            <a href="{{ client.url }}">
+                                <img src="{{ MEDIA_URL }}{{ client.image }}"
+                                     alt="{{ client.name }} ({{ client.image.width }})"/>
+                            </a>
+                        </li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+
+        </div>
+
+        </div>
+
+    {%  endif %}
+
+{% endblock %}

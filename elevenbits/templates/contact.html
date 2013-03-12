@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+    <!-- header -->
+    <div class="container" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+
+	    <div class="sixteen columns">
+
+    		<div id="page-title">
+	    		<h2>Contact <span>/ We'd love to hear from you</span></h2>
+			    <div id="bolded-line"></div>
+		    </div>
+
+    	</div>
+
+    </div>
+
+    <div class="container">
+
+        <!-- google map -->
+        <div class="sixteen columns">
+
+            <script type="text/javascript">
+
+                function initialize() {
+                    var mapOptions = {
+                        zoom: 16,
+                        center: new google.maps.LatLng(51.20151, 4.42884),
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    }
+                    var map = new google.maps.Map(document.getElementById("googlemaps"), mapOptions);
+                    var marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(51.20151, 4.42884),
+                        map: map,
+                        title:"ElevenBits!"
+                    });
+                }
+
+                function loadScript() {
+                    var script = document.createElement("script");
+                    script.type = "text/javascript";
+                    script.src = "http://maps.googleapis.com/maps/api/js?key=AIzaSyDFm67ZPW8WpJFcvgTmqT8fab-DrRTC3Lk&sensor=false&callback=initialize";
+                    document.body.appendChild(script);
+                }
+
+                window.onload = loadScript;
+
+            </script>
+
+            <div id="googlemaps" class="google-map google-map-full" style="height:300px;"></div>
+
+        </div>
+
+        <!-- address -->
+        <div class="eight columns">
+
+            <br/>
+
+            <div class="headline low-margin"><h4>Address</h4></div>
+
+            <p>
+                ElevenBits<br/>
+                Zénobe Grammestraat 22<br/>
+                2018 Antwerpen<br/>
+                Belgium<br/>
+            </p>
+
+        </div>
+
+        <!-- contact points -->
+        <div class="eight columns">
+
+            <br/>
+
+            <div class="headline low-margin"><h4>Contacts</h4></div>
+
+            <p>
+                Telephone: +32.472.69.99.96<br/>
+                Email: jw@elevenbits.com<br/>
+                Website: elevenbits.com<br/>
+            </p>
+
+        </div>
+
+    </div>
+
+{% endblock %}

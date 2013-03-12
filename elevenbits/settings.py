@@ -132,14 +132,10 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'tracking.middleware.BannedIPMiddleware',
+# TODO: try to add this one:
 #    'django.middleware.gzip.GZipMiddleware',
-#    'django.middleware.common.CommonMiddleware',
-#    'django.contrib.sessions.middleware.SessionMiddleware',
-#    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'tracking.middleware.VisitorTrackingMiddleware',
     'tracking.middleware.VisitorCleanUpMiddleware',
-
-#    'django.contrib.messages.middleware.MessageMiddleware',
 )
 
 ROOT_URLCONF = 'elevenbits.urls'
@@ -163,7 +159,7 @@ INSTALLED_APPS = (
     'elevenbits.static',
     'elevenbits.deployment',
     'elevenbits',
-    #'treemenus',
+    'treemenus',
     'tracking',
     'south',
     'debug_toolbar',

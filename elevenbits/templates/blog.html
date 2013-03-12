@@ -18,34 +18,41 @@
     {% if entries %}
 
         <div class="container">
-        <div class="twelve columns">
+        <div class="sixteen columns">
 
             {% for entry in entries.object_list %}
                 {% include "entry.html" %}
             {% endfor %}
 
-            <table><tr>
-                <td>
-                    <div class="previous">
-                        {% if entries.has_previous %}
-                            <a href="/page/{{ entries.previous_page_number }}">« previous page</a>
-                        {% endif %}
-                    </div>
-                </td>
-                <td>
-                    <div class="next">
-                        {% if entries.has_next %}
-                            <a href="/page/{{ entries.next_page_number }}">next page »</a>
-                        {% endif %}
-                    </div>
-                </td>
-            </tr></table>
+                <ul class="pagination">
+                    {% if entries.has_previous %}
+                        <a href="/page/{{ entries.previous_page_number }}">
+                            <li>«</li>
+                        </a>
+                    {% endif %}
+                    {% for page in entries.paginator.page_range %}
+                        <a href="/page/{{ page }}">
+                            {% if page == entries.number %}
+                                <li class="current">
+                            {% else %}
+                                <li>
+                            {%  endif %}
+                                    {{ page }}
+                                </li>
+                        </a>
+                    {% endfor %}
+                    {% if entries.has_next %}
+                        <a href="/page/{{ entries.next_page_number }}">
+                            <li>»</li>
+                        </a>
+                    {% endif %}
+                </ul>
 
         </div>
         </div>
 
     {% else %}
-        <p>No blog entries are available.</p>
+        <p>No blog entries are available.  How weird.</p>
     {% endif %}
 
 

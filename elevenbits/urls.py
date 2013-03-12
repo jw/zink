@@ -15,19 +15,19 @@ urlpatterns = patterns('',
 
     # blog
     url(r'^blog', 'elevenbits.blog.views.index'),
+    # TODO: check this
     url(r'^page/(?P<page>\d+)/$', 'elevenbits.blog.views.index'),
     url(r'^page/$', 'elevenbits.blog.views.index'),
+    # TODO: check this
     url(r'^detail/(?P<id>\d+)/$', 'elevenbits.blog.views.detail'),
 
+    # TODO: check this
     # tags
     url(r'^tag/(?P<tag>\w+)/page/(?P<page>\d+)$', 'elevenbits.blog.views.tags'),
     url(r'^tag/(?P<tag>\w+)', 'elevenbits.blog.views.tags'),
 
-    # some elevenbits static stuff
-    url(r'^elevenbits/clients/', 'elevenbits.firm.views.clients'),
-    url(r'^elevenbits/projects/', 'elevenbits.firm.views.projects'),
-    url(r'^elevenbits/about/', 'elevenbits.firm.views.about'),
-    url(r'^elevenbits/contact/', 'elevenbits.firm.views.contact'),
+    url(r'^services', 'elevenbits.services.views.services'),
+    url(r'^contact', 'elevenbits.contact.views.contact'),
 
     # users tracking
     #url(r'^tracking/', include('tracking.urls')),

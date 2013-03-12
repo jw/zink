@@ -3,10 +3,10 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.conf import settings
 
-from elevenbits.blog.models import Entry
-from elevenbits.blog.models import Tag
+from elevenbits.blog.models import Entry, Tag
 from elevenbits.static.models import Static
-from elevenbits.deployment.models import Deployment 
+from elevenbits.deployment.models import Deployment
+from elevenbits.index.models import Link
 
 # get latest deployment
 def get_deployment():
@@ -32,8 +32,6 @@ def get_static():
 
 def index(request, page=1):
 
-    deployment = get_deployment()
-    
     static = get_static()
     static['title'] = Static.objects.get(name="index.title").value
     static['header'] = Static.objects.get(name="index.header").value
@@ -58,9 +56,15 @@ def index(request, page=1):
     except (EmptyPage, InvalidPage):
         entries = paginator.page(paginator.num_pages)
 
+    # bottom part
+    static['message'] = Static.objects.get(name="about.message").value
+    links = Link.objects.all().order_by('description')
+    deployment = get_deployment()
+
     attributes = {'deployment': deployment,
                   'static': static,
-                  'entries': entries}
+                  'entries': entries,
+                  'links': links}
 
     return render_to_response('blog.html',
                               attributes,
