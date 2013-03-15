@@ -27,8 +27,8 @@ def contact(request):
 
     static = {}
     static['copyright'] = Static.objects.get(name="copyright").value
-    static['title'] = Static.objects.get(name="index.title").value
-    static['header'] = Static.objects.get(name="index.header").value
+    static['title'] = Static.objects.get(name="elevenbits").value
+    static['header'] = Static.objects.get(name="contact.header").value
 
     slider_images = Image.objects.filter(types__name="slider")
 

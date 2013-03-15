@@ -29,8 +29,10 @@ def get_static():
     static['deployment_time'] = Static.objects.get(name="deployment.time").value
     static['copyright'] = Static.objects.get(name="copyright").value
     static['message'] = Static.objects.get(name="about.message").value
-    static['title'] = Static.objects.get(name="service.title").value
+    static['title'] = Static.objects.get(name="elevenbits").value
     static['header'] = Static.objects.get(name="service.header").value
+    static['methodologies_one'] = Static.objects.get(name="service.methodologies_one").value
+    static['methodologies_two'] = Static.objects.get(name="service.methodologies_two").value
     return static
 
 def services(request):

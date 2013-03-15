@@ -25,16 +25,12 @@ def get_deployment():
         deployment['deployer'] = "unknown"
     return deployment
 
-def get_static():
-    static = {}
-    static['copyright'] = Static.objects.get(name="copyright").value
-    return static
-
 def index(request, page=1):
 
-    static = get_static()
-    static['title'] = Static.objects.get(name="index.title").value
-    static['header'] = Static.objects.get(name="index.header").value
+    static = {}
+    static['copyright'] = Static.objects.get(name="copyright").value
+    static['title'] = Static.objects.get(name="elevenbits").value
+    static['header'] = Static.objects.get(name="blog.header").value
     
     entry_list = Entry.objects.filter(active=True).reverse()
     

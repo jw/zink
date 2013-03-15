@@ -27,19 +27,19 @@ def index(request):
 
     static = {}
     static['copyright'] = Static.objects.get(name="copyright").value
-    static['title'] = Static.objects.get(name="index.title").value
-    static['header'] = Static.objects.get(name="index.header").value
+    static['title'] = Static.objects.get(name="elevenbits").value
+    static['header'] = Static.objects.get(name="home.header").value
 
     slider_images = Image.objects.filter(types__name="slider")
 
-    # selects a believe, a tool or an about message at random
+    # selects a believe, a tool and an about message at random
     believe = Believe.objects.order_by('?')[0]
     tool = Tool.objects.order_by('?')[0]
     about = About.objects.order_by('?')[0]
 
     # gets 6 random clients
     clients = Client.objects.all().order_by('?')[:6]
-    # this is a small hack to center the clients
+    # the width calculation is a small hack to center the clients
     width = 0
     for client in clients:
         width += client.image.width + settings.CLIENT_LOGO_MARGIN
