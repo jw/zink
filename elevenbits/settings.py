@@ -157,6 +157,7 @@ INSTALLED_APPS = (
     'elevenbits.index',
     'elevenbits.blog',
     'elevenbits.static',
+    'elevenbits.services',
     'elevenbits.deployment',
     'elevenbits',
     'treemenus',

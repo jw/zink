@@ -221,15 +221,20 @@ def backup():
     """
     with cd(env.path):
         sudo('python manage.py dumpdata --indent 4 static > %(path)s/fixtures/static.json' % env)
-        sudo('python manage.py dumpdata --indent 4 treemenus > %(path)s/fixtures/treemenus.json' % env)
+        # FIXME: treemenus
+        #sudo('python manage.py dumpdata --indent 4 treemenus > %(path)s/fixtures/treemenus.json' % env)
         sudo('python manage.py dumpdata --indent 4 blog > %(path)s/fixtures/blog.json' % env)
+        sudo('python manage.py dumpdata --indent 4 index > %(path)s/fixtures/index.json' % env)
+        #sudo('python manage.py dumpdata --indent 4 contact > %(path)s/fixtures/contact.json' % env)
+        #sudo('python manage.py dumpdata --indent 4 firm > %(path)s/fixtures/firm.json' % env)
+        #sudo('python manage.py dumpdata --indent 4 services > %(path)s/fixtures/services.json' % env)
         # TODO: handle this properly
         with settings(warn_only=True):
-            result = sudo('hg commit -u %(user)s -m "Automatically committed latest content to repo when deploying"' % env)
+            result = sudo('hg commit -u %(user)s -m "[fabfile] Committed latest content to repo."' % env)
             if (result.failed and result.return_code == 1):
                 print(yellow("Nothing changed - leaving as is"))
             else:
-                result = sudo('hg push https://%(user)s:%(password)s@%(repo)s/elevenbits' % env)
+                result = sudo('hg push https://%(user)s:%(password)s@%(repo)s/%(project)' % env)
                 if (result.failed):
                     print(red("Could not push the latest commit - please check."))
 

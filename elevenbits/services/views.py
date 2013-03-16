@@ -4,6 +4,7 @@ from django.conf import settings
 
 from elevenbits.static.models import Static
 from elevenbits.index.models import Client, Link
+from elevenbits.services.models import Feature, Service
 
 from elevenbits.deployment.models import Deployment
 
@@ -38,17 +39,29 @@ def get_static():
 def services(request):
     deployment = get_deployment()
     static = get_static()
+
+    # get all features
+    features = Feature.objects.all().order_by('feature')
+
+    # get all services
+    services = Service.objects.all().order_by('title')
+
     # gets 6 random clients
     clients = Client.objects.all().order_by('?')[:6]
+
     # this is a small hack to center the clients
     width = 0
     for client in clients:
         width += client.image.width + settings.CLIENT_LOGO_MARGIN
+
     links = Link.objects.all().order_by('description')
+
     return render_to_response('services.html',
                               {'static': static,
                                'deployment': deployment,
                                'clients': clients,
                                'width': width,
-                               'links': links},
+                               'links': links,
+                               'features': features,
+                               'services': services},
                               context_instance=RequestContext(request))

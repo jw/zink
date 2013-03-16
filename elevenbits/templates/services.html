@@ -39,77 +39,35 @@
             <div class="headline no-margin"><h4>Features</h4></div>
 
             <ul class="check_list">
-                <li>Project Management</li>
-                <li>Agile programming</li>
-                <li>Web site design and implementation</li>
-                <li>Python expertise (Django, Mercurial)</li>
-                <li>Java expertise (Spring, Hibernate)</li>
-                <li>Rest and JSON</li>
+                {% for feature in features %}
+                    <li>{{ feature.feature }}</li>
+                {% endfor %}
             </ul>
-            </p>
         </div>
 
-        <div class="sixteen columns">
+        <div class="sixteen columns">`
             <div class="headline low-margin"><h4>Services</h4></div>
         </div>
 
-        <!-- Icon Box Container -->
-        <div class="icon-boxes-container">
+        {% for service in services %}
 
-            <!-- Icon Box Start -->
-            <div class="eight columns">
-                <div class="icon-box">
-                    <i class="ico-stats" style="margin-left: -12px;"></i>
-                    <h3>Scrum</h3>
-                    <p>Scrum is an agile software development model based on multiple small teams working in an intensive and interdependent manner. The term is named for the scrum (or scrummage) formation in rugby, which is used to restart the game after an event that causes play to stop, such as an infringement.</p>
-                    <p>Scrum employs real-time decision-making processes based on actual events and information. This requires well-trained and specialized teams capable of self-management, communication and decision-making. The teams in the organization work together while constantly focusing on their common interests.</p>
+            {% if forloop.counter0|divisibleby:"2" %}
+                <div class="icon-boxes-container">
+            {% endif %}
+
+                <div class="eight columns">
+                    <div class="icon-box">
+                        <i class="ico-stats" style="margin-left: -12px;"></i>
+                        <h3>{{ service.title }}</h3>
+                        {{ service.body|safe }}
+                    </div>
                 </div>
-            </div>
-            <!-- Icon Box End -->
 
-            <!-- Icon Box Start -->
-            <div class="eight columns">
-                <div class="icon-box">
-                    <i class="ico-thumbs-up"></i>
-                    <h3>Agile Project Management</h3>
-                    <p>In software application development, agile software development (ASD) is a methodology for the creative process that anticipates the need for flexibility and applies a level of pragmatism into the delivery of the finished product.</p>
-                    <p>Agile software development focuses on keeping code simple, testing often, and delivering functional bits of the application as soon as they're ready. The goal of ASD is to build upon small client-approved parts as the project progresses, as opposed to delivering one large application at the end of the project.</p>
+            {% if forloop.counter0|divisibleby:"2" %}
                 </div>
-            </div>
-            <!-- Icon Box End -->
+            {% endif %}
 
-        </div>
-        <!-- Icon Box Container / End -->
-
-        <!-- Icon Box Container -->
-        <div class="icon-boxes-container">
-
-            <!-- Icon Box Start -->
-            <div class="eight columns">
-                <div class="icon-box">
-                    <i class="ico-display" style="margin-left: -10px;"></i>
-                    <h3>Kaizen</h3>
-                    <p>Kaizen, also known as continuous improvement, is a long-term approach to work that systematically seeks to achieve small, incremental changes in processes in order to improve efficiency and quality. Kaizen can be applied to any kind of work, but it is perhaps best known for being used in lean manufacturing and lean programming. If a work environment practices kaizen, continuous improvement is the responsibility of every worker, not just a selected few.</p>
-                    <p>Kaizen can be roughly translated from Japanese to mean "good change." The philosophy behind kaizen is often credited to Dr. W. Edwards Deming. Dr. Demming was invited by Japanese industrial leaders and engineers to help rebuild Japan after World War II. He was honored for his contributions by Emperor Hirohito and the Japanese Union of Scientists and Engineers.</p>
-                </div>
-            </div>
-            <!-- Icon Box End -->
-
-            <!-- Icon Box Start -->
-            <div class="eight columns">
-                <div class="icon-box">
-                    <i class="ico-film"></i>
-                    <h3>Video Recording</h3>
-                    <p>Proin iaculis purus consequat sem cure digni ssim. Donec porttitora entum suscipit aenean rhoncus posuere odio in tincidunt. Mauris ut ligula tortorea lorem ipsum dolor sit amet gorbi vel nulla eget quam porttitor gravida.</p>
-                </div>
-            </div>
-            <!-- Icon Box End -->
-
-        </div>
-        <!-- Icon Box Container / End -->
-
-
-    </div>
+        {% endfor %}
 
     <!-- clients -->
     {% if clients %}
