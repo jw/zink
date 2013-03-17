@@ -1,0 +1,47 @@
+[
+    {
+        "pk": 1,
+        "model": "index.believe",
+        "fields": {
+            "body": "We can learn more from each other when information is open. A free exchange of ideas is critical to creating an environment where people are allowed to learn and use existing information toward creating new ideas.",
+            "title": "We believe in an open exchange",
+            "icon": "ico-ok"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "index.believe",
+        "fields": {
+            "body": "Rapid prototypes can lead to rapid failures, but that leads to better solutions found faster. When you're free to experiment, you can look at problems in new ways and look for answers in new places. You can learn by doing.",
+            "title": "We believe in rapid prototyping",
+            "icon": "ico-stopwatch"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "index.believe",
+        "fields": {
+            "body": "In a meritocracy, the best ideas win. In a meritocracy, everyone has access to the same information. Successful work determines which projects rise and gather effort from the community.",
+            "title": "We believe in meritocracy",
+            "icon": "ico-share"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "index.believe",
+        "fields": {
+            "body": "Communities are formed around a common purpose. They bring together diverse ideas and share work. Together, a global community can create beyond the capabilities of any one individual. It multiplies effort and shares the work. Together, we can do more.",
+            "title": "We believe in community",
+            "icon": "ico-group"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "index.believe",
+        "fields": {
+            "body": "When we are free to collaborate, we create. We can solve problems that no one person may be able to solve on their own.",
+            "title": "We believe in the power of participation",
+            "icon": "ico-group"
+        }
+    }
+]
