@@ -37,13 +37,6 @@ def contact(request):
     tool = Tool.objects.order_by('?')[0]
     about = About.objects.order_by('?')[0]
 
-    # gets 6 random clients
-    clients = Client.objects.all().order_by('?')[:6]
-    # this is a small hack to center the clients
-    width = 0
-    for client in clients:
-        width += client.image.width + settings.CLIENT_LOGO_MARGIN
-
     # bottom part
     static['message'] = Static.objects.get(name="about.message").value
     links = Link.objects.all().order_by('description')
@@ -54,8 +47,6 @@ def contact(request):
                   'believe': believe,
                   'tool': tool,
                   'about': about,
-                  'clients': clients,
-                  'width': width,
                   'links': links,
                   'deployment': deployment}
 

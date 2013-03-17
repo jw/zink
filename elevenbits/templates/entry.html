@@ -20,6 +20,11 @@
         <div class="post-content">
             <div class="post-title"><h2><a href="blog_post.html">{{ entry.title }}</a></h2></div>
             <div class="post-meta"><span><i class="mini-ico-calendar"></i>{{ entry.posted|date:"l, jS F Y, Hi\h\r\s" }}</span> <span><i class="mini-ico-user"></i>By <a href="#">jw</a></span> <!--<span><i class="mini-ico-comment"></i>With <a href="#">12 Comments</a></span>--></div>
+            <div class="tags">
+                {% for tag in entry.tags.all %}
+                    <a href="/tag/{{tag.pk}}">{{tag.tag}}</a>
+                {% endfor %}
+            </div>
             <div class="post-description">
                 {% load markup %}
                 <p>

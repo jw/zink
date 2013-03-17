@@ -89,11 +89,47 @@ class Client(models.Model):
 
     url = models.CharField(max_length=1024, help_text="The url of the client's website")
 
+    logo = models.ImageField(upload_to=".", blank=True, help_text="The logo of the client.")
+
+    date = models.CharField(max_length=64, blank=True, help_text="The date.")
+
     short = models.CharField(max_length=1024, help_text="A short description of what we did for this client")
 
     long = models.CharField(max_length=4096, help_text="A long description of what we did for this client")
 
-    image = models.ImageField(upload_to=".", help_text="The image related to this client")
+    related_clients = models.ManyToManyField('self', blank=True,
+                                             help_text="Related clients.")
+
+    related_projects = models.ManyToManyField('Project', blank=True,
+                                              help_text="Related projects.")
+
+    def __unicode__(self):
+        return self.name
+
+#
+# Projects
+#
+
+class Project(models.Model):
+    """
+        A project.
+    """
+
+    name = models.CharField(max_length=128, help_text='Name of the project.')
+
+    url = models.CharField(max_length=128, blank=True, help_text='Name url of the project.')
+
+    logo = models.ImageField(upload_to=".", blank=True, help_text="The logo of the project.")
+
+    date = models.CharField(max_length=64, blank=True, help_text="The date.")
+
+    text = models.TextField(help_text="The description of the client.")
+
+    related_clients = models.ManyToManyField(Client, blank=True,
+                                             help_text="Related clients.")
+
+    related_projects = models.ManyToManyField('self', blank=True,
+                                              help_text="Related projects.")
 
     def __unicode__(self):
         return self.name

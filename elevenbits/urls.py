@@ -28,6 +28,8 @@ urlpatterns = patterns('',
 
     url(r'^services', 'elevenbits.services.views.services'),
     url(r'^contact', 'elevenbits.contact.views.contact'),
+    url(r'^clients', 'elevenbits.index.views.clients'),
+    url(r'^projects', 'elevenbits.index.views.projects'),
 
     # users tracking
     #url(r'^tracking/', include('tracking.urls')),

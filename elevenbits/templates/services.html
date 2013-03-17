@@ -12,6 +12,7 @@
             </div>
 
     	</div>
+
     </div>
 
     <div class="container">
@@ -69,41 +70,41 @@
 
         {% endfor %}
 
-    <!-- clients -->
-    {% if clients %}
+        <!-- clients -->
+        {% if clients %}
 
-        <div class="container">
-            <div class="sixteen columns">
+            <div class="container">
+                <div class="sixteen columns">
 
-                <div class="headline no-margin">
-                    <h3>Some Of Our Clients</h3>
+                    <div class="headline no-margin">
+                        <h3>Some Of Our Clients</h3>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="container">
+
+                <div class="sixteen columns">
+
+                    <ul class="client-list" style="width: {{ width }}px;">
+
+                        {% for client in clients %}
+                            <li>
+                                <a href="{{ client.url }}">
+                                    <img src="{{ MEDIA_URL }}{{ client.image }}"
+                                         alt="{{ client.name }} ({{ client.image.width }})"/>
+                                </a>
+                            </li>
+                        {% endfor %}
+
+                    </ul>
                 </div>
 
             </div>
-        </div>
 
-        <div class="container">
+        {%  endif %}
 
-            <div class="sixteen columns">
-
-                <ul class="client-list" style="width: {{ width }}px;">
-
-                    {% for client in clients %}
-                        <li>
-                            <a href="{{ client.url }}">
-                                <img src="{{ MEDIA_URL }}{{ client.image }}"
-                                     alt="{{ client.name }} ({{ client.image.width }})"/>
-                            </a>
-                        </li>
-                    {% endfor %}
-
-                </ul>
-            </div>
-
-        </div>
-
-        </div>
-
-    {%  endif %}
+    </div>
 
 {% endblock %}

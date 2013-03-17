@@ -1,5 +1,5 @@
 from elevenbits.static.models import Static
-from elevenbits.index.models import Image, Believe, About, Tool, Client, Link
+from elevenbits.index.models import Image, Believe, About, Tool, Project, Client, Link
 from elevenbits.deployment.models import Deployment
 
 from django.template import RequestContext
@@ -42,7 +42,7 @@ def index(request):
     # the width calculation is a small hack to center the clients
     width = 0
     for client in clients:
-        width += client.image.width + settings.CLIENT_LOGO_MARGIN
+        width += client.logo.width + settings.CLIENT_LOGO_MARGIN
 
     # bottom part
     static['message'] = Static.objects.get(name="about.message").value
@@ -62,3 +62,51 @@ def index(request):
     return render_to_response('index.html',
                               attributes,
                               context_instance=RequestContext(request))
+
+def clients(request):
+    static = {}
+    static['copyright'] = Static.objects.get(name="copyright").value
+    static['title'] = Static.objects.get(name="elevenbits").value
+    static['header'] = Static.objects.get(name="home.header").value
+
+    # selects a believe, a tool and an about message at random
+    clients = Client.objects.all()
+
+    # bottom part
+    static['message'] = Static.objects.get(name="about.message").value
+    links = Link.objects.all().order_by('description')
+    deployment = get_deployment()
+
+    attributes = {'static': static,
+                  'clients': clients,
+                  'links': links,
+                  'deployment': deployment}
+
+    return render_to_response('clients.html',
+                              attributes,
+                              context_instance=RequestContext(request))
+
+
+def projects(request):
+    static = {}
+    static['copyright'] = Static.objects.get(name="copyright").value
+    static['title'] = Static.objects.get(name="elevenbits").value
+    static['header'] = Static.objects.get(name="home.header").value
+
+    # selects a believe, a tool and an about message at random
+    projects = Project.objects.all()
+
+    # bottom part
+    static['message'] = Static.objects.get(name="about.message").value
+    links = Link.objects.all().order_by('description')
+    deployment = get_deployment()
+
+    attributes = {'static': static,
+                  'projects': projects,
+                  'links': links,
+                  'deployment': deployment}
+
+    return render_to_response('projects.html',
+                              attributes,
+                              context_instance=RequestContext(request))
+

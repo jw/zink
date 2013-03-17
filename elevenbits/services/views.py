@@ -52,7 +52,7 @@ def services(request):
     # this is a small hack to center the clients
     width = 0
     for client in clients:
-        width += client.image.width + settings.CLIENT_LOGO_MARGIN
+        width += client.logo.width + settings.CLIENT_LOGO_MARGIN
 
     links = Link.objects.all().order_by('description')
 
