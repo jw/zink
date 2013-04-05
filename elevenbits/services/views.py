@@ -50,6 +50,7 @@ def services(request):
     clients = Client.objects.all().order_by('?')[:6]
 
     # this is a small hack to center the clients
+    # the width calculation is a small hack to center the clients
     width = 0
     for client in clients:
         width += client.logo.width + settings.CLIENT_LOGO_MARGIN

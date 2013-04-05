@@ -1,0 +1,2456 @@
+[
+    {
+        "pk": 10,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "about",
+            "name": "about",
+            "app_label": "index"
+        }
+    },
+    {
+        "pk": 27,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "bannedip",
+            "name": "Banned IP",
+            "app_label": "tracking"
+        }
+    },
+    {
+        "pk": 9,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "believe",
+            "name": "believe",
+            "app_label": "index"
+        }
+    },
+    {
+        "pk": 12,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "client",
+            "name": "client",
+            "app_label": "index"
+        }
+    },
+    {
+        "pk": 18,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "comment",
+            "name": "Comment",
+            "app_label": "blog"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "contenttype",
+            "name": "content type",
+            "app_label": "contenttypes"
+        }
+    },
+    {
+        "pk": 22,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "deployment",
+            "name": "deployment",
+            "app_label": "deployment"
+        }
+    },
+    {
+        "pk": 17,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "entry",
+            "name": "entry",
+            "app_label": "blog"
+        }
+    },
+    {
+        "pk": 15,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "event",
+            "name": "event",
+            "app_label": "index"
+        }
+    },
+    {
+        "pk": 20,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "feature",
+            "name": "feature",
+            "app_label": "services"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "group",
+            "name": "group",
+            "app_label": "auth"
+        }
+    },
+    {
+        "pk": 8,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "image",
+            "name": "image",
+            "app_label": "index"
+        }
+    },
+    {
+        "pk": 14,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "link",
+            "name": "link",
+            "app_label": "index"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "logentry",
+            "name": "log entry",
+            "app_label": "admin"
+        }
+    },
+    {
+        "pk": 24,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "menu",
+            "name": "menu",
+            "app_label": "treemenus"
+        }
+    },
+    {
+        "pk": 23,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "menuitem",
+            "name": "menu item",
+            "app_label": "treemenus"
+        }
+    },
+    {
+        "pk": 28,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "migrationhistory",
+            "name": "migration history",
+            "app_label": "south"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "permission",
+            "name": "permission",
+            "app_label": "auth"
+        }
+    },
+    {
+        "pk": 13,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "project",
+            "name": "project",
+            "app_label": "index"
+        }
+    },
+    {
+        "pk": 21,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "service",
+            "name": "service",
+            "app_label": "services"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "session",
+            "name": "session",
+            "app_label": "sessions"
+        }
+    },
+    {
+        "pk": 19,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "static",
+            "name": "static",
+            "app_label": "static"
+        }
+    },
+    {
+        "pk": 16,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "tag",
+            "name": "tag",
+            "app_label": "blog"
+        }
+    },
+    {
+        "pk": 11,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "tool",
+            "name": "tool",
+            "app_label": "index"
+        }
+    },
+    {
+        "pk": 7,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "type",
+            "name": "type",
+            "app_label": "index"
+        }
+    },
+    {
+        "pk": 26,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "untrackeduseragent",
+            "name": "Untracked User-Agent",
+            "app_label": "tracking"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "user",
+            "name": "user",
+            "app_label": "auth"
+        }
+    },
+    {
+        "pk": 25,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "visitor",
+            "name": "visitor",
+            "app_label": "tracking"
+        }
+    },
+    {
+        "pk": "1131ef7ffef2df0d170e9fb4eb12e359",
+        "model": "sessions.session",
+        "fields": {
+            "expire_date": "2013-04-11T22:09:06.462",
+            "session_data": "NWZmYWY5NDBkMWQyNDRiM2E4OTIyMzk3YmRhNjBiODE1MjViZWZkZDqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "index.believe",
+        "fields": {
+            "body": "We can learn more from each other when information is open. A free exchange of ideas is critical to creating an environment where people are allowed to learn and use existing information toward creating new ideas.",
+            "title": "We believe in an open exchange",
+            "icon": "ico-ok"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "index.believe",
+        "fields": {
+            "body": "Rapid prototypes can lead to rapid failures, but that leads to better solutions found faster. When you're free to experiment, you can look at problems in new ways and look for answers in new places. You can learn by doing.",
+            "title": "We believe in rapid prototyping",
+            "icon": "ico-stopwatch"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "index.believe",
+        "fields": {
+            "body": "In a meritocracy, the best ideas win. In a meritocracy, everyone has access to the same information. Successful work determines which projects rise and gather effort from the community.",
+            "title": "We believe in meritocracy",
+            "icon": "ico-share"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "index.believe",
+        "fields": {
+            "body": "Communities are formed around a common purpose. They bring together diverse ideas and share work. Together, a global community can create beyond the capabilities of any one individual. It multiplies effort and shares the work. Together, we can do more.",
+            "title": "We believe in community",
+            "icon": "ico-group"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "index.believe",
+        "fields": {
+            "body": "When we are free to collaborate, we create. We can solve problems that no one person may be able to solve on their own.",
+            "title": "We believe in the power of participation",
+            "icon": "ico-group"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "index.about",
+        "fields": {
+            "string": "ElevenBits is a one-person company, started by Jan Willems in 2000, with a strong focus on Kaizen (\u6539\u5584, Japanese for \"change for the better\"). This quality concept can loosely be translated as \"continuous improvement\"."
+        }
+    },
+    {
+        "pk": 2,
+        "model": "index.about",
+        "fields": {
+            "string": "ElevenBits strongly applies and recommends the agile process management. ElevenBits uses a set of interrelated practices and rules that optimize the development environment, reduce organizational overhead, and closely synchronize market requirements with iterative prototypes."
+        }
+    },
+    {
+        "pk": 3,
+        "model": "index.about",
+        "fields": {
+            "string": "Using modern process control theory, ElevenBits tries to build the best possible software given the available resources, acceptable quality, and required release dates. Useful product functionality is delivered every thirty days as requirements, architecture, and design emerge, even when using unstable technologies."
+        }
+    },
+    {
+        "pk": 1,
+        "model": "index.tool",
+        "fields": {
+            "body": "Django is a high-level Python Web framework that encourages rapid development and clean, pragmatic design.  Django makes it easier to build better web applications more quickly with less code.  It is a framework for perfectionists with deadlines.  That's why we like it!",
+            "title": "Python and Django",
+            "icon": ""
+        }
+    },
+    {
+        "pk": 1,
+        "model": "index.link",
+        "fields": {
+            "link": "https://hg.elevenbits.com",
+            "description": "Mercurial"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "index.link",
+        "fields": {
+            "link": "http://jira.elevenbits.org",
+            "description": "Jira"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "index.link",
+        "fields": {
+            "link": "/cookies",
+            "description": "Cookies"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "index.link",
+        "fields": {
+            "link": "/blog",
+            "description": "Blog"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "index.link",
+        "fields": {
+            "link": "http://dutch.elevenbits.com",
+            "description": "Nederlands"
+        }
+    },
+    {
+        "pk": 7,
+        "model": "index.link",
+        "fields": {
+            "link": "/terms",
+            "description": "Terms of Use"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "index.link",
+        "fields": {
+            "link": "/search",
+            "description": "Search this site"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "blog.tag",
+        "fields": {
+            "tag": "Django"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "blog.tag",
+        "fields": {
+            "tag": "ElevenBits"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "blog.tag",
+        "fields": {
+            "tag": "Linux"
+        }
+    },
+    {
+        "pk": 7,
+        "model": "blog.tag",
+        "fields": {
+            "tag": "Python"
+        }
+    },
+    {
+        "pk": 8,
+        "model": "blog.tag",
+        "fields": {
+            "tag": "Eclipse"
+        }
+    },
+    {
+        "pk": 9,
+        "model": "blog.tag",
+        "fields": {
+            "tag": "Debian"
+        }
+    },
+    {
+        "pk": 10,
+        "model": "blog.tag",
+        "fields": {
+            "tag": "PDF"
+        }
+    },
+    {
+        "pk": 11,
+        "model": "blog.tag",
+        "fields": {
+            "tag": "Maven"
+        }
+    },
+    {
+        "pk": 12,
+        "model": "blog.tag",
+        "fields": {
+            "tag": "Java"
+        }
+    },
+    {
+        "pk": 13,
+        "model": "blog.tag",
+        "fields": {
+            "tag": "Ubuntu"
+        }
+    },
+    {
+        "pk": 14,
+        "model": "blog.tag",
+        "fields": {
+            "tag": "Software development"
+        }
+    },
+    {
+        "pk": 15,
+        "model": "blog.tag",
+        "fields": {
+            "tag": "Project management"
+        }
+    },
+    {
+        "pk": 17,
+        "model": "blog.tag",
+        "fields": {
+            "tag": "Cherokee"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "blog.entry",
+        "fields": {
+            "body": "This is my first blog entry ever :-)",
+            "title": "My first own blog!",
+            "tags": [
+                4,
+                5,
+                6,
+                7
+            ],
+            "created": "2009-06-25T04:02:00",
+            "active": true,
+            "posted": "2009-06-26T10:51:37"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "blog.entry",
+        "fields": {
+            "body": "To develop Django applications, I use Eclipse with the Pydev plugin with some other extras.  Here is a small how-to on my setup:\r\n\r\nDownload and install these different components:\r\n\r\n * ####Django\r\n\r\n    I'm using [Django 1.0.2 final](http://www.djangoproject.com/download/) but I guess that Django's 1.1 beta or the development release would also work fine.\r\n\r\n * ####Eclipse\r\n\r\n    Just download [the eclipse platform release](http://www.eclipse.org/downloads/) and install it.\r\n\r\n * ####Pydev\r\n\r\n    Then download the [Python IDE plugin](http://pydev.sourceforge.net/download.html) and install it through the update manager, using these [guidelines](http://www.fabioz.com/pydev/manual_101_install.html).  Then you can use [this page](http://www.fabioz.com/pydev/manual_101_interpreter.html) to configure the Python interpreter. \r\n\r\n * ####Subversion\r\n\r\n    A project is never complete when it is not version controlled.  So install [Subversion](http://svn.tigris.org) and the [Subversion plugin](http://community.polarion.com/index.php?page=overview&project=subversive).  When installing the plugin, take care to select the correct features.  The *SVN Team Provider* is required, together with at least one *SVN Connector*.  I selected the [SVNKit](http://svnkit.com/) as my connector.\r\n\r\nThen create your own Django projects.  This can be done using the Eclipse <code>Run -> Run configurations</code>.  Here are the settings to start the lightweight development web server through the <code>manage.py</code>:\r\n\r\n![alt code](http://static.elevenbits.org/blog/19.06.2009.001.png \"Run configurations\")\r\n\r\nThen specify <code>runserver</code> as program argument: \r\n\r\n![alt code](http://static.elevenbits.org/blog/20.06.2009.001.png \"Parameters\")\r\n\r\nHappy coding!\r\n",
+            "title": "Eclipse and Django development setup",
+            "tags": [
+                4,
+                7,
+                8
+            ],
+            "created": "2009-07-21T17:58:02",
+            "active": true,
+            "posted": "2009-07-21T17:58:37"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "blog.entry",
+        "fields": {
+            "body": "Beware:\r\n\r\n'''python-psyco'''\r\n\r\n\r\n\r\n    :::python\r\n\r\n    print \"Hello there!\"\r\n\r\n\r\n\r\n\r\n\r\n * One\r\n\r\n * Two\r\n\r\n\r\n\r\nHello there!\r\n\r\n\r\n\r\n    :::java\r\n\r\n    public static void main(String * args) {\r\n\r\n        System.out.println(\"Hello there\");\r\n\r\n        // this is a very loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong line and I'm pretty excited to see how markdown and pygments behave!\r\n\r\n        /*\r\n\r\n            a comment line\r\n\r\n            a comment line\r\n\r\n            a comment line\r\n\r\n            a comment line\r\n\r\n            a comment line\r\n\r\n            a comment line\r\n\r\n            a comment line\r\n\r\n            a comment line\r\n\r\n            a comment line\r\n\r\n            a comment line\r\n\r\n        */\r\n\r\n    }\r\n\r\n\r\n\r\nAnd\r\n\r\n\r\n\r\n    :::python\r\n\r\n    import this\r\n\r\n    def demo():\r\n\r\n        pass\r\n\r\n\r\n\r\nInstall pydef:\r\n\r\n\r\n\r\nBeware:\r\n\r\n'''python-psyco'''\r\n\r\n\r\n\r\n    ::::html+django\r\n\r\n    {% extends 'base.html' %}\r\n\r\n    {% load ittybitty_tags %}\r\n\r\n\r\n\r\n    {% block content %}\r\n\r\n    <a href=\"{% ittybitty_url %}\">Link to this page!</a>\r\n\r\n    {% endblock %}\r\n\r\n\r\n\r\n\r\n\r\nHello there!\r\n",
+            "title": "Temporary entry",
+            "tags": [
+                7
+            ],
+            "created": "2009-08-03T19:00:39",
+            "active": false,
+            "posted": "2009-08-03T19:00:53"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "blog.entry",
+        "fields": {
+            "body": "[Ubuntu](http://www.ubuntu.com) and [Debian](http://www.debian.org) packages are all bundled in something what is called a [repository](http://www.debian.org/doc/manuals/repository-howto/repository-howto).  Some people, like me, create their own: \r\n\r\n######Note:\r\nMy repository links with the [Jaunty](http://packages.ubuntu.com/jaunty/) distribution (that is Ubuntu 9.04).  Your can connect yours to any other, like Debians [experimental repository](http://packages.debian.org/experimental/).\r\n\r\n####First create your own repository.\r\n\r\nMy repository is accessible over the web, so I installed it on my web server:\r\n\r\n    ::::console\r\n    user@box:~$ cd /var/www/\r\n    user@box:/var/www$ sudo mkdir packages\r\n    user@box:/var/www$ cd packages/\r\n\r\nIn this <code>/var/www/packages</code> we will create a pool, the 'jaunty' distribution and the cache directories:\r\n\r\n    ::::console\r\n    user@box:/var/www/packages$ sudo mkdir -p pool/main\r\n    user@box:/var/www/packages$ sudo mkdir -p dists/jaunty/main/binary-i386\r\n    user@box:/var/www/packages$ sudo mkdir .cache\r\n\r\nNow two files need to be created. The first one is the <code>apt-release.conf</code>.  Make sure that it looks like:\r\n\r\n    ::::console\r\n    APT::FTPArchive::Release::Codename \"jaunty\";\r\n    APT::FTPArchive::Release::Origin \"elevenbits.com\";\r\n    APT::FTPArchive::Release::Components \"main\";\r\n    APT::FTPArchive::Release::Label \"ElevenBits Ubuntu Repository\";\r\n    APT::FTPArchive::Release::Architectures \"i386\";\r\n    APT::FTPArchive::Release::Suite \"jaunty;\r\n\r\nThe second file is called <code>apt-ftparchive.conf</code>.  This one should look like:\r\n\r\n    ::::console\r\n    Dir {\r\n         ArchiveDir \".\";\r\n         CacheDir \"./.cache\";\r\n    };\r\n    \r\n    Default {\r\n         Packages::Compress \". gzip bzip2\";\r\n         Contents::Compress \". gzip bzip2\";\r\n    };\r\n    \r\n    TreeDefault {\r\n         BinCacheDB \"packages-$(SECTION)-$(ARCH).db\";\r\n         Directory \"pool/$(SECTION)\";\r\n         Packages \"$(DIST)/$(SECTION)/binary-$(ARCH)/Packages\";\r\n         Contents \"$(DIST)/Contents-$(ARCH)\";\r\n    };\r\n    \r\n    Tree \"dists/jaunty\" {\r\n         Sections \"main\";\r\n         Architectures \"i386\";\r\n    }\r\n\r\nAfter you'd created these file your system should look like this:\r\n\r\n    ::::console\r\n    user@box:/var/www/packages$ ls -al\r\n    total 28\r\n    drwxr-xr-x 5 root root 4096 Aug 14 13:32 .\r\n    drwxr-xr-x 3 root root 4096 Aug 14 13:22 ..\r\n    drwxr-xr-x 2 root root 4096 Aug 14 13:26 .cache\r\n    -rw-r--r-- 1 root root  427 Aug 14 13:32 apt-ftparchive.conf\r\n    -rw-r--r-- 1 root root  282 Aug 14 13:30 apt-release.conf\r\n    drwxr-xr-x 3 root root 4096 Aug 14 13:26 dists\r\n    drwxr-xr-x 3 root root 4096 Aug 14 13:26 pool\r\n\r\n####Add your own packages and update the repository.\r\n\r\nHere the <code>yourpackage</code> package version 1.0 is copied into the new (empty) repository:\r\n\r\n    ::::console\r\n    user@box:~$ cd /var/www/packages/pool/main\r\n    user@box:/var/www/packages/pool/main$ sudo cp ~/yourpackage_1.0_all.deb .\r\n\r\nNow the repo needs to be initialized. This you can do using these commands:\r\n\r\n    ::::console\r\n    user@box:~$ cd /var/www/packages\r\n    user@box:/var/www/packages$ sudo apt-ftparchive generate apt-ftparchive.conf\r\n     pool/main: 1 files 9900B 0s\r\n    Done Packages, Starting contents.\r\n     dists/jaunty/Contents-i386: 1 files 9900B 0s\r\n    Done. 9900B in 1 archives. Took 0s\r\n    user@box:/var/www/packages$ apt-ftparchive -c apt-release.conf release dists/jaunty | sudo tee dists/jaunty/Release\r\n    Architectures: i386\r\n    Codename: jaunty\r\n    Components: main\r\n    Date: Mon, 17 Aug 2009 14:16:41 UTC\r\n    Label: ElevenBits Ubuntu Repository\r\n    Origin: elevenbits.com\r\n    Suite: jaunty\r\n    MD5Sum:\r\n     1d25efc884e5bbfc32eeba74771e322e              536 main/binary-i386/Packages\r\n     574c2e304fb14272b8f70355e93fbe80              416 main/binary-i386/Packages.bz2\r\n     3a0cbc2e4a38e40c8182451c85de1251              390 main/binary-i386/Packages.gz\r\n    SHA1:\r\n     949b9e9045f7698cd64abd4c1fa2261eb5d22f82              536 main/binary-i386/Packages\r\n     6d5d5c841a8890b4491650f4f360d53158d16cc0              416 main/binary-i386/Packages.bz2\r\n     eda59ba70dc9e9d65cf92076e33cb589a07de564              390 main/binary-i386/Packages.gz\r\n    SHA256:\r\n     b30b4e68d8928785d132dbdc6bb4158e75e907e07f00a3b8d206030236b8f94a              536 main/binary-i386/Packages\r\n     38b855ab6e0ce3111f986f26347871827e5e461af9b29b8ccf12773560f63caf              416 main/binary-i386/Packages.bz2\r\n     1d1aec4f2cff1a3b71212083aabfc3f2003c88b70f1f0a2ef32bfbb94c2aa879              390 main/binary-i386/Packages.gz\r\n\r\nAfter this, the repository is ready to be used.  See <code>http://localhost/packages</code> to make sure.\r\n\r\n######Note:\r\nRemember to re-initialize the repo each time the <code>/var/www/packages</code> is altered.\r\n\r\n####Enable the repository on your client machines.\r\n\r\nOn the Ubuntu machines that need access to your repository, use\r\n\r\n    ::::console\r\n    sudo vim /etc/apt/sources.list\r\n\r\nto add in the repository address:\r\n\r\n    ::::sources.list\r\n    deb http://ww.xx.yy.zz/packages jaunty main\r\n\r\nwhere ww.xx.yy.zz is the address where your server lives.\r\n\r\nFrom now on the system has access to our own private repository.  Cool, no?\r\n\r\n",
+            "title": "Howto create your own Ubuntu repository",
+            "tags": [
+                6,
+                9
+            ],
+            "created": "2009-09-11T18:22:01",
+            "active": true,
+            "posted": "2009-09-11T22:25:40"
+        }
+    },
+    {
+        "pk": 7,
+        "model": "blog.entry",
+        "fields": {
+            "body": "It is very simple to merge serveral PDF documents together into one PDF document.  Just make sure that the <code>gs</code> package is installed on your system. \r\n\r\n    ::::console\r\n    user@box:~$ gs -dNOPAUSE -sDEVICE=pdfwrite \\\r\n    > -sOUTPUTFILE=result.pdf \\\r\n    > -dBATCH one.pdf two.pdf three.pdf\r\n\r\nThis command will merge the thee PDF documents <code>one.pdf</code>, <code>two.pdf</code> and <code>three.pdf</code> into the resulting <code>result.pdf</code> document.",
+            "title": "Howto merge PDF documents",
+            "tags": [
+                6,
+                9,
+                10
+            ],
+            "created": "2009-09-25T17:33:15",
+            "active": true,
+            "posted": "2009-09-25T17:38:36"
+        }
+    },
+    {
+        "pk": 8,
+        "model": "blog.entry",
+        "fields": {
+            "body": "#####What is the UUID?\r\nThe UUID library, present in all Linux systems, is used to generate unique identifiers for objects that may be accessible beyond the local system.  The UUIDs generated by this library can be reasonably expected to be unique within a system, and unique across all systems.  They could be used, for instance, to generate unique HTTP cookies across  multiple web servers without communication between the servers, and without fear of a name clash.  The UUIDs are also used to identify the hard disks on your Linux box.\r\n\r\n#####Retrieve the UUID of your disk using <code>blkid</code>\r\nThe *blkid* program can be used to determine the type of content (e.g. filesystem, swap) a block device holds, and also attributes (tokens, NAME=value pairs) from the content metadata (e.g. LABEL or UUID fields).\r\n\r\n    ::::console\r\n    user@box:~$ blkid /dev/sda5\r\n    /dev/sda5: UUID=\"21fb314a-b170-42b4-960a-07d7930b693f\" TYPE=\"ext3\" \r\n\r\n#####The UUIDs of your disks can also be found in <code>/dev/disk</code>\r\n\r\n    ::::console\r\n    user@box:~$ ls -al /dev/disk/by-uuid\r\n    total 0\r\n    drwxr-xr-x 2 root root 120 2009-10-14 10:31 .\r\n    drwxr-xr-x 5 root root 100 2009-10-14 10:31 ..\r\n    lrwxrwxrwx 1 root root  10 2009-10-14 10:31 0B7E-3FC3 -> ../../sda7\r\n    lrwxrwxrwx 1 root root  10 2009-10-14 10:31 21fb314a-b170-42b4-960a-07d7930b693f -> ../../sda5\r\n    lrwxrwxrwx 1 root root  10 2009-10-14 10:31 50340AA1340A8A64 -> ../../sda1\r\n    lrwxrwxrwx 1 root root  10 2009-10-14 10:31 9e83c2fe-b180-4b46-8b1c-b21eb1634895 -> ../../sda6\r\n\r\n#####Use the <code>vol_id</code> command...\r\n...when you want to see even more info on the hard disk:\r\n\r\n    :::::console\r\n    user@box:~$ sudo vol_id /dev/sda5\r\n    ID_FS_USAGE=filesystem\r\n    ID_FS_TYPE=ext3\r\n    ID_FS_VERSION=1.0\r\n    ID_FS_UUID=21fb314a-b170-42b4-960a-07d7930b693f\r\n    ID_FS_UUID_ENC=21fb314a-b170-42b4-960a-07d7930b693f\r\n    ID_FS_LABEL=\r\n    ID_FS_LABEL_ENC=\r\n",
+            "title": "Howto get the UUID of a hard disk",
+            "tags": [
+                6
+            ],
+            "created": "2009-10-14T11:59:05",
+            "active": true,
+            "posted": "2009-10-14T12:01:45"
+        }
+    },
+    {
+        "pk": 9,
+        "model": "blog.entry",
+        "fields": {
+            "body": "[Maven](http://maven.apache.org) filters <code>${&lt;property name&gt;}</code> automatically from the [pom](http://maven.apache.org/pom.html).  By specifying an extra <code>$</code>, like <code>$${&lt;property name&gt;}</code>, the replacement will not happen.",
+            "title": "Maven ${<property name>} handling",
+            "tags": [
+                11,
+                12
+            ],
+            "created": "2009-11-16T08:48:58",
+            "active": true,
+            "posted": "2009-11-23T08:49:16"
+        }
+    },
+    {
+        "pk": 10,
+        "model": "blog.entry",
+        "fields": {
+            "body": "#####Debianization\r\nWhen you are working on a [Java based](http://www.javasoft.com) project, it is often handy to [debianize](http://www.debian.org/doc/maint-guide/) the resulting application.  Using a package installer your application can be easily installed together with its dependencies, it will will be accessible automagically by the all the users of the system and can easily be uninstalled,...\r\n\r\n#####Manually\r\nYou could do this [debianization manually](http://www.debian.org/doc/maint-guide/ch-first.en.html#s-dh_make), but there are many drawbacks when doing so:\r\n\r\n * It would work only for your machine type (e.g. [Ubuntu Karmic](http://packages.ubuntu.com/karmic/), or [Debian Sid](http://packages.debian.org/unstable/)), not for other os types.\r\n * Extra documentation needs to be provided to the other developers in the team.\r\n * It would be a very repetitive job. \r\n * I'm sure errors will be made.\r\n\r\n#####The pkg plugin\r\nWhen the application is built using [Maven](http://maven.apache.org) the [pkg](http://wiki.evolvis.org/mvn-pkg-plugin/index.php/Hauptseite) plugin can be used to automate the [package](http://www.debian.org/doc/FAQ/ch-pkg_basics.en.html) building process.\r\n\r\nThe package builder itself is managed at the [Evolvis site](https://evolvis.org/projects/mvn-pkg-plugin/).  It is created by [Tarent](http://www.tarent.de), an IT company from Bonn, and is released under GPL version 2.\r\n\r\n#####Prepare\r\nBest to start by adding this plugin prepository to your [pom](http://maven.apache.org/pom.html) or your [settings.xml](http://maven.apache.org/settings.html):\r\n\r\n    :::::xml\r\n    <pluginRepositories>\r\n         <pluginRepository>\r\n               <id>evolvis-release-repository</id>\r\n               <name>evolvis.org release repository</name>\r\n               <url>http://maven-repo.evolvis.org/releases</url>\r\n               <snapshots>\r\n                   <enabled>false</enabled>\r\n               </snapshots>\r\n         </pluginRepository>\r\n    </pluginRepositories>\r\n\r\n#####Configure\r\nHere is an example of a simple Java application configured for [Ubuntu Hardy](http://packages.ubuntu.com/hardy/) debianization.  These tags should be placed in the <code>&lt;build&gt;&lt;plugins&gt;</code> section of your pom.  Further down the important tags are explained.\r\n\r\n    :::::xml\r\n    <plugin>\r\n        <groupId>de.tarent.maven.plugins</groupId>\r\n        <artifactId>maven-pkg-plugin</artifactId>\r\n        <version>2.1.4</version>\r\n        <configuration>\r\n             <defaultDistro>ubuntu_hardy</defaultDistro>\r\n             <shortDescription>PPP Monitor</shortDescription>\r\n             <auxPackageMapURL>\r\n                   ${project.baseUri}/src/main/package/elevenbits.xml\r\n             </auxPackageMapURL>\r\n             <defaults>\r\n                  <distros><string>ubuntu_hardy</string></distros>\r\n                  <architecture>all</architecture>\r\n                  <section>misc</section>\r\n                  <mainClass>com.elevenbits.pppmonitor.PPPMonitor</mainClass>\r\n                  <maintainer>\r\n                        ElevenBits &lt;packages@elevenbits.com&gt;\r\n                  </maintainer>\r\n                  <revision>r6</revision>\r\n                  <customCodeUnix>\r\n                        #echo \"Updating classpath...\"\r\n                        POSTFIX=$${CLASSPATH_ARG#* }\r\n                        PREFIX=/etc/pppmonitor\r\n                        CLASSPATH_ARG=\"-cp $PREFIX:$POSTFIX\"\r\n                        #echo \"Classpath: $CLASSPATH_ARG\"\r\n                   </customCodeUnix>\r\n                   <srcSysconfFilesDir>src/main/packager/etc</srcSysconfFilesDir>\r\n                   <sysconfFiles>\r\n                        <sysconfFile>\r\n                             <from>log4j.xml</from>\r\n                             <to>pppmonitor</to>\r\n                        </sysconfFile>\r\n                        <sysconfFile>\r\n                             <from>pppmonitor.properties</from>\r\n                             <to>pppmonitor</to>\r\n                        </sysconfFile>\r\n                   </sysconfFiles>\r\n                   <datadir>\r\n                         /usr/share/pppmonitor/\r\n                   </datadir>\r\n                   <dataFiles>\r\n                        <dataFile>\r\n                             <from>pppmonitor</from>\r\n                             <to></to>\r\n                        </dataFile>\r\n                   </dataFiles>\r\n                   <srcAuxFilesDir>src/main/packager/scripts</srcAuxFilesDir>\r\n                   <postinstScript>postinst.sh</postinstScript>\r\n                   <postrmScript>postrm.sh</postrmScript>\r\n              </defaults>\r\n         </configuration>\r\n    </plugin>\r\n\r\nNow follows the explanation of the important tags.  The [pkg web site](http://wiki.evolvis.org/mvn-pkg-plugin/index.php/Configuration) contains all information on the configuration settings.\r\n\r\n    :::::xml\r\n    <groupId>de.tarent.maven.plugins</groupId>\r\n    <artifactId>maven-pkg-plugin</artifactId>\r\n    <version>2.1.4</version>\r\n\r\nVersion 2.1.4 or higher is required, since it allows the installment of pre/post install/remove scripts in the resulting package.\r\n\r\n    :::::xml\r\n    <defaultDistro>ubuntu_hardy</defaultDistro>\r\n     \r\nThe pkg plugin can build packages for distributions like Debian and Ubuntu as well as embedded Linux variants like Maemo and OpenMoko.  Additionally it supports the creation of IzPack installers.  The *defaultDistro* tag value can be one of [these](http://wiki.evolvis.org/mvn-pkg-plugin/index.php/Built-in_Distribution-Definitions). \r\n\r\n    :::::xml\r\n    <auxPackageMapURL>\r\n         ${project.baseUri}/src/main/package/elevenbits.xml\r\n    </auxPackageMapURL>\r\n\r\nThe *auxPackageMapURL* should point to the ElevenBits package map.  This package map sets the *defaultBinPath* to <code>/usr/sbin</code>. That way the generated package will be runnable by root only.  You can find more info on the [PackageMaps](http://wiki.evolvis.org/mvn-pkg-plugin/index.php/PackageMaps) is available at the pkg site.  Here is the ElevenBits mapping xml:\r\n\r\n    :::::xml\r\n    <!--\r\n         Package maps document for Ubuntu 8.04 LTS (Hardy Heron) with\r\n         ElevenBits updates.\r\n    -->\r\n    <package-maps>\r\n         <version>1.0</version>\r\n         <distro>\r\n              <id>ubuntu_hardy</id>\r\n              <label>ElevenBits's Ubuntu Hardy mapping.</label>\r\n              <inherit>ubuntu_gutsy</inherit>\r\n              <defaultBinPath>/usr/sbin</defaultBinPath>\r\n              <map>\r\n                   <!-- Add extra mappings here. -->\r\n              </map>\r\n         </distro>\r\n    </package-maps>\r\n\r\nLets continue with some other tags:\r\n\r\n    :::::xml\r\n    <architecture>all</architecture>\r\n    <section>misc</section>\r\n    <mainClass>com.elevenbits.pppmonitor.PPPMonitor</mainClass>\r\n\r\nThe package will run on all architectures (since it is a Java application), the section in the package list is <code>misc</code> and the main class is <code>com.elevenbits.pppmonitor.PPPMonitor</code>.\r\n\r\n    ::::xml\r\n    <maintainer>\r\n         ElevenBits &lt;packages@elevenbits.com&gt;\r\n    </maintainer>\r\n\r\nThe maintainer will be used when signing the package.  This is in detail explained further below.\r\n\r\n    :::::xml\r\n    <customCodeUnix>\r\n          #echo \"Updating classpath...\"\r\n          POSTFIX=$${CLASSPATH_ARG#* }\r\n          PREFIX=/etc/pppmonitor\r\n          CLASSPATH_ARG=\"-cp $PREFIX:$POSTFIX\"\r\n          #echo \"Classpath: $CLASSPATH_ARG\"\r\n    </customCodeUnix>\r\n\r\nWhen pkg builds a package a script is created using the pom data.  At the end of the script the *customCodeUnix* is added by the plugin.  Here is the code generated for this example:\r\n\r\n    :::::bash\r\n    #!/bin/sh\r\n    # This file is autogenerated by the maven-pkg-plugin. The source responsible\r\n    # for this script can be found in class: de.tarent.maven.plugins.pkg.generator.WrapperScriptGenerator\r\n\r\n    # You can provide additional VM arguments by setting the VMARGS environment variable.\r\n    BOOTCLASSPATH_ARG=\"\"\r\n     \r\n    CLASSPATH_ARG=\"-cp /usr/share/java/pppmonitor/devices-1.1.0.jar:/usr/share/java/RXTXcomm.jar:/usr/share/java/commons-logging.jar:/usr/share/java/log4j-1.2.jar:/usr/share/java/pppmonitor/mail-1.4.jar:/usr/share/java/activation.jar:/usr/share/java/pppmonitor/jms-1.1.jar:/usr/share/java/pppmonitor/jmxtools-1.2.1.jar:/usr/share/java/pppmonitor/jmxri-1.2.1.jar:/usr/share/java/pppmonitor/rolling-appender-1.0.jar:/usr/share/java/pppmonitor.jar\"\r\n     \r\n    MAIN_CLASS=com.elevenbits.pppmonitor.PPPMonitor\r\n     \r\n    # Path of the shared libraries (e.g. for SWT\r\n    LIBRARY_PATH_ARG=\"-Djava.library.path=/usr/lib/jni:/usr/lib\"\r\n     \r\n    # Path to BC-ABI compiled classes. Has no effect on runtimes other than GCJ.\r\n    DB_PATH_ARG=\"\"\r\n     \r\n    # Additional system properties which are special for this application:\r\n    SYSTEM_PROPERTIES=\"\"\r\n     \r\n    # Allows overriding the VM by setting the JAVA environment variable.\r\n    if [ x${JAVA} = x ];\r\n    then\r\n         JAVA=java\r\n    fi\r\n\r\n    #echo \"Updating classpath...\"\r\n    POSTFIX=${CLASSPATH_ARG#* }\r\n    PREFIX=/etc/pppmonitor\r\n    CLASSPATH_ARG=\"-cp $PREFIX:$POSTFIX\"\r\n    #echo \"Classpath: $CLASSPATH_ARG\"\r\n     \r\n    exec ${JAVA}  ${VMARGS} ${BOOTCLASSPATH_ARG} ${CLASSPATH_ARG} ${LIBRARY_PATH_ARG} ${DB_PATH_ARG} ${SYSTEM_PROPERTIES} ${MAIN_CLASS} ${@}\r\n\r\nTo set up the <code>/etc</code> and the related data files you can use these tags:\r\n\r\n    :::::xml\r\n    <srcSysconfFilesDir>src/main/packager/etc</srcSysconfFilesDir>\r\n    <sysconfFiles>\r\n         <sysconfFile>\r\n              <from>log4j.xml</from>\r\n              <to>pppmonitor</to>\r\n          </sysconfFile>\r\n          <sysconfFile>\r\n               <from>pppmonitor.properties</from>\r\n               <to>pppmonitor</to>\r\n          </sysconfFile>\r\n    </sysconfFiles>\r\n    <datadir>\r\n         /usr/share/pppmonitor/\r\n    </datadir>\r\n    <dataFiles>\r\n         <dataFile>\r\n               <from>pppmonitor</from>\r\n               <to></to>\r\n         </dataFile>\r\n    </dataFiles>\r\n\r\nThe default <code>sysconfDir</code> is <code>/etc</code>.  The <code>pppmonitor</code> is a script that will be placed in the <code>/etc/init.d</code> by the <code>postinst.sh</code>.  The <code>ppppmonitor</code> script is created with the [Linux Standard Base](http://www.linuxfoundation.org/collaborate/workgroups/lsb) in mind:  \r\n\r\n    :::::bash\r\n    #! /bin/sh\r\n     \r\n    ### BEGIN INIT INFO\r\n    # Provides:             pppmonitor\r\n    # Required-Start:       $all\r\n    # Required-Stop:\r\n    # Default-Start:        2 3 4 5\r\n    # Default-Stop:         0 1 6\r\n    # Short-Description:    The ppp monitor checks the 3G/UMTS state\r\n    ### END INIT INFO\r\n    \r\n    # Do NOT \"set -e\"!\r\n     \r\n    PATH=/sbin:/usr/sbin:/bin:/usr/bin\r\n    NAME=pppmonitor\r\n    DESC=\"PPP Monitor\"\r\n    DAEMON=/usr/sbin/pppmonitor\r\n    PIDFILE=/var/run/pppmonitor.pid\r\n    SCRIPTNAME=/etc/init.d/$NAME\r\n     \r\n    # Exit if the package is not installed\r\n    [ -x $DAEMON ] || exit 0\r\n     \r\n    # Load the VERBOSE setting and other rcS variables\r\n    . /lib/init/vars.sh \r\n     \r\n    # Define the LSB start_daemoin, killproc and log_* functions\r\n    . /lib/lsb/init-functions\r\n     \r\n    case \"$1\" in\r\n        start)\r\n             [ \"$VERBOSE\" != no ] && log_daemon_msg \"Starting $DESC\" \"$NAME\"\r\n             start_daemon -p $PIDFILE $DAEMON \r\n             if [ $? -ne 0 ]; then\r\n                  [ \"$VERBOSE\" != no ] && log_end_msg 1 || \\\r\n                  log_failure_msg \"Oops!\"\r\n                  exit 1\r\n             fi\r\n             [ \"$VERBOSE\" != no ] && log_end_msg 0\r\n        ;;\r\n        stop)\r\n             [ \"$VERBOSE\" != no ] && log_daemon_msg \"Stopping $DESC\" \"$NAME\" \r\n             killproc -p $PIDFILE $DAEMON\r\n             if [ $? -ne 0 ]; then\r\n                  [ \"$VERBOSE\" != no ] && log_end_msg 1\r\n                  exit 1\r\n             fi\r\n             [ \"$VERBOSE\" != no ] && log_end_msg 0\r\n       ;;\r\n       restart)\r\n             log_daemon_msg \"Restarting $DESC\" \"$NAME\"\r\n             killproc -p $PIDFILE $DAEMON\r\n             if [ $? -ne 0 ]; then\r\n                  log_end_msg 1\r\n                  log_failure_msg \"Failed to stop $NAME.\"\r\n                  exit 1\r\n             fi\r\n             start_daemon -p $PIDFILE $DAEMON \r\n             if [ $? -ne 0 ]; then\r\n                  log_end_msg 1\r\n                  log_failure_msg \"Failed to start $NAME.\"\r\n                  exit 1\r\n             fi\r\n             log_end_msg 0\r\n        ;;\r\n        status)\r\n             log_failure_msg \"Status is not implemented yet.\"\r\n        ;;\r\n        *)\r\n             echo \"Usage: $SCRIPTNAME {start|stop|restart|status}\" >&2\r\n             exit 3\r\n        ;;\r\n    esac\r\n    exit 0\r\n\r\nThe last plugin tags define the install and remove scripts:\r\n\r\n    :::::xml\r\n    <srcAuxFilesDir>src/main/packager/scripts</srcAuxFilesDir>\r\n    <postinstScript>postinst.sh</postinstScript>\r\n    <postrmScript>postrm.sh</postrmScript>\r\n\r\nThey are placed in the directory set in the *srcAuxFilesDir*.  Here uis the <code>postinst.sh</code>:\r\n\r\n    :::::bash\r\n    echo \"Installing $name...\"\r\n    /bin/cp $datadir/$name /etc/init.d\r\n    /bin/chmod +x /etc/init.d/$name\r\n    cd /etc/init.d \r\n    /usr/sbin/update-rc.d $name start 95 2 3 4 5 . stop 95 0 1 6 .\r\n    echo \"Installed $name successfully!\"\r\n\r\nThe <code>postrm.sh</code>:\r\n\r\n    :::::bash\r\n    echo \"Removing $name...\"\r\n    /bin/rm -f /etc/init.d/$name\r\n    /usr/sbin/update-rc.d -f $name remove\r\n    echo \"Removed $name successfully!\"\r\n\r\nWhen following this example, do use this code layout for your maven package:\r\n\r\n![alt code](http://static.elevenbits.org/blog/24.12.2009.001.png \"Code Layout\")\r\n\r\n#####Execute\r\nThe pkg plugin has four goals: <code>config, pkg, sign</code> and <code>deploy</code>.  To create a package, use this command:\r\n\r\n\r\n    :::::console\r\n    user@box:~/java/workspace/pppmonitor$ mvn pkg:pkg\r\n    [INFO] Scanning for projects...\r\n    [INFO] ------------------------------------------------------------------------\r\n    [INFO] Building PPP Monitor\r\n    [INFO]    task-segment: [pkg:pkg]\r\n    [INFO] ------------------------------------------------------------------------\r\n    [INFO] Preparing pkg:pkg\r\n    [INFO] [resources:resources {execution: default-resources}]\r\n    [WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n    [INFO] Copying 1 resource\r\n    [INFO] [compiler:compile {execution: default-compile}]\r\n    [INFO] Nothing to compile - all classes are up to date\r\n    [INFO] [resources:testResources {execution: default-testResources}]\r\n    [WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n    [INFO] Copying 1 resource\r\n    [INFO] [compiler:testCompile {execution: default-testCompile}]\r\n    [INFO] Nothing to compile - all classes are up to date\r\n    [INFO] [surefire:test {execution: default-test}]\r\n    [INFO] Surefire report directory: /home/jw/java/workspace/pppmonitor/target/surefire-reports\r\n\r\n    -------------------------------------------------------\r\n     T E S T S\r\n    -------------------------------------------------------\r\n    Running com.elevenbits.pppmonitor.command.CurrentOperatorCommandTest\r\n    ...\r\n    [device] [DEBUG] [2009.12.25 13:52:11] com.elevenbits.pppmonitor.command.ATCommand.handleLine(146) | Received empty line, ignore\r\n    [device] [DEBUG] [2009.12.25 13:52:11] com.elevenbits.pppmonitor.command.ATCommand.handleLine(148) | Received OK, output complete\r\n    Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.018 sec\r\n     \r\n    Results :\r\n\r\n    Tests run: 10, Failures: 0, Errors: 0, Skipped: 0\r\n     \r\n    [INFO] [jar:jar {execution: default-jar}]\r\n    [INFO] [pkg:pkg {execution: default-cli}]\r\n    [INFO] distribution             : ubuntu_hardy\r\n    [INFO] package system           : deb\r\n    [INFO] default package map      : built-in\r\n    [INFO] auxiliary package map    : file:/home/jw/java/workspace/pppmonitor//src/main/packager/elevenbits.xml\r\n    [INFO] type of project          : application\r\n    [INFO] section                  : misc\r\n    [INFO] bundle all dependencies  : no\r\n    [INFO] ahead of time compilation: no\r\n    [INFO] custom jar libraries     : <none>\r\n    [INFO] JNI libraries            : <none>\r\n    [INFO] auxiliary file source dir: src/main/packager/scripts\r\n    [INFO] auxiliary files          : <none>\r\n    [INFO] prefix                   : / (default)\r\n    [INFO] sysconf files source dir : src/main/packager/etc\r\n    [INFO] sysconfdir               : (default)\r\n    [INFO] dataroot files source dir: src/main/auxfiles (default)\r\n    [INFO] dataroot                 : (default)\r\n    [INFO] data files source dir    : src/main/auxfiles (default)\r\n    [INFO] datadir                  : /usr/share/pppmonitor/\r\n    [INFO] bindir                   : (default)\r\n    [INFO] creating temporary directory: /home/jw/java/workspace/pppmonitor/target/deb-tmp\r\n    [INFO] cleaning the temporary directory\r\n    [INFO] creating package directory: /home/jw/java/workspace/pppmonitor/target/deb-tmp/pppmonitor-0.0.3-0ubuntu~hardy-r6\r\n    [INFO] copying artifact: /home/jw/java/workspace/pppmonitor/target/pppmonitor-0.0.3.jar\r\n    [INFO] destination: /home/jw/java/workspace/pppmonitor/target/deb-tmp/pppmonitor-0.0.3-0ubuntu~hardy-r6/usr/share/java/pppmonitor.jar\r\n    [INFO] copying sysconf file: /home/jw/java/workspace/pppmonitor/src/main/packager/etc/log4j.xml\r\n    [INFO] destination: /home/jw/java/workspace/pppmonitor/target/deb-tmp/pppmonitor-0.0.3-0ubuntu~hardy-r6/etc/pppmonitor\r\n    [INFO] copying sysconf file: /home/jw/java/workspace/pppmonitor/src/main/packager/etc/pppmonitor.properties\r\n    [INFO] destination: /home/jw/java/workspace/pppmonitor/target/deb-tmp/pppmonitor-0.0.3-0ubuntu~hardy-r6/etc/pppmonitor\r\n    [INFO] copying data file: /home/jw/java/workspace/pppmonitor/src/main/packager/scripts/pppmonitor\r\n    [INFO] destination: /home/jw/java/workspace/pppmonitor/target/deb-tmp/pppmonitor-.0.3-0ubuntu~hardy-r6/usr/share/pppmonitor\r\n    [INFO] resolving dependency artifacts\r\n    [WARNING] ubuntu_hardy has no entry for: com.elevenbits:devices:jar:1.1.0:compile\r\n    [WARNING] ubuntu_hardy has no entry for: javax.mail:mail:jar:1.4:compile\r\n    [WARNING] ubuntu_hardy has no entry for: javax.jms:jms:jar:1.1:compile\r\n    [WARNING] ubuntu_hardy has no entry for: com.sun.jdmk:jmxtools:jar:1.2.1:compile\r\n    [WARNING] ubuntu_hardy has no entry for: com.sun.jmx:jmxri:jar:1.2.1:compile\r\n    [WARNING] ubuntu_hardy has no entry for: org.apache.log4j:rolling-appender:jar:1.0:compile\r\n    [INFO] using traditional starter\r\n    [INFO] copying 6 dependency artifacts.\r\n    [INFO] destination: /home/jw/java/workspace/pppmonitor/target/deb-tmp/pppmonitor-0.0.3-0ubuntu~hardy-r6/usr/share/java/pppmonitor\r\n    [INFO] copying artifact: org.apache.log4j:rolling-appender:jar:1.0:compile\r\n    [INFO] copying artifact: com.elevenbits:devices:jar:1.1.0:compile\r\n    [INFO] copying artifact: com.sun.jmx:jmxri:jar:1.2.1:compile\r\n    [INFO] copying artifact: javax.jms:jms:jar:1.1:compile\r\n    [INFO] copying artifact: com.sun.jdmk:jmxtools:jar:1.2.1:compile\r\n    [INFO] copying artifact: javax.mail:mail:jar:1.4:compile\r\n    [WARNING] ubuntu_hardy has no entry for: com.elevenbits:devices:jar:1.1.0:compile\r\n    [WARNING] ubuntu_hardy has no entry for: javax.mail:mail:jar:1.4:compile\r\n    [WARNING] ubuntu_hardy has no entry for: javax.jms:jms:jar:1.1:compile\r\n    [WARNING] ubuntu_hardy has no entry for: com.sun.jdmk:jmxtools:jar:1.2.1:compile\r\n    [WARNING] ubuntu_hardy has no entry for: com.sun.jmx:jmxri:jar:1.2.1:compile\r\n    [WARNING] ubuntu_hardy has no entry for: org.apache.log4j:rolling-appender:jar:1.0:compile\r\n    [INFO] creating control file: /home/jw/java/workspace/pppmonitor/target/deb-tmp/pppmonitor-0.0.3-0ubuntu~hardy-r6/DEBIAN/control\r\n    [INFO] calling dpkg-deb to create binary package\r\n    [INFO] ------------------------------------------------------------------------\r\n    [INFO] BUILD SUCCESSFUL\r\n    [INFO] ------------------------------------------------------------------------\r\n    [INFO] Total time: 5 seconds\r\n    [INFO] Finished at: Fri Dec 25 13:52:13 CET 2009\r\n    [INFO] Final Memory: 13M/78M\r\n    [INFO] ------------------------------------------------------------------------\r\n\r\nYou can find the <code>.deb</code> file in the <code>target</code> folder.\r\n\r\nTo sign and deploy a site to your (private) package list, you can use this command:\r\n\r\n    :::::console\r\n    user@box:~/java/workspace/pppmonitor$ mvn pkg sign deploy -Dmaven.test.skip -Drepo=<dupload config name>\r\n\r\nwhere the *dupload config name* is the name linking to your packaging system as specified in the /etc/dupload.conf file.  The dupload tool is a utility to upload Debian packages.  See [here](http://www.debian.org/doc/maint-guide/ch-upload.en.html) for an example and information regarding this command.\r\n",
+            "title": "Howto debianize Java applications",
+            "tags": [
+                9,
+                11,
+                12,
+                13
+            ],
+            "created": "2009-12-24T14:51:18",
+            "active": true,
+            "posted": "2009-12-24T14:55:20"
+        }
+    },
+    {
+        "pk": 11,
+        "model": "blog.entry",
+        "fields": {
+            "body": "Surely [\"Just learn these 57 classes\"](http://www.pragprog.com/magazines/2010-04/tangled-up-in-tools) is not the re-use we were promised?",
+            "title": "What's wrong with libraries, and what to do about it ",
+            "tags": [
+                14,
+                15
+            ],
+            "created": "2010-04-16T21:45:44",
+            "active": true,
+            "posted": "2010-04-16T21:46:08"
+        }
+    },
+    {
+        "pk": 14,
+        "model": "blog.entry",
+        "fields": {
+            "body": "In the world of hackers, the kind of answers you get to your technical questions depends as much on the way you ask the questions as on the difficulty of developing the answer. [This guide](http://www.catb.org/~esr/faqs/smart-questions.html) will teach you how to ask questions in a way more likely to get you a satisfactory answer.  It is written by [Eric S. Raymond](http://www.catb.org/~esr/), the author of [the cathedral & the bazaar](http://oreilly.com/catalog/9781565927247/).",
+            "title": "How to ask questions the smart way",
+            "tags": [
+                6,
+                14,
+                15
+            ],
+            "created": "2010-07-15T18:43:57",
+            "active": true,
+            "posted": "2010-07-15T18:50:21"
+        }
+    },
+    {
+        "pk": 15,
+        "model": "blog.entry",
+        "fields": {
+            "body": "[What every computer scientist should know about floating-point arithmetic](http://www.math.umd.edu/~jkolesar/mait613/floating_point_math.pdf).  A shorter and simpler explanation can be found [here](http://floating-point-gui.de/).\r\n",
+            "title": "0.1 + 0.2 != 0.3 and 0.1 * 0.2 != 0.02",
+            "tags": [
+                14,
+                15
+            ],
+            "created": "2010-10-28T21:44:31",
+            "active": true,
+            "posted": "2010-10-29T21:44:44"
+        }
+    },
+    {
+        "pk": 17,
+        "model": "blog.entry",
+        "fields": {
+            "body": "To redirect <code>http://a.mysite.com</code> to <code>http://mysite.com:8000</code> follow these steps in your [Cherokee](http://www.cherokee-project.com) admin web environment:\r\n\r\n- First go to the *vServers* tab and create a virtual server with name <code>a.mysite.com</code> and give it a *document root*, e.g. <code>/var/www</code>.\r\n\r\n- Then link to the *sources* tab and create a new [*information source*](http://www.cherokee-project.com/doc/config_info_sources.html) by clicking the 'plus' icon.  Enter <code>a.mysite.com</code> as nick and <code>mysite:8000</code> as connection.\r\n\r\n- Go back to the *vServers* tab.  After making sure that the <code>a.mysite.com</code> server is selected check that the host match method is set to 'match nickname'.\r\n\r\n- In the *behaviour* tab select the *default* directory and in the handler tab select *HTTP Reverse Proxy* from the *handler* dropdown list.  Then select *Round Robin* as balancer in the Back-end Server section.\r\n\r\n- In the section Assign Information Sources section select <code>a.mysite.com</code> as application server.\r\n\r\n- Then save and restart Cherokee.\r\n\r\nNow the <code>http://a.mysite.com</code> will be redirected automatically to  <code>http://mysite.com:8000</code>.  And, when your site becomes more popular, you can add more application servers to <code>mysite.com</code>. \r\n",
+            "title": "How to on port redirection in Cherokee",
+            "tags": [
+                17
+            ],
+            "created": "2010-12-30T12:37:12",
+            "active": true,
+            "posted": "2010-12-30T12:42:58"
+        }
+    },
+    {
+        "pk": 20,
+        "model": "blog.entry",
+        "fields": {
+            "body": "After you've downloaded and installed Eclipse Classic (like the Helios release, or version 3.7), the Marketplace client plugin will not be installed.\r\n\r\nYou can however find and install this plugin via the <code>Help -> Install new software...</code> menu.  Check the Helios repository and search for *Marketplace*:\r\n\r\n![alt code](http://static.elevenbits.org/blog/28.03.2011.001.png \"Eclipse Marketplace\")\r\n\r\nAfter successful install you'll be able to install plugins using the market place via <code>Help -> Eclipse Marketplace...</code>\r\n\r\n![alt code](http://static.elevenbits.org/blog/28.03.2011.002.png \"Eclipse Marketplace\")\r\n\r\nEnjoy!",
+            "title": "Eclipse Classic (3.6 a.k.a Helios or 3.7) and the Marketplace plugin",
+            "tags": [
+                8
+            ],
+            "created": "2011-03-28T22:44:37",
+            "active": true,
+            "posted": "2011-03-28T22:44:52"
+        }
+    },
+    {
+        "pk": 21,
+        "model": "blog.entry",
+        "fields": {
+            "body": "The [cherokee-admin](http://www.cherokee-project.com/doc/other_bundle_cherokee-admin.html) binds only to local loopback by default. There are some workarounds:\r\n\r\n#####Tunneling\r\nCreate an SSH tunnel. This is the recommended way. In order to do so you must issue the following command:\r\n\r\n    :::::console\r\n    user@box:~$ ssh -L 9090:localhost:9090 remote_IP\r\n\r\nAfter that your terminal will be logged in the remote machine.  There you can start the admin.  From then on you can access this remote interface through http://localhost:9090.  Every request will be forwarded to the remote IP running cherokee-admin.\r\n\r\n#####The -b parameter\r\nLaunch cherokee-admin with the -b parameter in order to force it to listen to all the network interfaces.\r\n\r\n#####Copy and paste\r\nFinally you could always install cherokee on your local host, configure it there and then copy the generated cherokee.conf file to the device running the cherokee instance you wanted to set up.",
+            "title": "How to access cherokee-admin from a remote machine",
+            "tags": [
+                6,
+                17
+            ],
+            "created": "2012-08-15T08:31:44",
+            "active": true,
+            "posted": "2012-08-15T08:35:15"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "static.static",
+        "fields": {
+            "name": "tags.title",
+            "value": "Tags"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "static.static",
+        "fields": {
+            "name": "tags.header",
+            "value": "Tags"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "static.static",
+        "fields": {
+            "name": "clients.header",
+            "value": "Current and past customers"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "static.static",
+        "fields": {
+            "name": "clients.title",
+            "value": "Clients"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "static.static",
+        "fields": {
+            "name": "projects.title",
+            "value": "ElevenBits projects"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "static.static",
+        "fields": {
+            "name": "projects.header",
+            "value": "ElevenBits projects"
+        }
+    },
+    {
+        "pk": 7,
+        "model": "static.static",
+        "fields": {
+            "name": "contact.header",
+            "value": "How to reach us..."
+        }
+    },
+    {
+        "pk": 8,
+        "model": "static.static",
+        "fields": {
+            "name": "contact.title",
+            "value": "Contact"
+        }
+    },
+    {
+        "pk": 11,
+        "model": "static.static",
+        "fields": {
+            "name": "index.title",
+            "value": "ElevenBits"
+        }
+    },
+    {
+        "pk": 12,
+        "model": "static.static",
+        "fields": {
+            "name": "about.header",
+            "value": "About ElevenBits"
+        }
+    },
+    {
+        "pk": 13,
+        "model": "static.static",
+        "fields": {
+            "name": "about.title",
+            "value": "About"
+        }
+    },
+    {
+        "pk": 14,
+        "model": "static.static",
+        "fields": {
+            "name": "index.header",
+            "value": "Welcome!"
+        }
+    },
+    {
+        "pk": 9,
+        "model": "static.static",
+        "fields": {
+            "name": "copyright",
+            "value": "\u00a9 copyright 2004-2012, m8n and ElevenBits"
+        }
+    },
+    {
+        "pk": 10,
+        "model": "static.static",
+        "fields": {
+            "name": "deployment.time",
+            "value": "18.08.2012, 1142hrs"
+        }
+    },
+    {
+        "pk": 15,
+        "model": "static.static",
+        "fields": {
+            "name": "elevenbits",
+            "value": "elevenbits"
+        }
+    },
+    {
+        "pk": 16,
+        "model": "static.static",
+        "fields": {
+            "name": "home.header",
+            "value": "Welcome!"
+        }
+    },
+    {
+        "pk": 17,
+        "model": "static.static",
+        "fields": {
+            "name": "about.message",
+            "value": "ElevenBits is a one-person company, started by Jan Willems in 2000, with a strong focus on Kaizen (\u6539\u5584, Japanese for \"change for the better\"). This quality concept can loosely be translated as \"continuous improvement\"."
+        }
+    },
+    {
+        "pk": 18,
+        "model": "static.static",
+        "fields": {
+            "name": "service.header",
+            "value": "Services"
+        }
+    },
+    {
+        "pk": 21,
+        "model": "static.static",
+        "fields": {
+            "name": "blog.header",
+            "value": "blog"
+        }
+    },
+    {
+        "pk": 20,
+        "model": "static.static",
+        "fields": {
+            "name": "service.methodologies_two",
+            "value": "ElevenBits strongly applies and recommends the agile process management. ElevenBits uses a set of interrelated practices and rules that optimize the development environment, reduce organizational overhead, and closely synchronize market requirements with iterative prototypes."
+        }
+    },
+    {
+        "pk": 19,
+        "model": "static.static",
+        "fields": {
+            "name": "service.methodologies_one",
+            "value": "Using modern process control theory, ElevenBits tries to build the best possible software given the available resources, acceptable quality, and required release dates. Useful product functionality is delivered every thirty days as requirements, architecture, and design emerge, even when using unstable technologies."
+        }
+    },
+    {
+        "pk": 1,
+        "model": "services.feature",
+        "fields": {
+            "feature": "Agile programming",
+            "show": false
+        }
+    },
+    {
+        "pk": 2,
+        "model": "services.feature",
+        "fields": {
+            "feature": "Project Management",
+            "show": false
+        }
+    },
+    {
+        "pk": 3,
+        "model": "services.feature",
+        "fields": {
+            "feature": "Web site design and implementation",
+            "show": false
+        }
+    },
+    {
+        "pk": 4,
+        "model": "services.feature",
+        "fields": {
+            "feature": "C, C++ (Linux drivers, Cellular networks)",
+            "show": false
+        }
+    },
+    {
+        "pk": 5,
+        "model": "services.feature",
+        "fields": {
+            "feature": "Java expertise (Spring, Hibernate)",
+            "show": false
+        }
+    },
+    {
+        "pk": 6,
+        "model": "services.feature",
+        "fields": {
+            "feature": "Java Native Interface",
+            "show": false
+        }
+    },
+    {
+        "pk": 7,
+        "model": "services.feature",
+        "fields": {
+            "feature": "Python expertise (Django, Mercurial)",
+            "show": false
+        }
+    },
+    {
+        "pk": 1,
+        "model": "treemenus.menuitem",
+        "fields": {
+            "parent": null,
+            "level": 0,
+            "url": "",
+            "menu": 1,
+            "rank": 0,
+            "caption": "Root",
+            "named_url": ""
+        }
+    },
+    {
+        "pk": 12,
+        "model": "treemenus.menuitem",
+        "fields": {
+            "parent": 1,
+            "level": 1,
+            "url": "/blog",
+            "menu": 1,
+            "rank": 4,
+            "caption": "Blog",
+            "named_url": "Blog"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "treemenus.menuitem",
+        "fields": {
+            "parent": 1,
+            "level": 1,
+            "url": "/contact",
+            "menu": 1,
+            "rank": 5,
+            "caption": "Contact",
+            "named_url": "Contact"
+        }
+    },
+    {
+        "pk": 9,
+        "model": "treemenus.menuitem",
+        "fields": {
+            "parent": null,
+            "level": 0,
+            "url": "",
+            "menu": 2,
+            "rank": 0,
+            "caption": "root",
+            "named_url": ""
+        }
+    },
+    {
+        "pk": 11,
+        "model": "treemenus.menuitem",
+        "fields": {
+            "parent": 9,
+            "level": 1,
+            "url": "http://elevenbits.org:8080",
+            "menu": 2,
+            "rank": 1,
+            "caption": "Jira",
+            "named_url": "Jira"
+        }
+    },
+    {
+        "pk": 10,
+        "model": "treemenus.menuitem",
+        "fields": {
+            "parent": 9,
+            "level": 1,
+            "url": "https://hg.elevenbits.org",
+            "menu": 2,
+            "rank": 0,
+            "caption": "Mercurial",
+            "named_url": "Mercurial"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "treemenus.menuitem",
+        "fields": {
+            "parent": 1,
+            "level": 1,
+            "url": "/",
+            "menu": 1,
+            "rank": 0,
+            "caption": "Home",
+            "named_url": "Home"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "treemenus.menuitem",
+        "fields": {
+            "parent": 1,
+            "level": 1,
+            "url": "/projects",
+            "menu": 1,
+            "rank": 1,
+            "caption": "Projects",
+            "named_url": "Projects"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "treemenus.menuitem",
+        "fields": {
+            "parent": 1,
+            "level": 1,
+            "url": "/services",
+            "menu": 1,
+            "rank": 2,
+            "caption": "Services",
+            "named_url": "Services"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "treemenus.menuitem",
+        "fields": {
+            "parent": 1,
+            "level": 1,
+            "url": "/clients",
+            "menu": 1,
+            "rank": 3,
+            "caption": "Clients",
+            "named_url": "Clients"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "treemenus.menu",
+        "fields": {
+            "root_item": 1,
+            "name": "root"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "treemenus.menu",
+        "fields": {
+            "root_item": 9,
+            "name": "admin"
+        }
+    },
+    {
+        "pk": 16,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_logentry",
+            "name": "Can add log entry",
+            "content_type": 6
+        }
+    },
+    {
+        "pk": 17,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_logentry",
+            "name": "Can change log entry",
+            "content_type": 6
+        }
+    },
+    {
+        "pk": 18,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_logentry",
+            "name": "Can delete log entry",
+            "content_type": 6
+        }
+    },
+    {
+        "pk": 4,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_group",
+            "name": "Can add group",
+            "content_type": 2
+        }
+    },
+    {
+        "pk": 5,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_group",
+            "name": "Can change group",
+            "content_type": 2
+        }
+    },
+    {
+        "pk": 6,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_group",
+            "name": "Can delete group",
+            "content_type": 2
+        }
+    },
+    {
+        "pk": 1,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_permission",
+            "name": "Can add permission",
+            "content_type": 1
+        }
+    },
+    {
+        "pk": 2,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_permission",
+            "name": "Can change permission",
+            "content_type": 1
+        }
+    },
+    {
+        "pk": 3,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_permission",
+            "name": "Can delete permission",
+            "content_type": 1
+        }
+    },
+    {
+        "pk": 7,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_user",
+            "name": "Can add user",
+            "content_type": 3
+        }
+    },
+    {
+        "pk": 8,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_user",
+            "name": "Can change user",
+            "content_type": 3
+        }
+    },
+    {
+        "pk": 9,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_user",
+            "name": "Can delete user",
+            "content_type": 3
+        }
+    },
+    {
+        "pk": 52,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_comment",
+            "name": "Can add Comment",
+            "content_type": 18
+        }
+    },
+    {
+        "pk": 53,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_comment",
+            "name": "Can change Comment",
+            "content_type": 18
+        }
+    },
+    {
+        "pk": 54,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_comment",
+            "name": "Can delete Comment",
+            "content_type": 18
+        }
+    },
+    {
+        "pk": 49,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_entry",
+            "name": "Can add entry",
+            "content_type": 17
+        }
+    },
+    {
+        "pk": 50,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_entry",
+            "name": "Can change entry",
+            "content_type": 17
+        }
+    },
+    {
+        "pk": 51,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_entry",
+            "name": "Can delete entry",
+            "content_type": 17
+        }
+    },
+    {
+        "pk": 46,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_tag",
+            "name": "Can add tag",
+            "content_type": 16
+        }
+    },
+    {
+        "pk": 47,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_tag",
+            "name": "Can change tag",
+            "content_type": 16
+        }
+    },
+    {
+        "pk": 48,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_tag",
+            "name": "Can delete tag",
+            "content_type": 16
+        }
+    },
+    {
+        "pk": 10,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_contenttype",
+            "name": "Can add content type",
+            "content_type": 4
+        }
+    },
+    {
+        "pk": 11,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_contenttype",
+            "name": "Can change content type",
+            "content_type": 4
+        }
+    },
+    {
+        "pk": 12,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_contenttype",
+            "name": "Can delete content type",
+            "content_type": 4
+        }
+    },
+    {
+        "pk": 64,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_deployment",
+            "name": "Can add deployment",
+            "content_type": 22
+        }
+    },
+    {
+        "pk": 65,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_deployment",
+            "name": "Can change deployment",
+            "content_type": 22
+        }
+    },
+    {
+        "pk": 66,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_deployment",
+            "name": "Can delete deployment",
+            "content_type": 22
+        }
+    },
+    {
+        "pk": 28,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_about",
+            "name": "Can add about",
+            "content_type": 10
+        }
+    },
+    {
+        "pk": 29,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_about",
+            "name": "Can change about",
+            "content_type": 10
+        }
+    },
+    {
+        "pk": 30,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_about",
+            "name": "Can delete about",
+            "content_type": 10
+        }
+    },
+    {
+        "pk": 25,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_believe",
+            "name": "Can add believe",
+            "content_type": 9
+        }
+    },
+    {
+        "pk": 26,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_believe",
+            "name": "Can change believe",
+            "content_type": 9
+        }
+    },
+    {
+        "pk": 27,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_believe",
+            "name": "Can delete believe",
+            "content_type": 9
+        }
+    },
+    {
+        "pk": 34,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_client",
+            "name": "Can add client",
+            "content_type": 12
+        }
+    },
+    {
+        "pk": 35,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_client",
+            "name": "Can change client",
+            "content_type": 12
+        }
+    },
+    {
+        "pk": 36,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_client",
+            "name": "Can delete client",
+            "content_type": 12
+        }
+    },
+    {
+        "pk": 43,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_event",
+            "name": "Can add event",
+            "content_type": 15
+        }
+    },
+    {
+        "pk": 44,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_event",
+            "name": "Can change event",
+            "content_type": 15
+        }
+    },
+    {
+        "pk": 45,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_event",
+            "name": "Can delete event",
+            "content_type": 15
+        }
+    },
+    {
+        "pk": 22,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_image",
+            "name": "Can add image",
+            "content_type": 8
+        }
+    },
+    {
+        "pk": 23,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_image",
+            "name": "Can change image",
+            "content_type": 8
+        }
+    },
+    {
+        "pk": 24,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_image",
+            "name": "Can delete image",
+            "content_type": 8
+        }
+    },
+    {
+        "pk": 40,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_link",
+            "name": "Can add link",
+            "content_type": 14
+        }
+    },
+    {
+        "pk": 41,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_link",
+            "name": "Can change link",
+            "content_type": 14
+        }
+    },
+    {
+        "pk": 42,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_link",
+            "name": "Can delete link",
+            "content_type": 14
+        }
+    },
+    {
+        "pk": 37,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_project",
+            "name": "Can add project",
+            "content_type": 13
+        }
+    },
+    {
+        "pk": 38,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_project",
+            "name": "Can change project",
+            "content_type": 13
+        }
+    },
+    {
+        "pk": 39,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_project",
+            "name": "Can delete project",
+            "content_type": 13
+        }
+    },
+    {
+        "pk": 31,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_tool",
+            "name": "Can add tool",
+            "content_type": 11
+        }
+    },
+    {
+        "pk": 32,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_tool",
+            "name": "Can change tool",
+            "content_type": 11
+        }
+    },
+    {
+        "pk": 33,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_tool",
+            "name": "Can delete tool",
+            "content_type": 11
+        }
+    },
+    {
+        "pk": 19,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_type",
+            "name": "Can add type",
+            "content_type": 7
+        }
+    },
+    {
+        "pk": 20,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_type",
+            "name": "Can change type",
+            "content_type": 7
+        }
+    },
+    {
+        "pk": 21,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_type",
+            "name": "Can delete type",
+            "content_type": 7
+        }
+    },
+    {
+        "pk": 58,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_feature",
+            "name": "Can add feature",
+            "content_type": 20
+        }
+    },
+    {
+        "pk": 59,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_feature",
+            "name": "Can change feature",
+            "content_type": 20
+        }
+    },
+    {
+        "pk": 60,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_feature",
+            "name": "Can delete feature",
+            "content_type": 20
+        }
+    },
+    {
+        "pk": 61,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_service",
+            "name": "Can add service",
+            "content_type": 21
+        }
+    },
+    {
+        "pk": 62,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_service",
+            "name": "Can change service",
+            "content_type": 21
+        }
+    },
+    {
+        "pk": 63,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_service",
+            "name": "Can delete service",
+            "content_type": 21
+        }
+    },
+    {
+        "pk": 13,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_session",
+            "name": "Can add session",
+            "content_type": 5
+        }
+    },
+    {
+        "pk": 14,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_session",
+            "name": "Can change session",
+            "content_type": 5
+        }
+    },
+    {
+        "pk": 15,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_session",
+            "name": "Can delete session",
+            "content_type": 5
+        }
+    },
+    {
+        "pk": 82,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_migrationhistory",
+            "name": "Can add migration history",
+            "content_type": 28
+        }
+    },
+    {
+        "pk": 83,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_migrationhistory",
+            "name": "Can change migration history",
+            "content_type": 28
+        }
+    },
+    {
+        "pk": 84,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_migrationhistory",
+            "name": "Can delete migration history",
+            "content_type": 28
+        }
+    },
+    {
+        "pk": 55,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_static",
+            "name": "Can add static",
+            "content_type": 19
+        }
+    },
+    {
+        "pk": 56,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_static",
+            "name": "Can change static",
+            "content_type": 19
+        }
+    },
+    {
+        "pk": 57,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_static",
+            "name": "Can delete static",
+            "content_type": 19
+        }
+    },
+    {
+        "pk": 79,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_bannedip",
+            "name": "Can add Banned IP",
+            "content_type": 27
+        }
+    },
+    {
+        "pk": 80,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_bannedip",
+            "name": "Can change Banned IP",
+            "content_type": 27
+        }
+    },
+    {
+        "pk": 81,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_bannedip",
+            "name": "Can delete Banned IP",
+            "content_type": 27
+        }
+    },
+    {
+        "pk": 76,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_untrackeduseragent",
+            "name": "Can add Untracked User-Agent",
+            "content_type": 26
+        }
+    },
+    {
+        "pk": 77,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_untrackeduseragent",
+            "name": "Can change Untracked User-Agent",
+            "content_type": 26
+        }
+    },
+    {
+        "pk": 78,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_untrackeduseragent",
+            "name": "Can delete Untracked User-Agent",
+            "content_type": 26
+        }
+    },
+    {
+        "pk": 73,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_visitor",
+            "name": "Can add visitor",
+            "content_type": 25
+        }
+    },
+    {
+        "pk": 74,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_visitor",
+            "name": "Can change visitor",
+            "content_type": 25
+        }
+    },
+    {
+        "pk": 75,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_visitor",
+            "name": "Can delete visitor",
+            "content_type": 25
+        }
+    },
+    {
+        "pk": 70,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_menu",
+            "name": "Can add menu",
+            "content_type": 24
+        }
+    },
+    {
+        "pk": 71,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_menu",
+            "name": "Can change menu",
+            "content_type": 24
+        }
+    },
+    {
+        "pk": 72,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_menu",
+            "name": "Can delete menu",
+            "content_type": 24
+        }
+    },
+    {
+        "pk": 67,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_menuitem",
+            "name": "Can add menu item",
+            "content_type": 23
+        }
+    },
+    {
+        "pk": 68,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_menuitem",
+            "name": "Can change menu item",
+            "content_type": 23
+        }
+    },
+    {
+        "pk": 69,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_menuitem",
+            "name": "Can delete menu item",
+            "content_type": 23
+        }
+    },
+    {
+        "pk": 1,
+        "model": "auth.user",
+        "fields": {
+            "username": "jw",
+            "first_name": "",
+            "last_name": "",
+            "is_active": true,
+            "is_superuser": true,
+            "is_staff": true,
+            "last_login": "2013-03-28T22:09:06.442",
+            "groups": [],
+            "user_permissions": [],
+            "password": "pbkdf2_sha256$10000$vrPcZl9dW5wW$2f8gJDFttLJ//TNNJyttceXFQvcKs6Jh5hca+7eAvFg=",
+            "email": "jan.willems@elevenbits.com",
+            "date_joined": "2013-03-28T22:06:24.165"
+        }
+    },
+    {
+        "pk": 45,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2013-04-03T08:20:27.796",
+            "object_repr": "Python expertise (Django, Mercurial)",
+            "object_id": "7",
+            "change_message": "",
+            "user": 1,
+            "content_type": 20
+        }
+    },
+    {
+        "pk": 44,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2013-04-03T08:20:22.458",
+            "object_repr": "Java Native Interface",
+            "object_id": "6",
+            "change_message": "",
+            "user": 1,
+            "content_type": 20
+        }
+    },
+    {
+        "pk": 43,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2013-04-03T08:20:17.226",
+            "object_repr": "Java expertise (Spring, Hibernate)",
+            "object_id": "5",
+            "change_message": "",
+            "user": 1,
+            "content_type": 20
+        }
+    },
+    {
+        "pk": 42,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2013-04-03T08:20:11.734",
+            "object_repr": "C, C++ (Linux drivers, Cellular networks)",
+            "object_id": "4",
+            "change_message": "",
+            "user": 1,
+            "content_type": 20
+        }
+    },
+    {
+        "pk": 41,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2013-04-03T08:20:03.254",
+            "object_repr": "Web site design and implementation",
+            "object_id": "3",
+            "change_message": "",
+            "user": 1,
+            "content_type": 20
+        }
+    },
+    {
+        "pk": 40,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2013-04-03T08:19:57.454",
+            "object_repr": "Project Management",
+            "object_id": "2",
+            "change_message": "",
+            "user": 1,
+            "content_type": 20
+        }
+    },
+    {
+        "pk": 39,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2013-04-03T08:19:50.748",
+            "object_repr": "Agile programming",
+            "object_id": "1",
+            "change_message": "",
+            "user": 1,
+            "content_type": 20
+        }
+    },
+    {
+        "pk": 38,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 2,
+            "action_time": "2013-04-03T08:19:09.245",
+            "object_repr": "service.methodologies_one",
+            "object_id": "19",
+            "change_message": "Changed value.",
+            "user": 1,
+            "content_type": 19
+        }
+    },
+    {
+        "pk": 37,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 2,
+            "action_time": "2013-04-03T08:18:43.893",
+            "object_repr": "service.methodologies_two",
+            "object_id": "20",
+            "change_message": "Changed value.",
+            "user": 1,
+            "content_type": 19
+        }
+    },
+    {
+        "pk": 36,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2013-03-31T09:00:12.568",
+            "object_repr": "blog.header",
+            "object_id": "21",
+            "change_message": "",
+            "user": 1,
+            "content_type": 19
+        }
+    },
+    {
+        "pk": 35,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2013-03-31T08:57:04.234",
+            "object_repr": "Blog",
+            "object_id": "12",
+            "change_message": "",
+            "user": 1,
+            "content_type": 23
+        }
+    },
+    {
+        "pk": 34,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 3,
+            "action_time": "2013-03-31T08:56:09.961",
+            "object_repr": "Mercurial",
+            "object_id": "8",
+            "change_message": "",
+            "user": 1,
+            "content_type": 23
+        }
+    },
+    {
+        "pk": 33,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 3,
+            "action_time": "2013-03-31T08:56:03.565",
+            "object_repr": "Jira",
+            "object_id": "7",
+            "change_message": "",
+            "user": 1,
+            "content_type": 23
+        }
+    },
+    {
+        "pk": 32,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 2,
+            "action_time": "2013-03-31T08:55:38.733",
+            "object_repr": "Mercurial",
+            "object_id": "10",
+            "change_message": "Changed caption and named_url.",
+            "user": 1,
+            "content_type": 23
+        }
+    },
+    {
+        "pk": 31,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2013-03-31T08:55:17.132",
+            "object_repr": "Jira",
+            "object_id": "11",
+            "change_message": "",
+            "user": 1,
+            "content_type": 23
+        }
+    },
+    {
+        "pk": 30,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2013-03-31T08:54:44.233",
+            "object_repr": "mercurial",
+            "object_id": "10",
+            "change_message": "",
+            "user": 1,
+            "content_type": 23
+        }
+    },
+    {
+        "pk": 29,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2013-03-31T08:54:13.078",
+            "object_repr": "admin",
+            "object_id": "2",
+            "change_message": "",
+            "user": 1,
+            "content_type": 24
+        }
+    },
+    {
+        "pk": 28,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 2,
+            "action_time": "2013-03-29T20:27:25.719",
+            "object_repr": "Search this site",
+            "object_id": "5",
+            "change_message": "Changed description.",
+            "user": 1,
+            "content_type": 14
+        }
+    },
+    {
+        "pk": 27,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2013-03-29T07:39:18.964",
+            "object_repr": "service.methodologies_two",
+            "object_id": "20",
+            "change_message": "",
+            "user": 1,
+            "content_type": 19
+        }
+    },
+    {
+        "pk": 26,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2013-03-29T07:34:27.495",
+            "object_repr": "service.methodologies_one",
+            "object_id": "19",
+            "change_message": "",
+            "user": 1,
+            "content_type": 19
+        }
+    },
+    {
+        "pk": 25,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2013-03-29T07:34:01.744",
+            "object_repr": "service.header",
+            "object_id": "18",
+            "change_message": "",
+            "user": 1,
+            "content_type": 19
+        }
+    },
+    {
+        "pk": 24,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 2,
+            "action_time": "2013-03-29T07:27:31.018",
+            "object_repr": "Services",
+            "object_id": "6",
+            "change_message": "Changed caption, url and named_url.",
+            "user": 1,
+            "content_type": 23
+        }
+    },
+    {
+        "pk": 23,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 2,
+            "action_time": "2013-03-29T07:26:48.065",
+            "object_repr": "About",
+            "object_id": "6",
+            "change_message": "Changed parent and url.",
+            "user": 1,
+            "content_type": 23
+        }
+    },
+    {
+        "pk": 22,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 2,
+            "action_time": "2013-03-29T07:26:34.254",
+            "object_repr": "Contact",
+            "object_id": "5",
+            "change_message": "Changed parent and url.",
+            "user": 1,
+            "content_type": 23
+        }
+    },
+    {
+        "pk": 21,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 2,
+            "action_time": "2013-03-29T07:26:20.827",
+            "object_repr": "Clients",
+            "object_id": "4",
+            "change_message": "Changed parent and url.",
+            "user": 1,
+            "content_type": 23
+        }
+    },
+    {
+        "pk": 20,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 2,
+            "action_time": "2013-03-29T07:26:06.891",
+            "object_repr": "Projects",
+            "object_id": "3",
+            "change_message": "Changed parent and url.",
+            "user": 1,
+            "content_type": 23
+        }
+    },
+    {
+        "pk": 19,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 2,
+            "action_time": "2013-03-29T07:23:31.046",
+            "object_repr": "Home",
+            "object_id": "2",
+            "change_message": "Changed caption and named_url.",
+            "user": 1,
+            "content_type": 23
+        }
+    },
+    {
+        "pk": 18,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2013-03-29T07:22:49.962",
+            "object_repr": "Terms of Use",
+            "object_id": "7",
+            "change_message": "",
+            "user": 1,
+            "content_type": 14
+        }
+    },
+    {
+        "pk": 17,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 2,
+            "action_time": "2013-03-29T07:21:49.074",
+            "object_repr": "Search",
+            "object_id": "5",
+            "change_message": "Changed link and description.",
+            "user": 1,
+            "content_type": 14
+        }
+    },
+    {
+        "pk": 16,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 2,
+            "action_time": "2013-03-29T07:21:39.081",
+            "object_repr": "Nederlands",
+            "object_id": "6",
+            "change_message": "Changed link and description.",
+            "user": 1,
+            "content_type": 14
+        }
+    },
+    {
+        "pk": 15,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 2,
+            "action_time": "2013-03-29T07:21:26.141",
+            "object_repr": "Blog",
+            "object_id": "4",
+            "change_message": "Changed link and description.",
+            "user": 1,
+            "content_type": 14
+        }
+    },
+    {
+        "pk": 14,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 2,
+            "action_time": "2013-03-29T07:21:16.088",
+            "object_repr": "Cookies",
+            "object_id": "3",
+            "change_message": "Changed link and description.",
+            "user": 1,
+            "content_type": 14
+        }
+    },
+    {
+        "pk": 13,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2013-03-29T07:20:41.095",
+            "object_repr": "http://dutch.elevenbits.com",
+            "object_id": "6",
+            "change_message": "",
+            "user": 1,
+            "content_type": 14
+        }
+    },
+    {
+        "pk": 12,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2013-03-29T07:20:21.268",
+            "object_repr": "/search",
+            "object_id": "5",
+            "change_message": "",
+            "user": 1,
+            "content_type": 14
+        }
+    },
+    {
+        "pk": 11,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2013-03-29T07:20:12.647",
+            "object_repr": "/blog",
+            "object_id": "4",
+            "change_message": "",
+            "user": 1,
+            "content_type": 14
+        }
+    },
+    {
+        "pk": 10,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2013-03-29T07:20:06.283",
+            "object_repr": "/cookies",
+            "object_id": "3",
+            "change_message": "",
+            "user": 1,
+            "content_type": 14
+        }
+    },
+    {
+        "pk": 9,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2013-03-29T07:19:54.906",
+            "object_repr": "Jira",
+            "object_id": "2",
+            "change_message": "",
+            "user": 1,
+            "content_type": 14
+        }
+    },
+    {
+        "pk": 8,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2013-03-29T07:19:08.744",
+            "object_repr": "Mercurial",
+            "object_id": "1",
+            "change_message": "",
+            "user": 1,
+            "content_type": 14
+        }
+    },
+    {
+        "pk": 7,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2013-03-28T22:21:47.357",
+            "object_repr": "about.message",
+            "object_id": "17",
+            "change_message": "",
+            "user": 1,
+            "content_type": 19
+        }
+    },
+    {
+        "pk": 6,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2013-03-28T22:21:00.385",
+            "object_repr": "Using modern process control theory, ElevenBits tries to build the best possible software given the available resources, acceptable quality, and required release dates. Useful product functionality is",
+            "object_id": "3",
+            "change_message": "",
+            "user": 1,
+            "content_type": 10
+        }
+    },
+    {
+        "pk": 5,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2013-03-28T22:20:48.616",
+            "object_repr": "ElevenBits strongly applies and recommends the agile process management. ElevenBits uses a set of interrelated practices and rules that optimize the development environment, reduce organizational over",
+            "object_id": "2",
+            "change_message": "",
+            "user": 1,
+            "content_type": 10
+        }
+    },
+    {
+        "pk": 4,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2013-03-28T22:20:32.867",
+            "object_repr": "ElevenBits is a one-person company, started by Jan Willems in 2000, with a strong focus on Kaizen (\u6539\u5584, Japanese for \"change for the better\"). This quality concept can loosely be translated as \"continu",
+            "object_id": "1",
+            "change_message": "",
+            "user": 1,
+            "content_type": 10
+        }
+    },
+    {
+        "pk": 3,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2013-03-28T22:19:18.937",
+            "object_repr": "Python and Django",
+            "object_id": "1",
+            "change_message": "",
+            "user": 1,
+            "content_type": 11
+        }
+    },
+    {
+        "pk": 2,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2013-03-28T22:12:19.718",
+            "object_repr": "home.header",
+            "object_id": "16",
+            "change_message": "",
+            "user": 1,
+            "content_type": 19
+        }
+    },
+    {
+        "pk": 1,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2013-03-28T22:11:56.892",
+            "object_repr": "elevenbits",
+            "object_id": "15",
+            "change_message": "",
+            "user": 1,
+            "content_type": 19
+        }
+    },
+    {
+        "pk": 3,
+        "model": "tracking.visitor",
+        "fields": {
+            "session_start": "2013-04-03T08:18:33.040",
+            "url": "/favicon.ico",
+            "referrer": "unknown",
+            "page_views": 21,
+            "last_update": "2013-04-03T08:49:52.970",
+            "user": null,
+            "session_key": "127.0.0.1:Mozilla/5.0 (X11; Linux i686) ",
+            "ip_address": "127.0.0.1",
+            "user_agent": "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.22 (KHTML, like Gecko) Ubuntu Chromium/25.0.1364.160 Chrome/25.0.1364.160 Safari/537.22"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "tracking.visitor",
+        "fields": {
+            "session_start": "2013-04-03T08:18:32.599",
+            "url": "/services",
+            "referrer": "http://localhost:8000/admin/static/static/",
+            "page_views": 40,
+            "last_update": "2013-04-03T08:20:33.920",
+            "user": 1,
+            "session_key": "1131ef7ffef2df0d170e9fb4eb12e359",
+            "ip_address": "127.0.0.1",
+            "user_agent": "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.22 (KHTML, like Gecko) Ubuntu Chromium/25.0.1364.160 Chrome/25.0.1364.160 Safari/537.22"
+        }
+    }
+]

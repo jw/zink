@@ -103,6 +103,8 @@ class Client(models.Model):
     related_projects = models.ManyToManyField('Project', blank=True,
                                               help_text="Related projects.")
 
+    related_tools = models.ManyToManyField('Tool', blank=True, help_text="Related technologies.")
+
     def __unicode__(self):
         return self.name
 

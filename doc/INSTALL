@@ -21,6 +21,10 @@ postgres=# ALTER USER postgres WITH PASSWORD '<your password>';
 postgres=# create user django with password 'Reinhardt';
 postgres=# create database django owner django;
 
+webserver:
+
+nginx
+
 environments:
 
 Handled via fabfile:
