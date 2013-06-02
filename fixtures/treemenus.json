@@ -13,6 +13,71 @@
         }
     },
     {
+        "pk": 12,
+        "model": "treemenus.menuitem",
+        "fields": {
+            "parent": 1,
+            "level": 1,
+            "url": "/blog",
+            "menu": 1,
+            "rank": 4,
+            "caption": "Blog",
+            "named_url": "Blog"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "treemenus.menuitem",
+        "fields": {
+            "parent": 1,
+            "level": 1,
+            "url": "/contact",
+            "menu": 1,
+            "rank": 5,
+            "caption": "Contact",
+            "named_url": "Contact"
+        }
+    },
+    {
+        "pk": 9,
+        "model": "treemenus.menuitem",
+        "fields": {
+            "parent": null,
+            "level": 0,
+            "url": "",
+            "menu": 2,
+            "rank": 0,
+            "caption": "root",
+            "named_url": ""
+        }
+    },
+    {
+        "pk": 11,
+        "model": "treemenus.menuitem",
+        "fields": {
+            "parent": 9,
+            "level": 1,
+            "url": "http://elevenbits.org:8080",
+            "menu": 2,
+            "rank": 1,
+            "caption": "Jira",
+            "named_url": "Jira"
+        }
+    },
+    {
+        "pk": 10,
+        "model": "treemenus.menuitem",
+        "fields": {
+            "parent": 9,
+            "level": 1,
+            "url": "https://hg.elevenbits.org",
+            "menu": 2,
+            "rank": 0,
+            "caption": "Mercurial",
+            "named_url": "Mercurial"
+        }
+    },
+    {
         "pk": 2,
         "model": "treemenus.menuitem",
         "fields": {
@@ -21,86 +86,47 @@
             "url": "/",
             "menu": 1,
             "rank": 0,
-            "caption": "ElevenBits",
-            "named_url": "ElevenBits"
+            "caption": "Home",
+            "named_url": "Home"
         }
     },
     {
         "pk": 3,
         "model": "treemenus.menuitem",
         "fields": {
-            "parent": 2,
-            "level": 2,
-            "url": "/elevenbits/projects",
-            "menu": 1,
-            "rank": 0,
-            "caption": "Projects",
-            "named_url": "Projects"
-        }
-    },
-    {
-        "pk": 4,
-        "model": "treemenus.menuitem",
-        "fields": {
-            "parent": 2,
-            "level": 2,
-            "url": "/elevenbits/clients",
+            "parent": 1,
+            "level": 1,
+            "url": "/projects",
             "menu": 1,
             "rank": 1,
-            "caption": "Clients",
-            "named_url": "Clients"
-        }
-    },
-    {
-        "pk": 5,
-        "model": "treemenus.menuitem",
-        "fields": {
-            "parent": 2,
-            "level": 2,
-            "url": "/elevenbits/contact",
-            "menu": 1,
-            "rank": 2,
-            "caption": "Contact",
-            "named_url": "Contact"
+            "caption": "Projects",
+            "named_url": "Projects"
         }
     },
     {
         "pk": 6,
         "model": "treemenus.menuitem",
         "fields": {
-            "parent": 2,
-            "level": 2,
-            "url": "/elevenbits/about",
-            "menu": 1,
-            "rank": 3,
-            "caption": "About",
-            "named_url": "About"
-        }
-    },
-    {
-        "pk": 7,
-        "model": "treemenus.menuitem",
-        "fields": {
             "parent": 1,
             "level": 1,
-            "url": "http://elevenbits.org:8080",
-            "menu": 1,
-            "rank": 1,
-            "caption": "Jira",
-            "named_url": "Jira"
-        }
-    },
-    {
-        "pk": 8,
-        "model": "treemenus.menuitem",
-        "fields": {
-            "parent": 1,
-            "level": 1,
-            "url": "https://hg.elevenbits.org",
+            "url": "/services",
             "menu": 1,
             "rank": 2,
-            "caption": "Mercurial",
-            "named_url": "Mercurial"
+            "caption": "Services",
+            "named_url": "Services"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "treemenus.menuitem",
+        "fields": {
+            "parent": 1,
+            "level": 1,
+            "url": "/clients",
+            "menu": 1,
+            "rank": 3,
+            "caption": "Clients",
+            "named_url": "Clients"
         }
     },
     {
@@ -109,6 +135,14 @@
         "fields": {
             "root_item": 1,
             "name": "root"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "treemenus.menu",
+        "fields": {
+            "root_item": 9,
+            "name": "admin"
         }
     }
 ]

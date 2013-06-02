@@ -18,6 +18,7 @@ env.prefix = '/var/www'
 env.path = "%(prefix)s/%(project)s" % env
 env.local = dirname(realpath(join(__file__, "..")))
 env.upload = "%(prefix)s/%(project)s/static/upload" % env
+env.media = "%(prefix)s/%(project)s/media" % env
 
 #
 # Some config utility methods
@@ -124,8 +125,10 @@ def deploy():
         create_database()
         #link_local_files()
         copy_current()
+        create_media_directory()
     else:
         create_root_directory()
+        create_media_directory()
 
         # TODO: make a backup of the staging|production database environment
         # TODO: create a new revision
@@ -193,17 +196,26 @@ def create_upload_directory():
     sudo("chmod 777 %(upload)s" % env)
     sudo("ls -al %(upload)s" % env)
 
+def create_media_directory():
+    """
+        Create media directory
+    """
+    sudo("mkdir -p %(media)s" % env)
+    sudo("chown www-data:www-data %(media)s" % env)
+    sudo("chmod 777 %(media)s" % env)
+    sudo("ls -al %(media)s" % env)
+
 def checkout_latest():
     """
         Get latest version from repository.
     """
-    sudo('hg clone https://%(user)s:%(password)s@%(repo)s/elevenbits %(path)s' % env, user="www-data")
+    sudo('hg clone https://%(user)s:%(password)s@%(repo)s/%(project)s %(path)s' % env, user="www-data")
 
 def checkout_revision(revision):
     """
         Clone a revision.
     """
-    sudo('hg clone -r %(branch)s https://%(user)s:%(password)s@%(repo)s/elevenbits %(path)s' % env, user="www-data")
+    sudo('hg clone -r %(branch)s https://%(user)s:%(password)s@%(repo)s/%(project)s %(path)s' % env, user="www-data")
 
 def install_requirements():
     """
@@ -220,23 +232,21 @@ def backup():
         Dump the latest content of the portal and add it to the repository.
     """
     with cd(env.path):
-        sudo('python manage.py dumpdata --indent 4 static > %(path)s/fixtures/static.json' % env)
-        # FIXME: treemenus
-        #sudo('python manage.py dumpdata --indent 4 treemenus > %(path)s/fixtures/treemenus.json' % env)
-        sudo('python manage.py dumpdata --indent 4 blog > %(path)s/fixtures/blog.json' % env)
-        sudo('python manage.py dumpdata --indent 4 index > %(path)s/fixtures/index.json' % env)
-        #sudo('python manage.py dumpdata --indent 4 contact > %(path)s/fixtures/contact.json' % env)
-        #sudo('python manage.py dumpdata --indent 4 firm > %(path)s/fixtures/firm.json' % env)
-        #sudo('python manage.py dumpdata --indent 4 services > %(path)s/fixtures/services.json' % env)
+        print(env.local)
+        sudo('python manage.py dumpdata --indent 4 static > %(local)s/fixtures/static.json' % env)
+        sudo('python manage.py dumpdata --indent 4 treemenus > %(local)s/fixtures/treemenus.json' % env)
+        sudo('python manage.py dumpdata --indent 4 blog > %(local)s/fixtures/blog.json' % env)
+        sudo('python manage.py dumpdata --indent 4 index > %(local)s/fixtures/index.json' % env)
+        sudo('python manage.py dumpdata --indent 4 services > %(local)s/fixtures/services.json' % env)
         # TODO: handle this properly
-        with settings(warn_only=True):
-            result = sudo('hg commit -u %(user)s -m "[fabfile] Committed latest content to repo."' % env)
-            if (result.failed and result.return_code == 1):
-                print(yellow("Nothing changed - leaving as is"))
-            else:
-                result = sudo('hg push https://%(user)s:%(password)s@%(repo)s/%(project)' % env)
-                if (result.failed):
-                    print(red("Could not push the latest commit - please check."))
+        #with settings(warn_only=True):
+        #    result = sudo('hg commit -u %(user)s -m "[fabfile] Committed latest content to repo."' % env)
+        #    if (result.failed and result.return_code == 1):
+        #        print(yellow("Nothing changed - leaving as is"))
+        #    else:
+        #        result = sudo('hg push https://%(user)s:%(password)s@%(repo)s/%(project)' % env)
+        #        if (result.failed):
+        #            print(red("Could not push the latest commit - please check."))
 
 def user_exists():
     """
