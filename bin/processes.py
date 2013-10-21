@@ -1,45 +1,56 @@
 #!/usr/bin/env python
 
+"""
+    Checks existence of some processes, when a process does not exist,
+    a mail is sent.
+
+    The `processes.properties` file contains the processes and the mail
+    properties.  This properties file must look like:
+
+    [processes]
+    names = nginx, uwsgi, postgres, django
+
+    [mail]
+    host = <host>
+    port = <port>
+    username = <username>
+    password = <password>
+"""
+
 #
-# Checks existence of some processes, when a process does not exist,
-# a mail is sent.  The processes.properties file contains the processes
-# and the mail properties.  This properties file must look like:
-#
-# [processes]
-# names = nginx, uwsgi, postgres, django
-#
-# [mail]
-# host = <host>
-# port = <port>
-# username = <username>
-# password = <password>
+# Implementation note:
+# This is a Python 3 based class, with some changes to make
+# it Python 2.7 compliant.
 #
 
 from subprocess import Popen, PIPE
 from re import split
-from ConfigParser import SafeConfigParser
+try:
+    from configparser import ConfigParser
+except ImportError:
+    # python 2.7
+    from ConfigParser import SafeConfigParser as ConfigParser
 from os.path import exists
-
-# TODO: get this from the properties file
-processes = set(["nginx", "uwsgi", "postgres", "django"])
 
 
 class Properties():
+    """The properties file contents."""
 
     def __init__(self, filename):
-        parser = SafeConfigParser()
+        parser = ConfigParser()
         parser.read(filename)
         self.host = parser.get('mail', 'host')
         self.port = parser.get('mail', 'port')
         self.username = parser.get('mail', 'username')
         self.password = parser.get('mail', 'password')
-        # TODO: get properties
+        self.processes = parser.get('processes', 'names').split()
+        print(self.processes)
 
 
-class Proc(object):
+# FIXME: this is a bad class
+class Process(object):
     """
-        Data structure for a processes.
-        The class properties are process attributes.
+        Data structure for a process.
     """
 
     def __init__(self, proc_info):
@@ -65,38 +76,41 @@ class Proc(object):
 
 def get_proc_list():
     """
-        Retrieves a list [] of Proc objects representing the active
-        process list list.
+        Retrieves a list [] of Process objects representing the active
+        process list.
     """
 
     proc_list = []
     sub_proc = Popen(['ps', 'aux'], shell=False, stdout=PIPE)
     sub_proc.stdout.readline()
     for line in sub_proc.stdout:
-        # the separator for splitting is 'variable number of spaces'
+        # the separator for splitting is a 'variable number of spaces'
         proc_info = split(" *", line.strip())
-        proc_list.append(Proc(proc_info))
+        proc_list.append(Process(proc_info))
     return proc_list
 
 
-def missing_processes():
+def missing_processes(properties):
     """
         Returns missing processes.
     """
 
-    proc_list = get_proc_list()
+    process_list = get_proc_list()
 
     valid = set([])
 
-    for proc in proc_list:
-        for check in processes:
-            if check in proc.cmd:
+    for process in process_list:
+        for check in properties.processes:
+            if check in process.cmd:
                 valid.add(check)
 
-    return processes - valid
+    return properties.processes - valid
 
 
 def send_mail(host, port, username, password, subject, missing):
+    """
+        Send a mail informing the receiver a set of processes are missing.
+    """
 
     import smtplib
     import string
@@ -113,8 +127,10 @@ def send_mail(host, port, username, password, subject, missing):
         for process in missing:
             message += " - " + process + "\n"
 
-    BODY = "Hello,\n" + "\n" + message + "\n" + \
-           "Please investigate,\n" + "Your machine"
+    BODY = (
+        "Hello,\n" + "\n" + message + "\n",
+        "Please investigate,\n" + "Your machine"
+    )
 
     body = string.join((
         "From: %s" % FROM,
@@ -132,7 +148,9 @@ def send_mail(host, port, username, password, subject, missing):
     server.sendmail(FROM, [TO], body)
     server.quit()
 
+
 if __name__ == "__main__":
+
     import argparse
     parser = argparse.ArgumentParser(version="1.0")
     parser.add_argument("--properties", required=True, dest="file",
@@ -142,7 +160,7 @@ if __name__ == "__main__":
         print("Given file does not exist: %s - bailing out." % results.file)
     else:
         properties = Properties(results.file)
-        missing = missing_processes()
+        missing = missing_processes(properties)
         if not missing:
             print("No issues. Good!")
         else:
