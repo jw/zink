@@ -6,7 +6,7 @@ syntax: regexp
 ^bin/fabfile\.properties$
 .project
 .pydevproject
-
+^.idea/
 
 syntax: regexp
 ^bin/processes\.properties$
