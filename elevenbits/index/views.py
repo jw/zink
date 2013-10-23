@@ -106,7 +106,7 @@ def projects(request):
                   'links': links,
                   'deployment': deployment}
 
-    return render_to_response('projects.html',
+    return render_to_response('elevenbits/projects.html',
                               attributes,
                               context_instance=RequestContext(request))
 

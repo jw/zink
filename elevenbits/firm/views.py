@@ -5,6 +5,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from elevenbits.static.models import Static
 from elevenbits.deployment.models import Deployment 
 
+
 # get latest deployment
 def get_deployment():
     deployment = {}
@@ -22,11 +23,13 @@ def get_deployment():
         deployment['deployer'] = "unknown"
     return deployment
 
+
 def get_static():
     static = {}
     static['deployment_time'] = Static.objects.get(name="deployment.time").value
     static['copyright'] = Static.objects.get(name="copyright").value
     return static
+
 
 def about(request):
     deployment = get_deployment()
