@@ -43,6 +43,7 @@ def about(request):
                               },
                               context_instance=RequestContext(request))
 
+
 def contact(request):
     deployment = get_deployment()
     static = get_static()

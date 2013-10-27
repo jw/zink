@@ -1,13 +1,25 @@
 {% load tree_menu_tags %}
+{% load menu_extension_filters %}
 
-{% if menu_item.has_children %}
-    <li><a href="{{ menu_item.url }}">{{ menu_item.caption }}</a>
-		<ul>
-		    {% for child in menu_item.children %}
-		        {% show_menu_item child %}
-			{% endfor %}
-		</ul>
-	</li>
-{% else %}
-	<li><a href="{{ menu_item.url }}">{{ menu_item.caption }}</a></li>
-{% endif %}
+{# The 'class="current"' will add an extra marker in the html/css to show  #}
+{# that the specific menu entry was selected.                              #}
+
+{# There are two menus in this website.  One on top, one at the bottom.    #}
+{# One the top one, all the children will be shown; on the bottom one only #}
+{# the menus in rank 1 are displayed.                                      #}
+
+<li {% if menu_item.extension.selected_patterns|match_path:request.path %}class="current"{% endif %}>
+    <a href="{{ menu_item.url }}"
+        {% ifequal menu_item.level 1 %}
+            data-description="{{ menu_item.extension.description }}"
+        {% endifequal %}>
+        {{ menu_item.caption }}
+    </a>
+    {% if menu_item.has_children and menu_type == "top" %}
+        <ul style="display: none;">
+            {% for child in menu_item.children %}
+                {% show_menu_item child %}
+            {% endfor %}
+        </ul>
+    {% endif %}
+</li>

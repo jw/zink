@@ -6,8 +6,9 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
 from django.conf import settings
 
-# get latest deployment
+
 def get_deployment():
+    """Get latest deployment."""
     deployment = {}
     try:
         last = Deployment.objects.all().reverse()[0]
@@ -23,6 +24,7 @@ def get_deployment():
         deployment['deployer'] = "unknown"
     return deployment
 
+
 def index(request):
 
     static = {}
@@ -33,16 +35,16 @@ def index(request):
     slider_images = Image.objects.filter(types__name="slider")
 
     # selects a believe, a tool and an about message at random
-    believe = Believe.objects.order_by('?')[0]
-    tool = Tool.objects.order_by('?')[0]
-    about = About.objects.order_by('?')[0]
+    #believe = Believe.objects.order_by('?')[0]
+    #tool = Tool.objects.order_by('?')[0]
+    #about = About.objects.order_by('?')[0]
 
     # gets 6 random clients
-    clients = Client.objects.all().order_by('?')[:6]
+    #clients = Client.objects.all().order_by('?')[:6]
     # the width calculation is a small hack to center the clients
-    width = 0
-    for client in clients:
-        width += client.logo.width + settings.CLIENT_LOGO_MARGIN
+    #width = 0
+    #for client in clients:
+    #    width += client.logo.width + settings.CLIENT_LOGO_MARGIN
 
     # bottom part
     static['message'] = Static.objects.get(name="about.message").value
@@ -51,17 +53,18 @@ def index(request):
 
     attributes = {'static': static,
                   'slider_images': slider_images,
-                  'believe': believe,
-                  'tool': tool,
-                  'about': about,
+                  #'believe': believe,
+                  #'tool': tool,
+                  #'about': about,
                   'clients': clients,
-                  'width': width,
+                  #'width': width,
                   'links': links,
                   'deployment': deployment}
 
     return render_to_response('index.html',
                               attributes,
                               context_instance=RequestContext(request))
+
 
 def clients(request):
     static = {}
@@ -109,4 +112,3 @@ def projects(request):
     return render_to_response('elevenbits/projects.html',
                               attributes,
                               context_instance=RequestContext(request))
-

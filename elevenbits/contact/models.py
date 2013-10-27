@@ -4,10 +4,10 @@ from django.db import models
 # Contact
 #
 
+
+# TODO: add docstring!
 class Contact(models.Model):
     """
-        Type of an image.  Could be something like 'blog', or 'clients'.
-        Also 'slider' can be used.
     """
 
     name = models.CharField(max_length=256, unique=True)

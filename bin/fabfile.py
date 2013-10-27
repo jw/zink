@@ -20,9 +20,11 @@ env.local = dirname(realpath(join(__file__, "..")))
 env.upload = "%(prefix)s/%(project)s/static/upload" % env
 env.media = "%(prefix)s/%(project)s/media" % env
 
+
 #
 # Some config utility methods
 #
+
 
 def _create_environment(filename, environment):
     """
@@ -44,6 +46,7 @@ def _create_environment(filename, environment):
               "] section in '" + filename + "'."))
         return False
     
+
 def _add_properties(config, section):
     """
         Gets the entries of a section from a config parser.
@@ -55,22 +58,26 @@ def _add_properties(config, section):
         env.dbuser = config.get(section, "db.username")
         env.dbpassword = config.get(section, "db.password")
         env.dbname = config.get(section, "db.name")
-        env.hosts = [ config.get(section, "host") ]
+        env.hosts = [config.get(section, "host")]
         return True
     except NoOptionError as noe:
         print(red("Could not find the '" + noe.option + 
               "' key in the '" + noe.section + "' section."))
         return False
 
+
 #
 # The three environments.
 #
+
+
 @task
 def production():
     """
         Build for a Production environment.
     """
     _create_environment("fabfile.properties", "production")
+
 
 @task
 def staging():
@@ -79,6 +86,7 @@ def staging():
     """
     _create_environment("fabfile.properties", "staging")
 
+
 @task
 def development():
     """
@@ -86,9 +94,11 @@ def development():
     """
     _create_environment("fabfile.properties", "development")
 
+
 #
-# At last. Where to get the tasks.
+# The tasks
 #
+
 
 @task
 def tip():
@@ -97,6 +107,7 @@ def tip():
     """
     env.branch = 'tip'
 
+
 @task
 def revision(revision="tip"):
     """
@@ -104,23 +115,26 @@ def revision(revision="tip"):
     """
     env.branch = revision
 
+
 @task
 def deploy():
     """
         Setup a new website by installing everything we need, and fire up 
-        the database.  Then deploys the site.
+        the database.  Then start the server.
     """
     
     require('settings', provided_by=[production, staging, development])
     require('branch', provided_by=[tip, revision])
 
-    print(green("Fabricating " + env.branch + " in " + env.settings + " environment..."))
+    print(green("Fabricating " + env.branch + " in " +
+                env.settings + " environment..."))
 
     remove_previous_releases()
     create_prefix_directory()
 
-    if (env.settings == "development" and env.branch == "tip"):
-        print(green("Since in development and deploying tip, just symbolically linking..."))
+    if env.settings == "development" and env.branch == "tip":
+        print(green("Since in development and deploying tip, " +
+                    "just symbolically linking..."))
         create_user()
         create_database()
         #link_local_files()
@@ -160,17 +174,21 @@ def deploy():
 # Tasks to help in deployment
 #
 
+
 def add_cronjob():
     """
         Add a cronjob which checks for the correct processes to be running.
     """
     sudo("cp %(path)s/conf/processes /etc/cron.d/processes" % env)
 
+
 def remove_previous_releases():
     sudo("rm -rf %(path)s" % env)
 
+
 def create_prefix_directory():
     sudo("mkdir -p %(prefix)s" % env)
+
 
 def create_root_directory():
     """
@@ -179,22 +197,26 @@ def create_root_directory():
     sudo("mkdir -p %(path)s" % env)
     sudo("chown www-data:www-data %(path)s" % env)
 
+
 def copy_current():
     sudo('cp -r %(local)s %(prefix)s' % env)
     sudo("chown www-data:www-data --recursive %(path)s" % env)
+
 
 def link_local_files():
     sudo('ln -s %(local)s %(path)s' % env)
     sudo("chown www-data:www-data --recursive %(path)s" % env)
 
+
 def create_upload_directory():
     """
-        allow write access by group on upload directory
+        Allow write access by group on upload directory
     """
     sudo("mkdir -p %(upload)s" % env)
     sudo("chown www-data:www-data --recursive %(upload)s" % env)
     sudo("chmod 777 %(upload)s" % env)
     sudo("ls -al %(upload)s" % env)
+
 
 def create_media_directory():
     """
@@ -205,17 +227,20 @@ def create_media_directory():
     sudo("chmod 777 %(media)s" % env)
     sudo("ls -al %(media)s" % env)
 
+
 def checkout_latest():
     """
         Get latest version from repository.
     """
     sudo('hg clone https://%(user)s:%(password)s@%(repo)s/%(project)s %(path)s' % env, user="www-data")
 
+
 def checkout_revision(revision):
     """
         Clone a revision.
     """
     sudo('hg clone -r %(branch)s https://%(user)s:%(password)s@%(repo)s/%(project)s %(path)s' % env, user="www-data")
+
 
 def install_requirements():
     """
@@ -225,6 +250,7 @@ def install_requirements():
     print(green("Some required packages are installed."))
     print(yellow("Some packages might be missing."))
     print(yellow("You still need to do check this yourself for now..."))
+
 
 @task
 def backup():
@@ -248,6 +274,7 @@ def backup():
         #        if (result.failed):
         #            print(red("Could not push the latest commit - please check."))
 
+
 def user_exists():
     """
         Check if the user exists.
@@ -260,6 +287,7 @@ def user_exists():
         return True
     else:
         return False
+
 
 def create_user():
     """
@@ -274,6 +302,7 @@ def create_user():
             print(red("Could not create user."))
             abort("User creation error.")
 
+
 def database_exists():
     """
         Check if the database exists.
@@ -285,6 +314,7 @@ def database_exists():
     else:
         return False
 
+
 def create_database():
     if not database_exists():
         print(green("Creating database '%(dbname)s'..." % env))
@@ -295,6 +325,7 @@ def create_database():
             print(red("Could not create database."))
             abort("Database creation error.")
 
+
 def drop_database():
     """
         Destroys the user and database for this project.
@@ -302,6 +333,7 @@ def drop_database():
     with settings(warn_only=True):
         run('dropdb %(dbname)s' % env)
         run('dropuser %(dbuser)s' % env)
+
 
 @task
 def update_deployment_time():
@@ -325,6 +357,7 @@ def update_deployment_time():
         deployment = Deployment(tag=tag, timestamp=now, version=version, deployer='Deployed via Fabric.')
         deployment.save()
         
+
 def populate_database():
     """
         Loads (mostly fixture) data in the database.
@@ -339,12 +372,15 @@ def populate_database():
     with cd(env.path + "/bin"):
         run('fab update_deployment_time')
 
+
 def restart_database():
     sudo("service postgresql restart")
     
+
 def restart_webserver():
     sudo("service nginx restart")
     sudo("service uwsgi restart")
+
 
 def update_webserver():
     # remove default first
@@ -359,6 +395,7 @@ def update_webserver():
     sudo("mkdir -p /etc/uwsgi/apps-enabled" % env)
     sudo("cp %(path)s/conf/django.ini /etc/uwsgi/apps-available" % env)
     sudo("ln -sf %(path)s/conf/django.ini /etc/uwsgi/apps-enabled/django.ini" % env)
+
 
 def create_uwsgi_upstart():
     # TODO: first check if it already exists
