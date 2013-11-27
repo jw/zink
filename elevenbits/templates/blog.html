@@ -1,60 +1,83 @@
 {% extends "base.html" %}
 
-{% block body %}
+{% block content %}
 
-    <div class="container">
+    <section id="content" class="container clearfix">
 
-        <div class="sixteen columns">
+		<header class="page-header">
 
-            <div id="page-title">
-                <h2>The Blog <span>/ Words of Wisdom</span></h2>
-                <div id="bolded-line"></div>
+    		<h1 class="page-title">Welcome to our blog</h1>
+
+		</header>
+
+        <section id="main" class="three-fourth">
+
+            {% if entries %}
+
+                {% for entry in entries.object_list %}
+                    {% include "entry.html" %}
+                {% endfor %}
+
+                <section class="pagination">
+                    <ul>
+                        {% if entries.has_previous %}
+                            <a href="{% url 'blog:page' entries.previous_page_number %}">
+                                <li>Previous</li>
+                            </a>
+                        {% endif %}
+                        {% for page in entries.paginator.page_range %}
+                            <a href="{% url 'blog:page' page %}">
+                                {% if page == entries.number %}
+                                    <li class="selected">
+                                {% else %}
+                                    <li>
+                                {%  endif %}
+                                        {{ page }}
+                                    </li>
+                            </a>
+                        {% endfor %}
+                        {% if entries.has_next %}
+                            <a href="{% url 'blog:page' entries.next_page_number %}">
+                                <li>Next</li>
+                            </a>
+                        {% endif %}
+                    </ul>
+                </section>
+
+            {% else %}
+                <p>No blog entries are available.  How weird.</p>
+            {% endif %}
+
+        </section>
+
+        <aside id="sidebar" class="one-fourth last">
+
+            <div class="widget">
+                <h6 class="widget-title">
+                    Blog Categories
+                </h6>
+                <ul class="categories">
+                    {% for tag in tags %}
+                        <li><a href="{% url 'blog:tag' tag.pk %}">{{ tag.tag }}</a></li>
+                    {% endfor %}
+                </ul>
             </div>
 
-        </div>
-
-    </div>
-
-    {% if entries %}
-
-        <div class="container">
-        <div class="sixteen columns">
-
-            {% for entry in entries.object_list %}
-                {% include "entry.html" %}
-            {% endfor %}
-
-                <ul class="pagination">
-                    {% if entries.has_previous %}
-                        <a href="/page/{{ entries.previous_page_number }}">
-                            <li>«</li>
-                        </a>
-                    {% endif %}
-                    {% for page in entries.paginator.page_range %}
-                        <a href="/page/{{ page }}">
-                            {% if page == entries.number %}
-                                <li class="current">
-                            {% else %}
-                                <li>
-                            {%  endif %}
-                                    {{ page }}
-                                </li>
-                        </a>
+            <div class="widget">
+                <h6 class="widget-title">
+                    Twitter Feed
+                </h6>
+                <ul class="categories">
+                    {% for tag in tags %}
+                        <li><a href="{% url 'blog:tag' tag.pk %}">{{ tag.tag }}</a></li>
                     {% endfor %}
-                    {% if entries.has_next %}
-                        <a href="/page/{{ entries.next_page_number }}">
-                            <li>»</li>
-                        </a>
-                    {% endif %}
                 </ul>
+            </div>
 
-        </div>
-        </div>
+        </aside>
 
-    {% else %}
-        <p>No blog entries are available.  How weird.</p>
-    {% endif %}
+        <div class="clear"/>
 
+    </section> {# content #}
 
 {% endblock %}
-

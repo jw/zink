@@ -25,6 +25,11 @@ def get_deployment():
     return deployment
 
 
+def test(request):
+    return render_to_response('empty.html',
+                              context_instance=RequestContext(request))
+
+
 def index(request):
 
     static = {}
@@ -53,11 +58,7 @@ def index(request):
 
     attributes = {'static': static,
                   'slider_images': slider_images,
-                  #'believe': believe,
-                  #'tool': tool,
-                  #'about': about,
                   'clients': clients,
-                  #'width': width,
                   'links': links,
                   'deployment': deployment}
 

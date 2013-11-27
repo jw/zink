@@ -1,7 +1,8 @@
 from django.db import models
 
-# The deployment parameters of the website
+
 class Deployment(models.Model):
+    """The deployment parameters of the website."""
 
     tag = models.CharField('tag', max_length=255,
                            help_text='The tag of this deployment.')

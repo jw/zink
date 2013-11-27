@@ -1,19 +1,37 @@
+
+#
+# Zink
+#
+
 from fabric.api import run, env
 from fabric.decorators import task
 from fabric.colors import red, green, yellow
 from fabric.operations import require, sudo
-from fabric.context_managers import show, settings, cd
+from fabric.context_managers import settings, cd
 from fabric.utils import abort
 from fabric.contrib import django
 
 from os.path import join, dirname, realpath
 
 #
+# Defaults
+#
+
+CONFIGURATION_FILE = "fabfile.properties"
+DEVELOPMENT = "development"
+PRODUCTION = "production"
+STAGING = "staging"
+
+#
 # Base configuration first
 #
 
+# repository is https://elevenbits@bitbucket.org/elevenbits/zink
 env.project = "zink"
-env.repo = "hg.elevenbits.org"
+env.repo = "bitbucket.org"
+env.account = "elevenbits"
+
+# deployment properties
 env.prefix = '/var/www'
 env.path = "%(prefix)s/%(project)s" % env
 env.local = dirname(realpath(join(__file__, "..")))
@@ -28,8 +46,11 @@ env.media = "%(prefix)s/%(project)s/media" % env
 
 def _create_environment(filename, environment):
     """
-        Creates the correct env keys for an environment using a given
+        Create the correct env keys for an environment using a given
         configuration filename.
+        @param filename: the filename to be read as configuration.
+        @param environment: the section in the filename to be used as
+        configuration file.
     """
     from ConfigParser import SafeConfigParser
     from os.path import isfile
@@ -42,14 +63,16 @@ def _create_environment(filename, environment):
         env.settings = environment
         return _add_properties(config, environment)
     else:
-        print(red("Could not find the [" + environment + 
-              "] section in '" + filename + "'."))
+        print(red("Could not find the [%s] section in '%s'.") %
+              (environment, filename))
         return False
-    
+
 
 def _add_properties(config, section):
     """
-        Gets the entries of a section from a config parser.
+        Get the entries of a section from a config parser.
+        @param config: a ConfigParser.
+        @param section: a section in an ini file.
     """
     from ConfigParser import NoOptionError
     try:
@@ -61,7 +84,7 @@ def _add_properties(config, section):
         env.hosts = [config.get(section, "host")]
         return True
     except NoOptionError as noe:
-        print(red("Could not find the '" + noe.option + 
+        print(red("Could not find the '" + noe.option +
               "' key in the '" + noe.section + "' section."))
         return False
 
@@ -76,7 +99,7 @@ def production():
     """
         Build for a Production environment.
     """
-    _create_environment("fabfile.properties", "production")
+    _create_environment(CONFIGURATION_FILE, PRODUCTION)
 
 
 @task
@@ -84,7 +107,7 @@ def staging():
     """
         Build for a Staging environment.
     """
-    _create_environment("fabfile.properties", "staging")
+    _create_environment(CONFIGURATION_FILE, STAGING)
 
 
 @task
@@ -92,7 +115,7 @@ def development():
     """
         Build for a Development environment.
     """
-    _create_environment("fabfile.properties", "development")
+    _create_environment(CONFIGURATION_FILE, DEVELOPMENT)
 
 
 #
@@ -119,10 +142,10 @@ def revision(revision="tip"):
 @task
 def deploy():
     """
-        Setup a new website by installing everything we need, and fire up 
+        Setup a new website by installing everything we need, and fire up
         the database.  Then start the server.
     """
-    
+
     require('settings', provided_by=[production, staging, development])
     require('branch', provided_by=[tip, revision])
 
@@ -159,7 +182,7 @@ def deploy():
         populate_database()
         restart_database()
 
-        add_cronjob() # checks existence of some core processes
+        add_cronjob()  # checks existence of some core processes
 
     #create_upload_directory()
 
@@ -232,14 +255,18 @@ def checkout_latest():
     """
         Get latest version from repository.
     """
-    sudo('hg clone https://%(user)s:%(password)s@%(repo)s/%(project)s %(path)s' % env, user="www-data")
+    sudo('hg clone '
+         'https://%(account)s@%(repo)s/%(account)s/%(project)s '
+         '%(path)s' % env, user="www-data")
 
 
 def checkout_revision(revision):
     """
         Clone a revision.
     """
-    sudo('hg clone -r %(branch)s https://%(user)s:%(password)s@%(repo)s/%(project)s %(path)s' % env, user="www-data")
+    sudo('hg clone -r %(branch)s '
+         'https://%(account)s@%(repo)s/$(account)s/%(project)s '
+         '%(path)s' % env, user="www-data")
 
 
 def install_requirements():
@@ -259,30 +286,29 @@ def backup():
     """
     with cd(env.path):
         print(env.local)
-        sudo('python manage.py dumpdata --indent 4 static > %(local)s/fixtures/static.json' % env)
-        sudo('python manage.py dumpdata --indent 4 treemenus > %(local)s/fixtures/treemenus.json' % env)
-        sudo('python manage.py dumpdata --indent 4 blog > %(local)s/fixtures/blog.json' % env)
-        sudo('python manage.py dumpdata --indent 4 index > %(local)s/fixtures/index.json' % env)
-        sudo('python manage.py dumpdata --indent 4 services > %(local)s/fixtures/services.json' % env)
-        # TODO: handle this properly
-        #with settings(warn_only=True):
-        #    result = sudo('hg commit -u %(user)s -m "[fabfile] Committed latest content to repo."' % env)
-        #    if (result.failed and result.return_code == 1):
-        #        print(yellow("Nothing changed - leaving as is"))
-        #    else:
-        #        result = sudo('hg push https://%(user)s:%(password)s@%(repo)s/%(project)' % env)
-        #        if (result.failed):
-        #            print(red("Could not push the latest commit - please check."))
+        sudo('python manage.py dumpdata --indent 4 static > '
+             '%(local)s/fixtures/static.json' % env)
+        sudo('python manage.py dumpdata --indent 4 treemenus > '
+             '%(local)s/fixtures/treemenus.json' % env)
+        sudo('python manage.py dumpdata --indent 4 blog > '
+             '%(local)s/fixtures/blog.json' % env)
+        sudo('python manage.py dumpdata --indent 4 index > '
+             '%(local)s/fixtures/index.json' % env)
+        sudo('python manage.py dumpdata --indent 4 services > '
+             '%(local)s/fixtures/services.json' % env)
+        # TODO: save these to the repo?
 
 
 def user_exists():
     """
-        Check if the user exists.
+        Check if the database user exists.
     """
-    print('echo "SELECT 1 FROM pg_roles WHERE rolname=\'%(dbuser)s\';" | psql postgres -tA' % env)
-    output = run('echo "SELECT 1 FROM pg_roles WHERE rolname=\'%(dbuser)s\';" | psql postgres -tA' % env)
+    print('echo "SELECT 1 FROM pg_roles WHERE rolname=\'%(dbuser)s\';" '
+          '| psql postgres -tA' % env)
+    output = run('echo "SELECT 1 FROM pg_roles WHERE rolname=\'%(dbuser)s\';" '
+                 ' | psql postgres -tA' % env)
     print("output: " + output)
-    if (output == "1"):
+    if output == "1":
         print(green("Good.  User '%(dbuser)s' exists." % env))
         return True
     else:
@@ -291,12 +317,14 @@ def user_exists():
 
 def create_user():
     """
-        Creates a user.
+        Creates a database user.
     """
     if not user_exists():
         print(green("Creating user '%(dbuser)s'." % env))
-        output = run('echo "CREATE ROLE %(dbuser)s WITH LOGIN PASSWORD \'%(dbpassword)s\';" | psql postgres -tA' % env)
-        if (output == "CREATE DATABASE" or output == "CREATE ROLE"):
+        output = run('echo "CREATE ROLE %(dbuser)s WITH LOGIN '
+                     'PASSWORD \'%(dbpassword)s\' CREATEDB;" | '
+                     'psql postgres -tA' % env)
+        if output == "CREATE DATABASE" or output == "CREATE ROLE":
             print(green("Created user successfully."))
         else:
             print(red("Could not create user."))
@@ -307,8 +335,9 @@ def database_exists():
     """
         Check if the database exists.
     """
-    output = run('echo "SELECT 1 from pg_database WHERE datname=\'%(dbname)s\';" | psql postgres -tA' % env)
-    if (output == "1"):
+    output = run('echo "SELECT 1 from pg_database WHERE '
+                 'datname=\'%(dbname)s\';" | psql postgres -tA' % env)
+    if output == "1":
         print(green("Good.  Database '%(dbname)s' exists." % env))
         return True
     else:
@@ -318,8 +347,9 @@ def database_exists():
 def create_database():
     if not database_exists():
         print(green("Creating database '%(dbname)s'..." % env))
-        output = run('echo "CREATE DATABASE %(dbname)s OWNER %(dbuser)s;" | psql postgres -tA' % env)
-        if (output == "CREATE DATABASE"):
+        output = run('echo "CREATE DATABASE %(dbname)s OWNER %(dbuser)s;" '
+                     '| psql postgres -tA' % env)
+        if output == "CREATE DATABASE":
             print(green("Created database successfully."))
         else:
             print(red("Could not create database."))
@@ -340,7 +370,7 @@ def update_deployment_time():
     # get date and time
     from datetime import datetime
     now = datetime.now()
-    deployment_time = now.strftime("%d.%m.%Y, %H%Mhrs");
+    deployment_time = now.strftime("%d.%m.%Y, %H%Mhrs")
     print(green("Deployment time is " + deployment_time + "."))
     # first get Django access
     from sys import path
@@ -354,9 +384,10 @@ def update_deployment_time():
         tag = "n/a"
         # add this development
         from elevenbits.deployment.models import Deployment
-        deployment = Deployment(tag=tag, timestamp=now, version=version, deployer='Deployed via Fabric.')
+        deployment = Deployment(tag=tag, timestamp=now, version=version,
+                                deployer='Deployed via Fabric.')
         deployment.save()
-        
+
 
 def populate_database():
     """
@@ -375,7 +406,7 @@ def populate_database():
 
 def restart_database():
     sudo("service postgresql restart")
-    
+
 
 def restart_webserver():
     sudo("service nginx restart")
@@ -389,12 +420,14 @@ def update_webserver():
     # update nginx
     sudo("mkdir -p /etc/nginx/sites-available" % env)
     sudo("cp %(path)s/conf/%(host)s.conf /etc/nginx/sites-available" % env)
-    sudo("ln -sf %(path)s/conf/%(host)s.conf /etc/nginx/sites-enabled/%(host)s.conf" % env)
+    sudo("ln -sf %(path)s/conf/%(host)s.conf '"
+         "/etc/nginx/sites-enabled/%(host)s.conf" % env)
     # update uwsgi
     sudo("mkdir -p /etc/uwsgi/apps-available" % env)
     sudo("mkdir -p /etc/uwsgi/apps-enabled" % env)
     sudo("cp %(path)s/conf/django.ini /etc/uwsgi/apps-available" % env)
-    sudo("ln -sf %(path)s/conf/django.ini /etc/uwsgi/apps-enabled/django.ini" % env)
+    sudo("ln -sf %(path)s/conf/django.ini "
+         "/etc/uwsgi/apps-enabled/django.ini" % env)
 
 
 def create_uwsgi_upstart():

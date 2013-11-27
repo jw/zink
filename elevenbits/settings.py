@@ -1,6 +1,7 @@
 
 #
-# settings for [www.]elevenbits.org, [www.]elevenbits.com, vonk.elevenbits.org and m8n.be
+# public settings for [www.]elevenbits.org, [www.]elevenbits.com,
+# vonk.elevenbits.org and m8n.be
 #
 
 from os.path import join, dirname, realpath
@@ -19,14 +20,24 @@ elif ("m8n" in gethostname()):
     HOSTNAME = "m8n"
 else:
     print(gethostname() + " is an unknown hostname; using localhost as default")
+    # TODO: this is not secure!
     HOSTNAME = "localhost"
 
 DEBUG = False
-if (HOSTNAME in ["antwerp", "localhost"]):
+if HOSTNAME in ["antwerp", "localhost", '127.0.0.1']:
     DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+ALLOWED_HOSTS = ["localhost"]
 
+#
+# Test properties
+#
+
+# TODO: check existence of rainbowtests first
+TEST_RUNNER = 'rainbowtests.RainbowTestSuiteRunner'
+
+# TODO: check this
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.auth.context_processors.auth",
     "django.core.context_processors.debug",
@@ -73,24 +84,10 @@ ADMINS = (
 )
 MANAGERS = ADMINS
 
-#
-# Database
-#
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'django',
-        'USER': 'django',
-        'PASSWORD': 'Reinhardt',
-        'HOST': 'localhost',
-        'DATABASE_PORT': '',
-    }
-}
-
 TIME_ZONE = 'Europe/Brussels'
 LANGUAGE_CODE = 'en-BE'
 
+# TODO: check this. Is this handy when using m8n.be, elevenbits.com
 SITE_ID = 1
 
 # use i18n, l10n and make dates time zone
@@ -99,6 +96,7 @@ USE_L10N = True
 USE_TZ = False
 
 # The statics (css and images) location
+# TODO: check this
 STATICFILES_DIRS = (
     "",
 )
@@ -119,9 +117,6 @@ MEDIA_URL = "http://localhost/media/"
 
 FIXTURE_DIRS = (join(SITE_ROOT, 'fixtures'),)
 
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = '0u^l=%@(2_imjrza(c4hgitd2a^)bn0%)s8496m9!aoshfisqef3rf-j+sdxesq1'
-
 # TODO: read up on this
 #CONTEXT_PREPROCESSORS = (
 #    "django.contrib.auth.context_processors.auth",
@@ -135,6 +130,7 @@ SECRET_KEY = '0u^l=%@(2_imjrza(c4hgitd2a^)bn0%)s8496m9!aoshfisqef3rf-j+sdxesq1'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
 )
 
@@ -145,11 +141,11 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'tracking.middleware.BannedIPMiddleware',
+#    'tracking.middleware.BannedIPMiddleware',
+#     'tracking.middleware.VisitorTrackingMiddleware',
+#     'tracking.middleware.VisitorCleanUpMiddleware',
 # TODO: try to add this one:
 #    'django.middleware.gzip.GZipMiddleware',
-    'tracking.middleware.VisitorTrackingMiddleware',
-    'tracking.middleware.VisitorCleanUpMiddleware',
 )
 
 ROOT_URLCONF = 'elevenbits.urls'
@@ -161,22 +157,28 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
+    # django contribs
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.admin',
     'django.contrib.admindocs',
-    'django.contrib.markup',
+    'django.contrib.messages',
     'django.contrib.staticfiles',
-    'elevenbits.index',
-    'elevenbits.menu_extras',
-    'elevenbits.blog',
-    'elevenbits.static',
-    'elevenbits.services',
+    # zink apps
+    # 'elevenbits.index',
+    'elevenbits.menu_extras',  # TODO: move this in apps root
+    'blog',
+    'elevenbits.static',  # TODO: move this in apps root
+    'contact',
+    'home',
+    # 'elevenbits.services',
     'elevenbits.deployment',
     'elevenbits',
-    'treemenus',
-    'tracking',
+    # utility apps
+    'treemenus',  # TODO: make sure to use the proper (Russian) one!
+    # 'tracking',  # TODO: fix this!
+    'util',
     'south',
     'debug_toolbar',
 )
@@ -193,25 +195,33 @@ CLIENT_LOGO_MARGIN = 20
 #
 
 LOGGING = { 
-   'version': 1,
-   'disable_existing_loggers': True,
-   'formatters': {
-       'simple': {
-           'format': '%(levelname)s %(message)s',
-       },  
-   },  
-   'handlers': {
-       'console':{
-           'level':'DEBUG',
-           'class':'logging.StreamHandler',
-           'formatter': 'simple'
-       },  
-   },  
-   'loggers': {
-       'django': {
-           'handlers': ['console'],
-           'level': 'DEBUG',
-       },  
-   }   
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s',
+        },
+    },
+    'handlers': {
+        'console':{
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+        'elevenbits': {
+            'handlers': ['console'],
+            'level': 'INFO',
+        }
+    }
 }
 
+from .local_settings import *

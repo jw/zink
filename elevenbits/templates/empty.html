@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Form Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="{{ STATIC_URL }}bootstrap/css/sticky-footer-navbar.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}bootstrap/css/custom.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="{{ STATIC_URL }}bootstrap/js/html5shiv.js"></script>
+        <script src="{{ STATIC_URL }}bootstrap/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+{#style="margin: 20px;">#}
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="{{ STATIC_URL }}bootstrap/js/jquery-latest.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js"></script>
+
+    <div class="container">
+        <h1>Bootstrap Form Example:</h1>
+
+        <form class="form-horizontal" role="form">
+            <div class="row">
+                <div class="col-sm-4">
+                    <label for="inputName" class="control-label">Name</label>
+                    <input type="text" class="form-control span5" id="inputName" placeholder="Name"/>
+                    <p class="text-muted">Please enter your name</p>
+                </div>
+                <div class="col-sm-4">
+                    <label for="inputEmail" class="control-label">Email</label>
+                    <input type="email" class="form-control" id="inputEmail" placeholder="Email"/>
+                    <p class="text-danger"><strong>Oops, please enter a valid email!</strong></p>
+                </div>
+                <div class="col-sm-4">
+                    <label for="inputSubject" class="control-label">Name</label>
+                    <input type="text" class="form-control" id="inputSubject" placeholder="Subject"/>
+                    <p class="text-muted">The subject of your mail</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <label for="inputMessage" class="control-label">Message</label>
+                    <textarea class="form-control" id="inputSubject" placeholder="Message"></textarea>
+                    <p class="text-muted">The message you want to send</p>
+                </div>
+            </div>
+            <div class="row">
+                <p><br/></p>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+</body>
+</html>

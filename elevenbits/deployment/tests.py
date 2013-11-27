@@ -5,9 +5,9 @@ from django.template import Template, Context, TemplateSyntaxError
 from datetime import datetime, timedelta
 from elevenbits.deployment.models import Deployment
 
+
 class DeploymentTest(TestCase):
 
-    fixtures = ['fixtures/static', 'fixtures/blog', 'fixtures/treemenus']
 
     def setUp(self):
         self.client = Client()
@@ -17,6 +17,7 @@ class DeploymentTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.client.get('/page/2')
         self.assertEqual(response.status_code, 200)
+
 
 class RelativeTimeTest(TestCase):
     

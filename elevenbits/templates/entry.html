@@ -1,50 +1,30 @@
 
-{% comment %}
+<article class="entry clearfix">
 
-	This is the content of a blog entry.
+    <div class="entry-body">
 
-{% endcomment %}
+        <a href="{% url 'blog:detail' entry.pk %}">
+            <h1 class="title">
+                {{ entry.title }}
+            </h1>
+        </a>
+        <h1 class="posted">
+            {{ entry.posted|date:"l, jS F Y, Hi\h\r\s" }}
+        </h1>
+        <h1 class="tags">
+            {% for tag in entry.tags.all %}
+                <a href="{% url 'blog:tag' tag.pk %}">{{tag.tag}}</a>
+                {% if not forloop.last %} | {% endif %}
+            {% endfor %}
+        </h1>
 
-<div class="entry">
+        <div class="image"></div>
 
-    <div class="post">
-        <!--
-        <div class="post-img picture">
-            <a href="blog_post.html">
-                <img src="images/blog-img-01.jpg" alt="" />
-                <div class="image-overlay-link"></div>
-            </a>
-        </div>
-        -->
-        <a href="#" class="post-icon standard"></a>
-        <div class="post-content">
-            <div class="post-title"><h2><a href="blog_post.html">{{ entry.title }}</a></h2></div>
-            <div class="post-meta"><span><i class="mini-ico-calendar"></i>{{ entry.posted|date:"l, jS F Y, Hi\h\r\s" }}</span> <span><i class="mini-ico-user"></i>By <a href="#">jw</a></span> <!--<span><i class="mini-ico-comment"></i>With <a href="#">12 Comments</a></span>--></div>
-            <div class="tags">
-                {% for tag in entry.tags.all %}
-                    <a href="/tag/{{tag.pk}}">{{tag.tag}}</a>
-                {% endfor %}
-            </div>
-            <div class="post-description">
-                {% load markup %}
-                <p>
-                {{ entry.body|markdown:"codehilite" }}
-                </p>
-            </div>
-        </div>
+        {% load markup %}
+        <p>
+        {{ entry.body|markup }}
+        </p>
+
     </div>
 
-	<h3></h3>
-	<h4></h4>
-
-<!--
-	{% if entry.tags.all %}
-		<div class="tags"> 
-			{% for tag in entry.tags.all %}
-				<a href="/tag/{{tag.pk}}">{{tag.tag}}</a>
-			{% endfor %}
-		</div>
-	{% endif %}
--->
-
-</div> <!-- entry -->
+</article>

@@ -20,70 +20,145 @@
 
 	<div class="container clearfix">
 
-		<div class="one-fourth">
+        {% if contact %}
 
-			<h3>Address</h3>
+            <div class="one-fourth">
 
-			<p>
-                ElevenBits<br/>
-                Zénobe Grammestraat 22<br/>
-			    2018 Antwerpen<br/>
-			    Belgium
-            </p>
+                <h3>Address</h3>
+                <p>
+                    {{ contact.name }}<br/>
+                    {{ contact.street }}<br/>
+                    {{ contact.city }}<br/>
+                    {{ contact.country }}
+                </p>
 
-			<h3>Phone and e-mail</h3>
+                <h3>Phone and e-mail</h3>
+                <p>
+                    Phone: {{ contact.phone }}<br/>
+                    Email: {{ contact.email }}<br/>
+                </p>
 
-            <p>
-                Phone: +32.472.96.99.96<br/>
-				Email: jan.willems@elevenbits.com<br/>
-            </p>
+                <h3>VAT and bank account</h3>
+                <p>
+                    ElevenBits VAT number is {{ contact.vat }}.
+                    ElevenBits Belgian bank account is: {{ contact.account }}.
+                </p>
 
-            <h3>VAT and bank account</h3>
-	        <p>
-                ElevenBits VAT number is BE.0.865.637.502.
-                ElevenBits Belgian bank account is: 738-0257196-71.
-            </p>
+            </div>
 
-		</div>
+        {% else %}
+
+            <div class="one-fourth">
+
+    			<h3>Oops!</h3>
+
+                <p>
+                Sorry, no contact info could be retrieved from the database.
+                The administrator has been informed - we are working on it!
+                </p>
+
+            </div>
+
+
+        {% endif %}
 
 		<div class="three-fourth last">
 
-			<h3>Let's keep in touch</h3>
+			<h3 id="form">Let's keep in touch</h3>
 
-			<form action="php/contact-send.php" method="post" class="contact-form">
+                {% if messages %}
+                    <ul class="success">
+                        {% for message in messages %}
+                            {{ message|safe }}
+                        {% endfor %}
+                    </ul>
+                {% endif %}
 
-				<p class="input-block">
-					<label for="contact-name"><strong>Name</strong> (required)</label>
-					<input type="text" name="name" value="" id="contact-name" required>
-				</p>
+                {% if form.errors %}
+                    <p class="error">
+                        <strong>Oops!</strong>
+                        Please fill in all values correctly!
+                    </p>
+                {% endif %}
 
-				<p class="input-block">
-					<label for="contact-email"><strong>Email</strong> (required)</label>
-					<input type="email" name="email" value="" id="contact-email" required>
-				</p>
+				<form action="{% url 'contact:contact' %}" method="post" class="contact-form" novalidate>
 
-				<p class="input-block">
-					<label for="contact-subject"><strong>Subject</strong></label>
-					<input type="text" name="subject" value="" id="contact-subject">
-				</p>
+                {% csrf_token %}
 
-				<p class="textarea-block">
-					<label for="contact-message"><strong>Your Message</strong> (required)</label>
-					<textarea name="message" id="contact-message" cols="88" rows="6" required></textarea>
-				</p>
+                <div class="one-fourth">
+                    <p class="input-block">
+                        <label for="name"><strong>Name</strong> (required)</label>
+                        {{ form.name }}
+                        {%  if form.name.errors %}
+                            {% for error in form.name.errors %}
+                                <strong style="color: #c12e2a;">{{ error|escape }}</strong>
+                            {% endfor %}
+                        {% else %}
+                            {{ form.name.help_text }}
+                        {% endif %}
+                    </p>
+                </div>
 
-				<div class="hidden">
-					<label for="contact-spam-check">Do not fill out this field:</label>
-					<input name="spam-check" type="text" value="" id="contact-spam-check" />
-				</div>
+                <div class="one-fourth">
+                    <p class="input-block">
+                        <label for="email"><strong>Email</strong> (required)</label>
+                        {{ form.email }}
+                        {%  if form.email.errors %}
+                            {% for error in form.email.errors %}
+                                <strong style="color: #c12e2a;">{{ error|escape }}</strong>
+                            {% endfor %}
+                        {% else %}
+                            {{ form.email.help_text }}
+                        {% endif %}
+                    </p>
+                </div>
 
-				<input type="submit" value="Submit">
+                <div class="one-fourth last">
+                    <p class="input-block">
+                        <label for="subject"><strong>Subject</strong></label>
+                        {{ form.subject }}
+                        {%  if form.subject.errors %}
+                            {% for error in form.subject.errors %}
+                                <strong style="color: #c12e2a;">{{ error|escape }}</strong>
+                            {% endfor %}
+                        {% else %}
+                            {{ form.subject.help_text }}
+                        {% endif %}
+    	            </p>
+                </div>
 
-				<div class="clear"></div>
+                <div class="clear"></div>
+
+				<div class="three-fourth last">
+
+                    <div class="contact-form">
+                        <p>
+                            <label for="message"><strong>Your Message</strong> (required)</label>
+                            {{ form.message }}
+                            {%  if form.message.errors %}
+                                {% for error in form.message.errors %}
+                                    <strong style="color: #c12e2a;">{{ error|escape }}</strong>
+                                {% endfor %}
+                            {% else %}
+                                {{ form.message.help_text }}
+                            {% endif %}
+                        </p>
+                    </div>
+
+                    <div class="hidden">
+                        <label for="contact-spam-check">Do not fill out this field:</label>
+                        {{ form.spam }}
+                    </div>
+
+    				<input type="submit" value="Submit">
+
+	    			<div class="clear"></div>
+
+                </div>
 
 			</form>
 
-		</div>
+        </div>
 
 	</div>
 

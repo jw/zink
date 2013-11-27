@@ -1,16 +1,49 @@
 {% extends "base.html" %}
 
-{% block menu %}
-    {% include "menu.html" %}
-{% endblock%}
+{% block content %}
 
-{% block body %}
-	{% if entry %}
-		<div class="entry">
-			{% include "entry.html" %}
-	    </div>
-	{% else %}
-	    <p>No entry is available.</p>
-	{% endif %}
+    <section id="content" class="container clearfix">
+
+		<header class="page-header">
+
+    		<h1 class="page-title">{{ entry.title }}</h1>
+
+		</header>
+
+        <section id="main" class="three-fourth">
+
+            {% include "entry.html" %}
+
+        </section>
+
+        <aside id="sidebar" class="one-fourth last">
+
+            <div class="widget">
+                <h6 class="widget-title">
+                    Blog Categories
+                </h6>
+                <ul class="categories">
+                    {% for tag in tags %}
+                        <li><a href="{% url 'blog:tag' tag.pk %}">{{ tag.tag }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="widget">
+                <h6 class="widget-title">
+                    Twitter Feed
+                </h6>
+                <ul class="categories">
+                    {% for tag in tags %}
+                        <li><a href="{% url 'blog:tag' tag.pk %}">{{ tag.tag }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+        </aside>
+
+        <div class="clear"/>
+
+    </section> {# content #}
+
 {% endblock %}
-

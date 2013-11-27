@@ -4,7 +4,7 @@
     Checks existence of some processes, when a process does not exist,
     a mail is sent.
 
-    The `processes.properties` file contains the processes and the mail
+    The ``processes.properties`` file contains the processes and the mail
     properties.  This properties file must look like:
 
     [processes]

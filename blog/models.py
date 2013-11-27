@@ -1,7 +1,13 @@
+
+#
+# Zink
+#
+
 from django.db import models
 
-# The tag
+
 class Tag(models.Model):
+    """Each blog entry can have zero to n tags."""
     tag = models.CharField(max_length=255, unique=True)
     
     def __unicode__(self):
@@ -10,11 +16,13 @@ class Tag(models.Model):
     def get_absolute_url(self):
         return '%stag/%s/' % (settings.BLOG_ROOT, self.slug)
 
-# The entry
+
 class Entry(models.Model):
+    """The blog entry."""
     
     created = models.DateTimeField('created',
-                                   help_text='Date and time when this entry was created')
+                                   help_text='Date and time when '
+                                             'this entry was created')
 
     title = models.CharField(max_length=200)
     
@@ -24,7 +32,8 @@ class Entry(models.Model):
                                 help_text="Is this entry viewable on site?")
     
     posted = models.DateTimeField('posted',
-                                  help_text='Date and time when this entry went public',
+                                  help_text='Date and time when this '
+                                            'entry went public',
                                   blank=True)
     
     tags = models.ManyToManyField(Tag, blank=True)
@@ -36,13 +45,15 @@ class Entry(models.Model):
     def __unicode__(self):
         return self.title
 
-# Comments on an entry
+
 class Comment(models.Model):
+    """An entry can have zero to n comments."""
 
     created = models.DateTimeField('created',
-                                   help_text='Date and time when this comment was written')
+                                   help_text='Date and time when this '
+                                             'comment was written')
 
-    body  = models.TextField(help_text="The content of this comment")
+    body = models.TextField(help_text="The content of this comment")
     
     entry = models.ForeignKey(Entry)
     
@@ -52,4 +63,3 @@ class Comment(models.Model):
 
     def __unicode__(self):
         return self.body
-    

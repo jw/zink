@@ -1,4 +1,5 @@
-from elevenbits.contact.models import Contact
 from django.contrib import admin
+
+from contact.models import Contact, ContactForm
 
 admin.site.register(Contact)

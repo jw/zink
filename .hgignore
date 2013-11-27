@@ -3,10 +3,13 @@ syntax: glob
 *~
 
 syntax: regexp
+
+# private property files
+^elevenbits/local_settings\.py
 ^bin/fabfile\.properties$
+^bin/processes\.properties$
+
+# ide stuff
 .project
 .pydevproject
 ^.idea/
-
-syntax: regexp
-^bin/processes\.properties$

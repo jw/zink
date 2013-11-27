@@ -1,37 +1,38 @@
-from django.conf.urls import patterns, include, url
-from django.views.generic.simple import direct_to_template
 
-# enable the admin
+#
+# Zink
+#
+
+from django.conf.urls import patterns, include, url
+from django.views.generic.base import TemplateView
+
 from django.contrib import admin
+import settings
+
 admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
 
     # robots.txt
-    url(r'^robots\.txt$', direct_to_template, {'template': 'robots.txt', 'mimetype': 'text/plain'}),
+    url(r'^robots\.txt$',
+        TemplateView.as_view(template_name='robots.txt',
+                             content_type='text/plain'),
+        name='robots'),
 
-    # index
-    url('^$', 'elevenbits.index.views.index'),
+    # 404 and 500 return codes
+    url(r'^500$', TemplateView.as_view(template_name='500.html'), name='500'),
+    url(r'^404$', TemplateView.as_view(template_name='404.html'), name='404'),
 
-    # blog
-    url(r'^blog', 'elevenbits.blog.views.index'),
-    # TODO: check this
-    url(r'^page/(?P<page>\d+)/$', 'elevenbits.blog.views.index'),
-    url(r'^page/$', 'elevenbits.blog.views.index'),
-    # TODO: check this
-    url(r'^detail/(?P<id>\d+)/$', 'elevenbits.blog.views.detail'),
+    # home, blog and contact sections
+    url(r'^$', include('home.urls', namespace='home')),
+    url(r'^blog', include('blog.urls', namespace='blog')),
+    url(r'^contact', include('contact.urls', namespace='contact')),
 
-    # TODO: check this
-    # tags
-    url(r'^tag/(?P<tag>\w+)/page/(?P<page>\d+)$', 'elevenbits.blog.views.tags'),
-    url(r'^tag/(?P<tag>\w+)', 'elevenbits.blog.views.tags'),
-
+    # TODO: handle these later
     url(r'^services', 'elevenbits.services.views.services'),
-    url(r'^contact', 'elevenbits.contact.views.contact'),
     url(r'^clients', 'elevenbits.index.views.clients'),
     url(r'^projects', 'elevenbits.index.views.projects'),
-
-    # users tracking
     #url(r'^tracking/', include('tracking.urls')),
 
     # admin
@@ -40,5 +41,9 @@ urlpatterns = patterns('',
 
 )
 
-# only for local development (DEBUG needs to be true for this to work) 
-#urlpatterns += staticfiles_urlpatterns()
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns += patterns(
+        '',
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    )

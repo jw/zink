@@ -1,148 +1,88 @@
 [
-    {
-        "pk": 1,
-        "model": "treemenus.menuitem",
+{
+        "pk": 14, 
+        "model": "treemenus.menuitem", 
         "fields": {
-            "parent": null,
-            "level": 0,
-            "url": "",
-            "menu": 1,
-            "rank": 0,
-            "caption": "Root",
-            "named_url": ""
+                "parent": null, 
+                "level": 0, 
+                "url": "", 
+                "menu": 3, 
+                "rank": 0, 
+                "caption": "root", 
+                "named_url": ""
         }
-    },
-    {
-        "pk": 12,
-        "model": "treemenus.menuitem",
+},
+{
+        "pk": 15, 
+        "model": "treemenus.menuitem", 
         "fields": {
-            "parent": 1,
-            "level": 1,
-            "url": "/blog",
-            "menu": 1,
-            "rank": 4,
-            "caption": "Blog",
-            "named_url": "Blog"
+                "parent": 14, 
+                "level": 1, 
+                "url": "/", 
+                "menu": 3, 
+                "rank": 0, 
+                "caption": "Home", 
+                "named_url": "home"
         }
-    },
-    {
-        "pk": 5,
-        "model": "treemenus.menuitem",
+},
+{
+        "pk": 16, 
+        "model": "treemenus.menuitem", 
         "fields": {
-            "parent": 1,
-            "level": 1,
-            "url": "/contact",
-            "menu": 1,
-            "rank": 5,
-            "caption": "Contact",
-            "named_url": "Contact"
+                "parent": 14, 
+                "level": 1, 
+                "url": "/contact", 
+                "menu": 3, 
+                "rank": 2, 
+                "caption": "Contact", 
+                "named_url": "Contact"
         }
-    },
-    {
-        "pk": 9,
-        "model": "treemenus.menuitem",
+},
+{
+        "pk": 17, 
+        "model": "treemenus.menuitem", 
         "fields": {
-            "parent": null,
-            "level": 0,
-            "url": "",
-            "menu": 2,
-            "rank": 0,
-            "caption": "root",
-            "named_url": ""
+                "parent": 14, 
+                "level": 1, 
+                "url": "/blog", 
+                "menu": 3, 
+                "rank": 1, 
+                "caption": "Blog", 
+                "named_url": "Blog"
         }
-    },
-    {
-        "pk": 11,
-        "model": "treemenus.menuitem",
+},
+{
+        "pk": 18, 
+        "model": "treemenus.menuitem", 
         "fields": {
-            "parent": 9,
-            "level": 1,
-            "url": "http://elevenbits.org:8080",
-            "menu": 2,
-            "rank": 1,
-            "caption": "Jira",
-            "named_url": "Jira"
+                "parent": null, 
+                "level": 0, 
+                "url": "", 
+                "menu": null, 
+                "rank": 0, 
+                "caption": "contact", 
+                "named_url": ""
         }
-    },
-    {
-        "pk": 10,
-        "model": "treemenus.menuitem",
+},
+{
+        "pk": 19, 
+        "model": "treemenus.menuitem", 
         "fields": {
-            "parent": 9,
-            "level": 1,
-            "url": "https://hg.elevenbits.org",
-            "menu": 2,
-            "rank": 0,
-            "caption": "Mercurial",
-            "named_url": "Mercurial"
+                "parent": null, 
+                "level": 0, 
+                "url": "", 
+                "menu": null, 
+                "rank": 0, 
+                "caption": "contact", 
+                "named_url": ""
         }
-    },
-    {
-        "pk": 2,
-        "model": "treemenus.menuitem",
+},
+{
+        "pk": 3, 
+        "model": "treemenus.menu", 
         "fields": {
-            "parent": 1,
-            "level": 1,
-            "url": "/",
-            "menu": 1,
-            "rank": 0,
-            "caption": "Home",
-            "named_url": "Home"
+                "root_item": 14, 
+                "name": "root"
         }
-    },
-    {
-        "pk": 3,
-        "model": "treemenus.menuitem",
-        "fields": {
-            "parent": 1,
-            "level": 1,
-            "url": "/projects",
-            "menu": 1,
-            "rank": 1,
-            "caption": "Projects",
-            "named_url": "Projects"
-        }
-    },
-    {
-        "pk": 6,
-        "model": "treemenus.menuitem",
-        "fields": {
-            "parent": 1,
-            "level": 1,
-            "url": "/services",
-            "menu": 1,
-            "rank": 2,
-            "caption": "Services",
-            "named_url": "Services"
-        }
-    },
-    {
-        "pk": 4,
-        "model": "treemenus.menuitem",
-        "fields": {
-            "parent": 1,
-            "level": 1,
-            "url": "/clients",
-            "menu": 1,
-            "rank": 3,
-            "caption": "Clients",
-            "named_url": "Clients"
-        }
-    },
-    {
-        "pk": 1,
-        "model": "treemenus.menu",
-        "fields": {
-            "root_item": 1,
-            "name": "root"
-        }
-    },
-    {
-        "pk": 2,
-        "model": "treemenus.menu",
-        "fields": {
-            "root_item": 9,
-            "name": "admin"
-        }
-    }
+}
 ]
