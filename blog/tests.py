@@ -15,6 +15,7 @@ logger = logging.getLogger('elevenbits')
 
 
 class TagTestCase(TestCase):
+    """Test the basic tag creation."""
 
     def setUp(self):
         self.linux = Tag.objects.create(tag="linux")
@@ -26,13 +27,12 @@ class TagTestCase(TestCase):
 
 
 class BlogTest(TestCase):
+    """Test all the blog features."""
 
     fixtures = ['static', 'contact', 'treemenus', 'menu_extras', 'blog']
 
-    def setUp(self):
-        pass
-
     def testBlog(self):
+        """Test the full blog."""
         client = Client()
         response = client.get(reverse('blog:blog'))
         self.assertContains(response, "Welcome to our blog")
@@ -40,6 +40,7 @@ class BlogTest(TestCase):
         self.assertContains(response, '/">Java</a>')
 
     def testTag(self):
+        """Test one tag."""
         client = Client()
         response = client.get(reverse('blog:tag', args=[4]))  # django
         self.assertContains(response, "<title>Tags - elevenbits</title>")
@@ -48,13 +49,15 @@ class BlogTest(TestCase):
         self.assertContains(response, "Blog Categories")
         self.assertContains(response, '/">Java</a>')
 
-    def testTag(self):
+    def testDetail(self):
+        """Test one single blog entry."""
         client = Client()
         # get the 'how to access cherokee-admin...' entry
         response = client.get(reverse('blog:detail', args=[21]))
         self.assertContains(response, 'How to access cherokee-admin')
 
     def testPageTag(self):
+        """Test the tag pages"""
         client = Client()
         # page 1
         response = client.get(reverse('blog:tagpage', args=[6, 1]))  # linux
@@ -84,6 +87,7 @@ class BlogTest(TestCase):
 
     # TODO: this must be somewhere else
     def test404(self):
+        """Test the 404 response."""
         client = Client()
         response = client.get("/this_page_does_not_exist")
         self.assertContains(response, "404 message", status_code=404)
