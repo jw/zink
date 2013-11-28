@@ -4,6 +4,7 @@
 #
 
 from django.db import models
+from elevenbits import settings
 
 
 class Tag(models.Model):
