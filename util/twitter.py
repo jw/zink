@@ -62,7 +62,7 @@ if __name__ == "__main__":
         print(tweets)
         for tweet in tweets:
             print(tweet)
-            print(tweet['text'])
-            print(tweet['source'])
-            print(tweet['created_at'])
-            print(tweet['user']['name'])
+            print("text: %s. " % tweet['text'])
+            print("source: %s." % tweet['source'])
+            print("created at: %s." % tweet['created_at'])
+            print("user: %s." % tweet['user']['name'])

@@ -18,9 +18,8 @@
 """
 
 #
-# Implementation note:
-# This is a Python 3 based class, with some changes to make
-# it Python 2.7 compliant.
+# This is a Python 3 based class, with some changes to make it Python 2.7
+# compliant.
 #
 
 from subprocess import Popen, PIPE

@@ -179,6 +179,7 @@ INSTALLED_APPS = (
     'treemenus',  # TODO: make sure to use the proper (Russian) one!
     # 'tracking',  # TODO: fix this!
     'util',
+    'tweeter',
     'south',
     'debug_toolbar',
 )
