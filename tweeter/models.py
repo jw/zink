@@ -1,3 +1,8 @@
+
+#
+# Zink
+#
+
 from django.db import models
 from jsonfield import JSONField
 
@@ -7,7 +12,8 @@ from datetime import datetime
 class Tweet(models.Model):
     """A very basic tweet."""
 
-    json = JSONField()
+    json = JSONField(help_text="The json stream of this tweet. "
+                               "All other properties are derived from it.")
 
     def _get_created_at(self):
         """Get the creation date of this tweet."""
@@ -40,7 +46,7 @@ class Tweet(models.Model):
     urls = property(_get_entities_urls)
 
     def _get_first_url(self):
-        """Return the url of this tweet,"""
+        """Return the first url of this tweet."""
         if isinstance(self.entities_urls, list):
             return self.entities_urls[0]
         else:
@@ -61,7 +67,7 @@ class Tweet(models.Model):
     user_name = property(_get_user_name)
 
     def _get_user_screen_name(self):
-        """Return the ``screen_name``` of this tweet's user"""
+        """Return the ``screen_name`` of this tweet's user"""
         if isinstance(self.user, dict):
             return self.user.get('screen_name')
         else:

@@ -4,7 +4,7 @@
 #
 
 from django.conf.urls import patterns, include, url
-from django.views.generic.base import TemplateView
+from django.views.generic.base import TemplateView, RedirectView
 
 from django.contrib import admin
 import settings
@@ -25,7 +25,9 @@ urlpatterns = patterns(
     url(r'^404$', TemplateView.as_view(template_name='404.html'), name='404'),
 
     # home, blog and contact sections
-    url(r'^$', include('home.urls', namespace='home')),
+    url(r'^$', RedirectView.as_view(url='/home')),
+    url(r'^home$', include('home.urls', namespace='home')),
+
     url(r'^blog', include('blog.urls', namespace='blog')),
     url(r'^contact', include('contact.urls', namespace='contact')),
 

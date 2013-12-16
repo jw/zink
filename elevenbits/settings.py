@@ -152,6 +152,12 @@ ROOT_URLCONF = 'elevenbits.urls'
 
 WSGI_APPLICATION = 'elevenbits.wsgi.application'
 
+CRONJOBS = [
+    ('*/5 * * * *', 'tweeter.admin.get_latest_tweets'),
+]
+
+# tweeter.admin
+
 TEMPLATE_DIRS = (
     join(dirname(__file__), 'templates').replace('\\', '/'),
 )
@@ -179,7 +185,11 @@ INSTALLED_APPS = (
     'treemenus',  # TODO: make sure to use the proper (Russian) one!
     # 'tracking',  # TODO: fix this!
     'util',
+
+    'django_crontab',
     'tweeter',
+
+
     'south',
     'debug_toolbar',
 )

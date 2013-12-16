@@ -33,9 +33,9 @@
                 <h6 class="widget-title">
                     Twitter Feed
                 </h6>
-                <ul class="categories">
-                    {% for tag in tags %}
-                        <li><a href="{% url 'blog:tag' tag.pk %}">{{ tag.tag }}</a></li>
+                <ul class="tweets-feed">
+                    {% for tweet in tweets %}
+                        <li>{{ tweet.text }}<span class="date">{{ tweet.created_at }}</span></li>
                     {% endfor %}
                 </ul>
             </div>

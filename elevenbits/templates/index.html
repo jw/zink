@@ -1,107 +1,49 @@
 {% extends "base.html" %}
 
-{% block body %}
+{% block content %}
 
-    <!-- image slider -->
-    {% if slider_images %}
-        <div class="container" xmlns="http://www.w3.org/1999/html">
-            <div class="sixteen columns">
-                <section class="slider">
-                    <div class="flexslider home">
-                        <ul class="slides">
-                            {% for image in slider_images %}
-                                <li>
-                                    <img src="{{ MEDIA_URL }}{{ image.file }}" alt="" />
-                                    {% if image.stitle or image.caption %}
-                                        <div class="slide-caption">
-                                            {% if image.title %}
-                                                <h3>{{ image.title }}</h3>
-                                            {% endif %}
-                                            {% if image.caption %}
-                                                <p>{{ image.caption }}</p>
-                                            {% endif %}
-                                        </div>
-                                    {% endif %}
-                                </li>
-                            {% endfor %}
-                        </ul>
+    <section id="content" class="container clearfix">
+
+    <h2 class="slogan align-center">
+        I am a software developer, designer and cyclist.<br>
+	    On this site I leave interesting findings and opinions.
+    </h2>
+
+    <h6 class="section-title">Latest stuff from my blog</h6>
+
+    {% if entries %}
+
+        <ul class="post-carousel">
+
+            {% for entry in entries %}
+                <li>
+
+                    <div class="entry-meta">
+
+                        <a href="{% url 'blog:detail' entry.pk %}">
+                            <span class="post-format link">Permalink</span>
+                        </a>
+
                     </div>
-                </section>
-            </div>
-        </div>
+
+                    <div class="entry-body">
+
+                        <a href="{% url 'blog:detail' entry.pk %}">
+                            <h5 class="title">{{ entry.title }}</h5>
+                        </a>
+
+                        <p><i>{{ entry.posted|date:"F Y" }}</i></p>
+
+                    </div>
+
+                </li>
+
+            {% endfor %}
+
+        </ul>
+
     {% endif %}
 
-    <div class="container">
-
-        <div class="icon-box-container">
-
-            <!-- Believes -->
-            <div class="one-third column">
-                <div class="icon-box">
-                    <i class="{% if believe.icon %}{{believe.icon}}{% else %}icon-box{% endif %}"
-                       style="margin-left: -10px;"></i>
-                    <h3>{{ believe.title|safe }}</h3>
-                    <p>{{ believe.body|safe }}</p>
-                </div>
-            </div>
-
-            <!-- Tools -->
-            <div class="one-third column">
-                <div class="icon-box">
-                    <i class="{% if tool.icon %}{{tool.icon}}{% else %}ico-cogwheel{% endif %}"></i>
-                    <h3>{{ tool.title|safe }}</h3>
-                    <p>{{ tool.body|safe }}</p>
-                </div>
-            </div>
-
-            <!-- About -->
-            <div class="one-third column">
-                <div class="icon-box">
-                    <i class="ico-circle-info"></i>
-                    <h3>About ElevenBits</h3>
-                    <p>{{ about.string|safe }}</p>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- clients -->
-    {% if clients %}
-
-        <div class="container">
-            <div class="sixteen columns">
-
-                <div class="headline no-margin">
-                    <h3>Some Of Our Clients</h3>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="container">
-
-            <div class="sixteen columns">
-
-                 <ul class="client-list" style="width: {{ width }}px;">
-
-                    {% for client in clients %}
-                        <li>
-                            <a href="{{ client.url }}">
-                                <img src="{{ MEDIA_URL }}{{ client.logo }}"
-                                     alt="{{ client.name }}"/>
-                            </a>
-                        </li>
-                    {% endfor %}
-
-                 </ul>
-                </div>
-
-            </div>
-
-        </div>
-
-    {%  endif %}
+    </section>
 
 {% endblock %}

@@ -1,5 +1,11 @@
+
+#
+# Zink
+#
+
 from django.test import TestCase
 from tweeter.models import Tweet
+from tweeter.admin import get_latest_tweets
 
 from datetime import datetime
 
@@ -12,6 +18,7 @@ class TweetTest(TestCase):
     def test_empty_tweet(self):
         """Test empty tweet properties."""
         tweet = Tweet.objects.create(json={})
+        tweet = Tweet.objects.get(id=tweet.id)
         self.assertEquals(tweet.json, {})
         self.assertEquals(tweet.created_at, 'Sun Dec 28 00:00:00 +0000 1969')
         self.assertEquals(tweet.created_at_as_datetime,
@@ -73,3 +80,11 @@ class TweetTest(TestCase):
                           'Wed Nov 13 22:32:07 +0000 2013')
         self.assertEquals(new_tweet.created_at_as_datetime,
                           datetime(2013, 11, 13, 22, 32, 7))
+
+
+class GetLatestTweetsTest(TestCase):
+
+    def test_get_latest_tweets(self):
+        tweets = get_latest_tweets(number=5)
+        all = Tweet.objects.all()
+        self.assertEqual(len(tweets), len(all))
