@@ -11,7 +11,7 @@ from fabric.context_managers import settings, cd
 from fabric.utils import abort
 from fabric.contrib import django
 
-from os.path import join, dirname, realpath
+from os.path import join, dirname, realpath, exists
 
 #
 # Defaults
@@ -35,6 +35,9 @@ env.account = "elevenbits"
 env.prefix = '/var/www'
 env.path = "%(prefix)s/%(project)s" % env
 env.local = dirname(realpath(join(__file__, "..")))
+print("local: %s." % env.local)
+
+# TODO: handle these properly
 env.upload = "%(prefix)s/%(project)s/static/upload" % env
 env.media = "%(prefix)s/%(project)s/media" % env
 
@@ -46,11 +49,11 @@ env.media = "%(prefix)s/%(project)s/media" % env
 
 def _create_environment(filename, environment):
     """
-        Create the correct env keys for an environment using a given
-        configuration filename.
-        @param filename: the filename to be read as configuration.
-        @param environment: the section in the filename to be used as
-        configuration file.
+    Create the correct env keys for an environment using a given configuration
+    filename.
+    @param filename: the filename to be read as configuration.
+    @param environment: the section in the filename to be used as
+    configuration file.
     """
     from ConfigParser import SafeConfigParser
     from os.path import isfile
@@ -70,9 +73,9 @@ def _create_environment(filename, environment):
 
 def _add_properties(config, section):
     """
-        Get the entries of a section from a config parser.
-        @param config: a ConfigParser.
-        @param section: a section in an ini file.
+    Get the entries of a section from a config parser.
+    @param config: a ConfigParser.
+    @param section: a section in an ini file.
     """
     from ConfigParser import NoOptionError
     try:
@@ -142,25 +145,23 @@ def revision(revision="tip"):
 @task
 def deploy():
     """
-        Setup a new website by installing everything we need, and fire up
-        the database.  Then start the server.
+    Install everything we need, and fire up the database.  Then start the
+    server.
     """
 
     require('settings', provided_by=[production, staging, development])
     require('branch', provided_by=[tip, revision])
 
-    print(green("Fabricating " + env.branch + " in " +
-                env.settings + " environment..."))
+    print(green("Fabricating %s in %s environment..." %
+                (env.branch, env.settings)))
 
     remove_previous_releases()
     create_prefix_directory()
 
     if env.settings == "development" and env.branch == "tip":
-        print(green("Since in development and deploying tip, " +
-                    "just symbolically linking..."))
+        print(green("Deploying hot development trunk..."))
         create_user()
         create_database()
-        #link_local_files()
         copy_current()
         create_media_directory()
     else:
@@ -171,7 +172,7 @@ def deploy():
         # TODO: create a new revision
 
         print(green("Getting files from repository..."))
-        if (env.branch == "tip"):
+        if env.branch == "tip":
             checkout_latest()
         else:
             checkout_revision(env.branch)
@@ -186,9 +187,13 @@ def deploy():
 
     #create_upload_directory()
 
-    create_uwsgi_upstart()
+    print(green("Checking to see if uwsgi is an upstart job..."))
+    handle_uwsgi_upstart()
 
-    update_webserver()
+    print(green("Updating nginx and uwsgi configuration..."))
+    update_webserver_and_uwsgi_configuration()
+
+    print(green("Restarting nginx and uwsgi..."))
     restart_webserver()
 
     print(green("Setup complete."))
@@ -226,25 +231,18 @@ def copy_current():
     sudo("chown www-data:www-data --recursive %(path)s" % env)
 
 
-def link_local_files():
-    sudo('ln -s %(local)s %(path)s' % env)
-    sudo("chown www-data:www-data --recursive %(path)s" % env)
-
-
+# TODO: check this - this seems wrong
 def create_upload_directory():
-    """
-        Allow write access by group on upload directory
-    """
+    """Allow write access by group on upload directory"""
     sudo("mkdir -p %(upload)s" % env)
     sudo("chown www-data:www-data --recursive %(upload)s" % env)
     sudo("chmod 777 %(upload)s" % env)
     sudo("ls -al %(upload)s" % env)
 
 
+# TODO: is this needed?
 def create_media_directory():
-    """
-        Create media directory
-    """
+    """Create media directory"""
     sudo("mkdir -p %(media)s" % env)
     sudo("chown www-data:www-data %(media)s" % env)
     sudo("chmod 777 %(media)s" % env)
@@ -252,18 +250,14 @@ def create_media_directory():
 
 
 def checkout_latest():
-    """
-        Get latest version from repository.
-    """
+    """Get latest version from repository."""
     sudo('hg clone '
          'https://%(account)s@%(repo)s/%(account)s/%(project)s '
          '%(path)s' % env, user="www-data")
 
 
 def checkout_revision(revision):
-    """
-        Clone a revision.
-    """
+    """Clone a revision."""
     sudo('hg clone -r %(branch)s '
          'https://%(account)s@%(repo)s/$(account)s/%(project)s '
          '%(path)s' % env, user="www-data")
@@ -305,9 +299,10 @@ def user_exists():
     """
     print('echo "SELECT 1 FROM pg_roles WHERE rolname=\'%(dbuser)s\';" '
           '| psql postgres -tA' % env)
-    output = run('echo "SELECT 1 FROM pg_roles WHERE rolname=\'%(dbuser)s\';" '
+    output = run('echo "SELECT 1'
+                 '      FROM pg_roles'
+                 '      WHERE rolname=\'%(dbuser)s\' and rolcreatedb is true;"'
                  ' | psql postgres -tA' % env)
-    print("output: " + output)
     if output == "1":
         print(green("Good.  User '%(dbuser)s' exists." % env))
         return True
@@ -317,13 +312,14 @@ def user_exists():
 
 def create_user():
     """
-        Creates a database user.
+    Create a database user.
     """
     if not user_exists():
         print(green("Creating user '%(dbuser)s'." % env))
-        output = run('echo "CREATE ROLE %(dbuser)s WITH LOGIN '
-                     'PASSWORD \'%(dbpassword)s\' CREATEDB;" | '
-                     'psql postgres -tA' % env)
+        output = run('echo "CREATE ROLE %(dbuser)s'
+                     '      WITH LOGIN'
+                     '      PASSWORD \'%(dbpassword)s\' CREATEDB;"'
+                     ' | psql postgres -tA' % env)
         if output == "CREATE DATABASE" or output == "CREATE ROLE":
             print(green("Created user successfully."))
         else:
@@ -333,7 +329,7 @@ def create_user():
 
 def database_exists():
     """
-        Check if the database exists.
+    Check if the database exists.
     """
     output = run('echo "SELECT 1 from pg_database WHERE '
                  'datname=\'%(dbname)s\';" | psql postgres -tA' % env)
@@ -357,9 +353,7 @@ def create_database():
 
 
 def drop_database():
-    """
-        Destroys the user and database for this project.
-    """
+    """Destroys the user and database for this project."""
     with settings(warn_only=True):
         run('dropdb %(dbname)s' % env)
         run('dropuser %(dbuser)s' % env)
@@ -413,14 +407,15 @@ def restart_webserver():
     sudo("service uwsgi restart")
 
 
-def update_webserver():
-    # remove default first
-    with settings(warn_only=True):
-        sudo("rm /etc/nginx/sites-enabled/default")
+def update_webserver_and_uwsgi_configuration():
+    # remove default first if it is there
+    if exists("/etc/nginx/sites-enabled/default"):
+        with settings(warn_only=True):
+            sudo("rm /etc/nginx/sites-enabled/default")
     # update nginx
     sudo("mkdir -p /etc/nginx/sites-available" % env)
     sudo("cp %(path)s/conf/%(host)s.conf /etc/nginx/sites-available" % env)
-    sudo("ln -sf %(path)s/conf/%(host)s.conf '"
+    sudo("ln -sf %(path)s/conf/%(host)s.conf "
          "/etc/nginx/sites-enabled/%(host)s.conf" % env)
     # update uwsgi
     sudo("mkdir -p /etc/uwsgi/apps-available" % env)
@@ -430,7 +425,26 @@ def update_webserver():
          "/etc/uwsgi/apps-enabled/django.ini" % env)
 
 
-def create_uwsgi_upstart():
-    # TODO: first check if it already exists
-    sudo("cp %(path)s/conf/uwsgi.conf /etc/init" % env)
-    sudo("initctl reload uwsgi")
+def uwsgi_is_upstart_job():
+    if exists("/etc/init/uwsgi.conf"):
+        output = run("initctl list", quiet=True)
+        if "uwsgi" in output:
+            return True
+        else:
+            return False
+    else:
+        return False
+
+
+def handle_uwsgi_upstart():
+    """Make sure that uwsgi is an upstart job."""
+    if uwsgi_is_upstart_job():
+        print("uwsgi seems to be an upstart job. Leaving as is.")
+    else:
+        print("Forcing uwsgi to be an upstart job...")
+        sudo("cp %(path)s/conf/uwsgi.conf /etc/init" % env)
+        sudo("initctl reload uwsgi")
+        if uwsgi_is_upstart_job():
+            print(green("Good. uwsgi is now an upstart job."))
+        else:
+            print(red("Could not make uwsgi an upstart job. Please check."))
