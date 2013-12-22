@@ -9,8 +9,6 @@ wsgiref==0.1.2
 # treemenus is at https://hg.elevenbits.org/treemenus
 #django-treemenus==0.8.8-pre
 
-fabric
-
 Django==1.6
 Fabric==1.8.0
 Markdown==2.3.1
