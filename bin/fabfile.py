@@ -100,7 +100,9 @@ def _add_properties(config, section):
 @task
 def production():
     """
-        Build for a Production environment.
+    Build for a Production environment.
+
+    Files will come from the repository.
     """
     _create_environment(CONFIGURATION_FILE, PRODUCTION)
 
@@ -108,7 +110,9 @@ def production():
 @task
 def staging():
     """
-        Build for a Staging environment.
+    Build for a Staging environment.
+
+    Files will come from the repository.
     """
     _create_environment(CONFIGURATION_FILE, STAGING)
 
@@ -116,7 +120,9 @@ def staging():
 @task
 def development():
     """
-        Build for a Development environment.
+    Build for a Development environment.
+
+    Files will come from the repository, or (when in tip) from the users drive.
     """
     _create_environment(CONFIGURATION_FILE, DEVELOPMENT)
 
@@ -129,7 +135,7 @@ def development():
 @task
 def tip():
     """
-        Deploy the tip.
+    Deploy the tip.
     """
     env.branch = 'tip'
 
@@ -137,7 +143,7 @@ def tip():
 @task
 def revision(revision="tip"):
     """
-        Deploy a certain revision.  Default is the tip.
+    Deploy a certain revision.  Default is the tip.
     """
     env.branch = revision
 
@@ -166,7 +172,6 @@ def deploy():
         create_media_directory()
     else:
         create_root_directory()
-        create_media_directory()
 
         # TODO: make a backup of the staging|production database environment
         # TODO: create a new revision
@@ -183,6 +188,7 @@ def deploy():
         populate_database()
         restart_database()
 
+        create_media_directory()  # TODO: is this necessary?
         add_cronjob()  # checks existence of some core processes
 
     #create_upload_directory()

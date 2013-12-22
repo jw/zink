@@ -3,11 +3,14 @@ INSTALL
 
 First install the required packages.
 
-These need to be installed first, using apt-get and via hg, so best to ensure mercurial is installed too:
+These need to be installed first, using apt-get and via hg, so best to
+ensure mercurial is installed too:
+- mercurial: sudo apt-get install mercurial
+- pip: sudo apt-get install python-pip
 - postgresql: sudo apt-get install postgresql
 - python-psycopg2: sudo apt-get install python-psycopg2
-- tracking: hg clone https://hg.elevenbits.org/tracking and sudo python setup.py install
-- treemenus: hg clone https://hg.elevenbits.org/treemenus and sudo python setup.py install
+#- tracking: hg clone https://hg.elevenbits.org/tracking and sudo python setup.py install
+#- treemenus: hg clone https://hg.elevenbits.org/treemenus and sudo python setup.py install
 Later, the pip install -r requirements will install the other packages/libraries
 
 database:
