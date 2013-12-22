@@ -16,7 +16,6 @@ Pygments==1.5
 South==0.8.4
 django-crontab==0.5.1
 django-debug-toolbar==0.11.0
-django-rainbowtests==0.1.3
 django-tracking==0.4.1
 jsonfield==0.9.20
 mercurial==2.2.2
