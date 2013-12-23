@@ -184,6 +184,7 @@ def deploy():
 
         install_requirements()
 
+        create_user()
         create_database()
         populate_database()
         restart_database()
@@ -282,7 +283,7 @@ def install_requirements():
 @task
 def backup():
     """
-        Dump the latest content of the portal and add it to the repository.
+    Dump the latest content of the portal and add it to the repository.
     """
     with cd(env.path):
         print(env.local)
@@ -301,13 +302,12 @@ def backup():
 
 def user_exists():
     """
-        Check if the database user exists.
+    Check if the database user exists.
     """
-    print('echo "SELECT 1 FROM pg_roles WHERE rolname=\'%(dbuser)s\';" '
-          '| psql postgres -tA' % env)
     output = run('echo "SELECT 1'
                  '      FROM pg_roles'
-                 '      WHERE rolname=\'%(dbuser)s\' and rolcreatedb is true;"'
+                 '      WHERE rolname=\'%(dbuser)s\' and '
+                 '            rolcreatedb is true;"'
                  ' | psql postgres -tA' % env)
     if output == "1":
         print(green("Good.  User '%(dbuser)s' exists." % env))
@@ -321,12 +321,20 @@ def create_user():
     Create a database user.
     """
     if not user_exists():
+        # first remove user...
+        output = run('echo "drop user %(dbuser)s;"'
+                     '| psql postgres -tA' % env)
+        if output == "CREATE ROLE":
+            print(green("Dropped user first."))
+        elif output.startswith("ERROR"):
+            pass  # user is not there - all fine
+        # ...then create user...
         print(green("Creating user '%(dbuser)s'." % env))
         output = run('echo "CREATE ROLE %(dbuser)s'
-                     '      WITH LOGIN'
-                     '      PASSWORD \'%(dbpassword)s\' CREATEDB;"'
+                     '      WITH PASSWORD \'%(dbpassword)s\''
+                     '           CREATEDB;"'
                      ' | psql postgres -tA' % env)
-        if output == "CREATE DATABASE" or output == "CREATE ROLE":
+        if output == "CREATE ROLE":
             print(green("Created user successfully."))
         else:
             print(red("Could not create user."))
@@ -337,8 +345,10 @@ def database_exists():
     """
     Check if the database exists.
     """
-    output = run('echo "SELECT 1 from pg_database WHERE '
-                 'datname=\'%(dbname)s\';" | psql postgres -tA' % env)
+    output = run('echo "SELECT 1 '
+                 '      FROM pg_database '
+                 '      WHERE datname=\'%(dbname)s\'; "'
+                 '| psql postgres -tA' % env)
     if output == "1":
         print(green("Good.  Database '%(dbname)s' exists." % env))
         return True
@@ -350,7 +360,7 @@ def create_database():
     if not database_exists():
         print(green("Creating database '%(dbname)s'..." % env))
         output = run('echo "CREATE DATABASE %(dbname)s OWNER %(dbuser)s;" '
-                     '| psql postgres -tA' % env)
+                     '| psql postgres -tA -U %(dbname)s' % env)
         if output == "CREATE DATABASE":
             print(green("Created database successfully."))
         else:
