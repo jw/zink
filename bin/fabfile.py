@@ -537,6 +537,7 @@ def populate_database():
         run('./manage.py migrate')
         run('./manage.py loaddata static.json')
         run('./manage.py loaddata treemenus.json')
+        run('./manage.py loaddata menu_extras.json')
         run('./manage.py loaddata blog.json')
     # update the deployment time
     with cd(env.path + "/bin"):

@@ -183,6 +183,8 @@ INSTALLED_APPS = (
     'elevenbits',
     # utility apps
     'treemenus',  # TODO: make sure to use the proper (Russian) one!
+    'elevenbits.menu_extras',
+
     # 'tracking',  # TODO: fix this!
     'util',
 
