@@ -433,8 +433,9 @@ def user_exists():
     """
     output = run('echo "SELECT 1'
                  '      FROM pg_roles'
-                 '      WHERE rolname=\'%(dbuser)s\' and '
-                 '            rolcreatedb is true;"'
+                 '      WHERE rolname=\'%(dbuser)s\' and'
+                 '            rolcreatedb is true and'
+                 '            rolcanlogin is true;"'
                  ' | psql postgres -tA' % env)
     if output == "1":
         print(green("Good.  User '%(dbuser)s' exists." % env))
@@ -459,7 +460,7 @@ def create_user():
         print(green("Creating user '%(dbuser)s'." % env))
         output = run('echo "CREATE ROLE %(dbuser)s'
                      '      WITH PASSWORD \'%(dbpassword)s\''
-                     '           CREATEDB;"'
+                     '           CREATEDB LOGIN;"'
                      ' | psql postgres -tA' % env)
         print(yellow("The current output: %s." % output))
         if output == "CREATE ROLE":

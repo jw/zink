@@ -12,6 +12,9 @@ ensure mercurial is installed too:
 
 - sudo apt-get install python-dev
 
+- sudo apt-get install uwsgi
+- sudo apt-get install nginx
+
 #- tracking: hg clone https://hg.elevenbits.org/tracking and sudo python setup.py install
 #- treemenus: hg clone https://hg.elevenbits.org/treemenus and sudo python setup.py install
 Later, the pip install -r requirements will install the other packages/libraries

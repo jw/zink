@@ -28,7 +28,7 @@ if HOSTNAME in ["antwerp", "localhost", '127.0.0.1']:
     DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = ["localhost"]
+ALLOWED_HOSTS = ["localhost", ".elevenbits.com", ".elevenbits.org", ".m8n.be"]
 
 #
 # Test properties
@@ -87,7 +87,7 @@ MANAGERS = ADMINS
 TIME_ZONE = 'Europe/Brussels'
 LANGUAGE_CODE = 'en-BE'
 
-# TODO: check this. Is this handy when using m8n.be, elevenbits.com
+# TODO: check this. Is this handy when using m8n.be, elevenbits.(com|org)
 SITE_ID = 1
 
 # use i18n, l10n and make dates time zone
@@ -109,7 +109,7 @@ STATICFILES_FINDERS = (
 
 # static location
 STATIC_ROOT = '/var/www/zink/static/'
-STATIC_URL = "http://localhost/static/"
+STATIC_URL = "/static/"
 
 # upload location
 MEDIA_ROOT = "/var/www/zink/media/"
