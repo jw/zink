@@ -4,6 +4,7 @@
 #
 
 from fabric.api import run, env
+from fabric.operations import put
 from fabric.decorators import task
 from fabric.colors import red, green, yellow
 from fabric.operations import require, sudo
@@ -11,7 +12,10 @@ from fabric.context_managers import settings, cd
 from fabric.utils import abort
 from fabric.contrib import django
 
-from os.path import join, dirname, realpath, exists
+from os import makedirs
+from os.path import join, dirname, realpath, exists, isfile
+from ConfigParser import SafeConfigParser, NoOptionError
+from string import Template
 
 #
 # Defaults
@@ -27,30 +31,31 @@ STAGING = "staging"
 #
 
 # repository is https://elevenbits@bitbucket.org/elevenbits/zink
-env.project = "zink"
+env.name = "zink"
 env.repo = "bitbucket.org"
 env.account = "elevenbits"
 
 # deployment properties
 env.prefix = '/var/www'
-env.path = "%(prefix)s/%(project)s" % env
+env.remote = env.path = "%(prefix)s/%(name)s" % env
 env.local = dirname(realpath(join(__file__, "..")))
 print("local: %s." % env.local)
+print("remote: %s" % env.remote)
 
 # TODO: handle these properly
-env.upload = "%(prefix)s/%(project)s/static/upload" % env
-env.media = "%(prefix)s/%(project)s/media" % env
+env.upload = "%(prefix)s/%(name)s/static/upload" % env
+env.media = "%(prefix)s/%(name)s/media" % env
 
 
 #
-# Some config utility methods
+# Some config utility and property retrieval methods
 #
 
 
 def _create_environment(filename, environment):
     """
     Create the correct env keys for an environment using a given configuration
-    filename.
+    filename. Also the properties of the project are retrieved.
     @param filename: the filename to be read as configuration.
     @param environment: the section in the filename to be used as
     configuration file.
@@ -58,24 +63,90 @@ def _create_environment(filename, environment):
     from ConfigParser import SafeConfigParser
     from os.path import isfile
     if not isfile(filename):
-        print(red("Configuration file '" + filename + "' does not exist."))
-        return False
+        print(red("Configuration file '%s' does not exist." % filename))
+        abort("Could not find configuration file %s." % filename)
     config = SafeConfigParser()
     config.read(filename)
     if environment in config.sections():
         env.settings = environment
-        return _add_properties(config, environment)
+        _add_environment_properties(config, environment)
+        _add_project_properties(env.name)
     else:
         print(red("Could not find the [%s] section in '%s'.") %
               (environment, filename))
-        return False
+        abort("Could not find the [%s] section in '%s'." %
+              (environment, filename))
 
 
-def _add_properties(config, section):
+def _add_project_properties(name):
     """
-    Get the entries of a section from a config parser.
+    Read the project.properties file and add the different sections into
+    the env.project as a dict. There should be three sections: project, email
+    and twitter.
+    """
+    filename = name + ".properties"
+    print("Getting properties of project '%s'..." % filename)
+    if not isfile(filename):
+        print(red("Configuration file '%s' does not exist." % filename))
+        abort("Could not find configuration file %s." % filename)
+
+    # read the file
+    config = SafeConfigParser()
+    config.read(filename)
+
+    # check the three sections
+    if "email" not in config.sections():
+        abort("Missing the email section in %s." % filename)
+    if "twitter" not in config.sections():
+        abort("Missing the twitter section in %s." % filename)
+    if "project" not in config.sections():
+        abort("Missing the project section in %s." % filename)
+
+    # read and handle them
+    env["project"] = {}
+    env["project"]["name"] = name
+    try:
+        env["project"]["key"] = config.get("project", "key")
+    except NoOptionError:
+        abort("No key entry found in project section in the %s file." %
+              filename)
+    try:
+        _add_email_properties(config)
+        _add_twitter_properties(config)
+    except NoOptionError as noe:
+        abort("Could not find the '" + noe.option +
+              "' key in the '" + noe.section + "' section.")
+
+
+def _add_email_properties(config):
+    """
+    Add the email properties to the env["project"]["email"] as a dict.
+    """
+    e = env["project"]["email"] = {}
+    e["host"] = config.get("email", "host")
+    e["port"] = config.get("email", "port")
+    e["user"] = config.get("email", "user")
+    e["password"] = config.get("email", "password")
+    e["tls"] = config.get("email", "tls")
+
+
+def _add_twitter_properties(config):
+    """
+    Add the twitter properties to the env["project"]["twitter"] as a dict.
+    """
+    t = env["project"]["twitter"] = {}
+    t["name"] = config.get("twitter", "name")
+    t["consumer.key"] = config.get("twitter", "consumer.key")
+    t["consumer.secret"] = config.get("twitter", "consumer.secret")
+    t["oauth.token"] = config.get("twitter", "oauth.token")
+    t["oauth.token.secret"] = config.get("twitter", "oauth.token.secret")
+
+
+def _add_environment_properties(config, section):
+    """
+    Get the database entries of a environment section from a config parser.
     @param config: a ConfigParser.
-    @param section: a section in an ini file.
+    @param section: a section in an ini file, e.g. staging, or production.
     """
     from ConfigParser import NoOptionError
     try:
@@ -89,7 +160,8 @@ def _add_properties(config, section):
     except NoOptionError as noe:
         print(red("Could not find the '" + noe.option +
               "' key in the '" + noe.section + "' section."))
-        return False
+        abort("Could not find the '" + noe.option +
+              "' key in the '" + noe.section + "' section.")
 
 
 #
@@ -103,6 +175,9 @@ def production():
     Build for a Production environment.
 
     Files will come from the repository.
+    Secret environment properties (like email, twitter,...) are first
+    retrieved from the zink.properties file; then a the local_settings.py
+    is populated by them.
     """
     _create_environment(CONFIGURATION_FILE, PRODUCTION)
 
@@ -113,6 +188,9 @@ def staging():
     Build for a Staging environment.
 
     Files will come from the repository.
+    Secret environment properties (like email, twitter,...) are first
+    retrieved from the zink.properties file; then a the local_settings.py
+    is populated by them.
     """
     _create_environment(CONFIGURATION_FILE, STAGING)
 
@@ -123,6 +201,10 @@ def development():
     Build for a Development environment.
 
     Files will come from the repository, or (when in tip) from the users drive.
+    When not in tip, the secret environment properties (like email,
+    twitter,...) are first retrieved from the zink.properties file; then
+    a the local_settings.py is populated by them.  When in tip, the
+    current local_settings.py is used as is.
     """
     _create_environment(CONFIGURATION_FILE, DEVELOPMENT)
 
@@ -171,6 +253,7 @@ def deploy():
         copy_current()
         create_media_directory()
     else:
+        print(green("Creating..."))
         create_root_directory()
 
         # TODO: make a backup of the staging|production database environment
@@ -181,6 +264,8 @@ def deploy():
             checkout_latest()
         else:
             checkout_revision(env.branch)
+
+        create_local_settings()
 
         install_requirements()
 
@@ -238,6 +323,48 @@ def copy_current():
     sudo("chown www-data:www-data --recursive %(path)s" % env)
 
 
+@task
+def create_local_settings():
+    d = {}
+    # project
+    d["project_key"] = env["project"]["key"]
+    # database
+    d["db_name"] = env.dbname
+    d["db_username"] = env.dbuser
+    d["db_password"] = env.dbpassword
+    # email
+    d["email_host"] = env["project"]["email"]["host"]
+    d["email_port"] = env["project"]["email"]["port"]
+    d["email_user"] = env["project"]["email"]["user"]
+    d["email_password"] = env["project"]["email"]["password"]
+    d["email_tls"] = env["project"]["email"]["tls"]
+    # twitter
+    t = env["project"]["twitter"]
+    d["twitter_name"] = t["name"]
+    d["twitter_consumer_key"] = t["consumer.key"]
+    d["twitter_consumer_secret"] = t["consumer.secret"]
+    d["twitter_oauth_token"] = t["oauth.token"]
+    d["twitter_oauth_token_secret"] = t["oauth.token.secret"]
+    #print("d: %s" % d)
+    #for (entry, key) in d.items():
+    #    print("%s -> %s" % (entry, key))
+    # get the template
+    with open("template.py") as f:
+        s = Template(f.read())
+    #print("s: %s" % s.template)
+    reply = s.substitute(d)
+    # if not exists("%s/elevenbits" % env.remote):
+    #     makedirs("%s/elevenbits" % env.remote)
+    with open("/tmp/foobar.py", "w") as f:
+        f.write(reply)
+    sudo("mkdir -p %(remote)s/elevenbits/" % env, user="www-data")
+    put("/tmp/foobar.py",
+        "%(remote)s/elevenbits/local_settings.py" % env,
+        use_sudo=True)
+    sudo("chown www-data:www-data %(remote)s/elevenbits/local_settings.py" %
+         env)
+
+
 # TODO: check this - this seems wrong
 def create_upload_directory():
     """Allow write access by group on upload directory"""
@@ -259,14 +386,14 @@ def create_media_directory():
 def checkout_latest():
     """Get latest version from repository."""
     sudo('hg clone '
-         'https://%(account)s@%(repo)s/%(account)s/%(project)s '
+         'https://%(account)s@%(repo)s/%(account)s/%(name)s '
          '%(path)s' % env, user="www-data")
 
 
 def checkout_revision(revision):
     """Clone a revision."""
     sudo('hg clone -r %(branch)s '
-         'https://%(account)s@%(repo)s/$(account)s/%(project)s '
+         'https://%(account)s@%(repo)s/$(account)s/%(name)s '
          '%(path)s' % env, user="www-data")
 
 
@@ -334,6 +461,7 @@ def create_user():
                      '      WITH PASSWORD \'%(dbpassword)s\''
                      '           CREATEDB;"'
                      ' | psql postgres -tA' % env)
+        print(yellow("The current output: %s." % output))
         if output == "CREATE ROLE":
             print(green("Created user successfully."))
         else:
@@ -360,7 +488,7 @@ def create_database():
     if not database_exists():
         print(green("Creating database '%(dbname)s'..." % env))
         output = run('echo "CREATE DATABASE %(dbname)s OWNER %(dbuser)s;" '
-                     '| psql postgres -tA -U %(dbname)s' % env)
+                     '| psql postgres -tA' % env)
         if output == "CREATE DATABASE":
             print(green("Created database successfully."))
         else:

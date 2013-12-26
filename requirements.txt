@@ -7,7 +7,7 @@ wsgiref==0.1.2
 #django-tracking==0.4.0
 
 # treemenus is at https://hg.elevenbits.org/treemenus
-#django-treemenus==0.8.8-pre
+django-treemenus==0.8.8-pre
 
 Django==1.6
 Fabric==1.8.0
