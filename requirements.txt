@@ -6,10 +6,8 @@ wsgiref==0.1.2
 # tracking is at https://hg.elevenbits.org/tracking
 #django-tracking==0.4.0
 
-# treemenus is at https://hg.elevenbits.org/treemenus
-django-treemenus==0.8.8-pre
-
-Django==1.6
+django-treemenus==0.9.0
+Django==1.6.1
 Fabric==1.8.0
 Markdown==2.3.1
 Pygments==1.5
