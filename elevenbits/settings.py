@@ -109,11 +109,11 @@ STATICFILES_FINDERS = (
 
 # static location
 STATIC_ROOT = '/var/www/zink/static/'
-STATIC_URL = "/static/"
+STATIC_URL = "http://elevenbits.org/static/"
 
 # upload location
 MEDIA_ROOT = "/var/www/zink/media/"
-MEDIA_URL = "http://localhost/media/"
+MEDIA_URL = "http://elevenbits.org/media/"
 
 FIXTURE_DIRS = (join(SITE_ROOT, 'fixtures'),)
 
