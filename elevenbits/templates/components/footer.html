@@ -37,12 +37,23 @@
 	</div>
 
 </footer>
+
 <footer id="footer-bottom" class="clearfix">
     <div class="container">
         <ul>
             <li>ElevenBits &copy; 2014</li>
-            <li><a href="#">About</a></li>
-            <li><a href="">Deployment</a></li>
+            {% load version %}
+            <li><a href="#">Django 1.6.1 uWSGI 1.9.13 nginx 1.2.6</a></li>
+            <li><a href="#">
+                {% load relative_time %}
+                zink {{deployment.version}} deployed {{deployment.timestamp|relative_time}}
+            </a></li>
+            <li><a href="#">
+                {% load tracking_tags %}
+                {% visitors_on_site as visitors %}
+                There {{ vistors|pluralize:"is ,are " }}
+                {{ visitors }} active user{{ visitors|pluralize }}
+            </a></li>
         </ul>
     </div>
 </footer>

@@ -107,10 +107,12 @@ STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.AppDirectoriesFinder"
 )
 
+# TODO: check this
 # static location
 STATIC_ROOT = '/var/www/zink/static/'
 STATIC_URL = "http://elevenbits.org/static/"
 
+# TODO: check this
 # upload location
 MEDIA_ROOT = "/var/www/zink/media/"
 MEDIA_URL = "http://elevenbits.org/media/"
@@ -141,11 +143,10 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-#    'tracking.middleware.BannedIPMiddleware',
-#     'tracking.middleware.VisitorTrackingMiddleware',
-#     'tracking.middleware.VisitorCleanUpMiddleware',
-# TODO: try to add this one:
-#    'django.middleware.gzip.GZipMiddleware',
+    'tracking.middleware.BannedIPMiddleware',
+    'tracking.middleware.VisitorTrackingMiddleware',
+    'tracking.middleware.VisitorCleanUpMiddleware',
+    'django.middleware.gzip.GZipMiddleware',
 )
 
 ROOT_URLCONF = 'elevenbits.urls'
@@ -185,7 +186,8 @@ INSTALLED_APPS = (
     'treemenus',  # TODO: make sure to use the proper (Russian) one!
     'elevenbits.menu_extras',
 
-    # 'tracking',  # TODO: fix this!
+    'tracking',
+
     'util',
 
     'django_crontab',

@@ -3,54 +3,54 @@ from django.utils import timezone
 
 register = template.Library()
 
+
 @register.simple_tag
 def relative_time(obj):
     """
-        Convert datetime objects into relative time.
+    Convert datetime objects into relative time.
     """
     
     now = timezone.now()
     difference = now - obj
     
     # seconds
-    HALF_MINUTE = 30
-    MINUTE = 60
-    TWO_MINUTES = 2 * MINUTE
-    HOUR = 60 * MINUTE
-    TWO_HOURS = 2 * HOUR
-    ONE_DAY = 24 * HOUR
-    FOURTY_EIGHT_HOURS = 48 * HOUR
+    half_minute = 30
+    minute = 60
+    two_minutes = 2 * minute
+    hour = 60 * minute
+    two_hours = 2 * hour
+    one_day = 24 * hour
+    forty_eight_hours = 48 * hour
     
     # days
-    ONE_WEEK = 7
-    THREE_WEEKS = 3 * ONE_WEEK
-    ONE_MONTH = 4 * ONE_WEEK
-    THREE_MONTHS = 3 * ONE_MONTH
-    FIFTEEN_MONTHS = 15 * ONE_MONTH
-    ONE_YEAR = 365
+    one_week = 7
+    three_weeks = 3 * one_week
+    one_month = 4 * one_week
+    three_months = 3 * one_month
+    fifteen_months = 15 * one_month
+    one_year = 365
 
     # TODO: use pluralise to handle 1 second vs 2+ secondS
-    string = ''
-    if (difference.days < 2):
-        if (difference.seconds < HALF_MINUTE):
+    if difference.days < 2:
+        if difference.seconds < half_minute:
             string = 'moments ago'
-        elif (difference.seconds < TWO_MINUTES):
+        elif difference.seconds < two_minutes:
             string = str(difference.seconds) + ' seconds ago'
-        elif (difference.seconds < TWO_HOURS):
-            string = str(difference.seconds / MINUTE) + ' minutes ago'
-        elif (difference.seconds < FOURTY_EIGHT_HOURS):
-            string = str(difference.seconds / HOUR) + ' hours ago'
+        elif difference.seconds < two_hours:
+            string = str(difference.seconds / minute) + ' minutes ago'
+        elif difference.seconds < forty_eight_hours:
+            string = str(difference.seconds / hour) + ' hours ago'
         else:
-            string = str(difference.seconds / ONE_DAY)  + ' days ago'
+            string = str(difference.seconds / one_day) + ' days ago'
     else:
-        if (difference.days < THREE_WEEKS):
-            string = str(difference.days)  + ' days ago'
-        elif (difference.days < THREE_MONTHS):
-            string = str(difference.days / ONE_WEEK)  + ' weeks ago'
-        elif (difference.days < FIFTEEN_MONTHS):
-            string = str(difference.days / ONE_MONTH) + ' months ago'
+        if difference.days < three_weeks:
+            string = str(difference.days) + ' days ago'
+        elif difference.days < three_months:
+            string = str(difference.days / one_week) + ' weeks ago'
+        elif difference.days < fifteen_months:
+            string = str(difference.days / one_month) + ' months ago'
         else:
-            string = str(difference.days / ONE_YEAR) + ' years ago'
+            string = str(difference.days / one_year) + ' years ago'
     return string
     
 register.filter(relative_time)

@@ -8,7 +8,6 @@ from elevenbits.deployment.models import Deployment
 
 class DeploymentTest(TestCase):
 
-
     def setUp(self):
         self.client = Client()
 
@@ -35,23 +34,32 @@ class RelativeTimeTest(TestCase):
         self.twoyearsago = Deployment.objects.create(timestamp=(now - timedelta(weeks=55*2)))
         
     def test_relative_time_tensecondsago(self):
-        "After ten seconds, the relative_time tag should just show 'moments ago'"
-        out = Template(
-                "{% load relative_time %}"
-                "{{deployment.timestamp|relative_time}}"
-            ).render(Context({'deployment':self.tensecondsago}))
+        """
+        After ten seconds, the relative_time tag should
+        just show 'moments ago'
+        """
+        out = Template("{% load relative_time %}"
+                       "{{deployment.timestamp|relative_time}}"
+                       ).render(Context({'deployment':
+                                         self.tensecondsago}))
         self.assertEqual(out, "moments ago")
 
     def test_relative_time_fourtytwosecondsago(self):
-        "After 42 seconds, the relative_time tag should just show 'about 42 seconds ago'"
-        out = Template(
-                "{% load relative_time %}"
-                "{{deployment.timestamp|relative_time}}"
-            ).render(Context({'deployment':self.fourtytwosecondsago}))
+        """
+        After 42 seconds, the relative_time tag should
+        just show 'about 42 seconds ago'
+        """
+        out = Template("{% load relative_time %}"
+                       "{{deployment.timestamp|relative_time}}"
+                       ).render(Context({'deployment':
+                                         self.fourtytwosecondsago}))
         self.assertEqual(out, "42 seconds ago")
 
     def test_relative_time_threeminutesago(self):
-        "After three minutes, the relative_time tag should just show 'about 3 minutes ago'"
+        """
+        After three minutes, the relative_time tag should
+        just show 'about 3 minutes ago'
+        """
         out = Template(
                 "{% load relative_time %}"
                 "{{deployment.timestamp|relative_time}}"
