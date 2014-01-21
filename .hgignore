@@ -4,7 +4,7 @@ syntax: glob
 
 syntax: regexp
 
-# private property files
+# private files
 ^elevenbits/local_settings\.py
 ^bin/fabfile\.properties$
 ^bin/processes\.properties$

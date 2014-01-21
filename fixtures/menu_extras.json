@@ -1,0 +1,32 @@
+[
+{
+        "pk": 8, 
+        "model": "menu_extras.menuitemextension", 
+        "fields": {
+                "selected_patterns": "/index\r\n", 
+                "menu_item": 15, 
+                "description": "all starts here", 
+                "published": true
+        }
+},
+{
+        "pk": 9, 
+        "model": "menu_extras.menuitemextension", 
+        "fields": {
+                "selected_patterns": "/contact\r\n", 
+                "menu_item": 16, 
+                "description": "enquire here", 
+                "published": true
+        }
+},
+{
+        "pk": 10, 
+        "model": "menu_extras.menuitemextension", 
+        "fields": {
+                "selected_patterns": "/blog\r\n", 
+                "menu_item": 17, 
+                "description": "what we think", 
+                "published": true
+        }
+}
+]
