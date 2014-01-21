@@ -1,25 +1,25 @@
+Django==1.6.1
+
+uWSGI==1.9.21.1
 argparse==1.2.1
-#mercurial==2.4-rc
-#psycopg2==2.4.5
 wsgiref==0.1.2
 
 # django-tracking
 hg+https://elevenbits@bitbucket.org/elevenbits/django-tracking
 
 django-treemenus==0.9.0
-Django==1.6.1
 Fabric==1.8.0
 Markdown==2.3.1
 Pygments==1.5
 South==0.8.4
 django-crontab==0.5.1
 django-debug-toolbar==0.11.0
-#django-tracking==0.4.1
 jsonfield==0.9.20
-#mercurial==2.2.2
+
+# twitter
 oauth==1.0.1
 oauth2==1.5.211
 oauthlib==0.6.0
-pep8==1.4.6
 python-twitter==1.1
-uWSGI==1.9.21.1
+
+pep8==1.4.6

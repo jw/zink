@@ -9,6 +9,16 @@
 	    On this site I leave interesting findings and opinions.
     </h2>
 
+    <h6 class="section-title">Latest blog entry</h6>
+
+    <hr/>
+
+    {% if entry %}
+
+        {% include "entry.html" %}
+
+    {% endif %}
+
     <h6 class="section-title">Latest stuff from my blog</h6>
 
     {% if entries %}

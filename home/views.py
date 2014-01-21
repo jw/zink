@@ -24,6 +24,7 @@ def home(request):
     logger.info("Retrieved %s blog entries." % len(entry_list))
 
     attributes = {'deployment': deployment,
+                  'entry': entry_list[0],
                   'entries': entry_list,
                   'static': static}
 

@@ -1,57 +1,111 @@
 
 INSTALL
 
-First install the required packages.
+The required packages
+=====================
 
 These need to be installed first, using apt-get and via hg, so best to
 ensure mercurial is installed too:
+
 - mercurial: sudo apt-get install mercurial
 - pip: sudo apt-get install python-pip
 - postgresql: sudo apt-get install postgresql
 - python-psycopg2: sudo apt-get install python-psycopg2
 
+# TODO: not sure of this
 - sudo apt-get install python-dev
 
 - sudo apt-get install uwsgi
 - sudo apt-get install nginx
 
-#- tracking: hg clone https://hg.elevenbits.org/tracking and sudo python setup.py install
-#- treemenus: hg clone https://hg.elevenbits.org/treemenus and sudo python setup.py install
-Later, the pip install -r requirements will install the other packages/libraries
+Later, the pip install -r requirements will install the other
+packages/libraries
 
-hg:
+The database
+============
 
-
-database:
+The database can be created using the fabric script (see below), but you
+can also create the database yourself.  Best to use the properties you
+need to specify in the fabfile.properties file.
 
 0) sudo -u postgres psql
 
 1) Make sure you own the database engine
 postgres=# ALTER USER postgres WITH PASSWORD '<your password>';
 
-2) Create a django database
-postgres=# create user django with password 'Reinhardt';
-postgres=# create database django owner django;
+2) Create a database user
+postgres=# create role <db.username> with createdb login
+postgres-# password '<db.password>';
 
-Note:
-sudo -u postgres createuser -D -A -P jw
+2) Create a database owned by this user
+postgres=# create database <db.name> owner <db.username>;
 
-webserver:
+The webserver
+=============
 
-nginx
+1) nginx
+2) uwsgi
 
-environments:
+Fabric
+======
 
-Handled via fabfile:
+fabfile.properties
+~~~~~~~~~~~~~~~~~~
 
-- development: your machine
-- staging: staging.elevenbits.org
-- production: www.elevenbits.org
+Fabric uses the fabfile.properties file to get the authentication data
+(password, username) for three building environments:
 
-Create fixtures:
+ - development: your machine
+ - staging: staging.elevenbits.org
+ - production: www.elevenbits.org
+
+zink.properties
+~~~~~~~~~~~~~~~
+
+It also uses the zink.properties file which needs to contain these entries:
+
+[project]
+key: <the key of the project, used by Django to secure your application>
+
+[email]
+host: <your email host>
+port: <your email port>
+user: <your email user>
+password: <your email password>
+tls: <set True to use tls (secure) mailing, False otherwise>
+
+[twitter]
+name: <your twitter name>
+consumer.key: <your consumer key>
+consumer.secret: <your consumer secret>
+oauth.token: <your oauth token>
+oauth.token.secret: <your oauth token secret>
+
+settings.py
+~~~~~~~~~~~
+
+Using these two files, the Fabric will create a local settings file which
+will become part of settings.py.
+
+Database creation
+~~~~~~~~~~~~~~~~~
+
+Using the local settings file (containing all the database authentication
+rules), Fabric will make sure that the database user and database are
+present.  If they are not, they are created and the database is populated
+with some default data.  When the user and the database are available,
+no population is done during the deploy step.
+
+It is of course possible to populate the database using the populate task.
+
+Fixtures
+========
+
+To create fixtures:
 
 python manage.py dumpdata --indent 4 treemenus > /home/jw/treemenus.json
 python manage.py dumpdata --indent 4 blog > /home/jw/blog.json
 python manage.py dumpdata --indent 4 static > /home/jw/static.json
 
-
+To populate the database with them:
+TODO

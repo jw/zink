@@ -22,6 +22,7 @@ from string import Template
 #
 
 CONFIGURATION_FILE = "fabfile.properties"
+
 DEVELOPMENT = "development"
 PRODUCTION = "production"
 STAGING = "staging"
@@ -48,7 +49,7 @@ env.media = "%(prefix)s/%(name)s/media" % env
 
 
 #
-# Some config utility and property retrieval methods
+# First some config utility and property retrieval methods
 #
 
 
@@ -175,9 +176,9 @@ def production():
     Build for a Production environment.
 
     Files will come from the repository.
-    Secret environment properties (like email, twitter,...) are first
-    retrieved from the zink.properties file; then a the local_settings.py
-    is populated by them.
+    Secret environment properties (like email, twitter,...) are
+    retrieved from the zink.properties file, then they are inserted
+    in the local_settings.py
     """
     _create_environment(CONFIGURATION_FILE, PRODUCTION)
 
@@ -188,9 +189,9 @@ def staging():
     Build for a Staging environment.
 
     Files will come from the repository.
-    Secret environment properties (like email, twitter,...) are first
-    retrieved from the zink.properties file; then a the local_settings.py
-    is populated by them.
+    Secret environment properties (like email, twitter,...) are
+    retrieved from the zink.properties file, then they are inserted
+    in the local_settings.py
     """
     _create_environment(CONFIGURATION_FILE, STAGING)
 
@@ -200,17 +201,17 @@ def development():
     """
     Build for a Development environment.
 
-    Files will come from the repository, or (when in tip) from the users drive.
-    When not in tip, the secret environment properties (like email,
-    twitter,...) are first retrieved from the zink.properties file; then
-    a the local_settings.py is populated by them.  When in tip, the
-    current local_settings.py is used as is.
+    Files will come from the repository, or (when in tip) from the users
+    drive.  When not in tip, the secret environment properties (like email,
+    twitter,...) are retrieved from the zink.properties file and
+    inserted in the local_settings.py.  When in tip, the current
+    local_settings.py is used as is.
     """
     _create_environment(CONFIGURATION_FILE, DEVELOPMENT)
 
 
 #
-# The tasks
+# The branch to deploy
 #
 
 
@@ -230,6 +231,21 @@ def revision(revision="tip"):
     env.branch = revision
 
 
+#
+# The tasks
+#
+
+
+@task
+def check_database():
+    # prepare_user
+    # prepare_postgres
+    pass
+
+@task
+def user_ready():
+    pass
+
 @task
 def deploy():
     """
@@ -248,10 +264,11 @@ def deploy():
 
     if env.settings == "development" and env.branch == "tip":
         print(green("Deploying hot development trunk..."))
-        create_user()
-        create_database()
-        copy_current()
-        create_media_directory()
+        if database_user_exists() and database_exists():
+            copy_current()
+        else:
+            print(red("Database user or database not available."))
+            abort("Database user or database not available.")
     else:
         print(green("Creating..."))
         create_root_directory()
@@ -427,7 +444,14 @@ def backup():
         # TODO: save these to the repo?
 
 
-def user_exists():
+#
+# Database handling
+#
+
+
+# check user and database
+
+def database_user_exists():
     """
     Check if the database user exists.
     """
@@ -437,37 +461,11 @@ def user_exists():
                  '            rolcreatedb is true and'
                  '            rolcanlogin is true;"'
                  ' | psql postgres -tA' % env)
-    if output == "1":
+    if "1" in output:
         print(green("Good.  User '%(dbuser)s' exists." % env))
         return True
     else:
         return False
-
-
-def create_user():
-    """
-    Create a database user.
-    """
-    if not user_exists():
-        # first remove user...
-        output = run('echo "drop user %(dbuser)s;"'
-                     '| psql postgres -tA' % env)
-        if output == "CREATE ROLE":
-            print(green("Dropped user first."))
-        elif output.startswith("ERROR"):
-            pass  # user is not there - all fine
-        # ...then create user...
-        print(green("Creating user '%(dbuser)s'." % env))
-        output = run('echo "CREATE ROLE %(dbuser)s'
-                     '      WITH PASSWORD \'%(dbpassword)s\''
-                     '           CREATEDB LOGIN;"'
-                     ' | psql postgres -tA' % env)
-        print(yellow("The current output: %s." % output))
-        if output == "CREATE ROLE":
-            print(green("Created user successfully."))
-        else:
-            print(red("Could not create user."))
-            abort("User creation error.")
 
 
 def database_exists():
@@ -478,11 +476,31 @@ def database_exists():
                  '      FROM pg_database '
                  '      WHERE datname=\'%(dbname)s\'; "'
                  '| psql postgres -tA' % env)
-    if output == "1":
+    if "1" in output:
         print(green("Good.  Database '%(dbname)s' exists." % env))
         return True
     else:
         return False
+
+
+# create user and database
+
+def create_user():
+    """
+    Create a database user.
+    """
+    if not database_user_exists():
+        print(green("Creating user '%(dbuser)s'." % env))
+        output = run('echo "CREATE ROLE %(dbuser)s'
+                     '      WITH PASSWORD \'%(dbpassword)s\''
+                     '      CREATEDB LOGIN;"'
+                     ' | psql postgres -tA' % env)
+        print(yellow("The current output: %s." % output))
+        if "CREATE ROLE" in output:
+            print(green("Created user successfully."))
+        else:
+            print(red("Could not create user."))
+            abort("User creation error.")
 
 
 def create_database():
@@ -497,15 +515,45 @@ def create_database():
             abort("Database creation error.")
 
 
+# drop and populate database
+
+@task
 def drop_database():
-    """Destroys the user and database for this project."""
+    """Destroys the database for this project."""
     with settings(warn_only=True):
         run('dropdb %(dbname)s' % env)
+
+
+@task
+def drop_user():
+    """Destroys the database for this project."""
+    with settings(warn_only=True):
         run('dropuser %(dbuser)s' % env)
 
 
 @task
+def populate_database():
+    """
+        Loads (mostly fixture) data in the database.
+    """
+    with cd(env.path):
+        run('./manage.py syncdb')
+        run('./manage.py migrate')
+        run('./manage.py loaddata static.json')
+        run('./manage.py loaddata treemenus.json')
+        run('./manage.py loaddata menu_extras.json')
+        run('./manage.py loaddata blog.json')
+    # update the deployment time
+    with cd(env.path + "/bin"):
+        run('fab update_deployment_time')
+
+
+@task
 def update_deployment_time():
+    """
+    Updates the deployment time on the machine where the website is being
+    deployed.
+    """
     # get date and time
     from datetime import datetime
     now = datetime.now()
@@ -528,21 +576,9 @@ def update_deployment_time():
         deployment.save()
 
 
-def populate_database():
-    """
-        Loads (mostly fixture) data in the database.
-    """
-    with cd(env.path):
-        run('./manage.py syncdb')
-        run('./manage.py migrate')
-        run('./manage.py loaddata static.json')
-        run('./manage.py loaddata treemenus.json')
-        run('./manage.py loaddata menu_extras.json')
-        run('./manage.py loaddata blog.json')
-    # update the deployment time
-    with cd(env.path + "/bin"):
-        run('fab update_deployment_time')
-
+#
+# Manage database and webserver runtime
+#
 
 def restart_database():
     sudo("service postgresql restart")

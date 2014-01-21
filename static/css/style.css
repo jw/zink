@@ -1901,7 +1901,7 @@ input.placeholder, textarea.placeholder { color: #b0b0b0; }
 /* ---------------------------------------------------------------------- */
 
 .entry {
-	border-bottom: 1px dotted #ced8df;
+	/* border-bottom: 1px dotted #ced8df; */
 	margin: 0 0 30px;
 	padding: 0 0 30px;
 }
@@ -3345,7 +3345,7 @@ input.placeholder, textarea.placeholder { color: #b0b0b0; }
 	/* -------------------------------------------------- */
 
 	#main {
-		border-bottom: 1px solid #efefef;
+		/* border-bottom: 1px solid #efefef; */
 		float: none;
 		margin-right: 0;
 		padding-bottom: 20px;
