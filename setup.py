@@ -9,7 +9,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 setup(
     name='zink',
     version='2.0.0',
-    packages=['blog'],
+    packages=['blog', 'contact', 'home', 'tweeter', 'versions'],
     include_package_data=True,
     license='BSD License',  # example license
     description='ElevenBits website.',

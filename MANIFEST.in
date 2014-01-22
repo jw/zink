@@ -1,0 +1,4 @@
+include README.md
+recursive-include elevenbits *
+recursive-include util *
+recursive-include docs *

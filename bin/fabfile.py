@@ -242,9 +242,11 @@ def check_database():
     # prepare_postgres
     pass
 
+
 @task
 def user_ready():
     pass
+
 
 @task
 def deploy():
