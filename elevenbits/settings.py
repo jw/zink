@@ -9,17 +9,17 @@ from socket import gethostname
 
 SITE_ROOT = dirname(realpath(join(__file__, "..")))
 
-# get the hostname
-if (gethostname().startswith("vonk")):
+hostname = gethostname()
+if hostname.startswith("vonk"):
     HOSTNAME = "vonk"
-elif ("elevenbits" in gethostname()):
+elif "elevenbits" in hostname:
     HOSTNAME = "elevenbits"
-elif ("antwerp" in gethostname()):
+elif "antwerp" in hostname:
     HOSTNAME = "antwerp"
-elif ("m8n" in gethostname()):
+elif "m8n" in hostname:
     HOSTNAME = "m8n"
 else:
-    print(gethostname() + " is an unknown hostname; using localhost as default")
+    print(hostname + " is an unknown hostname; using localhost as default")
     # TODO: this is not secure!
     HOSTNAME = "localhost"
 
@@ -61,7 +61,9 @@ DEBUG_TOOLBAR_CONFIG = {
     'INTERCEPT_REDIRECTS': False,
 }
 
-# Note: never add 'debug_toolbar.middleware.DebugToolbarMiddleware' to the debug panel!
+# Note:
+# never add 'debug_toolbar.middleware.DebugToolbarMiddleware' to
+# the debug panel!
 DEBUG_TOOLBAR_PANELS = (
     'debug_toolbar.panels.version.VersionDebugPanel',
     'debug_toolbar.panels.timer.TimerDebugPanel',
@@ -209,19 +211,20 @@ CLIENT_LOGO_MARGIN = 20
 # TODO: update the logging part
 #
 
-LOGGING = { 
+LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
     'formatters': {
         'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+            'format': '%(levelname)s %(asctime)s %(module)s ' +
+                      '%(process)d %(thread)d %(message)s'
         },
         'simple': {
             'format': '%(levelname)s %(message)s',
         },
     },
     'handlers': {
-        'console':{
+        'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
             'formatter': 'simple'
