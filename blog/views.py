@@ -36,7 +36,7 @@ def blog(request, page=1):
     except AttributeError:
         size = 5
     paginator = Paginator(entry_list, size)
-    
+
     # make sure page request is an int - if not, deliver first page
     try:
         page = int(page)
@@ -60,7 +60,7 @@ def blog(request, page=1):
 
 def tag(request, tag, page=1):
     """Get all entries for a specific tag."""
-    
+
     deployment = get_deployment()
 
     static = get_static("tags.title")
@@ -88,7 +88,7 @@ def tag(request, tag, page=1):
         logger.warn("No blog page size found in settings. Defaulting to 5.")
         size = 5
     paginator = Paginator(entry_list, size)
-    
+
     # Make sure page request is an int. If not, deliver first page.
     try:
         page = int(page)
