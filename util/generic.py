@@ -16,6 +16,3 @@ def get_static(name):
     static['host'] = Static.objects.get(name="elevenbits").value
     static['title'] = Static.objects.get(name=name).value
     return static
-
-
-

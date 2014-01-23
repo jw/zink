@@ -56,8 +56,10 @@ if __name__ == "__main__":
         print
     else:
         oauth = get_oauth()
-        r = requests.get(url="https://api.twitter.com/1.1/statuses/home_timeline.json",
-                         auth=oauth)
+        r = requests.get(
+            url="https://api.twitter.com/1.1/statuses/home_timeline.json",
+            auth=oauth
+        )
         tweets = r.json()
         print(tweets)
         for tweet in tweets:
