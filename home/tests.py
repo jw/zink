@@ -56,6 +56,5 @@ class ZinkTest(TestCase):
         response = client.get("/robots.txt")
         self.assertIn("User-agent: *", str(response))
 
-
     def test_something(self):
         pass

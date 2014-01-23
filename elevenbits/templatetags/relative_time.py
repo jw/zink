@@ -9,10 +9,10 @@ def relative_time(obj):
     """
     Convert datetime objects into relative time.
     """
-    
+
     now = timezone.now()
     difference = now - obj
-    
+
     # seconds
     half_minute = 30
     minute = 60
@@ -21,7 +21,7 @@ def relative_time(obj):
     two_hours = 2 * hour
     one_day = 24 * hour
     forty_eight_hours = 48 * hour
-    
+
     # days
     one_week = 7
     three_weeks = 3 * one_week
@@ -52,5 +52,5 @@ def relative_time(obj):
         else:
             string = str(difference.days / one_year) + ' years ago'
     return string
-    
+
 register.filter(relative_time)
