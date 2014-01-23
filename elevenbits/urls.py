@@ -32,9 +32,6 @@ urlpatterns = patterns(
     url(r'^contact', include('contact.urls', namespace='contact')),
 
     # TODO: handle these later
-    url(r'^services', 'elevenbits.services.views.services'),
-    url(r'^clients', 'elevenbits.foobar.views.clients'),
-    url(r'^projects', 'elevenbits.foobar.views.projects'),
     #url(r'^tracking/', include('tracking.urls')),
 
     # admin
