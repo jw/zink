@@ -10,6 +10,9 @@ def relative_time(obj):
     Convert datetime objects into relative time.
     """
 
+    if isinstance(obj, str):
+        return "unknown time ago"
+
     now = timezone.now()
     difference = now - obj
 
