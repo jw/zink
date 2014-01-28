@@ -1,5 +1,7 @@
 
 #
+# Copyright (C) 2013-2014 Jan Willems (ElevenBits)
+#
 # This file is part of Zink.
 #
 # Zink is free software: you can redistribute it and/or modify
