@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -8,22 +9,26 @@
 	<meta name="description" content="{{ static.description }}">
 	<meta name="author" content="Jan Willems">
 
+    <link rel="shortcut icon" href="{% static "favicon.ico" %}"/>
+
 	<!--[if !lte IE 6]><!-->
-		<link rel="stylesheet" href="{{ STATIC_URL }}css/style.css" media="screen" />
+		<link rel="stylesheet" href="{% static "css/style.css" %}" media="screen" />
 		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,600,300,800,700,400italic|PT+Serif:400,400italic" />
-		<link rel="stylesheet" href="{{ STATIC_URL }}css/fancybox.min.css" media="screen" />
-		<link rel="stylesheet" href="{{ STATIC_URL }}css/video-js.min.css" media="screen" />
-		<link rel="stylesheet" href="{{ STATIC_URL }}css/audioplayerv1.min.css" media="screen" />
+		<link rel="stylesheet" href="{% static "css/fancybox.min.css" %}" media="screen" />
+		<link rel="stylesheet" href="{% static "css/video-js.min.css" %}" media="screen" />
+		<link rel="stylesheet" href="{% static "css/audioplayerv1.min.css" %}" media="screen" />
 	<!--<![endif]-->
 
-	<!--[if lte IE 6]><link rel="stylesheet" href="//universal-ie6-css.googlecode.com/files/ie6.1.1.css" media="screen, projection"><![endif]-->
+	<!--[if lte IE 6]>
+        <link rel="stylesheet" href="//universal-ie6-css.googlecode.com/files/ie6.1.1.css" media="screen, projection">
+    <![endif]-->
 
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/code.css" media="screen" />
+    <link rel="stylesheet" href="{% static "css/code.css" %}" media="screen" />
 
 	<!-- HTML5 Shiv + detect touch events -->
-	<script src="{{ STATIC_URL }}js/modernizr.custom.js"></script>
+	<script src="{% static "js/modernizr.custom.js" %}"></script>
 
 	<!-- HTML5 video player -->
-	<script src="{{ STATIC_URL }}js/video.min.js"></script>
-	<script>_V_.options.flash.swf = '{{ STATIC_URL }}js/video-js.swf';</script>
+	<script src="{% static "js/video.min.js" %}"></script>
+	<script>_V_.options.flash.swf = '{% static "js/video-js.swf" %}"';</script>
 </head>

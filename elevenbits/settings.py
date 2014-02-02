@@ -19,8 +19,8 @@
 #
 
 #
-# public settings for [www.]elevenbits.org, [www.]elevenbits.com,
-# vonk.elevenbits.org and m8n.be
+# public settings for all sites handled by this Django instance, i.e.
+# [www.]elevenbits.org, [www.]elevenbits.com, vonk.elevenbits.org and m8n.be
 #
 
 from os.path import join, dirname, realpath
@@ -28,26 +28,14 @@ from socket import gethostname
 
 SITE_ROOT = dirname(realpath(join(__file__, "..")))
 
-hostname = gethostname()
-if hostname.startswith("vonk"):
-    HOSTNAME = "vonk"
-elif "elevenbits" in hostname:
-    HOSTNAME = "elevenbits"
-elif "antwerp" in hostname:
-    HOSTNAME = "antwerp"
-elif "m8n" in hostname:
-    HOSTNAME = "m8n"
-else:
-    print(hostname + " is an unknown hostname; using localhost as default")
-    # TODO: this is not secure!
-    HOSTNAME = "localhost"
-
 DEBUG = False
-if HOSTNAME in ["antwerp", "localhost", '127.0.0.1']:
-    DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = ["localhost", ".elevenbits.com", ".elevenbits.org", ".m8n.be"]
+ALLOWED_HOSTS = ["localhost",
+                 ".elevenbits.com",
+                 ".elevenbits.org",
+                 "elevenbits.be",
+                 ".m8n.be"]
 
 #
 # Test properties
@@ -108,7 +96,6 @@ MANAGERS = ADMINS
 TIME_ZONE = 'Europe/Brussels'
 LANGUAGE_CODE = 'en-BE'
 
-# TODO: check this. Is this handy when using m8n.be, elevenbits.(com|org)
 SITE_ID = 1
 
 # use i18n, l10n and make dates time zone
@@ -117,9 +104,8 @@ USE_L10N = True
 USE_TZ = False
 
 # The statics (css and images) location
-# TODO: check this
 STATICFILES_DIRS = (
-    "",
+    join(SITE_ROOT, "static"),
 )
 
 # TODO: read up on this
@@ -128,15 +114,8 @@ STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.AppDirectoriesFinder"
 )
 
-# TODO: check this
-# static location
-STATIC_ROOT = '/var/www/zink/static/'
+STATIC_ROOT = '/var/www/zink/'
 STATIC_URL = "http://elevenbits.org/static/"
-
-# TODO: check this
-# upload location
-MEDIA_ROOT = "/var/www/zink/media/"
-MEDIA_URL = "http://elevenbits.org/media/"
 
 FIXTURE_DIRS = (join(SITE_ROOT, 'fixtures'),)
 
@@ -194,27 +173,20 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # zink apps
-    # 'elevenbits.index',
     'elevenbits.menu_extras',  # TODO: move this in apps root
     'blog',
     'elevenbits.static',  # TODO: move this in apps root
     'contact',
     'home',
-    # 'elevenbits.services',
     'elevenbits.deployment',
     'elevenbits',
-    # utility apps
     'treemenus',  # TODO: make sure to use the proper (Russian) one!
     'elevenbits.menu_extras',
-
+    # utilities
     'tracking',
-
     'util',
-
     'django_crontab',
     'tweeter',
-
-
     'south',
     'debug_toolbar',
 )
@@ -260,5 +232,13 @@ LOGGING = {
         }
     }
 }
+
+hostname = gethostname()
+if "elevenbits" in hostname:
+    from settings_elevenbits import *
+elif "m8n" in hostname:
+    from settings_m8n import *
+else:
+    from settings_localhost import *
 
 from .local_settings import *
