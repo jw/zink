@@ -1,17 +1,18 @@
+{% load staticfiles %}
 <!--[if !lte IE 6]><!-->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script src="{{ STATIC_URL }}js/jquery-1.7.1.min.js"><\/script>')</script>
-	<!--[if lt IE 9]> <script src="{{ STATIC_URL }}js/selectivizr-and-extra-selectors.min.js"></script> <![endif]-->
-	<script src="{{ STATIC_URL }}js/respond.min.js"></script>
-	<script src="{{ STATIC_URL }}js/jquery.easing-1.3.min.js"></script>
-	<script src="{{ STATIC_URL }}js/jquery.fancybox.pack.js"></script>
-	<script src="{{ STATIC_URL }}js/jquery.smartStartSlider.min.js"></script>
-	<script src="{{ STATIC_URL }}js/jquery.jcarousel.min.js"></script>
-	<script src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
-	<script src="{{ STATIC_URL }}js/jquery.isotope.min.js"></script>
-	<script src="{{ STATIC_URL }}js/audioplayerv1.min.js"></script>
+	<script>window.jQuery || document.write('<script src="{% static "js/jquery-1.7.1.min.js" %}""><\/script>')</script>
+	<!--[if lt IE 9]> <script src="{% static "js/selectivizr-and-extra-selectors.min.js" %}"></script> <![endif]-->
+	<script src="{% static "js/respond.min.js" %}"></script>
+	<script src="{% static "js/jquery.easing-1.3.min.js" %}"></script>
+	<script src="{% static "js/jquery.fancybox.pack.js" %}"></script>
+	<script src="{% static "js/jquery.smartStartSlider.min.js" %}"></script>
+	<script src="{% static "js/jquery.jcarousel.min.js" %}"></script>
+	<script src="{% static "js/jquery.cycle.all.min.js" %}"></script>
+	<script src="{% static "js/jquery.isotope.min.js" %}"></script>
+	<script src="{% static "js/audioplayerv1.min.js" %}"></script>
 	<script src="//maps.google.com/maps/api/js?sensor=false"></script>
-	<script src="{{ STATIC_URL }}js/jquery.gmap.min.js"></script>
-	<script src="{{ STATIC_URL }}js/jquery.touchSwipe.min.js"></script>
-	<script src="{{ STATIC_URL }}js/custom.js"></script>
+	<script src="{% static "js/jquery.gmap.min.js" %}"></script>
+	<script src="{% static "js/jquery.touchSwipe.min.js" %}"></script>
+	<script src="{% static "js/custom.js" %}"></script>
 <!--<![endif]-->

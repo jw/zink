@@ -42,8 +42,10 @@
     <div class="container">
         <ul>
             <li>ElevenBits &copy; 2014</li>
-            {% load version %}
-            <li><a href="#">Django 1.6.1 uWSGI 1.9.13 nginx 1.2.6</a></li>
+            <li><a href="#">
+                {% load version %}
+                Django {%  version "django" %} uWSGI {% version "uwsgi" %} nginx 1.2.6
+            </a></li>
             <li><a href="#">
                 {% load relative_time %}
                 zink {{deployment.version}} deployed {{deployment.timestamp|relative_time}}
