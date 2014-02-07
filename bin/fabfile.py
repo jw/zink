@@ -27,16 +27,15 @@ from fabric.context_managers import settings, cd
 from fabric.utils import abort
 from fabric.contrib import django
 
-from os import makedirs
 from os.path import join, dirname, realpath, exists, isfile
 from ConfigParser import SafeConfigParser, NoOptionError
 from string import Template
 
 #
-# Defaults
+# Statics
 #
 
-CONFIGURATION_FILE = "fabfile.properties"
+CONFIGURATION_FILE = "zink.properties"
 
 DEVELOPMENT = "development"
 PRODUCTION = "production"
@@ -57,10 +56,6 @@ env.remote = env.path = "%(prefix)s/%(name)s" % env
 env.local = dirname(realpath(join(__file__, "..")))
 print("local: %s." % env.local)
 print("remote: %s" % env.remote)
-
-# TODO: handle these properly
-env.upload = "%(prefix)s/%(name)s/static/upload" % env
-env.media = "%(prefix)s/%(name)s/media" % env
 
 
 #
@@ -86,7 +81,7 @@ def _create_environment(filename, environment):
     if environment in config.sections():
         env.settings = environment
         _add_environment_properties(config, environment)
-        _add_project_properties(env.name)
+        _add_project_properties(config)
     else:
         print(red("Could not find the [%s] section in '%s'.") %
               (environment, filename))
@@ -94,38 +89,30 @@ def _create_environment(filename, environment):
               (environment, filename))
 
 
-def _add_project_properties(name):
+def _add_project_properties(config):
     """
     Read the project.properties file and add the different sections into
     the env.project as a dict. There should be three sections: project, email
     and twitter.
+    @param config: the config dict
     """
-    filename = name + ".properties"
-    print("Getting properties of project '%s'..." % filename)
-    if not isfile(filename):
-        print(red("Configuration file '%s' does not exist." % filename))
-        abort("Could not find configuration file %s." % filename)
 
-    # read the file
-    config = SafeConfigParser()
-    config.read(filename)
+    env["project"] = {}
+    env["project"]["name"] = "zink"
 
     # check the three sections
     if "email" not in config.sections():
-        abort("Missing the email section in %s." % filename)
+        abort("Missing the email section in the configuration file.")
     if "twitter" not in config.sections():
-        abort("Missing the twitter section in %s." % filename)
+        abort("Missing the twitter section in the configuration file.")
     if "project" not in config.sections():
-        abort("Missing the project section in %s." % filename)
+        abort("Missing the project section in the configuration file.")
 
     # read and handle them
-    env["project"] = {}
-    env["project"]["name"] = name
     try:
         env["project"]["key"] = config.get("project", "key")
     except NoOptionError:
-        abort("No key entry found in project section in the %s file." %
-              filename)
+        abort("No key entry in project section in the configuration file.")
     try:
         _add_email_properties(config)
         _add_twitter_properties(config)
@@ -299,8 +286,6 @@ def deploy():
         else:
             checkout_revision(env.branch)
 
-        create_local_settings()
-
         install_requirements()
 
         create_user()
@@ -310,7 +295,7 @@ def deploy():
 
         add_cronjob()  # checks existence of some core processes
 
-    #create_upload_directory()
+    create_local_settings()
 
     print(green("Checking to see if uwsgi is an upstart job..."))
     handle_uwsgi_upstart()
@@ -356,51 +341,45 @@ def copy_current():
     sudo("chown www-data:www-data --recursive %(path)s" % env)
 
 
-@task
 def create_local_settings():
-    d = {}
-    # project
-    d["project_key"] = env["project"]["key"]
-    # database
-    d["db_name"] = env.dbname
-    d["db_username"] = env.dbuser
-    d["db_password"] = env.dbpassword
-    # email
-    d["email_host"] = env["project"]["email"]["host"]
-    d["email_port"] = env["project"]["email"]["port"]
-    d["email_user"] = env["project"]["email"]["user"]
-    d["email_password"] = env["project"]["email"]["password"]
-    d["email_tls"] = env["project"]["email"]["tls"]
-    # twitter
-    t = env["project"]["twitter"]
-    d["twitter_name"] = t["name"]
-    d["twitter_consumer_key"] = t["consumer.key"]
-    d["twitter_consumer_secret"] = t["consumer.secret"]
-    d["twitter_oauth_token"] = t["oauth.token"]
-    d["twitter_oauth_token_secret"] = t["oauth.token.secret"]
-    # get the template...
-    with open("template.py") as f:
-        s = Template(f.read())
-    # ...substitute the values...
-    reply = s.substitute(d)
-    # ...and save it
-    with open("/tmp/foobar.py", "w") as f:
-        f.write(reply)
-    sudo("mkdir -p %(remote)s/elevenbits/" % env, user="www-data")
-    put("/tmp/foobar.py",
-        "%(remote)s/elevenbits/local_settings.py" % env,
-        use_sudo=True)
-    sudo("chown www-data:www-data %(remote)s/elevenbits/local_settings.py" %
-         env)
-
-
-# TODO: check this - this seems wrong
-def create_upload_directory():
-    """Allow write access by group on upload directory"""
-    sudo("mkdir -p %(upload)s" % env)
-    sudo("chown www-data:www-data --recursive %(upload)s" % env)
-    sudo("chmod 777 %(upload)s" % env)
-    sudo("ls -al %(upload)s" % env)
+    if exists("%(remote)s/elevenbits/local_settings.py" % env):
+        print(green("Local settings file exists.  Leaving as is."))
+    else:
+        d = {}
+        # project
+        d["project_key"] = env["project"]["key"]
+        # database
+        d["db_name"] = env.dbname
+        d["db_username"] = env.dbuser
+        d["db_password"] = env.dbpassword
+        # email
+        d["email_host"] = env["project"]["email"]["host"]
+        d["email_port"] = env["project"]["email"]["port"]
+        d["email_user"] = env["project"]["email"]["user"]
+        d["email_password"] = env["project"]["email"]["password"]
+        d["email_tls"] = env["project"]["email"]["tls"]
+        # twitter
+        t = env["project"]["twitter"]
+        d["twitter_name"] = t["name"]
+        d["twitter_consumer_key"] = t["consumer.key"]
+        d["twitter_consumer_secret"] = t["consumer.secret"]
+        d["twitter_oauth_token"] = t["oauth.token"]
+        d["twitter_oauth_token_secret"] = t["oauth.token.secret"]
+        # get the template...
+        with open("template.py") as f:
+            s = Template(f.read())
+        # ...substitute the values...
+        reply = s.substitute(d)
+        # ...and save it
+        with open("/tmp/foobar.py", "w") as f:
+            f.write(reply)
+        sudo("mkdir -p %(remote)s/elevenbits/" % env, user="www-data")
+        put("/tmp/foobar.py",
+            "%(remote)s/elevenbits/local_settings.py" % env,
+            use_sudo=True)
+        sudo("chown www-data:www-data "
+             "%(remote)s/elevenbits/local_settings.py" %
+             env)
 
 
 def checkout_latest():
@@ -419,7 +398,7 @@ def checkout_revision(revision):
 
 def install_requirements():
     """
-        Install the required packages using pip.
+    Install the required packages using pip.
     """
     sudo('pip install -r %(path)s/requirements.txt' % env)
     print(green("Some required packages are installed."))
@@ -624,9 +603,9 @@ def uwsgi_is_upstart_job():
 def handle_uwsgi_upstart():
     """Make sure that uwsgi is an upstart job."""
     if uwsgi_is_upstart_job():
-        print("uwsgi seems to be an upstart job. Leaving as is.")
+        print(green("uwsgi seems to be an upstart job. Leaving as is."))
     else:
-        print("Forcing uwsgi to be an upstart job...")
+        print(green("Forcing uwsgi to be an upstart job..."))
         sudo("cp %(path)s/conf/uwsgi.conf /etc/init" % env)
         sudo("initctl reload uwsgi")
         if uwsgi_is_upstart_job():
