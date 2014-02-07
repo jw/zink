@@ -308,7 +308,6 @@ def deploy():
         populate_database()
         restart_database()
 
-        create_media_directory()  # TODO: is this necessary?
         add_cronjob()  # checks existence of some core processes
 
     #create_upload_directory()
@@ -379,16 +378,12 @@ def create_local_settings():
     d["twitter_consumer_secret"] = t["consumer.secret"]
     d["twitter_oauth_token"] = t["oauth.token"]
     d["twitter_oauth_token_secret"] = t["oauth.token.secret"]
-    #print("d: %s" % d)
-    #for (entry, key) in d.items():
-    #    print("%s -> %s" % (entry, key))
-    # get the template
+    # get the template...
     with open("template.py") as f:
         s = Template(f.read())
-    #print("s: %s" % s.template)
+    # ...substitute the values...
     reply = s.substitute(d)
-    # if not exists("%s/elevenbits" % env.remote):
-    #     makedirs("%s/elevenbits" % env.remote)
+    # ...and save it
     with open("/tmp/foobar.py", "w") as f:
         f.write(reply)
     sudo("mkdir -p %(remote)s/elevenbits/" % env, user="www-data")
@@ -406,15 +401,6 @@ def create_upload_directory():
     sudo("chown www-data:www-data --recursive %(upload)s" % env)
     sudo("chmod 777 %(upload)s" % env)
     sudo("ls -al %(upload)s" % env)
-
-
-# TODO: is this needed?
-def create_media_directory():
-    """Create media directory"""
-    sudo("mkdir -p %(media)s" % env)
-    sudo("chown www-data:www-data %(media)s" % env)
-    sudo("chmod 777 %(media)s" % env)
-    sudo("ls -al %(media)s" % env)
 
 
 def checkout_latest():
