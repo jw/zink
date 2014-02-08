@@ -268,6 +268,7 @@ def deploy():
 
     if env.settings == "development" and env.branch == "tip":
         print(green("Deploying hot development trunk..."))
+        create_local_settings()
         if database_user_exists() and database_exists():
             copy_current()
         else:
@@ -288,6 +289,8 @@ def deploy():
 
         install_requirements()
 
+        create_local_settings()
+
         create_user()
         create_database()
         populate_database()
@@ -295,7 +298,6 @@ def deploy():
 
         add_cronjob()  # checks existence of some core processes
 
-    create_local_settings()
 
     print(green("Checking to see if uwsgi is an upstart job..."))
     handle_uwsgi_upstart()
