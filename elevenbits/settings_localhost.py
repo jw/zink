@@ -17,19 +17,16 @@
 # along with Zink.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-from os.path import dirname, realpath, join
-
 HOSTNAME = "localhost"
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-STATIC_ROOT = dirname(realpath(join(__file__, "..")))
-
-STATIC_URL = "/static/"
+STATIC_ROOT = "/var/www/static/zink/"
+#STATIC_URL = "http://localhost/"
 
 print("=============================================")
 print("Root: %s." % STATIC_ROOT)
-print("Url: %s." % STATIC_URL)
+#print("Url: %s." % STATIC_URL)
 print("=============================================")
 

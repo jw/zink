@@ -34,7 +34,7 @@ TEMPLATE_DEBUG = DEBUG
 ALLOWED_HOSTS = ["localhost",
                  ".elevenbits.com",
                  ".elevenbits.org",
-                 "elevenbits.be",
+                 ".elevenbits.be",
                  ".m8n.be"]
 
 #
@@ -114,8 +114,8 @@ STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.AppDirectoriesFinder"
 )
 
-STATIC_ROOT = '/var/www/zink/'
-STATIC_URL = "http://elevenbits.org/static/"
+STATIC_ROOT = '/var/www/static/zink/'
+STATIC_URL = 'http://static.elevenbits.com/'
 
 FIXTURE_DIRS = (join(SITE_ROOT, 'fixtures'),)
 

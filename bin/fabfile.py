@@ -265,6 +265,7 @@ def deploy():
 
     remove_previous_releases()
     create_prefix_directory()
+    create_root_directory()
 
     if env.settings == "development" and env.branch == "tip":
         print(green("Deploying hot development trunk..."))
@@ -276,7 +277,6 @@ def deploy():
             abort("Database user or database not available.")
     else:
         print(green("Creating..."))
-        create_root_directory()
 
         # TODO: make a backup of the staging|production database environment
         # TODO: create a new revision
@@ -297,7 +297,6 @@ def deploy():
         restart_database()
 
         add_cronjob()  # checks existence of some core processes
-
 
     print(green("Checking to see if uwsgi is an upstart job..."))
     handle_uwsgi_upstart()
@@ -332,19 +331,23 @@ def create_prefix_directory():
 
 def create_root_directory():
     """
-        Create directories necessary for deployment.
+    Create root directory.
     """
     sudo("mkdir -p %(path)s" % env)
     sudo("chown www-data:www-data %(path)s" % env)
 
 
 def copy_current():
+    """
+    Copy the current code to the server area.
+    """
     sudo('cp -r %(local)s %(prefix)s' % env)
     sudo("chown www-data:www-data --recursive %(path)s" % env)
 
 
 def create_local_settings():
-    if exists("%(remote)s/elevenbits/local_settings.py" % env):
+    print(green("Checking for %(remote)s/elevenbits/local_settings.py" % env))
+    if run(exists("%(remote)s/elevenbits/local_settings.py" % env)):
         print(green("Local settings file exists.  Leaving as is."))
     else:
         d = {}
@@ -423,9 +426,6 @@ def backup():
              '%(local)s/fixtures/blog.json' % env)
         sudo('python manage.py dumpdata --indent 4 index > '
              '%(local)s/fixtures/index.json' % env)
-        sudo('python manage.py dumpdata --indent 4 services > '
-             '%(local)s/fixtures/services.json' % env)
-        # TODO: save these to the repo?
 
 
 #
@@ -518,14 +518,14 @@ def drop_user():
 @task
 def populate_database():
     """
-        Loads (mostly fixture) data in the database.
+    Loads (mostly fixture) data in the database.
     """
     with cd(env.path):
         run('./manage.py syncdb')
         run('./manage.py migrate')
         run('./manage.py loaddata static.json')
         run('./manage.py loaddata treemenus.json')
-        run('./manage.py loaddata menu_extras.json')
+        #run('./manage.py loaddata menu_extras.json')
         run('./manage.py loaddata blog.json')
     # update the deployment time
     with cd(env.path + "/bin"):
@@ -580,9 +580,14 @@ def update_webserver_and_uwsgi_configuration():
             sudo("rm /etc/nginx/sites-enabled/default")
     # update nginx
     sudo("mkdir -p /etc/nginx/sites-available" % env)
+    # ...project conf
     sudo("cp %(path)s/conf/%(host)s.conf /etc/nginx/sites-available" % env)
     sudo("ln -sf %(path)s/conf/%(host)s.conf "
          "/etc/nginx/sites-enabled/%(host)s.conf" % env)
+    # ...static conf
+    sudo("cp %(path)s/conf/static.conf /etc/nginx/sites-available" % env)
+    sudo("ln -sf %(path)s/conf/static.conf "
+         "/etc/nginx/sites-enabled/static.conf" % env)
     # update uwsgi
     sudo("mkdir -p /etc/uwsgi/apps-available" % env)
     sudo("mkdir -p /etc/uwsgi/apps-enabled" % env)
