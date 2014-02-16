@@ -26,8 +26,9 @@ from fabric.operations import require, sudo
 from fabric.context_managers import settings, cd
 from fabric.utils import abort
 from fabric.contrib import django
+from fabric.contrib.files import exists
 
-from os.path import join, dirname, realpath, exists, isfile
+from os.path import join, dirname, realpath, isfile
 from ConfigParser import SafeConfigParser, NoOptionError
 from string import Template
 
@@ -347,7 +348,7 @@ def copy_current():
 
 def create_local_settings():
     print(green("Checking for %(remote)s/elevenbits/local_settings.py" % env))
-    if run(exists("%(remote)s/elevenbits/local_settings.py" % env)):
+    if exists("%(remote)s/elevenbits/local_settings.py" % env, verbose=True):
         print(green("Local settings file exists.  Leaving as is."))
     else:
         d = {}
