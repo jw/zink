@@ -9,7 +9,7 @@ Zink
 Overview
 --------
 
-Zink is ElevenBits website.  I believe it will remain private for a long while...
+Zink is the ElevenBits website.  I believe it will remain private for a long while...
 
 
 Install
