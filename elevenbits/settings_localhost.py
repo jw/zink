@@ -23,10 +23,3 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 STATIC_ROOT = "/var/www/static/zink/"
-#STATIC_URL = "http://localhost/"
-
-print("=============================================")
-print("Root: %s." % STATIC_ROOT)
-#print("Url: %s." % STATIC_URL)
-print("=============================================")
-

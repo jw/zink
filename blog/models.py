@@ -26,7 +26,7 @@ class Tag(models.Model):
     """Each blog entry can have zero to n tags."""
     tag = models.CharField(max_length=255, unique=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.tag
 
     def get_absolute_url(self):
@@ -58,7 +58,7 @@ class Entry(models.Model):
         ordering = ['posted']
         verbose_name_plural = 'Entries'
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
 
@@ -77,5 +77,5 @@ class Comment(models.Model):
         verbose_name = 'Comment'
         verbose_name_plural = 'Comments'
 
-    def __unicode__(self):
+    def __str__(self):
         return self.body

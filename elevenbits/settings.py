@@ -186,7 +186,6 @@ INSTALLED_APPS = (
     'util',
     #'django_crontab',
     'tweeter',
-    'south',
     #'debug_toolbar',
 )
 
@@ -233,11 +232,11 @@ LOGGING = {
 }
 
 hostname = gethostname()
-#if "elevenbits" in hostname:
-#    from settings_elevenbits import *
-#elif "m8n" in hostname:
-#    from settings_m8n import *
-#else:
-from .settings_localhost import *
+if "elevenbits" in hostname:
+    from .settings_elevenbits import *
+elif "m8n" in hostname:
+    from .settings_m8n import *
+else:
+    from .settings_localhost import *
 
 from .local_settings import *

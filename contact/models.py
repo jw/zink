@@ -69,7 +69,7 @@ class Contact(models.Model):
 
     account = models.CharField(max_length=32)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     def get_absolute_url(self):
