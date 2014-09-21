@@ -21,7 +21,7 @@
 from django.contrib import admin
 from treemenus.admin import MenuAdmin, MenuItemAdmin
 from treemenus.models import Menu
-from models import MenuItemExtension
+from .models import MenuItemExtension
 
 
 class MenuItemExtensionInline(admin.StackedInline):

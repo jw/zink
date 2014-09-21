@@ -20,12 +20,12 @@
 
 from django.conf.urls import patterns, include, url
 from django.views.generic.base import TemplateView, RedirectView
-from django.conf.urls.static import static
+#from django.conf.urls.static import static
 
 from django.contrib import admin
-import settings
-
 admin.autodiscover()
+
+from . import settings
 
 urlpatterns = patterns(
     '',
@@ -53,7 +53,7 @@ urlpatterns = patterns(
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
-)  #+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+)  # + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
     import debug_toolbar

@@ -348,7 +348,8 @@ def copy_current():
 
 def create_local_settings():
     print(green("Checking for %(remote)s/elevenbits/local_settings.py" % env))
-    if exists("%(remote)s/elevenbits/local_settings.py" % env, verbose=True):
+    if False:
+        #exists("%(remote)s/elevenbits/local_settings.py" % env, verbose=True):
         print(green("Local settings file exists.  Leaving as is."))
     else:
         d = {}
@@ -592,9 +593,9 @@ def update_webserver_and_uwsgi_configuration():
     # update uwsgi
     sudo("mkdir -p /etc/uwsgi/apps-available" % env)
     sudo("mkdir -p /etc/uwsgi/apps-enabled" % env)
-    sudo("cp %(path)s/conf/django.ini /etc/uwsgi/apps-available" % env)
-    sudo("ln -sf %(path)s/conf/django.ini "
-         "/etc/uwsgi/apps-enabled/django.ini" % env)
+    sudo("cp %(path)s/conf/zink.ini /etc/uwsgi/apps-available" % env)
+    sudo("ln -sf %(path)s/conf/zink.ini "
+         "/etc/uwsgi/apps-enabled/zink.ini" % env)
 
 
 def uwsgi_is_upstart_job():

@@ -71,18 +71,18 @@ DEBUG_TOOLBAR_CONFIG = {
 # Note:
 # never add 'debug_toolbar.middleware.DebugToolbarMiddleware' to
 # the debug panel!
-DEBUG_TOOLBAR_PANELS = (
-    'debug_toolbar.panels.version.VersionDebugPanel',
-    'debug_toolbar.panels.timer.TimerDebugPanel',
-    'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
-    'debug_toolbar.panels.headers.HeaderDebugPanel',
-    'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
-    'debug_toolbar.panels.sql.SQLDebugPanel',
-    'debug_toolbar.panels.template.TemplateDebugPanel',
-    'debug_toolbar.panels.cache.CacheDebugPanel',
-    'debug_toolbar.panels.signals.SignalDebugPanel',
-    'debug_toolbar.panels.logger.LoggingPanel',
-)
+# DEBUG_TOOLBAR_PANELS = (
+#     'debug_toolbar.panels.version.VersionDebugPanel',
+#     'debug_toolbar.panels.timer.TimerDebugPanel',
+#     'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
+#     'debug_toolbar.panels.headers.HeaderDebugPanel',
+#     'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
+#     'debug_toolbar.panels.sql.SQLDebugPanel',
+#     'debug_toolbar.panels.template.TemplateDebugPanel',
+#     'debug_toolbar.panels.cache.CacheDebugPanel',
+#     'debug_toolbar.panels.signals.SignalDebugPanel',
+#     'debug_toolbar.panels.logger.LoggingPanel',
+# )
 
 #
 # Administrators
@@ -137,7 +137,7 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    #'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -153,9 +153,9 @@ ROOT_URLCONF = 'elevenbits.urls'
 
 WSGI_APPLICATION = 'elevenbits.wsgi.application'
 
-CRONJOBS = [
-    ('*/5 * * * *', 'tweeter.admin.get_latest_tweets'),
-]
+#CRONJOBS = [
+#    ('*/5 * * * *', 'tweeter.admin.get_latest_tweets'),
+#]
 
 # tweeter.admin
 
@@ -181,14 +181,13 @@ INSTALLED_APPS = (
     'elevenbits.deployment',
     'elevenbits',
     'treemenus',  # TODO: make sure to use the proper (Russian) one!
-    'elevenbits.menu_extras',
     # utilities
     'tracking',
     'util',
-    'django_crontab',
+    #'django_crontab',
     'tweeter',
     'south',
-    'debug_toolbar',
+    #'debug_toolbar',
 )
 
 #
@@ -234,11 +233,11 @@ LOGGING = {
 }
 
 hostname = gethostname()
-if "elevenbits" in hostname:
-    from settings_elevenbits import *
-elif "m8n" in hostname:
-    from settings_m8n import *
-else:
-    from settings_localhost import *
+#if "elevenbits" in hostname:
+#    from settings_elevenbits import *
+#elif "m8n" in hostname:
+#    from settings_m8n import *
+#else:
+from .settings_localhost import *
 
 from .local_settings import *
