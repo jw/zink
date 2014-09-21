@@ -41,8 +41,11 @@ ALLOWED_HOSTS = ["localhost",
 # Test properties
 #
 
-# TODO: check existence of rainbowtests first
-TEST_RUNNER = 'rainbowtests.RainbowTestSuiteRunner'
+try:
+    import rainbowtests
+    TEST_RUNNER = 'rainbowtests.RainbowTestSuiteRunner'
+except ImportError:
+    pass
 
 # TODO: check this
 TEMPLATE_CONTEXT_PROCESSORS = (
