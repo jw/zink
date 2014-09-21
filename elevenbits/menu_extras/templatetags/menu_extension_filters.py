@@ -23,6 +23,8 @@ from django import template
 
 register = template.Library()
 
+import logging
+
 
 def match_path(patterns, path):
     """
