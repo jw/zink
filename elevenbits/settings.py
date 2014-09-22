@@ -41,6 +41,8 @@ ALLOWED_HOSTS = ["localhost",
 # Test properties
 #
 
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
+
 try:
     import rainbowtests
     TEST_RUNNER = 'rainbowtests.RainbowTestSuiteRunner'

@@ -32,6 +32,8 @@ class DeploymentTest(TestCase):
 
     def test_index_and_next_page(self):
         response = self.client.get('/')
+        self.assertEqual(response.status_code, 301)
+        self.client.get('/home')
         self.assertEqual(response.status_code, 200)
         self.client.get('/page/2')
         self.assertEqual(response.status_code, 200)

@@ -60,20 +60,20 @@ def relative_time(obj):
         elif difference.seconds < two_minutes:
             string = str(difference.seconds) + ' seconds ago'
         elif difference.seconds < two_hours:
-            string = str(difference.seconds / minute) + ' minutes ago'
+            string = str(difference.seconds // minute) + ' minutes ago'
         elif difference.seconds < forty_eight_hours:
-            string = str(difference.seconds / hour) + ' hours ago'
+            string = str(difference.seconds // hour) + ' hours ago'
         else:
-            string = str(difference.seconds / one_day) + ' days ago'
+            string = str(difference.seconds // one_day) + ' days ago'
     else:
         if difference.days < three_weeks:
             string = str(difference.days) + ' days ago'
         elif difference.days < three_months:
-            string = str(difference.days / one_week) + ' weeks ago'
+            string = str(difference.days // one_week) + ' weeks ago'
         elif difference.days < fifteen_months:
-            string = str(difference.days / one_month) + ' months ago'
+            string = str(difference.days // one_month) + ' months ago'
         else:
-            string = str(difference.days / one_year) + ' years ago'
+            string = str(difference.days // one_year) + ' years ago'
     return string
 
 register.filter(relative_time)
