@@ -1,4 +1,6 @@
 Django==1.7
+psycopg2==2.5.4
+
 
 # django-tracking
 hg+https://elevenbits@bitbucket.org/elevenbits/django-tracking

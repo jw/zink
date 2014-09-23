@@ -158,7 +158,7 @@ def send_mail(host, port, username, password, subject, missing):
         BODY), "\r\n")
 
     server = smtplib.SMTP(host, port)
-    #server.set_debuglevel(2)
+    # server.set_debuglevel(2)
     server.ehlo()
     server.starttls()
     server.ehlo()

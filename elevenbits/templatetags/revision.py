@@ -98,5 +98,4 @@ def revision():
         displays the revision number
         {% revision %}
     """
-    #return get_hg_revision("/home/jw/python/workspace/elevenbits.org/")
     return get_hg_revision()

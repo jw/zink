@@ -349,7 +349,9 @@ def copy_current():
 def create_local_settings():
     print(green("Checking for %(remote)s/elevenbits/local_settings.py" % env))
     if False:
-        #exists("%(remote)s/elevenbits/local_settings.py" % env, verbose=True):
+        # FIXME:
+        # exists("%(remote)s/elevenbits/local_settings.py" % env,
+        #        verbose=True):
         print(green("Local settings file exists.  Leaving as is."))
     else:
         d = {}
@@ -527,7 +529,7 @@ def populate_database():
         run('./manage.py migrate')
         run('./manage.py loaddata static.json')
         run('./manage.py loaddata treemenus.json')
-        #run('./manage.py loaddata menu_extras.json')
+        # run('./manage.py loaddata menu_extras.json')
         run('./manage.py loaddata blog.json')
     # update the deployment time
     with cd(env.path + "/bin"):

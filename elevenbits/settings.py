@@ -125,7 +125,7 @@ STATIC_URL = 'http://static.elevenbits.com/'
 FIXTURE_DIRS = (join(SITE_ROOT, 'fixtures'),)
 
 # TODO: read up on this
-#CONTEXT_PREPROCESSORS = (
+# CONTEXT_PREPROCESSORS = (
 #    "django.contrib.auth.context_processors.auth",
 #    "django.core.context_processors.debug",
 #    "django.core.context_processors.i18n",
@@ -133,7 +133,7 @@ FIXTURE_DIRS = (join(SITE_ROOT, 'fixtures'),)
 #    "django.core.context_processors.static",
 #    "django.core.context_processors.tz",
 #    "django.contrib.messages.context_processors.messages",
-#)
+# )
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -142,7 +142,7 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    #'debug_toolbar.middleware.DebugToolbarMiddleware',
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -158,9 +158,9 @@ ROOT_URLCONF = 'elevenbits.urls'
 
 WSGI_APPLICATION = 'elevenbits.wsgi.application'
 
-#CRONJOBS = [
-#    ('*/5 * * * *', 'tweeter.admin.get_latest_tweets'),
-#]
+# CRONJOBS = [
+#     ('*/5 * * * *', 'tweeter.admin.get_latest_tweets'),
+# ]
 
 # tweeter.admin
 
@@ -189,9 +189,9 @@ INSTALLED_APPS = (
     # utilities
     'tracking',
     'util',
-    #'django_crontab',
+    # 'django_crontab',
     'tweeter',
-    #'debug_toolbar',
+    # 'debug_toolbar',
 )
 
 #

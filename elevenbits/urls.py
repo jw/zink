@@ -20,7 +20,7 @@
 
 from django.conf.urls import patterns, include, url
 from django.views.generic.base import TemplateView, RedirectView
-#from django.conf.urls.static import static
+# from django.conf.urls.static import static
 
 from django.contrib import admin
 admin.autodiscover()
@@ -47,7 +47,7 @@ urlpatterns = patterns(
     url(r'^contact', include('contact.urls', namespace='contact')),
 
     # TODO: handle these later
-    #url(r'^tracking/', include('tracking.urls')),
+    # url(r'^tracking/', include('tracking.urls')),
 
     # admin
     url(r'^admin/', include(admin.site.urls)),

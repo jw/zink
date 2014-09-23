@@ -59,17 +59,14 @@ class ZinkTest(TestCase):
     def test404(self):
         client = Client()
         response = client.get("/this_page_does_not_exist")
-        self.assertIn("404 message", str(response))
+        self.assertEqual(response.status_code, 404)
 
     def test500(self):
         client = Client()
         response = client.get("/500")
-        self.assertIn("500 message", str(response))
+        self.assertIn(b'500 message', response.content)
 
     def testRobots(self):
         client = Client()
         response = client.get("/robots.txt")
-        self.assertIn("User-agent: *", str(response))
-
-    def test_something(self):
-        pass
+        self.assertIn(b'User-agent: *', response.content)
