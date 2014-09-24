@@ -7,6 +7,8 @@ The required packages
 These need to be installed first, using apt-get and via hg, so best to
 ensure mercurial is installed too:
 
+postgresql-server-dev-9.3
+
 - mercurial: sudo apt-get install mercurial
 - pip: sudo apt-get install python-pip
 - postgresql: sudo apt-get install postgresql
