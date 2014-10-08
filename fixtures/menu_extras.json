@@ -1,32 +1,32 @@
 [
 {
-        "pk": 8, 
-        "model": "menu_extras.menuitemextension", 
-        "fields": {
-                "selected_patterns": "/index\r\n", 
-                "menu_item": 15, 
-                "description": "all starts here", 
-                "published": true
-        }
+    "model": "menu_extras.menuitemextension",
+    "fields": {
+        "menu_item": 15,
+        "published": true,
+        "selected_patterns": "/home\r\n/index",
+        "description": "all starts here"
+    },
+    "pk": 1
 },
 {
-        "pk": 9, 
-        "model": "menu_extras.menuitemextension", 
-        "fields": {
-                "selected_patterns": "/contact\r\n", 
-                "menu_item": 16, 
-                "description": "enquire here", 
-                "published": true
-        }
+    "model": "menu_extras.menuitemextension",
+    "fields": {
+        "menu_item": 17,
+        "published": true,
+        "selected_patterns": "/blog\r\n",
+        "description": "what we think"
+    },
+    "pk": 2
 },
 {
-        "pk": 10, 
-        "model": "menu_extras.menuitemextension", 
-        "fields": {
-                "selected_patterns": "/blog\r\n", 
-                "menu_item": 17, 
-                "description": "what we think", 
-                "published": true
-        }
+    "model": "menu_extras.menuitemextension",
+    "fields": {
+        "menu_item": 16,
+        "published": true,
+        "selected_patterns": "/contact\r\n",
+        "description": "enquire here"
+    },
+    "pk": 3
 }
 ]

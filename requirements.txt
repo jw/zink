@@ -2,14 +2,11 @@ Django==1.7
 psycopg2==2.5.4
 
 
-# django-tracking
-hg+https://elevenbits@bitbucket.org/elevenbits/django-tracking
+django-user-tracking==0.4.11
 
 django-treemenus==0.9.1
 #django-crontab==0.5.1
 django-debug-toolbar==1.2.1
-
-South==1.0
 
 Fabric==1.10.0
 Markdown==2.5
