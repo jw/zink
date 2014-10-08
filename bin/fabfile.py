@@ -584,19 +584,20 @@ def update_webserver_and_uwsgi_configuration():
             sudo("rm /etc/nginx/sites-enabled/default")
     # update nginx
     sudo("mkdir -p /etc/nginx/sites-available" % env)
+    sudo("mkdir -p /etc/nginx/sites-enabled" % env)
     # ...project conf
     sudo("cp %(path)s/conf/zink.conf /etc/nginx/sites-available" % env)
-    sudo("ln -sf %(path)s/conf/zink.conf "
+    sudo("ln -sf /etc/nginx/sites-available/zink.conf "
          "/etc/nginx/sites-enabled/zink.conf" % env)
     # ...static conf
     sudo("cp %(path)s/conf/static.conf /etc/nginx/sites-available" % env)
-    sudo("ln -sf %(path)s/conf/static.conf "
+    sudo("ln -sf /etc/nginx/sites-available/static.conf "
          "/etc/nginx/sites-enabled/static.conf" % env)
     # update uwsgi
     sudo("mkdir -p /etc/uwsgi/apps-available" % env)
     sudo("mkdir -p /etc/uwsgi/apps-enabled" % env)
     sudo("cp %(path)s/conf/zink.ini /etc/uwsgi/apps-available" % env)
-    sudo("ln -sf %(path)s/conf/zink.ini "
+    sudo("ln -sf /etc/uwsgi/apps-available/zink.ini "
          "/etc/uwsgi/apps-enabled/zink.ini" % env)
 
 
