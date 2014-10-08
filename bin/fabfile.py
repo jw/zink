@@ -585,9 +585,9 @@ def update_webserver_and_uwsgi_configuration():
     # update nginx
     sudo("mkdir -p /etc/nginx/sites-available" % env)
     # ...project conf
-    sudo("cp %(path)s/conf/%(host)s.conf /etc/nginx/sites-available" % env)
-    sudo("ln -sf %(path)s/conf/%(host)s.conf "
-         "/etc/nginx/sites-enabled/%(host)s.conf" % env)
+    sudo("cp %(path)s/conf/zink.conf /etc/nginx/sites-available" % env)
+    sudo("ln -sf %(path)s/conf/zink.conf "
+         "/etc/nginx/sites-enabled/zink.conf" % env)
     # ...static conf
     sudo("cp %(path)s/conf/static.conf /etc/nginx/sites-available" % env)
     sudo("ln -sf %(path)s/conf/static.conf "
