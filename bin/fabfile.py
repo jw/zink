@@ -533,10 +533,8 @@ def populate_database():
         run('./manage.py loaddata blog.json')
     # update the deployment time
     with cd(env.path + "/bin"):
-        try:
+        with settings(warn_only=True):
             run('fab update_deployment_time')
-        except ImportError:
-            print(yellow("Started fab with Python 3, which currently fails."))
 
 @task
 def update_deployment_time():
