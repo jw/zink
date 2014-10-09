@@ -24,7 +24,7 @@ environ['DJANGO_SETTINGS_MODULE'] = settings
 
 print("Starting uwsgi application (via %s)..." % settings)
 
-from django.core.handlers.wsgi import WSGIHandler
-application = WSGIHandler()
+from django.core.wsgi import get_wsgi_application
+application = get_wsgi_application()
 
 print("Started uwsgi application successfully.")
