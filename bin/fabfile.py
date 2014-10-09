@@ -409,7 +409,7 @@ def install_requirements():
     """
     Install the required packages using pip.
     """
-    sudo('pip install -r %(path)s/requirements.txt' % env)
+    sudo('pip3 install -r %(path)s/requirements.txt' % env)
     print(green("Some required packages are installed."))
     print(yellow("Some packages might be missing."))
     print(yellow("You still need to do check this yourself for now..."))
@@ -533,8 +533,10 @@ def populate_database():
         run('./manage.py loaddata blog.json')
     # update the deployment time
     with cd(env.path + "/bin"):
-        run('fab update_deployment_time')
-
+        try:
+            run('fab update_deployment_time')
+        except ImportError:
+            print(yellow("Started fab with Python 3, which currently fails."))
 
 @task
 def update_deployment_time():
