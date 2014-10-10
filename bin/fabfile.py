@@ -409,7 +409,7 @@ def install_requirements():
     """
     Install the required packages using pip.
     """
-    sudo('pip install -r %(path)s/requirements.txt' % env)
+    sudo('pip3 install -r %(path)s/requirements.txt' % env)
     print(green("Some required packages are installed."))
     print(yellow("Some packages might be missing."))
     print(yellow("You still need to do check this yourself for now..."))
@@ -533,8 +533,8 @@ def populate_database():
         run('./manage.py loaddata blog.json')
     # update the deployment time
     with cd(env.path + "/bin"):
-        run('fab update_deployment_time')
-
+        with settings(warn_only=True):
+            run('fab update_deployment_time')
 
 @task
 def update_deployment_time():
@@ -584,19 +584,20 @@ def update_webserver_and_uwsgi_configuration():
             sudo("rm /etc/nginx/sites-enabled/default")
     # update nginx
     sudo("mkdir -p /etc/nginx/sites-available" % env)
+    sudo("mkdir -p /etc/nginx/sites-enabled" % env)
     # ...project conf
-    sudo("cp %(path)s/conf/%(host)s.conf /etc/nginx/sites-available" % env)
-    sudo("ln -sf %(path)s/conf/%(host)s.conf "
-         "/etc/nginx/sites-enabled/%(host)s.conf" % env)
+    sudo("cp %(path)s/conf/zink.conf /etc/nginx/sites-available" % env)
+    sudo("ln -sf /etc/nginx/sites-available/zink.conf "
+         "/etc/nginx/sites-enabled/zink.conf" % env)
     # ...static conf
     sudo("cp %(path)s/conf/static.conf /etc/nginx/sites-available" % env)
-    sudo("ln -sf %(path)s/conf/static.conf "
+    sudo("ln -sf /etc/nginx/sites-available/static.conf "
          "/etc/nginx/sites-enabled/static.conf" % env)
     # update uwsgi
     sudo("mkdir -p /etc/uwsgi/apps-available" % env)
     sudo("mkdir -p /etc/uwsgi/apps-enabled" % env)
     sudo("cp %(path)s/conf/zink.ini /etc/uwsgi/apps-available" % env)
-    sudo("ln -sf %(path)s/conf/zink.ini "
+    sudo("ln -sf /etc/uwsgi/apps-available/zink.ini "
          "/etc/uwsgi/apps-enabled/zink.ini" % env)
 
 

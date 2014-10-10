@@ -1,88 +1,88 @@
 [
 {
-    "pk": 14, 
-    "model": "treemenus.menuitem", 
+    "pk": 14,
     "fields": {
-        "parent": null, 
-        "level": 0, 
-        "url": "", 
-        "menu": 3, 
-        "rank": 0, 
-        "caption": "root", 
-        "named_url": ""
-    }
+        "url": "",
+        "level": 0,
+        "caption": "root",
+        "menu": 3,
+        "named_url": "",
+        "parent": null,
+        "rank": 0
+    },
+    "model": "treemenus.menuitem"
 },
 {
-    "pk": 15, 
-    "model": "treemenus.menuitem", 
+    "pk": 15,
     "fields": {
-        "parent": 14, 
-        "level": 1, 
-        "url": "/home", 
-        "menu": 3, 
-        "rank": 0, 
-        "caption": "Home", 
-        "named_url": "home"
-    }
+        "url": "/home",
+        "level": 1,
+        "caption": "Home",
+        "menu": 3,
+        "named_url": "home",
+        "parent": 14,
+        "rank": 0
+    },
+    "model": "treemenus.menuitem"
 },
 {
-    "pk": 16, 
-    "model": "treemenus.menuitem", 
+    "pk": 16,
     "fields": {
-        "parent": 14, 
-        "level": 1, 
-        "url": "/contact", 
-        "menu": 3, 
-        "rank": 2, 
-        "caption": "Contact", 
-        "named_url": "Contact"
-    }
+        "url": "/contact",
+        "level": 1,
+        "caption": "Contact",
+        "menu": 3,
+        "named_url": "Contact",
+        "parent": 14,
+        "rank": 2
+    },
+    "model": "treemenus.menuitem"
 },
 {
-    "pk": 17, 
-    "model": "treemenus.menuitem", 
+    "pk": 17,
     "fields": {
-        "parent": 14, 
-        "level": 1, 
-        "url": "/blog", 
-        "menu": 3, 
-        "rank": 1, 
-        "caption": "Blog", 
-        "named_url": "Blog"
-    }
+        "url": "/blog",
+        "level": 1,
+        "caption": "Blog",
+        "menu": 3,
+        "named_url": "Blog",
+        "parent": 14,
+        "rank": 1
+    },
+    "model": "treemenus.menuitem"
 },
 {
-    "pk": 18, 
-    "model": "treemenus.menuitem", 
+    "pk": 18,
     "fields": {
-        "parent": null, 
-        "level": 0, 
-        "url": "", 
-        "menu": null, 
-        "rank": 0, 
-        "caption": "contact", 
-        "named_url": ""
-    }
+        "url": "",
+        "level": 0,
+        "caption": "contact",
+        "menu": null,
+        "named_url": "",
+        "parent": null,
+        "rank": 0
+    },
+    "model": "treemenus.menuitem"
 },
 {
-    "pk": 19, 
-    "model": "treemenus.menuitem", 
+    "pk": 19,
     "fields": {
-        "parent": null, 
-        "level": 0, 
-        "url": "", 
-        "menu": null, 
-        "rank": 0, 
-        "caption": "contact", 
-        "named_url": ""
-    }
+        "url": "",
+        "level": 0,
+        "caption": "contact",
+        "menu": null,
+        "named_url": "",
+        "parent": null,
+        "rank": 0
+    },
+    "model": "treemenus.menuitem"
 },
 {
-    "pk": 3, 
-    "model": "treemenus.menu", 
+    "pk": 3,
     "fields": {
-        "root_item": 14, 
+        "root_item": 14,
         "name": "root"
-    }
+    },
+    "model": "treemenus.menu"
 }
 ]
