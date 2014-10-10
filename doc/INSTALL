@@ -7,21 +7,14 @@ The required packages
 These need to be installed first, using apt-get and via hg, so best to
 ensure mercurial is installed too:
 
-postgresql-server-dev-9.3
-
 - mercurial: sudo apt-get install mercurial
 - pip: sudo apt-get install python-pip
-- postgresql: sudo apt-get install postgresql
-- python-psycopg2: sudo apt-get install python-psycopg2
+- postgresql: sudo apt-get install postgresql-server-dev-9.3 postgresql
+- nginx: sudo apt-get install nginx
 
-# TODO: not sure of this
-- sudo apt-get install python-dev
+Install the uwsgi from source.  See below.
 
-- sudo apt-get install uwsgi
-- sudo apt-get install nginx
-
-Later, the pip install -r requirements will install the other
-packages/libraries
+The pip install -r requirements will install the other packages/libraries
 
 The database
 ============
@@ -47,6 +40,8 @@ The webserver
 
 1) nginx
 2) uwsgi
+
+Install uwsgi from source in a separate directory.
 
 Fabric
 ======
