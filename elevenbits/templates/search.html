@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <section id="content" class="container clearfix">
+
+		<header class="page-header">
+
+    		<h1 class="page-title">Search</h1>
+
+		</header>
+
+        <form method="get" action="/search">
+            <input type="text" name="q"/>
+            <button type="submit">Search</button>
+        </form>
+
+        {% for entry in entries %}
+
+            <h3>entry</h3>
+            {{ entry.text }}
+
+        {% endfor %}
+
+    </section>
+
+{% endblock %}

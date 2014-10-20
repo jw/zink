@@ -1,7 +1,6 @@
 Django==1.7
 psycopg2==2.5.4
 
-
 django-user-tracking==0.4.11
 
 django-treemenus==0.9.1
@@ -11,6 +10,10 @@ django-debug-toolbar==1.2.1
 Fabric==1.10.0
 Markdown==2.5
 Pygments==1.6
+
+# search
+django-haystack==2.3.1
+Whoosh==2.6.0
 
 # twitter
 #oauth==1.0.1

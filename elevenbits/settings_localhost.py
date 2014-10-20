@@ -19,7 +19,7 @@
 
 HOSTNAME = "localhost"
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 STATIC_ROOT = "/var/www/static/zink/"
