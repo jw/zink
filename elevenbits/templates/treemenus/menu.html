@@ -4,4 +4,9 @@
 	{% for menu_item in menu.root_item.children %}
 		{% show_menu_item menu_item %}
 	{% endfor %}
+    <li><a>
+        <form method="get" action="/search">
+            <input type="text" name="q"/>
+        </form>
+    </a></li>
 </ul>

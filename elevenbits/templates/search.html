@@ -2,23 +2,29 @@
 
 {% block content %}
 
-    <section id="content" class="container clearfix">
+    <section id="content" class="clearfix">
 
-		<header class="page-header">
+        <div class="container clearfix">
+	    	<header class="page-header">
+    		    <h1 class="page-title">Search</h1>
+    		</header>
+        </div>
 
-    		<h1 class="page-title">Search</h1>
+        <div class="three-fourth last">
 
-		</header>
-
-        <form method="get" action="/search">
-            <input type="text" name="q"/>
-            <button type="submit">Search</button>
-        </form>
+        <div class="container clearfix">
+            <form method="get" action="/search">
+                <input type="text" name="q"/>
+                <button type="submit">Search</button>
+            </form>
+        </div>
 
         {% for entry in entries %}
 
-            <h3>entry</h3>
-            {{ entry.text }}
+            {% if entry.model_name == 'entry' and entry.object.active %}
+                <h3>{{ entry.object.title }}</h3>
+                {{ entry.object.body|truncatechars:40 }}
+            {% endif %}
 
         {% endfor %}
 
