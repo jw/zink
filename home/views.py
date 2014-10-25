@@ -38,8 +38,13 @@ def home(request):
     entry_list = Entry.objects.filter(active=True).reverse()
     logger.info("Retrieved %s blog entries." % len(entry_list))
 
+    try:
+        entry = entry_list[0]
+    except IndexError:
+        entry = None
+
     attributes = {'deployment': deployment,
-                  'entry': entry_list[0],
+                  'entry': entry,
                   'entries': entry_list,
                   'static': static}
 

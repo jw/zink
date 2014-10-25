@@ -13,6 +13,7 @@ ensure mercurial is installed too:
 - postgresql: sudo apt-get install postgresql-server-dev-9.3 postgresql
 - nginx: sudo apt-get install nginx
 
+Note:
 Install the uwsgi from source.  See below.
 
 The pip install -r requirements will install the other packages/libraries
@@ -33,7 +34,7 @@ postgres=# ALTER USER postgres WITH PASSWORD '<your password>';
 postgres=# create role <db.username> with createdb login
 postgres-# password '<db.password>';
 
-2) Create a database owned by this user
+3) Create a database owned by this user
 postgres=# create database <db.name> owner <db.username>;
 
 The webserver
@@ -62,6 +63,15 @@ Then build the modular uWGSI system:
 > python3.4 uwsgiconfig.py --plugin plugins/python core python34
 
 Done!
+
+Run the instance
+================
+
+The Django instance can run using the webserver (nginx and uwsgi) or
+via the regular runserver manage.py task.
+
+But remeber that a superuser needs to be added:
+> python manage createsuperuser
 
 Fabric
 ======
