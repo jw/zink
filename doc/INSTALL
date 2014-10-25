@@ -9,6 +9,7 @@ ensure mercurial is installed too:
 
 - mercurial: sudo apt-get install mercurial
 - pip: sudo apt-get install python-pip
+- python-dev (needed for the psql driver): sudo apt-get install python3-dev
 - postgresql: sudo apt-get install postgresql-server-dev-9.3 postgresql
 - nginx: sudo apt-get install nginx
 
@@ -41,7 +42,19 @@ The webserver
 1) nginx
 2) uwsgi
 
-Install uwsgi from source in a separate directory.
+Install uwsgi from source in a separate directory:
+
+wget http://projects.unbit.it/downloads/uwsgi-2.0.7.tar.gz
+
+Get python 2 and 3  development files
+
+sudo apt-get install python-dev python3-dev
+
+Then build the modular uWGSI system:
+
+> python uwsgiconfig.py --build core
+> python2.7 uwsgiconfig.py --plugin plugins/python core python27
+> python3.4 uwsgiconfig.py --plugin plugins/python core python34
 
 Fabric
 ======
