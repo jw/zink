@@ -70,8 +70,17 @@ Run the instance
 The Django instance can run using the webserver (nginx and uwsgi) or
 via the regular runserver manage.py task.
 
-But remeber that a superuser needs to be added:
+Fixtures
+========
+
+Remember that a superuser needs to be added:
 > python manage createsuperuser
+
+Add the fixtures (if fabric did not do so):
+
+> python manage.py loaddata fixtures/static.json
+> python manage.py loaddata fixtures/treemenus.json fixtures/menu_extras.json
+> python manage.py loaddata fixtures/blog.json
 
 Fabric
 ======
