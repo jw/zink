@@ -536,6 +536,7 @@ def populate_database():
         with settings(warn_only=True):
             run('fab update_deployment_time')
 
+
 @task
 def update_deployment_time():
     """
