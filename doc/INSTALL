@@ -12,7 +12,8 @@ ensure mercurial is installed too:
 - postgresql: sudo apt-get install postgresql-server-dev-9.3 postgresql
 - nginx: sudo apt-get install nginx
 
-Install the uwsgi from source.  See below.
+When using both Python 2 and Python 3 on your websever, install uwsgi
+from source.  See below.  Otherwise, just use your apt, pacman,... tools.
 
 The pip install -r requirements will install the other packages/libraries
 

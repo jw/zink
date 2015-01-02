@@ -530,6 +530,13 @@ input.placeholder, textarea.placeholder { color: #b0b0b0; }
 						color: #f15a23;
 					}
 
+                    #main-nav a:hover .search {
+						border-bottom-color: #000000;
+						border-top-color: #000000;
+						color: #f15a23;
+                        margin: 0;
+					}
+
 					#main-nav a:hover, #main-nav .hover > a, #main-nav .current > a { background: #f8f8f8; }
 
 					.not-ie #main-nav .current:after {
@@ -3774,3 +3781,32 @@ input.placeholder, textarea.placeholder { color: #b0b0b0; }
 
 }
 
+.search-form .search-text-box {
+        position: absolute;
+        right:10px;
+        width: 54px;
+        background-color: #303030;
+        border: none;
+        color: transparent;
+        font-size: 12px;
+        padding: 18px 0;
+        cursor: pointer;
+        background: url("../img/search.png") 5% 50% no-repeat;
+        -webkit-transition: all 0.25s ease-in-out;
+        -moz-transition: all 0.25s ease-in-out;
+        -o-transition: all 0.25s ease-in-out;
+        -ms-transition: all 0.25s ease-in-out;
+        transition: all 0.25s ease-in-out;
+        -webkit-box-shadow:  none;
+        box-shadow:  none;
+}
+
+.search-form .search-text-box:focus {
+        font-size: 13px;
+        background-color: #303030;
+        padding: 17px 18px 17px 58px;
+        width: 150px;
+        border: none;
+        color: #fff;
+        cursor: text;
+}
