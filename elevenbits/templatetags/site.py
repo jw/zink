@@ -1,6 +1,6 @@
 
 #
-# Copyright (C) 2013-2014 Jan Willems (ElevenBits)
+# Copyright (c) 2013-2015 Jan Willems (ElevenBits)
 #
 # This file is part of Zink.
 #
