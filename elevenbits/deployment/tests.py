@@ -28,20 +28,6 @@ from datetime import datetime, timedelta
 from elevenbits.deployment.models import Deployment
 
 
-@skip('Will be tested later.')
-class DeploymentTest(TestCase):
-    def setUp(self):
-        self.client = Client()
-
-    def test_index_and_next_page(self):
-        response = self.client.get('/')
-        self.assertEqual(response.status_code, 301)
-        self.client.get('/home')
-        self.assertEqual(response.status_code, 200)
-        self.client.get('/page/2')
-        self.assertEqual(response.status_code, 200)
-
-
 class RelativeTimeTest(TestCase):
     def setUp(self):
         now = datetime.now()
@@ -79,7 +65,7 @@ class RelativeTimeTest(TestCase):
     def test_relative_time_fourtytwosecondsago(self):
         """
         After 42 seconds, the relative_time tag should
-        just show 'about 42 seconds ago'
+        just show '42 seconds ago'
         """
         out = Template(
             "{% load relative_time %}"
@@ -90,7 +76,7 @@ class RelativeTimeTest(TestCase):
     def test_relative_time_threeminutesago(self):
         """
         After three minutes, the relative_time tag should
-        just show 'about 3 minutes ago'
+        just show '3 minutes ago'
         """
         out = Template(
             "{% load relative_time %}"
@@ -101,7 +87,7 @@ class RelativeTimeTest(TestCase):
     def test_relative_time_threehoursago(self):
         """
         After 3 hours, the relative_time tag should
-        just show 'about 3 hours ago'
+        just show '3 hours ago'
         """
         out = Template(
             "{% load relative_time %}"
@@ -112,7 +98,7 @@ class RelativeTimeTest(TestCase):
     def test_relative_time_fiftyhoursago(self):
         """
         After 50 hours, the relative_time tag should
-        just show 'about 2 days ago'
+        just show '2 days ago'
         """
         out = Template(
             "{% load relative_time %}"
@@ -123,7 +109,7 @@ class RelativeTimeTest(TestCase):
     def test_relative_time_twoweeksago(self):
         """
         After two weeks, the relative_time tag should
-        just show 'about 14 days ago'"
+        just show '14 days ago'"
         """
         out = Template(
             "{% load relative_time %}"
@@ -134,7 +120,7 @@ class RelativeTimeTest(TestCase):
     def test_relative_time_fourweeksago(self):
         """
         After four weeks, the relative_time tag should
-        just show 'about 4 weeks ago'
+        just show '4 weeks ago'
         """
         out = Template(
             "{% load relative_time %}"
@@ -145,7 +131,7 @@ class RelativeTimeTest(TestCase):
     def test_relative_time_fourmonthsago(self):
         """
         After four months, the relative_time tag should
-        just show 'about 4 months ago'
+        just show '4 months ago'
         """
         out = Template(
             "{% load relative_time %}"
@@ -156,7 +142,7 @@ class RelativeTimeTest(TestCase):
     def test_relative_time_twoyearsago(self):
         """
         After two years, the relative_time tag should
-        just show 'about 2 years ago'
+        just show '2 years ago'
         """
         out = Template(
             "{% load relative_time %}"
