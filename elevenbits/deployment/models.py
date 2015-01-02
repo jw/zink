@@ -33,7 +33,7 @@ class Deployment(models.Model):
 
     deployer = models.CharField(max_length=255)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.version
 
     class Meta:
