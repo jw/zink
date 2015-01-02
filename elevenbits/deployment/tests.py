@@ -18,9 +18,7 @@
 # along with Zink.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-from django.test.client import Client
 from django.test import TestCase
-from unittest import skip
 
 from django.template import Template, Context
 
