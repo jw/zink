@@ -19,7 +19,7 @@
 #
 
 import pkg_resources
-
+import sys
 from django import template
 
 register = template.Library()
@@ -31,10 +31,15 @@ def version(module):
         displays the version number of the given module
         {% version("django") %}
     """
-    try:
-        version = pkg_resources.get_distribution(module).version
-    except pkg_resources.DistributionNotFound:
-        version = "unknown"
+    if module == "python":
+        return "{}.{}.{}".format(sys.version_info[0],
+                                 sys.version_info[1],
+                                 sys.version_info[2])
+    else:
+        try:
+            version = pkg_resources.get_distribution(module).version
+        except pkg_resources.DistributionNotFound:
+            version = "unknown"
 
     return version
 
