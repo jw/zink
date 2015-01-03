@@ -58,7 +58,7 @@
                 </h6>
                 <ul class="categories">
                     {% for tag in tags %}
-                        <li><a href="{% url 'blog:tag' tag.pk %}">{{ tag.tag }}</a></li>
+                        <li><a href="{% url 'blog:tag' tag.pk %}">{{ tag.tag }} ({{ tag.entry_set.all.count }})</a></li>
                     {% endfor %}
                 </ul>
             </div>
