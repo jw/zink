@@ -18,17 +18,22 @@
 # along with Zink.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+#
+# Note:
+# This is Python 2 code - fabric does not support Python 3 (yet)
+#
+
 from fabric.api import run, env
 from fabric.operations import put
 from fabric.decorators import task
 from fabric.colors import red, green, yellow
 from fabric.operations import require, sudo
-from fabric.context_managers import settings, cd
+from fabric.context_managers import settings, cd, prefix
 from fabric.utils import abort
 from fabric.contrib import django
 from fabric.contrib.files import exists
 
-from os.path import join, dirname, realpath, isfile
+from os.path import join, dirname, realpath
 from ConfigParser import SafeConfigParser, NoOptionError
 from string import Template
 
@@ -55,8 +60,6 @@ env.account = "elevenbits"
 env.prefix = '/var/www'
 env.remote = env.path = "%(prefix)s/%(name)s" % env
 env.local = dirname(realpath(join(__file__, "..")))
-print("local: %s." % env.local)
-print("remote: %s" % env.remote)
 
 
 #
@@ -240,18 +243,6 @@ def revision(revision="tip"):
 
 
 @task
-def check_database():
-    # prepare_user
-    # prepare_postgres
-    pass
-
-
-@task
-def user_ready():
-    pass
-
-
-@task
 def deploy():
     """
     Install everything we need, and fire up the database.  Then start the
@@ -270,9 +261,11 @@ def deploy():
 
     if env.settings == "development" and env.branch == "tip":
         print(green("Deploying hot development trunk..."))
-        create_local_settings()
         if database_user_exists() and database_exists():
             copy_current()
+            create_local_settings()
+            with prefix("source %(path)s/bin/activate" % env):
+                install_requirements()
         else:
             print(red("Database user or database not available."))
             abort("Database user or database not available.")
@@ -288,9 +281,12 @@ def deploy():
         else:
             checkout_revision(env.branch)
 
-        install_requirements()
-
         create_local_settings()
+        sudo("virtualenv --python=python3 %(path)s" % env)
+        sudo("source %(path)s/bin/activate" % env, user="www-data")
+
+        with prefix("source %(path)s/bin/activate" % env):
+            install_requirements()
 
         create_user()
         create_database()
@@ -348,12 +344,10 @@ def copy_current():
 
 def create_local_settings():
     print(green("Checking for %(remote)s/elevenbits/local_settings.py" % env))
-    if False:
-        # FIXME:
-        # exists("%(remote)s/elevenbits/local_settings.py" % env,
-        #        verbose=True):
+    if exists("%(remote)s/elevenbits/local_settings.py" % env, verbose=True):
         print(green("Local settings file exists.  Leaving as is."))
     else:
+        print(green("Creating local settings file..."))
         d = {}
         # project
         d["project_key"] = env["project"]["key"]
@@ -382,6 +376,7 @@ def create_local_settings():
         # ...and save it
         with open("/tmp/foobar.py", "w") as f:
             f.write(reply)
+        # now copy it to the remote path and chown it
         sudo("mkdir -p %(remote)s/elevenbits/" % env, user="www-data")
         put("/tmp/foobar.py",
             "%(remote)s/elevenbits/local_settings.py" % env,
@@ -524,13 +519,14 @@ def populate_database():
     """
     Loads (mostly fixture) data in the database.
     """
-    with cd(env.path):
-        run('./manage.py syncdb')
-        run('./manage.py migrate')
-        run('./manage.py loaddata static.json')
-        run('./manage.py loaddata treemenus.json')
-        # run('./manage.py loaddata menu_extras.json')
-        run('./manage.py loaddata blog.json')
+    with prefix("source %(path)s/bin/activate" % env):
+        with cd(env.path):
+            run('./manage.py syncdb')
+            run('./manage.py migrate')
+            run('./manage.py loaddata static.json')
+            run('./manage.py loaddata treemenus.json')
+            # run('./manage.py loaddata menu_extras.json')
+            run('./manage.py loaddata blog.json')
     # update the deployment time
     with cd(env.path + "/bin"):
         with settings(warn_only=True):
@@ -566,7 +562,7 @@ def update_deployment_time():
 
 
 #
-# Manage database and webserver runtime
+# Manage database and webserver (nginx and uwsgi) runtime
 #
 
 def restart_database():
@@ -620,7 +616,8 @@ def handle_uwsgi_upstart():
     else:
         print(green("Forcing uwsgi to be an upstart job..."))
         sudo("cp %(path)s/conf/uwsgi.conf /etc/init" % env)
-        sudo("initctl reload uwsgi")
+        with settings(warn_only=True):
+            sudo("initctl reload uwsgi")
         if uwsgi_is_upstart_job():
             print(green("Good. uwsgi is now an upstart job."))
         else:

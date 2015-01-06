@@ -8,7 +8,7 @@ django-treemenus==0.9.1
 #django-crontab==0.5.1
 django-debug-toolbar==1.2.1
 
-Fabric==1.10.0
+# Fabric==1.10.0 [only python 2.x]
 Markdown==2.5
 Pygments==1.6
 

@@ -8,14 +8,11 @@ These need to be installed first, using apt-get and via hg, so best to
 ensure mercurial is installed too:
 
 - mercurial: sudo apt-get install mercurial
-- pip: sudo apt-get install python-pip
-- postgresql: sudo apt-get install postgresql-server-dev-9.3 postgresql
+- python-dev
+[- pip: sudo apt-get install python-pip]
+- postgresql: sudo apt-get install postgresql-server-dev-9.4 postgresql
 - nginx: sudo apt-get install nginx
-
-When using both Python 2 and Python 3 on your websever, install uwsgi
-from source.  See below.  Otherwise, just use your apt, pacman,... tools.
-
-The pip install -r requirements will install the other packages/libraries
+- uwsgi: sudo apt-get install uwsgi-plugin-python3
 
 The database
 ============
