@@ -23,6 +23,16 @@
 # This is Python 2 code - fabric does not support Python 3 (yet)
 #
 
+#
+# Usage examples:
+#
+# fab tip development deploy
+# fab recreate tip development deploy
+# fab tip staging deploy
+# fab recreate tip staging deploy
+# fab tip production deploy
+#
+
 from fabric.api import run, env
 from fabric.operations import put
 from fabric.decorators import task
@@ -31,7 +41,8 @@ from fabric.operations import require, sudo
 from fabric.context_managers import settings, cd, prefix
 from fabric.utils import abort
 from fabric.contrib import django
-from fabric.contrib.files import exists
+from fabric.contrib.files import exists, upload_template
+from fabric.contrib.project import upload_project
 
 from os.path import join, dirname, realpath
 from ConfigParser import SafeConfigParser, NoOptionError
@@ -60,6 +71,10 @@ env.account = "elevenbits"
 env.prefix = '/var/www'
 env.remote = env.path = "%(prefix)s/%(name)s" % env
 env.local = dirname(realpath(join(__file__, "..")))
+
+# need to install the full environment with dependencies or not?
+# defaults to False, but will be set to True when in production
+env.recreate = False
 
 
 #
@@ -181,12 +196,15 @@ def production():
     """
     Build for a Production environment.
 
-    Files will come from the repository.
+    Files will come from the repository.  The full system always
+    will recreate all dependencies, the database, all data,...
+
     Secret environment properties (like email, twitter,...) are
     retrieved from the zink.properties file, then they are inserted
     in the local_settings.py
     """
     _create_environment(CONFIGURATION_FILE, PRODUCTION)
+    env.recreate = True
 
 
 @task
@@ -194,10 +212,10 @@ def staging():
     """
     Build for a Staging environment.
 
-    Files will come from the repository.
-    Secret environment properties (like email, twitter,...) are
-    retrieved from the zink.properties file, then they are inserted
-    in the local_settings.py
+    Files will come from the repository.  By default the system
+    will not be recreated.  Secret environment properties (like email,
+    twitter,...) are retrieved from the zink.properties file, then
+    they are inserted in the local_settings.py
     """
     _create_environment(CONFIGURATION_FILE, STAGING)
 
@@ -238,6 +256,18 @@ def revision(revision="tip"):
 
 
 #
+# Recreate the full environment with dependencies?
+#
+
+@task
+def recreate():
+    """
+    Recreate the full environment.
+    """
+    env.recreate = True
+
+
+#
 # The tasks
 #
 
@@ -252,54 +282,91 @@ def deploy():
     require('settings', provided_by=[production, staging, development])
     require('branch', provided_by=[tip, revision])
 
-    print(green("Fabricating %s in %s environment..." %
-                (env.branch, env.settings)))
+    print(green("Fabricating %(branch)s in %(settings)s environment..." % env))
 
-    remove_previous_releases()
-    create_prefix_directory()
-    create_root_directory()
+    if env.recreate:
+        print(green("Recreating environment; removing it first..."))
+        remove_previous_releases()
+        create_prefix_directory()
+        create_root_directory()
 
-    if env.settings == "development" and env.branch == "tip":
-        print(green("Deploying hot development trunk..."))
-        if database_user_exists() and database_exists():
-            copy_current()
+    # development tip deployment
+    #
+    # Just copies the system to /var/www, and if required recreates the
+    # full environment.  The database should be in a perfect state.
+    # If it is not, the deployment is aborted.  If the local settings
+    # file is found, it is left as is (unless the recreate request is
+    # given); otherwise it is recreated.
+    if env.settings == DEVELOPMENT and env.branch == "tip":
+        print(green("Deploying hot development..."))
+        copy_current()
+        path = "%(remote)s/elevenbits/local_settings.py" % env
+        if env.recreate or not exists(path, verbose=True):
             create_local_settings()
-            with prefix("source %(path)s/bin/activate" % env):
-                install_requirements()
+        if env.recreate:
+            create_environment()
+        if not database_user_exists() or not  database_exists():
+            print(red("Database user or database not available.  How weird."))
+            abort("Database user or database not available.  How weird.")
+
+    # staging tip deployment
+    #
+    # Copies the system to the remote /var/www, and if required recreates
+    # the full environment.  If the database is not there (i.e. the user
+    # or the database are not found) or the (re)creation request is given,
+    # the database and its data are created.  If the local settings file
+    # is found, it is left as is (unless the recreate request is given);
+    # otherwise it is recreated.
+    elif env.settings == STAGING and env.branch == "tip":
+        print(green("Deploying hot staging..."))
+        upload_project(env.local, env.prefix, use_sudo=True)
+        sudo("chown www-data:www-data --recursive %(prefix)s" % env)
+        path = "%(remote)s/elevenbits/local_settings.py" % env
+        if env.recreate or not exists(path, verbose=True):
+            create_local_settings()
+        if env.recreate:
+            create_environment()
+        if env.recreate or not database_user_exists() or not database_exists():
+            print(green("Creating database..."))
+            create_user()
+            create_database()
+            populate_database()
+            restart_database()
         else:
-            print(red("Database user or database not available."))
-            abort("Database user or database not available.")
+            print(green("Database seems to be ok."))
+
+    # production tip deployment or a specific revision is requested for
+    # any environment
+    #
+    # Gets the system from the repo and installs it in /var/www of
+    # the remote machine.  In production the database is recreated
+    # together with the full environment by default.
+    #
+    # TODO: make a backup of the staging|production database environment
+    # TODO: create a new revision when deploying in production
     else:
-        print(green("Creating..."))
-
-        # TODO: make a backup of the staging|production database environment
-        # TODO: create a new revision
-
         print(green("Getting files from repository..."))
         if env.branch == "tip":
             checkout_latest()
         else:
             checkout_revision(env.branch)
+        path = "%(remote)s/elevenbits/local_settings.py" % env
+        if env.recreate or not exists(path, verbose=True):
+            create_local_settings()
+        if env.recreate:
+            create_environment()
+        if env.recreate or not database_user_exists() or not database_exists():
+            print(green("Creating database..."))
+            create_user()
+            create_database()
+            populate_database()
+            restart_database()
 
-        create_local_settings()
-        sudo("virtualenv --python=python3 %(path)s" % env)
-        sudo("source %(path)s/bin/activate" % env, user="www-data")
-
-        with prefix("source %(path)s/bin/activate" % env):
-            install_requirements()
-
-        create_user()
-        create_database()
-        populate_database()
-        restart_database()
-
-        add_cronjob()  # checks existence of some core processes
-
-    print(green("Checking to see if uwsgi is an upstart job..."))
-    handle_uwsgi_upstart()
-
-    print(green("Updating nginx and uwsgi configuration..."))
-    update_webserver_and_uwsgi_configuration()
+    if env.recreate:
+        print(green("Checking to see if uwsgi is an upstart job..."))
+        handle_uwsgi_upstart()
+        print(green("Updating nginx and uwsgi configuration..."))
+        update_webserver_and_uwsgi_configuration()
 
     print(green("Restarting nginx and uwsgi..."))
     restart_webserver()
@@ -309,6 +376,16 @@ def deploy():
 #
 # Tasks to help in deployment
 #
+
+
+def create_environment():
+    """
+    Create the environment in a virtualenv.
+    """
+    print(green("Creating the environment..."))
+    sudo("virtualenv --python=python3 %(path)s" % env)
+    with prefix("source %(path)s/bin/activate" % env):
+        install_requirements()
 
 
 def add_cronjob():
@@ -343,47 +420,37 @@ def copy_current():
 
 
 def create_local_settings():
-    print(green("Checking for %(remote)s/elevenbits/local_settings.py" % env))
-    if exists("%(remote)s/elevenbits/local_settings.py" % env, verbose=True):
-        print(green("Local settings file exists.  Leaving as is."))
-    else:
-        print(green("Creating local settings file..."))
-        d = {}
-        # project
-        d["project_key"] = env["project"]["key"]
-        # database
-        d["db_name"] = env.dbname
-        d["db_username"] = env.dbuser
-        d["db_password"] = env.dbpassword
-        # email
-        d["email_host"] = env["project"]["email"]["host"]
-        d["email_port"] = env["project"]["email"]["port"]
-        d["email_user"] = env["project"]["email"]["user"]
-        d["email_password"] = env["project"]["email"]["password"]
-        d["email_tls"] = env["project"]["email"]["tls"]
-        # twitter
-        t = env["project"]["twitter"]
-        d["twitter_name"] = t["name"]
-        d["twitter_consumer_key"] = t["consumer.key"]
-        d["twitter_consumer_secret"] = t["consumer.secret"]
-        d["twitter_oauth_token"] = t["oauth.token"]
-        d["twitter_oauth_token_secret"] = t["oauth.token.secret"]
-        # get the template...
-        with open("template.py") as f:
-            s = Template(f.read())
-        # ...substitute the values...
-        reply = s.substitute(d)
-        # ...and save it
-        with open("/tmp/foobar.py", "w") as f:
-            f.write(reply)
-        # now copy it to the remote path and chown it
-        sudo("mkdir -p %(remote)s/elevenbits/" % env, user="www-data")
-        put("/tmp/foobar.py",
-            "%(remote)s/elevenbits/local_settings.py" % env,
-            use_sudo=True)
-        sudo("chown www-data:www-data "
-             "%(remote)s/elevenbits/local_settings.py" %
-             env)
+    print(green("Creating local settings file..."))
+    d = {}
+    # project
+    d["project_key"] = env["project"]["key"]
+    # host
+    d["host"] = env["host"]
+    # database
+    d["db_name"] = env.dbname
+    d["db_username"] = env.dbuser
+    d["db_password"] = env.dbpassword
+    # email
+    d["email_host"] = env["project"]["email"]["host"]
+    d["email_port"] = env["project"]["email"]["port"]
+    d["email_user"] = env["project"]["email"]["user"]
+    d["email_password"] = env["project"]["email"]["password"]
+    d["email_tls"] = env["project"]["email"]["tls"]
+    # twitter
+    t = env["project"]["twitter"]
+    d["twitter_name"] = t["name"]
+    d["twitter_consumer_key"] = t["consumer.key"]
+    d["twitter_consumer_secret"] = t["consumer.secret"]
+    d["twitter_oauth_token"] = t["oauth.token"]
+    d["twitter_oauth_token_secret"] = t["oauth.token.secret"]
+    # create the local settings
+    sudo("mkdir -p %(remote)s/elevenbits/" % env, user="www-data")
+    destination = "%(remote)s/elevenbits/local_settings.py" % env
+    upload_template("settings.template", destination, context=d,
+                    backup=False, use_sudo=True)
+    sudo("chown www-data:www-data "
+         "%(remote)s/elevenbits/local_settings.py" %
+         env)
 
 
 def checkout_latest():
@@ -405,9 +472,6 @@ def install_requirements():
     Install the required packages using pip.
     """
     sudo('pip3 install -r %(path)s/requirements.txt' % env)
-    print(green("Some required packages are installed."))
-    print(yellow("Some packages might be missing."))
-    print(yellow("You still need to do check this yourself for now..."))
 
 
 @task
@@ -562,7 +626,7 @@ def update_deployment_time():
 
 
 #
-# Manage database and webserver (nginx and uwsgi) runtime
+# Manage database and webserver (nginx and uwsgi) init
 #
 
 def restart_database():
@@ -583,17 +647,22 @@ def update_webserver_and_uwsgi_configuration():
     sudo("mkdir -p /etc/nginx/sites-available" % env)
     sudo("mkdir -p /etc/nginx/sites-enabled" % env)
     # ...project conf
-    sudo("cp %(path)s/conf/zink.conf /etc/nginx/sites-available" % env)
+    upload_template("%(local)s/conf/zink.conf" % env,
+                    "/etc/nginx/sites-available/zink.conf",
+                    context=env, backup=False, use_sudo=True)
     sudo("ln -sf /etc/nginx/sites-available/zink.conf "
          "/etc/nginx/sites-enabled/zink.conf" % env)
     # ...static conf
-    sudo("cp %(path)s/conf/static.conf /etc/nginx/sites-available" % env)
+    upload_template("%(local)s/conf/static.conf" % env,
+                    "/etc/nginx/sites-available/static.conf",
+                    context=env, backup=False, use_sudo=True)
     sudo("ln -sf /etc/nginx/sites-available/static.conf "
          "/etc/nginx/sites-enabled/static.conf" % env)
     # update uwsgi
     sudo("mkdir -p /etc/uwsgi/apps-available" % env)
     sudo("mkdir -p /etc/uwsgi/apps-enabled" % env)
-    sudo("cp %(path)s/conf/zink.ini /etc/uwsgi/apps-available" % env)
+    put("%(path)s/conf/zink.ini" % env, "/etc/uwsgi/apps-available" % env,
+        use_sudo=True)
     sudo("ln -sf /etc/uwsgi/apps-available/zink.ini "
          "/etc/uwsgi/apps-enabled/zink.ini" % env)
 

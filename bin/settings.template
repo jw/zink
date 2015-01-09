@@ -18,7 +18,17 @@
 # along with Zink.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-SECRET_KEY = '${project_key}'
+#
+# This settings template will be processed by fabric when deploying
+# in either development, staging or production environments.  This
+# ensures security: all passwords stay on your own machine and will
+# never be part of the repository.
+#
+
+from elevenbits.settings import ALLOWED_HOSTS
+ALLOWED_HOSTS.append('%(host)s')
+
+SECRET_KEY = '%(project_key)s'
 
 #
 # Database
@@ -27,9 +37,9 @@ SECRET_KEY = '${project_key}'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': '${db_name}',
-        'USER': '${db_username}',
-        'PASSWORD': '${db_password}',
+        'NAME': '%(db_name)s',
+        'USER': '%(db_username)s',
+        'PASSWORD': '%(db_password)s',
         'HOST': 'localhost',
         'DATABASE_PORT': '',
     }
@@ -39,20 +49,20 @@ DATABASES = {
 # Email settings
 #
 
-EMAIL_HOST = '${email_host}'
-EMAIL_PORT = ${email_port}
-EMAIL_HOST_USER = '${email_user}'
-EMAIL_HOST_PASSWORD = '${email_password}'
-EMAIL_USE_TLS = ${email_tls}
+EMAIL_HOST = '%(email_host)s'
+EMAIL_PORT = %(email_port)s
+EMAIL_HOST_USER = '%(email_user)s'
+EMAIL_HOST_PASSWORD = '%(email_password)s'
+EMAIL_USE_TLS = %(email_tls)s
 
 #
 # Twitter settings
 #
 
-TWITTER_NAME = "${twitter_name}"
+TWITTER_NAME = '%(twitter_name)s'
 
-CONSUMER_KEY = "${twitter_consumer_key}"
-CONSUMER_SECRET = "${twitter_consumer_secret}"
+CONSUMER_KEY = '%(twitter_consumer_key)s'
+CONSUMER_SECRET = '%(twitter_consumer_secret)s'
 
-OAUTH_TOKEN = "${twitter_oauth_token}"
-OAUTH_TOKEN_SECRET = "${twitter_oauth_token_secret}"
+OAUTH_TOKEN = '%(twitter_oauth_token)s'
+OAUTH_TOKEN_SECRET = '%(twitter_oauth_token_secret)s'

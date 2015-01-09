@@ -37,6 +37,8 @@ ALLOWED_HOSTS = ["localhost",
                  ".elevenbits.be",
                  ".m8n.be"]
 
+print("settings: " + str(ALLOWED_HOSTS))
+
 #
 # Test properties
 #
@@ -236,12 +238,15 @@ LOGGING = {
     }
 }
 
+# hostname based settings
 hostname = gethostname()
 if "elevenbits" in hostname:
     from .settings_elevenbits import *
 elif "m8n" in hostname:
     from .settings_m8n import *
 else:
+    # localhost will enable DEBUG
     from .settings_localhost import *
 
+# security settings
 from .local_settings import *
