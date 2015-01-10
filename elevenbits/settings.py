@@ -37,8 +37,6 @@ ALLOWED_HOSTS = ["localhost",
                  ".elevenbits.be",
                  ".m8n.be"]
 
-print("settings: " + str(ALLOWED_HOSTS))
-
 #
 # Test properties
 #
