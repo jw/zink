@@ -4,22 +4,27 @@ INSTALL
 The required packages
 =====================
 
-These need to be installed first, using apt-get and via hg, so best to
-ensure mercurial is installed too:
+These need to be installed first, using your package manager:
 
-- mercurial: sudo apt-get install mercurial
-- python-dev
-[- pip: sudo apt-get install python-pip]
-- postgresql: sudo apt-get install postgresql-server-dev-9.4 postgresql
-- nginx: sudo apt-get install nginx
-- uwsgi: sudo apt-get install uwsgi-plugin-python3
+- virtualenv
+- mercurial
+- python-dev (for psycopg)
+- pip
+- postgresql postgresql-server-dev-9.4
+- nginx
+- uwsgi-plugin-python3
+
+so, on a Debian based system, like Mint, you could do:
+
+sudo apt-get virtualenv mercurial python-dev pip posgresql \
+postgresql-server-dev-9.4 nginx uwsgi-plugin-python3
 
 The database
 ============
 
 The database can be created using the fabric script (see below), but you
 can also create the database yourself.  Best to use the properties you
-need to specify in the fabfile.properties file.
+need to specify in the zink.properties file.
 
 0) sudo -u postgres psql
 
@@ -33,31 +38,20 @@ postgres-# password '<db.password>';
 2) Create a database owned by this user
 postgres=# create database <db.name> owner <db.username>;
 
-The webserver
-=============
-
-1) nginx
-2) uwsgi
-
-Install uwsgi from source in a separate directory.
-
 Fabric
 ======
-
-fabfile.properties
-~~~~~~~~~~~~~~~~~~
-
-Fabric uses the fabfile.properties file to get the authentication data
-(password, username) for three building environments:
-
- - development: your machine
- - staging: staging.elevenbits.org
- - production: www.elevenbits.org
 
 zink.properties
 ~~~~~~~~~~~~~~~
 
-It also uses the zink.properties file which needs to contain these entries:
+Fabric uses the zink.properties file to get the authentication data
+(password, username) for three building environments:
+
+ - development: your machine
+ - staging: the staging environment
+ - production: the production environments (like elevenbits.org, m8n.be)
+
+The zink.properties file also needs to contain these entries:
 
 [project]
 key: <the key of the project, used by Django to secure your application>
@@ -79,8 +73,8 @@ oauth.token.secret: <your oauth token secret>
 settings.py
 ~~~~~~~~~~~
 
-Using these two files, the Fabric will create a local settings file which
-will become part of settings.py.
+Using this file, Fabric will create a local settings file which will become
+part of settings.py.
 
 Database creation
 ~~~~~~~~~~~~~~~~~
