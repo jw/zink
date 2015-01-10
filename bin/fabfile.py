@@ -20,7 +20,7 @@
 
 #
 # Note:
-# This is Python 2 code - fabric does not support Python 3 (yet)
+# This is Python 2 code, since fabric does not support Python 3 (yet)
 #
 
 #
@@ -240,42 +240,30 @@ def development():
 
 @task
 def tip():
-    """
-    Deploy the tip.
-    """
+    """Deploy the tip."""
     env.branch = 'tip'
 
 
 @task
 def revision(revision="tip"):
-    """
-    Deploy a certain revision.  Default is the tip.
-    """
+    """Deploy a certain revision.  Default is the tip."""
     env.branch = revision
 
 
-#
-# Recreate the full environment with dependencies?
-#
-
 @task
 def recreate():
-    """
-    Recreate the full environment.
-    """
+    """Recreate the full environment."""
     env.recreate = True
 
 
 #
-# The tasks
+# The only and therefore most important task
 #
 
 
 @task
 def deploy():
-    """
-    Install everything we need, and fire up the system.
-    """
+    """Install everything we need, and fire up the system."""
 
     require('settings', provided_by=[production, staging, development])
     require('branch', provided_by=[tip, revision])
@@ -364,15 +352,14 @@ def deploy():
 
     print(green("Setup complete."))
 
+
 #
 # Tasks to help in deployment
 #
 
 
 def create_environment():
-    """
-    Create the environment in a virtualenv.
-    """
+    """Create the environment in a virtualenv."""
     print(green("Creating the environment..."))
     sudo("virtualenv --python=python3 %(path)s" % env)
     with prefix("source %(path)s/bin/activate" % env):
@@ -380,21 +367,18 @@ def create_environment():
 
 
 def add_cronjob():
-    """
-        Add a cronjob which checks for the correct processes to be running.
-    """
+    """Add a cronjob which checks for the correct processes to be running."""
     sudo("cp %(path)s/conf/processes /etc/cron.d/processes" % env)
 
 
 def copy_current():
-    """
-    Copy the current code to the server area.
-    """
+    """Copy the current code to the server area."""
     sudo('cp -r %(local)s %(prefix)s' % env)
     sudo("chown www-data:www-data --recursive %(path)s" % env)
 
 
 def create_local_settings():
+    """Create the local settings file."""
     print(green("Creating local settings file..."))
     d = {}
     # project
@@ -443,17 +427,13 @@ def checkout_revision(revision):
 
 
 def install_requirements():
-    """
-    Install the required packages using pip.
-    """
+    """Install the required packages using pip."""
     sudo('pip3 install -r %(path)s/requirements.txt' % env)
 
 
 @task
 def backup():
-    """
-    Dump the latest content of the portal and add it to the repository.
-    """
+    """Dump the latest content of the portal and add it to the repository."""
     with cd(env.path):
         print(env.local)
         sudo('python manage.py dumpdata --indent 4 static > '
@@ -466,9 +446,35 @@ def backup():
              '%(local)s/fixtures/index.json' % env)
 
 
+@task
+def update_deployment_time():
+    """Update the deployment time on the remote machine."""
+    # get date and time
+    from datetime import datetime
+    now = datetime.now()
+    deployment_time = now.strftime("%d.%m.%Y, %H%Mhrs")
+    print(green("Deployment time is " + deployment_time + "."))
+    # first get Django access
+    from sys import path
+    path.append(env.path)
+    django.settings_module('elevenbits.settings')
+    with cd(env.path):
+        # get the version
+        from elevenbits.templatetags import revision
+        version = revision.get_hg_revision()
+        # TODO: get tag
+        tag = "n/a"
+        # add this development
+        from elevenbits.deployment.models import Deployment
+        deployment = Deployment(tag=tag, timestamp=now, version=version,
+                                deployer='Deployed via Fabric.')
+        deployment.save()
+
+
 #
 # Database handling
 #
+
 
 def create_full_database():
     print(green("Creating database..."))
@@ -496,9 +502,7 @@ def database_user_exists():
 
 
 def database_exists():
-    """
-    Check if the database exists.
-    """
+    """Check if the database exists."""
     output = run('echo "SELECT 1 '
                  '      FROM pg_database '
                  '      WHERE datname=\'%(dbname)s\'; "'
@@ -513,9 +517,7 @@ def database_exists():
 # create user and database
 
 def create_user():
-    """
-    Create a database user.
-    """
+    """Create a database user."""
     if not database_user_exists():
         print(green("Creating user '%(dbuser)s'." % env))
         output = run('echo "CREATE ROLE %(dbuser)s'
@@ -531,6 +533,7 @@ def create_user():
 
 
 def create_database():
+    """Create the database."""
     if not database_exists():
         print(green("Creating database '%(dbname)s'..." % env))
         output = run('echo "CREATE DATABASE %(dbname)s OWNER %(dbuser)s;" '
@@ -560,9 +563,7 @@ def drop_user():
 
 @task
 def populate_database():
-    """
-    Loads (mostly fixture) data in the database.
-    """
+    """Loads (mostly fixture) data in the database."""
     with prefix("source %(path)s/bin/activate" % env):
         with cd(env.path):
             run('./manage.py syncdb')
@@ -577,47 +578,24 @@ def populate_database():
             run('fab update_deployment_time')
 
 
-@task
-def update_deployment_time():
-    """
-    Updates the deployment time on the remote machine.
-    """
-    # get date and time
-    from datetime import datetime
-    now = datetime.now()
-    deployment_time = now.strftime("%d.%m.%Y, %H%Mhrs")
-    print(green("Deployment time is " + deployment_time + "."))
-    # first get Django access
-    from sys import path
-    path.append(env.path)
-    django.settings_module('elevenbits.settings')
-    with cd(env.path):
-        # get the version
-        from elevenbits.templatetags import revision
-        version = revision.get_hg_revision()
-        # TODO: get tag
-        tag = "n/a"
-        # add this development
-        from elevenbits.deployment.models import Deployment
-        deployment = Deployment(tag=tag, timestamp=now, version=version,
-                                deployer='Deployed via Fabric.')
-        deployment.save()
-
-
-#
-# Manage database and webserver (nginx and uwsgi) init
-#
-
 def restart_database():
+    """Restart the database."""
     sudo("service postgresql restart")
 
 
+#
+# Manage webserver (nginx and uwsgi) init
+#
+
+
 def restart_webserver():
+    """Restart the webserver."""
     sudo("service nginx restart")
     sudo("service uwsgi restart")
 
 
 def update_webserver_and_uwsgi_configuration():
+    """Update the nginx and uwsgi configuration."""
     # remove default first if it is there
     if exists("/etc/nginx/sites-enabled/default"):
         with settings(warn_only=True):
@@ -647,6 +625,7 @@ def update_webserver_and_uwsgi_configuration():
 
 
 def uwsgi_is_upstart_job():
+    """See if the uwsgi.conf exists."""
     if exists("/etc/init/uwsgi.conf"):
         output = run("initctl list", quiet=True)
         if "uwsgi" in output:
