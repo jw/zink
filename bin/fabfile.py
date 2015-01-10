@@ -46,7 +46,6 @@ from fabric.contrib.project import upload_project
 
 from os.path import join, dirname, realpath
 from ConfigParser import SafeConfigParser, NoOptionError
-from string import Template
 
 #
 # Statics
@@ -275,8 +274,7 @@ def recreate():
 @task
 def deploy():
     """
-    Install everything we need, and fire up the database.  Then start the
-    server.
+    Install everything we need, and fire up the system.
     """
 
     require('settings', provided_by=[production, staging, development])
@@ -600,8 +598,7 @@ def populate_database():
 @task
 def update_deployment_time():
     """
-    Updates the deployment time on the machine where the website is being
-    deployed.
+    Updates the deployment time on the remote machine.
     """
     # get date and time
     from datetime import datetime
