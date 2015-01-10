@@ -283,10 +283,11 @@ def deploy():
     print(green("Fabricating %(branch)s in %(settings)s environment..." % env))
 
     if env.recreate:
-        print(green("Recreating environment; removing it first..."))
-        remove_previous_releases()
-        create_prefix_directory()
-        create_root_directory()
+        print(green("Recreating environment..."))
+        sudo("rm -rf %(path)s" % env)
+        sudo("mkdir -p %(prefix)s" % env)
+        sudo("mkdir -p %(path)s" % env)
+        sudo("chown www-data:www-data %(path)s" % env)
 
     # development tip deployment
     #
@@ -325,11 +326,7 @@ def deploy():
         if env.recreate:
             create_environment()
         if env.recreate or not database_user_exists() or not database_exists():
-            print(green("Creating database..."))
-            create_user()
-            create_database()
-            populate_database()
-            restart_database()
+            create_full_database()
         else:
             print(green("Database seems to be ok."))
 
@@ -354,11 +351,7 @@ def deploy():
         if env.recreate:
             create_environment()
         if env.recreate or not database_user_exists() or not database_exists():
-            print(green("Creating database..."))
-            create_user()
-            create_database()
-            populate_database()
-            restart_database()
+            create_full_database()
 
     if env.recreate:
         print(green("Checking to see if uwsgi is an upstart job..."))
@@ -391,22 +384,6 @@ def add_cronjob():
         Add a cronjob which checks for the correct processes to be running.
     """
     sudo("cp %(path)s/conf/processes /etc/cron.d/processes" % env)
-
-
-def remove_previous_releases():
-    sudo("rm -rf %(path)s" % env)
-
-
-def create_prefix_directory():
-    sudo("mkdir -p %(prefix)s" % env)
-
-
-def create_root_directory():
-    """
-    Create root directory.
-    """
-    sudo("mkdir -p %(path)s" % env)
-    sudo("chown www-data:www-data %(path)s" % env)
 
 
 def copy_current():
@@ -493,8 +470,13 @@ def backup():
 # Database handling
 #
 
+def create_full_database():
+    print(green("Creating database..."))
+    create_user()
+    create_database()
+    populate_database()
+    restart_database()
 
-# check user and database
 
 def database_user_exists():
     """
