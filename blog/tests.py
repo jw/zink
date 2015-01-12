@@ -52,7 +52,7 @@ class BlogTest(TestCase):
         response = client.get(reverse('blog:blog'))
         self.assertContains(response, "Welcome to our blog")
         self.assertContains(response, "Blog Categories")
-        self.assertContains(response, '/">Java</a>')
+        self.assertContains(response, '/">Java (2)</a>')
 
     def testTag(self):
         """Test one tag."""
@@ -62,7 +62,7 @@ class BlogTest(TestCase):
         self.assertContains(response, "2 entries tagged with")
         self.assertContains(response, "Django")
         self.assertContains(response, "Blog Categories")
-        self.assertContains(response, '/">Java</a>')
+        self.assertContains(response, 'Java (2)')
 
     def testDetail(self):
         """Test one single blog entry."""
