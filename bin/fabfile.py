@@ -292,7 +292,7 @@ def deploy():
             create_local_settings()
         if env.recreate:
             create_environment()
-        if not database_user_exists() or not  database_exists():
+        if not database_user_exists() or not database_exists():
             print(red("Database user or database not available.  How weird."))
             abort("Database user or database not available.  How weird.")
 
