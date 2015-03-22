@@ -387,18 +387,18 @@ textarea {
 	resize: both;
 }
 	
-	input:hover, textarea:hover, select:hover { border-color: #dedede; }
+input:hover, textarea:hover, select:hover { border-color: #dedede; }
 	
-	input:focus, textarea:focus, select:focus { border-color: #ccc; }
+input:focus, textarea:focus, select:focus { border-color: #ccc; }
 
 input[type="submit"], input[type="reset"], button {
 	font-size: 13px;
 	text-transform: uppercase;
 }
 
-	input[type="submit"].medium, input[type="reset"].medium, button.medium { font-size: 15px; }
+input[type="submit"].medium, input[type="reset"].medium, button.medium { font-size: 15px; }
 
-	input[type="submit"].large, input[type="reset"].large, button.large { font-size: 17px; }
+input[type="submit"].large, input[type="reset"].large, button.large { font-size: 17px; }
 
 select, option {
 	cursor: pointer;
@@ -508,6 +508,14 @@ input.placeholder, textarea.placeholder { color: #b0b0b0; }
 					text-transform: uppercase;
 					z-index: 98;
 				}
+
+                #main-nav a#search {
+                    padding: 22px 20px 22px 20px;
+                    width: 150px;
+                }
+                #main-nav a form input {
+                    width: 130px;
+                }
 
 				.ie7 #main-nav a { padding: 33px 20px; }
 
@@ -1903,6 +1911,82 @@ input.placeholder, textarea.placeholder { color: #b0b0b0; }
 
 					.team-member .social-links a:hover { opacity: 1; }
 
+
+
+
+/* ---------------------------------------------------------------------- */
+/*	Search
+/* ---------------------------------------------------------------------- */
+
+.search {
+	margin: 0 0 30px;
+	padding: 0 0 30px;
+}
+
+	.search-body {
+        color: #474747;
+        float: right;
+		margin: -5px 0 0;
+		width: 800px;
+    }
+
+
+		.search-body .title {
+			font-size: 18px;
+			font-weight: 700;
+            color: #f15a23;
+            margin-bottom: 0px;
+		}
+
+		.search-body .tags {
+			font-size: 12px;
+			font-weight: 600;
+			margin-top: 0px;
+            margin-bottom: 15px;
+		}
+
+	.search-meta {
+		color: #878787;
+		float: left;
+		font-family: 'Open Sans', 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+		margin: 0 20px 0 0;
+		text-align: right;
+		width: 110px;
+	}
+
+		.search-meta ul { margin: 0; }
+
+			.search-meta li {
+				list-style: none;
+				margin: 0;
+			}
+
+                .search-body .score {
+                    font-size: 14px;
+                    font-weight: 700;
+                    color: #414141;
+                    margin-bottom: 0px;
+                }
+
+                .search-body .index {
+                    font-size: 14px;
+                    font-weight: 700;
+                    color: #414141;
+                    margin-bottom: 0px;
+                }
+
+				.search-meta .title { font-weight: 700; }
+
+                .search-meta .title { font-weight: 700; }
+
+				.search-meta a {
+					color: #959393;
+					display: inline-block;
+					font-style: italic;
+				}
+
+					.search-meta a:hover { color: #f15a23; }
+
 /* ---------------------------------------------------------------------- */
 /*	Blog
 /* ---------------------------------------------------------------------- */
@@ -1931,7 +2015,7 @@ input.placeholder, textarea.placeholder { color: #b0b0b0; }
 	.touch-device .entry .entry-audio { margin-top: -12.5px; }
 
 	.single-image .entry-image, .image-gallery .entry-image, .iframe .entry-image { margin-bottom: 20px; }
-			
+
 	.entry-body {
         color: #474747;
 	}
@@ -3781,32 +3865,3 @@ input.placeholder, textarea.placeholder { color: #b0b0b0; }
 
 }
 
-.search-form .search-text-box {
-        position: absolute;
-        right:10px;
-        width: 54px;
-        background-color: #303030;
-        border: none;
-        color: transparent;
-        font-size: 12px;
-        padding: 18px 0;
-        cursor: pointer;
-        background: url("../img/search.png") 5% 50% no-repeat;
-        -webkit-transition: all 0.25s ease-in-out;
-        -moz-transition: all 0.25s ease-in-out;
-        -o-transition: all 0.25s ease-in-out;
-        -ms-transition: all 0.25s ease-in-out;
-        transition: all 0.25s ease-in-out;
-        -webkit-box-shadow:  none;
-        box-shadow:  none;
-}
-
-.search-form .search-text-box:focus {
-        font-size: 13px;
-        background-color: #303030;
-        padding: 17px 18px 17px 58px;
-        width: 150px;
-        border: none;
-        color: #fff;
-        cursor: text;
-}

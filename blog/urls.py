@@ -18,7 +18,7 @@
 # along with Zink.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-from django.conf.urls import patterns, url
+from django.conf.urls import patterns, url, include
 
 urlpatterns = patterns(
     '',
@@ -38,4 +38,5 @@ urlpatterns = patterns(
 
     # one single blog entry
     url(r'^/(?P<id>\d+)/$', 'blog.views.detail', name='detail'),
+
 )

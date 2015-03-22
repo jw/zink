@@ -35,8 +35,26 @@ postgres=# ALTER USER postgres WITH PASSWORD '<your password>';
 postgres=# create role <db.username> with createdb login
 postgres-# password '<db.password>';
 
-2) Create a database owned by this user
+3) Create a database owned by this user
 postgres=# create database <db.name> owner <db.username>;
+
+Run the instance
+================
+
+The Django instance can run using the webserver (nginx and uwsgi) or
+via the regular runserver manage.py task.
+
+Fixtures
+========
+
+Remember that a superuser needs to be added:
+> python manage createsuperuser
+
+Add the fixtures (if fabric did not do so):
+
+> python manage.py loaddata fixtures/static.json
+> python manage.py loaddata fixtures/treemenus.json fixtures/menu_extras.json
+> python manage.py loaddata fixtures/blog.json
 
 Fabric
 ======
@@ -86,15 +104,3 @@ with some default data.  When the user and the database are available,
 no population is done during the deploy step.
 
 It is of course possible to populate the database using the populate task.
-
-Fixtures
-========
-
-To create fixtures:
-
-python manage.py dumpdata --indent 4 treemenus > /home/jw/treemenus.json
-python manage.py dumpdata --indent 4 blog > /home/jw/blog.json
-python manage.py dumpdata --indent 4 static > /home/jw/static.json
-
-To populate the database with them:
-TODO

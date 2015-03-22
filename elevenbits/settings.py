@@ -28,7 +28,7 @@ from socket import gethostname
 
 SITE_ROOT = dirname(realpath(join(__file__, "..")))
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = ["localhost",
@@ -120,7 +120,8 @@ STATICFILES_FINDERS = (
 )
 
 STATIC_ROOT = '/var/www/static/zink/'
-STATIC_URL = 'http://static.elevenbits.com/'
+# STATIC_URL = 'http://static.elevenbits.com/'
+STATIC_URL = '/static/'
 
 FIXTURE_DIRS = (join(SITE_ROOT, 'fixtures'),)
 
@@ -168,6 +169,13 @@ TEMPLATE_DIRS = (
     join(dirname(__file__), 'templates').replace('\\', '/'),
 )
 
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': join(dirname(__file__), 'whoosh_index'),
+    },
+}
+
 INSTALLED_APPS = (
     # django contribs
     'django.contrib.auth',
@@ -177,6 +185,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'haystack',
     # zink apps
     'elevenbits.menu_extras',  # TODO: move this in apps root
     'blog',
@@ -185,6 +194,7 @@ INSTALLED_APPS = (
     'home',
     'elevenbits.deployment',
     'elevenbits',
+    'search',
     'treemenus',  # TODO: make sure to use the proper (Russian) one!
     # utilities
     'tracking',

@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <section id="content" class="container clearfix">
+
+    	<header class="page-header">
+
+    		<h1 class="page-title">Search results for '{{ query }}'</h1>
+
+		</header>
+
+        {% for tag in tags %}
+
+            <article class="search clearfix">
+
+                <div class="search-body">
+
+                    <a href="{% url 'blog:tag' tag.pk %}">
+                        <h1 class="title">
+                            {{ tag.text }}
+                        </h1>
+                    </a>
+                    <p>
+                        Tag <a href="{% url 'blog:tag' tag.pk %}">{{ tag.text }}</a>
+                        contains many entries regarding '{{ query }}'.
+                    </p>
+
+                </div>
+                <div class="search-meta">
+                    <ul>
+                        <li><span class="score">[{{ tag.score|floatformat:3 }}]</span></li>
+                    </ul>
+                </div>
+
+            </article>
+
+        {% endfor %}
+
+        {% for blog in blogs %}
+
+            <article class="search clearfix">
+
+                <div class="search-body">
+
+                    <a href="{% url 'blog:detail' blog.pk %}">
+                        <h1 class="title">
+                            {{ blog.object.title }}
+                        </h1>
+                    </a>
+                    <h1 class="tags">
+                        {% for tag in blog.object.tags.all %}
+                            <a href="{% url 'blog:tag' tag.pk %}">{{tag.tag}}</a>
+                                {% if not forloop.last %} | {% endif %}
+                        {% endfor %}
+                    </h1>
+                    <p>
+                        {{ blog.object.plain|truncatechars:512 }}
+                    </p>
+
+                </div>
+                <div class="search-meta">
+                    <ul>
+                        <li><span class="score">[{{ blog.score|floatformat:3 }}]</span></li>
+                    </ul>
+                </div>
+
+            </article>
+
+        {% endfor %}
+
+
+{#        {% empty %}#}
+{#            <p>No results found.  Try again?</p>#}
+{#        {% endfor %}#}
+
+    </section>
+
+{% endblock %}

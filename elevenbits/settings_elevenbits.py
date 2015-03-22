@@ -19,3 +19,6 @@
 #
 
 HOSTNAME = "elevenbits"
+
+DEBUG = False
+TEMPLATE_DEBUG = DEBUG
