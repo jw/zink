@@ -26,8 +26,8 @@ def remove_tags(text):
 def search(request):
     """The search page."""
 
-    form = SearchForm(request.GET)
-    entries = form.search().load_all()
+    form = SearchForm(request.GET, load_all=True)
+    entries = form.search()
     tags = []
     blogs = []
     for entry in entries:

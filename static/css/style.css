@@ -1961,23 +1961,23 @@ input.placeholder, textarea.placeholder { color: #b0b0b0; }
 				margin: 0;
 			}
 
-                .search-body .score {
-                    font-size: 14px;
+                .search-meta .score {
                     font-weight: 700;
                     color: #414141;
                     margin-bottom: 0px;
                 }
 
-                .search-body .index {
-                    font-size: 14px;
+                .search-meta .index {
                     font-weight: 700;
                     color: #414141;
                     margin-bottom: 0px;
                 }
 
-				.search-meta .title { font-weight: 700; }
-
-                .search-meta .title { font-weight: 700; }
+                .search-meta .title {
+                    font-size: 12px;
+                    font-weight: 700;
+                    color: #3e3e3e;
+                }
 
 				.search-meta a {
 					color: #959393;
@@ -3286,6 +3286,13 @@ input.placeholder, textarea.placeholder { color: #b0b0b0; }
 			
 		.post-carousel .entry-body { width: 191px; }
 
+
+	/* -------------------------------------------------- */
+	/*	Search
+	/* -------------------------------------------------- */
+
+    .search-body { width: 358px; }
+
 	/* -------------------------------------------------- */
 	/*	Blog
 	/* -------------------------------------------------- */
@@ -3508,6 +3515,54 @@ input.placeholder, textarea.placeholder { color: #b0b0b0; }
 				background-color: rgba(241, 90, 35, 1);
 				filter: alpha(opacity=100); /* Fallback for old IE */
 			}
+
+
+	/* -------------------------------------------------- */
+	/*	Search
+	/* -------------------------------------------------- */
+
+    .search .search-body {
+		float: none;
+		margin: 0;
+        width: 100%;
+    }
+
+    .search .search-meta {
+		border-bottom: 1px solid #efefef;
+		border-top: 1px solid #efefef;
+		float: none;
+		margin: 10px 0;
+		padding: 4px 0;
+		text-align: left;
+		width: 100%;
+	}
+
+		.search .search-meta ul { }
+
+			.search .search-meta li {
+				border-left: 1px solid #efefef;
+				display: inline-block;
+				padding: 0 10px;
+			}
+
+			.search .search-meta li:first-child {
+				border-left: none;
+				padding-left: 0;
+			}
+
+			.search .search-meta li:last-child { padding-right: 0; }
+
+			.search .search-meta li .title { display: block; }
+
+				.search .search-meta .post-format {
+					background: none;
+					height: auto;
+					margin: 0;
+					text-indent: 0;
+					width: auto;
+				}
+
+					.search .search-meta a:hover > .post-format { background: none; }
 
 	/* -------------------------------------------------- */
 	/*	Blog

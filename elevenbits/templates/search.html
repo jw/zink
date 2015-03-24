@@ -14,6 +14,16 @@
 
             <article class="search clearfix">
 
+                <div class="search-meta">
+                    <ul>
+                        <li>
+                            <span class="index">
+                                TAG [{{ tag.score|floatformat:3 }}]
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+
                 <div class="search-body">
 
                     <a href="{% url 'blog:tag' tag.pk %}">
@@ -27,11 +37,6 @@
                     </p>
 
                 </div>
-                <div class="search-meta">
-                    <ul>
-                        <li><span class="score">[{{ tag.score|floatformat:3 }}]</span></li>
-                    </ul>
-                </div>
 
             </article>
 
@@ -40,6 +45,16 @@
         {% for blog in blogs %}
 
             <article class="search clearfix">
+
+                <div class="search-meta">
+                    <ul>
+                        <li>
+                            <span class="index">
+                                {{ forloop.counter }} [{{ blog.score|floatformat:3 }}]
+                            </span>
+                        </li>
+                    </ul>
+                </div>
 
                 <div class="search-body">
 
@@ -59,20 +74,12 @@
                     </p>
 
                 </div>
-                <div class="search-meta">
-                    <ul>
-                        <li><span class="score">[{{ blog.score|floatformat:3 }}]</span></li>
-                    </ul>
-                </div>
 
             </article>
 
+        {% empty %}
+            <p class="title">No results found for '{{ query }}'.  Try again?</p>
         {% endfor %}
-
-
-{#        {% empty %}#}
-{#            <p>No results found.  Try again?</p>#}
-{#        {% endfor %}#}
 
     </section>
 
