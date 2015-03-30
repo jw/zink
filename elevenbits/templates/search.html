@@ -31,6 +31,7 @@
                             {{ tag.text }}
                         </h1>
                     </a>
+
                     <p>
                         Tag <a href="{% url 'blog:tag' tag.pk %}">{{ tag.text }}</a>
                         contains many entries regarding '{{ query }}'.
@@ -78,7 +79,8 @@
             </article>
 
         {% empty %}
-            <p class="title">No results found for '{{ query }}'.  Try again?</p>
+            <h3>No results found for '{{ query }}'.  Try again?</h3>
+            <h6>Note that the search only works for blog entries; later (hopefully soon) the full website will be added to the search dataset.</h6>
         {% endfor %}
 
     </section>

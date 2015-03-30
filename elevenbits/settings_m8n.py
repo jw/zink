@@ -19,3 +19,7 @@
 #
 
 HOSTNAME = "m8n"
+
+DEBUG = False
+TEMPLATE_DEBUG = DEBUG
+

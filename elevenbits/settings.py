@@ -103,7 +103,7 @@ LANGUAGE_CODE = 'en-BE'
 
 SITE_ID = 1
 
-# use i18n, l10n and make dates time zone
+# use i18n l10n and make dates time zone
 USE_I18N = True
 USE_L10N = True
 USE_TZ = False
@@ -113,15 +113,13 @@ STATICFILES_DIRS = (
     join(SITE_ROOT, "static"),
 )
 
-# TODO: read up on this
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder"
 )
 
 STATIC_ROOT = '/var/www/static/zink/'
-# STATIC_URL = 'http://static.elevenbits.com/'
-STATIC_URL = '/static/'
+STATIC_URL = 'http://static.elevenbits.com/'
 
 FIXTURE_DIRS = (join(SITE_ROOT, 'fixtures'),)
 

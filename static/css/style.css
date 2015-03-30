@@ -2921,6 +2921,21 @@ input.placeholder, textarea.placeholder { color: #b0b0b0; }
 /* Standard 960 or larger (browsers) */
 @media only screen and (min-width: 960px) {
 
+    /* ---------------------------- */
+    /*  Search menu
+    /* ---------------------------- */
+
+    #main-nav a#search {
+        padding: 22px 20px 22px 20px;
+        width: 150px;
+    }
+
+    a#search > input {
+        /* padding: 22px 20px 22px 20px; */
+        /* width: 150px; */
+        height: 100px;
+    }
+
 	/* -------------------------------------------------- */
 	/*	Pricing Tables > Tooltip
 	/* -------------------------------------------------- */
@@ -3045,6 +3060,20 @@ input.placeholder, textarea.placeholder { color: #b0b0b0; }
 /* Smaller than standard 960 (devices and browsers) */
 @media only screen and (max-width: 959px) {
 
+    /* ---------------------------- */
+    /*  Search menu
+    /* ---------------------------- */
+
+    #main-nav a#search {
+        width: 100px;
+    }
+
+    a#search form input {
+        padding: 4px 6px 4px 6px;
+        height: 20px;
+        width: 100px;
+    }
+
 	/* -------------------------------------------------- */
 	/*	Home > Slider
 	/* -------------------------------------------------- */
@@ -3116,7 +3145,7 @@ input.placeholder, textarea.placeholder { color: #b0b0b0; }
 	.extended-pricing-table .features-list { display: none; }
 
 	/* -------------------------------------------------- */
-	/*	Potrfolio
+	/*	Portfolio
 	/* -------------------------------------------------- */
 
 	#portfolio-items-filter {
@@ -3175,6 +3204,21 @@ input.placeholder, textarea.placeholder { color: #b0b0b0; }
 /* Tablet Portrait size to standard 960 (devices and browsers) */
 @media only screen and (min-width: 768px) and (max-width: 959px) {
 		
+    /* ---------------------------- */
+    /*  Search menu
+    /* ---------------------------- */
+
+    #main-nav a#search {
+        padding: 21px 6px 21px 6px;
+        width: 130px;
+    }
+
+    a#search form input {
+        padding: 4px 6px 4px 6px;
+        height: 20px;
+        width: 100px;
+    }
+
 	/* -------------------------------------------------- */
 	/*	Wrap
 	/* -------------------------------------------------- */
@@ -3214,7 +3258,7 @@ input.placeholder, textarea.placeholder { color: #b0b0b0; }
 		#main .one-fourth { width: 107px; }
 
 			#main .three-fourth { width: 361px; }
-		
+
 	/* -------------------------------------------------- */
 	/*	Header
 	/* -------------------------------------------------- */
@@ -3337,6 +3381,21 @@ input.placeholder, textarea.placeholder { color: #b0b0b0; }
 
 /* All Mobile Sizes (devices and browser) */
 @media only screen and (max-width: 767px) {
+
+    /* ---------------------------- */
+    /*  Search menu
+    /* ---------------------------- */
+
+    #main-nav a#search {
+        padding: 17px 6px 17px 6px;
+        width: 150px;
+    }
+
+    a#search form input {
+        padding: 4px 6px 4px 6px;
+        height: 20px;
+        width: 100px;
+    }
 
 	/* -------------------------------------------------- */
 	/*	Basic Elements & Classes

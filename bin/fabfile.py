@@ -20,7 +20,8 @@
 
 #
 # Note:
-# This is Python 2 code, since fabric does not support Python 3 (yet)
+# This is Python 2 code, since fabric does not support Python 3
+# TODO: Need to migrate this to the Invoke task system.
 #
 
 #

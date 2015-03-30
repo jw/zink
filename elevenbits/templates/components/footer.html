@@ -44,13 +44,13 @@
             <li>ElevenBits &copy; 2015</li>
             <li><a href="#">
                 {% load version %}
-                Django {% version "django" %} on Python {%  version "python" %}
+                Django {% version "django" %} on Python {% version "python" %}
                 uWSGI {% version "uwsgi" %}
                 nginx 1.2.6
             </a></li>
             <li><a href="#">
                 {% load relative_time %}
-                zink {{deployment.version}} deployed {{deployment.timestamp|relative_time}}
+                zink {{ deployment.version }} deployed {{ deployment.timestamp|relative_time }}
             </a></li>
             <li><a href="#">
                 {% load tracking_tags %}

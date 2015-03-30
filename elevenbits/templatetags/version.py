@@ -28,7 +28,7 @@ register = template.Library()
 @register.simple_tag
 def version(module):
     """
-        displays the version number of the given module
+        Displays the version number of the given module
         {% version("django") %}
     """
     if module == "python":
