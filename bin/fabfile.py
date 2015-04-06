@@ -441,10 +441,10 @@ def backup():
              '%(local)s/fixtures/static.json' % env)
         sudo('python manage.py dumpdata --indent 4 treemenus > '
              '%(local)s/fixtures/treemenus.json' % env)
+        sudo('python manage.py dumpdata --indent 4 menu_extras > '
+             '%(local)s/fixtures/treemenus.json' % env)
         sudo('python manage.py dumpdata --indent 4 blog > '
              '%(local)s/fixtures/blog.json' % env)
-        sudo('python manage.py dumpdata --indent 4 index > '
-             '%(local)s/fixtures/index.json' % env)
 
 
 @task
@@ -571,7 +571,7 @@ def populate_database():
             run('./manage.py migrate')
             run('./manage.py loaddata static.json')
             run('./manage.py loaddata treemenus.json')
-            # run('./manage.py loaddata menu_extras.json')
+            run('./manage.py loaddata menu_extras.json')
             run('./manage.py loaddata blog.json')
     # update the deployment time
     with cd(env.path + "/bin"):

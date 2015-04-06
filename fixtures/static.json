@@ -1,138 +1,154 @@
 [
 {
+    "pk": 1,
     "model": "static.static",
     "fields": {
-        "value": "Tags",
-        "name": "tags.title"
-    },
-    "pk": 1
+        "name": "tags.title",
+        "value": "Tags"
+    }
 },
 {
+    "pk": 2,
     "model": "static.static",
     "fields": {
-        "value": "Tags",
-        "name": "tags.header"
-    },
-    "pk": 2
+        "name": "tags.header",
+        "value": "Tags"
+    }
 },
 {
+    "pk": 7,
     "model": "static.static",
     "fields": {
-        "value": "How to reach us...",
-        "name": "contact.header"
-    },
-    "pk": 7
+        "name": "contact.header",
+        "value": "How to reach us..."
+    }
 },
 {
+    "pk": 9,
     "model": "static.static",
     "fields": {
-        "value": "\u00a9 copyright 2004-2014, m8n and ElevenBits",
-        "name": "copyright"
-    },
-    "pk": 9
+        "name": "copyright",
+        "value": "\u00a9 copyright 2004-2014, m8n and ElevenBits"
+    }
 },
 {
+    "pk": 10,
     "model": "static.static",
     "fields": {
-        "value": "18.08.2012, 1142hrs",
-        "name": "deployment.time"
-    },
-    "pk": 10
+        "name": "deployment.time",
+        "value": "18.08.2012, 1142hrs"
+    }
 },
 {
+    "pk": 11,
     "model": "static.static",
     "fields": {
-        "value": "ElevenBits",
-        "name": "index.title"
-    },
-    "pk": 11
+        "name": "index.title",
+        "value": "ElevenBits"
+    }
 },
 {
+    "pk": 14,
     "model": "static.static",
     "fields": {
-        "value": "Welcome!",
-        "name": "index.header"
-    },
-    "pk": 14
+        "name": "index.header",
+        "value": "Welcome!"
+    }
 },
 {
+    "pk": 15,
     "model": "static.static",
     "fields": {
-        "value": "elevenbits",
-        "name": "elevenbits"
-    },
-    "pk": 15
+        "name": "elevenbits",
+        "value": "elevenbits"
+    }
 },
 {
+    "pk": 16,
     "model": "static.static",
     "fields": {
-        "value": "Welcome!",
-        "name": "home.header"
-    },
-    "pk": 16
+        "name": "home.header",
+        "value": "Welcome!"
+    }
 },
 {
+    "pk": 17,
     "model": "static.static",
     "fields": {
-        "value": "ElevenBits is a one-person company, started by Jan Willems in 2000, with a strong focus on Kaizen (\u6539\u5584, Japanese for \"change for the better\"). This quality concept can loosely be translated as \"continuous improvement\".",
-        "name": "about.message"
-    },
-    "pk": 17
+        "name": "about.message",
+        "value": "ElevenBits is a one-person company, started by Jan Willems in 2000, with a strong focus on Kaizen (\u6539\u5584, Japanese for \"change for the better\"). This quality concept can loosely be translated as \"continuous improvement\"."
+    }
 },
 {
+    "pk": 18,
     "model": "static.static",
     "fields": {
-        "value": "Services",
-        "name": "service.header"
-    },
-    "pk": 18
+        "name": "service.header",
+        "value": "Services"
+    }
 },
 {
+    "pk": 21,
     "model": "static.static",
     "fields": {
-        "value": "blog",
-        "name": "blog.header"
-    },
-    "pk": 21
+        "name": "blog.header",
+        "value": "blog"
+    }
 },
 {
+    "pk": 22,
     "model": "static.static",
     "fields": {
-        "value": "Contact Us",
-        "name": "contact.title"
-    },
-    "pk": 22
+        "name": "contact.title",
+        "value": "Contact Us"
+    }
 },
 {
+    "pk": 23,
     "model": "static.static",
     "fields": {
-        "value": "ElevenBits",
-        "name": "header.host"
-    },
-    "pk": 23
+        "name": "header.host",
+        "value": "ElevenBits"
+    }
 },
 {
+    "pk": 24,
     "model": "static.static",
     "fields": {
-        "value": "The ElevenBits website.",
-        "name": "header.description"
-    },
-    "pk": 24
+        "name": "header.description",
+        "value": "The ElevenBits website."
+    }
 },
 {
+    "pk": 25,
     "model": "static.static",
     "fields": {
-        "value": "Welcome!",
-        "name": "home.title"
-    },
-    "pk": 25
+        "name": "home.title",
+        "value": "Welcome!"
+    }
 },
 {
+    "pk": 26,
     "model": "static.static",
     "fields": {
-        "value": "Blog",
-        "name": "blog.title"
-    },
-    "pk": 26
+        "name": "blog.title",
+        "value": "Blog"
+    }
+},
+{
+    "pk": 27,
+    "model": "static.static",
+    "fields": {
+        "name": "search.header",
+        "value": "Search"
+    }
+},
+{
+    "pk": 28,
+    "model": "static.static",
+    "fields": {
+        "name": "static.author",
+        "value": "Jan Willems"
+    }
 }
 ]

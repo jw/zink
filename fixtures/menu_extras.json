@@ -1,32 +1,32 @@
 [
 {
-    "model": "menu_extras.menuitemextension",
     "fields": {
-        "menu_item": 15,
         "published": true,
         "selected_patterns": "/home\r\n/index",
+        "menu_item": 15,
         "description": "all starts here"
     },
-    "pk": 1
+    "pk": 1,
+    "model": "menu_extras.menuitemextension"
 },
 {
-    "model": "menu_extras.menuitemextension",
     "fields": {
-        "menu_item": 17,
         "published": true,
         "selected_patterns": "/blog\r\n",
+        "menu_item": 17,
         "description": "what we think"
     },
-    "pk": 2
+    "pk": 2,
+    "model": "menu_extras.menuitemextension"
 },
 {
-    "model": "menu_extras.menuitemextension",
     "fields": {
-        "menu_item": 16,
         "published": true,
         "selected_patterns": "/contact\r\n",
+        "menu_item": 16,
         "description": "enquire here"
     },
-    "pk": 3
+    "pk": 3,
+    "model": "menu_extras.menuitemextension"
 }
 ]
