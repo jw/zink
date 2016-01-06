@@ -1,11 +1,10 @@
-Django==1.7
+Django==1.9.1
 psycopg2==2.5.4
 
-django-user-tracking==0.4.11
-
-django-treemenus==0.9.1
+hg+https://bitbucket.org/elevenbits/django-user-tracking
+git+https://github.com/jw/django-treemenus.git
 #django-crontab==0.5.1
-django-debug-toolbar==1.2.1
+django-debug-toolbar==1.4
 
 # Fabric==1.10.0 [only python 2.x]
 Markdown==2.5
@@ -13,7 +12,7 @@ Pygments==1.6
 beautifulsoup4
 
 # search
-django-haystack==2.3.1
+django-haystack==2.4.1
 Whoosh==2.6.0
 
 # twitter

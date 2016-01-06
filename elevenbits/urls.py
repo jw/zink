@@ -26,9 +26,7 @@ admin.autodiscover()
 
 from . import settings
 
-urlpatterns = patterns(
-    '',
-
+urlpatterns = [
     # robots.txt
     url(r'^robots\.txt$',
         TemplateView.as_view(template_name='robots.txt',
@@ -41,7 +39,7 @@ urlpatterns = patterns(
 
     # home, blog and contact sections
     url(r'^$', RedirectView.as_view(url='/home')),
-    url(r'^home$', include('home.urls', namespace='home')),
+    url(r'^home', include('home.urls', namespace='home')),
     url(r'^blog', include('blog.urls', namespace='blog')),
     url(r'^contact', include('contact.urls', namespace='contact')),
 
@@ -54,11 +52,8 @@ urlpatterns = patterns(
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
-)  # + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]  # + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
     import debug_toolbar
-    urlpatterns += patterns(
-        '',
-        url(r'^__debug__/', include(debug_toolbar.urls)),
-    )
+    urlpatterns.append(url(r'^__debug__/', include(debug_toolbar.urls)))

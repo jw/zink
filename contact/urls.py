@@ -20,7 +20,6 @@
 
 from django.conf.urls import patterns, url
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^$', 'contact.views.contact', name='contact'),
-)
+]
