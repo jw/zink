@@ -23,7 +23,7 @@ from treemenus.models import MenuItem
 
 
 class MenuItemExtension(models.Model):
-    """Warpper for extra entries in the menu."""
+    """Wrapper for extra entries in the menu."""
     menu_item = models.OneToOneField(MenuItem, related_name="extension")
     published = models.BooleanField(default=False)
     description = models.CharField(max_length=512,

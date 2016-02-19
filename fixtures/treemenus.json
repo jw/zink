@@ -1,88 +1,88 @@
 [
 {
     "model": "treemenus.menuitem",
+    "pk": 14,
     "fields": {
-        "level": 0,
-        "named_url": "",
+        "parent": null,
         "caption": "root",
-        "menu": 3,
-        "parent": null,
         "url": "",
-        "rank": 0
-    },
-    "pk": 14
+        "named_url": "",
+        "level": 0,
+        "rank": 0,
+        "menu": 3
+    }
 },
 {
     "model": "treemenus.menuitem",
+    "pk": 15,
     "fields": {
-        "level": 1,
-        "named_url": "home",
+        "parent": 14,
         "caption": "Home",
-        "menu": 3,
-        "parent": 14,
         "url": "/home",
-        "rank": 0
-    },
-    "pk": 15
+        "named_url": "home",
+        "level": 1,
+        "rank": 0,
+        "menu": 3
+    }
 },
 {
     "model": "treemenus.menuitem",
+    "pk": 16,
     "fields": {
-        "level": 1,
-        "named_url": "Contact",
+        "parent": 14,
         "caption": "Contact",
-        "menu": 3,
-        "parent": 14,
         "url": "/contact",
-        "rank": 2
-    },
-    "pk": 16
-},
-{
-    "model": "treemenus.menuitem",
-    "fields": {
+        "named_url": "Contact",
         "level": 1,
-        "named_url": "Blog",
-        "caption": "Blog",
-        "menu": 3,
+        "rank": 2,
+        "menu": 3
+    }
+},
+{
+    "model": "treemenus.menuitem",
+    "pk": 17,
+    "fields": {
         "parent": 14,
+        "caption": "Blog",
         "url": "/blog",
-        "rank": 1
-    },
-    "pk": 17
+        "named_url": "Blog",
+        "level": 1,
+        "rank": 1,
+        "menu": 3
+    }
 },
 {
     "model": "treemenus.menuitem",
+    "pk": 18,
     "fields": {
-        "level": 0,
-        "named_url": "",
-        "caption": "contact",
-        "menu": null,
         "parent": null,
+        "caption": "contact",
         "url": "",
-        "rank": 0
-    },
-    "pk": 18
+        "named_url": "",
+        "level": 0,
+        "rank": 0,
+        "menu": null
+    }
 },
 {
     "model": "treemenus.menuitem",
+    "pk": 19,
     "fields": {
-        "level": 0,
-        "named_url": "",
-        "caption": "contact",
-        "menu": null,
         "parent": null,
+        "caption": "contact",
         "url": "",
-        "rank": 0
-    },
-    "pk": 19
+        "named_url": "",
+        "level": 0,
+        "rank": 0,
+        "menu": null
+    }
 },
 {
     "model": "treemenus.menu",
+    "pk": 3,
     "fields": {
-        "root_item": 14,
-        "name": "root"
-    },
-    "pk": 3
+        "name": "root",
+        "root_item": 14
+    }
 }
 ]

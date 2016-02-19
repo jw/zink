@@ -29,7 +29,6 @@ from socket import gethostname
 SITE_ROOT = dirname(realpath(join(__file__, "..")))
 
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = ["localhost",
                  ".elevenbits.com",
@@ -48,19 +47,6 @@ try:
     TEST_RUNNER = 'rainbowtests.RainbowTestSuiteRunner'
 except ImportError:
     pass
-
-# TODO: check this
-TEMPLATE_CONTEXT_PROCESSORS = (
-    "django.contrib.auth.context_processors.auth",
-    "django.core.context_processors.debug",
-    "django.core.context_processors.i18n",
-    "django.core.context_processors.media",
-    "django.core.context_processors.static",
-    "django.core.context_processors.tz",
-    "django.contrib.messages.context_processors.messages",
-    # needed for current menu identifier:
-    "django.core.context_processors.request",
-)
 
 
 #
@@ -134,11 +120,29 @@ FIXTURE_DIRS = (join(SITE_ROOT, 'fixtures'),)
 #    "django.contrib.messages.context_processors.messages",
 # )
 
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-)
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            join(dirname(__file__), 'templates').replace('\\', '/')
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.contrib.auth.context_processors.auth',
+                'django.core.context_processors.debug',
+                'django.core.context_processors.i18n',
+                'django.core.context_processors.media',
+                'django.core.context_processors.static',
+                'django.core.context_processors.tz',
+                'django.contrib.messages.context_processors.messages',
+                # needed for current menu identifier:
+                'django.core.context_processors.request'
+            ],
+        },
+    },
+]
 
 MIDDLEWARE_CLASSES = (
     # 'debug_toolbar.middleware.DebugToolbarMiddleware',
@@ -162,10 +166,6 @@ WSGI_APPLICATION = 'elevenbits.wsgi.application'
 # ]
 
 # tweeter.admin
-
-TEMPLATE_DIRS = (
-    join(dirname(__file__), 'templates').replace('\\', '/'),
-)
 
 HAYSTACK_CONNECTIONS = {
     'default': {
@@ -215,7 +215,7 @@ CLIENT_LOGO_MARGIN = 20
 
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': True,
+    'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
             'format': '%(levelname)s %(asctime)s %(module)s ' +
@@ -227,7 +227,6 @@ LOGGING = {
     },
     'handlers': {
         'console': {
-            'level': 'DEBUG',
             'class': 'logging.StreamHandler',
             'formatter': 'simple'
         },
@@ -235,13 +234,9 @@ LOGGING = {
     'loggers': {
         'django': {
             'handlers': ['console'],
-            'level': 'DEBUG',
+            'level': 'INFO'
         },
-        'elevenbits': {
-            'handlers': ['console'],
-            'level': 'INFO',
-        }
-    }
+    },
 }
 
 # hostname based settings

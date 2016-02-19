@@ -18,8 +18,10 @@
 # along with Zink.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-from django.conf.urls import patterns, url
+from django.conf.urls import url
+
+from . import views
 
 urlpatterns = [
-    url(r'^$', 'home.views.home', name='home')
+    url(r'^$', views.home, name='home')
 ]

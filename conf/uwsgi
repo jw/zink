@@ -1,0 +1,34 @@
+#!/bin/bash
+### BEGIN INIT INFO
+# Provides:          uwsgi
+# Required-Start:    $local_fs $remote_fs $network
+# Required-Stop:     $local_fs $remote_fs $network
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start/stop uWSGI server instance(s)
+# Description:       This script manages uWSGI server instance(s).
+### END INIT INFO
+
+daemon=/usr/bin/uwsgi
+pid=/run/uwsgi.pid
+logfile=/var/log/uwsgi/zink.log
+args="--gid www-data --uid www-data --ini /etc/uwsgi-emperor/vassals/zink.ini"
+
+case "$1" in
+        start)
+                echo "Starting uwsgi"
+                start-stop-daemon -p $pid --start --exec $daemon -- $args --daemonize $logfile
+        ;;
+        stop)
+                echo "Stopping script uwsgi"
+                start-stop-daemon --signal QUIT -p $pid --stop $daemon -- $args
+        ;;
+        reload | restart)
+                echo "Restarting worker threads"
+                kill -HUP $(cat $pid)
+        ;;
+        *)
+                echo "Usage: /etc/init.d/uwsgi {start|stop|reload}"
+                exit 1
+        ;;
+esac

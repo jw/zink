@@ -24,7 +24,7 @@ from django.test.client import Client
 
 class DeploymentTest(TestCase):
 
-    fixtures = ['fixtures/static', 'fixtures/blog', 'fixtures/treemenus']
+    fixtures = ['fixtures/static', 'fixtures/blog', 'fixtures/menus']
 
     def setUp(self):
         self.client = Client()

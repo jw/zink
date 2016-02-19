@@ -34,6 +34,12 @@
 # fab tip production deploy
 #
 
+#
+# Note:
+# Development is still using upstart/lsb, while staging and production
+# run systemd.
+#
+
 from fabric.api import run, env
 from fabric.operations import put
 from fabric.decorators import task
@@ -230,6 +236,9 @@ def development():
     twitter,...) are retrieved from the zink.properties file and
     inserted in the local_settings.py.  When in tip, the current
     local_settings.py is used as is.
+
+    The development environment uses startup, while staging and production
+    machines run on systemd.
     """
     _create_environment(CONFIGURATION_FILE, DEVELOPMENT)
 
@@ -343,8 +352,9 @@ def deploy():
             create_full_database()
 
     if env.recreate:
-        print(green("Checking to see if uwsgi is an upstart job..."))
-        handle_uwsgi_upstart()
+        if env.settings == DEVELOPMENT:
+            print(green("Checking to see if uwsgi is an upstart job..."))
+            handle_uwsgi_upstart()
         print(green("Updating nginx and uwsgi configuration..."))
         update_webserver_and_uwsgi_configuration()
 
@@ -362,7 +372,7 @@ def deploy():
 def create_environment():
     """Create the environment in a virtualenv."""
     print(green("Creating the environment..."))
-    sudo("virtualenv --python=python3 %(path)s" % env)
+    sudo("virtualenv --clear --python=python3.4 %(path)s" % env)
     with prefix("source %(path)s/bin/activate" % env):
         install_requirements()
 
@@ -442,7 +452,7 @@ def backup():
         sudo('python manage.py dumpdata --indent 4 treemenus > '
              '%(local)s/fixtures/treemenus.json' % env)
         sudo('python manage.py dumpdata --indent 4 menu_extras > '
-             '%(local)s/fixtures/treemenus.json' % env)
+             '%(local)s/fixtures/menus.json' % env)
         sudo('python manage.py dumpdata --indent 4 blog > '
              '%(local)s/fixtures/blog.json' % env)
 
@@ -567,7 +577,7 @@ def populate_database():
     """Loads (mostly fixture) data in the database."""
     with prefix("source %(path)s/bin/activate" % env):
         with cd(env.path):
-            run('./manage.py syncdb')
+            # run('./manage.py syncdb')
             run('./manage.py migrate')
             run('./manage.py loaddata static.json')
             run('./manage.py loaddata treemenus.json')
@@ -590,9 +600,22 @@ def restart_database():
 
 
 def restart_webserver():
+    if env.settings == DEVELOPMENT:
+        restart_webserver_upstart()
+    else:
+        restart_webserver_systemd()
+
+
+def restart_webserver_upstart():
     """Restart the webserver."""
     sudo("service nginx restart")
     sudo("service uwsgi restart")
+
+
+def restart_webserver_systemd():
+    """Restart the webserver."""
+    sudo("systemctl restart nginx.service")
+    sudo("systemctl restart uwsgi-emperor.service")
 
 
 def update_webserver_and_uwsgi_configuration():
@@ -617,12 +640,13 @@ def update_webserver_and_uwsgi_configuration():
     sudo("ln -sf /etc/nginx/sites-available/static.conf "
          "/etc/nginx/sites-enabled/static.conf" % env)
     # update uwsgi
-    sudo("mkdir -p /etc/uwsgi/apps-available" % env)
-    sudo("mkdir -p /etc/uwsgi/apps-enabled" % env)
-    put("%(path)s/conf/zink.ini" % env, "/etc/uwsgi/apps-available" % env,
+    put("%(path)s/conf/zink.ini" % env, "/etc/uwsgi-emperor/vassals" % env,
         use_sudo=True)
-    sudo("ln -sf /etc/uwsgi/apps-available/zink.ini "
-         "/etc/uwsgi/apps-enabled/zink.ini" % env)
+
+
+#
+# For development only:
+#
 
 
 def uwsgi_is_upstart_job():
