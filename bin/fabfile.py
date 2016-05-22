@@ -21,7 +21,6 @@
 #
 # Note:
 # This is Python 2 code, since fabric does not support Python 3
-# TODO: Need to migrate this to the Invoke task system.
 #
 
 #
@@ -32,12 +31,6 @@
 # fab tip staging deploy
 # fab recreate tip staging deploy
 # fab tip production deploy
-#
-
-#
-# Note:
-# Development is still using upstart/lsb, while staging and production
-# run systemd.
 #
 
 from fabric.api import run, env
@@ -74,7 +67,7 @@ env.repo = "bitbucket.org"
 env.account = "elevenbits"
 
 # deployment properties
-env.prefix = '/var/www'
+env.prefix = "/var/www"
 env.remote = env.path = "%(prefix)s/%(name)s" % env
 env.local = dirname(realpath(join(__file__, "..")))
 
@@ -251,7 +244,7 @@ def development():
 @task
 def tip():
     """Deploy the tip."""
-    env.branch = 'tip'
+    env.branch = "tip"
 
 
 @task
@@ -267,7 +260,7 @@ def recreate():
 
 
 #
-# The only and therefore most important task
+# The most important task
 #
 
 
@@ -352,11 +345,8 @@ def deploy():
             create_full_database()
 
     if env.recreate:
-        if env.settings == DEVELOPMENT:
-            print(green("Checking to see if uwsgi is an upstart job..."))
-            handle_uwsgi_upstart()
         print(green("Updating nginx and uwsgi configuration..."))
-        update_webserver_and_uwsgi_configuration()
+        update_nginx_and_uwsgi()
 
     print(green("Restarting nginx and uwsgi..."))
     restart_webserver()
@@ -372,7 +362,7 @@ def deploy():
 def create_environment():
     """Create the environment in a virtualenv."""
     print(green("Creating the environment..."))
-    sudo("virtualenv --clear --python=python3.4 %(path)s" % env)
+    sudo("virtualenv --clear --python=python3.5 %(path)s" % env)
     with prefix("source %(path)s/bin/activate" % env):
         install_requirements()
 
@@ -384,7 +374,7 @@ def add_cronjob():
 
 def copy_current():
     """Copy the current code to the server area."""
-    sudo('cp -r %(local)s %(prefix)s' % env)
+    sudo("cp -r %(local)s %(prefix)s" % env)
     sudo("chown www-data:www-data --recursive %(path)s" % env)
 
 
@@ -421,6 +411,9 @@ def create_local_settings():
     sudo("chown www-data:www-data "
          "%(remote)s/elevenbits/local_settings.py" %
          env)
+    # sudo("chmod www-data:www-data "
+    #      "%(remote)s/elevenbits/local_settings.py" %
+    #      env)
 
 
 def checkout_latest():
@@ -497,7 +490,7 @@ def create_full_database():
 
 def database_user_exists():
     """
-    Check if the database user exists.
+    Check if the database user exists.psql postgres -tA
     """
     output = run('echo "SELECT 1'
                  '      FROM pg_roles'
@@ -600,31 +593,43 @@ def restart_database():
 
 
 def restart_webserver():
-    if env.settings == DEVELOPMENT:
-        restart_webserver_upstart()
-    else:
-        restart_webserver_systemd()
-
-
-def restart_webserver_upstart():
-    """Restart the webserver."""
-    sudo("service nginx restart")
-    sudo("service uwsgi restart")
+    restart_webserver_systemd()
 
 
 def restart_webserver_systemd():
     """Restart the webserver."""
     sudo("systemctl restart nginx.service")
-    sudo("systemctl restart uwsgi-emperor.service")
+    sudo("systemctl restart uwsgi.service")
 
 
-def update_webserver_and_uwsgi_configuration():
+def update_nginx_and_uwsgi():
     """Update the nginx and uwsgi configuration."""
+    update_nginx()
+    update_uwsgi()
+
+
+def update_uwsgi():
+    """Update uwsgi."""
+    # make sure the service is available
+    if not exists("/lib/systemd/system/uwsgi.service"):
+        with settings(warn_only=True):
+            sudo("cp %(path)s/conf/uwsgi.service /lib/systemd/system" % env)
+            sudo("systemctl enable uwsgi")
+            sudo("systemctl start uwsgi")
+    # configure zink
+    sudo("mkdir -p /etc/uwsgi/vassals" % env)
+    with settings(warn_only=True):
+        sudo("cp %(path)s/conf/emperor.ini /etc/uwsgi" % env)
+        sudo("cp %(path)s/conf/zink.ini /etc/uwsgi/vassals" % env)
+
+
+def update_nginx():
+    """Update nginx."""
     # remove default first if it is there
     if exists("/etc/nginx/sites-enabled/default"):
         with settings(warn_only=True):
             sudo("rm /etc/nginx/sites-enabled/default")
-    # update nginx
+    # create config directories
     sudo("mkdir -p /etc/nginx/sites-available" % env)
     sudo("mkdir -p /etc/nginx/sites-enabled" % env)
     # ...project conf
@@ -639,38 +644,4 @@ def update_webserver_and_uwsgi_configuration():
                     context=env, backup=False, use_sudo=True)
     sudo("ln -sf /etc/nginx/sites-available/static.conf "
          "/etc/nginx/sites-enabled/static.conf" % env)
-    # update uwsgi
-    put("%(path)s/conf/zink.ini" % env, "/etc/uwsgi-emperor/vassals" % env,
-        use_sudo=True)
 
-
-#
-# For development only:
-#
-
-
-def uwsgi_is_upstart_job():
-    """See if the uwsgi.conf exists."""
-    if exists("/etc/init/uwsgi.conf"):
-        output = run("initctl list", quiet=True)
-        if "uwsgi" in output:
-            return True
-        else:
-            return False
-    else:
-        return False
-
-
-def handle_uwsgi_upstart():
-    """Make sure that uwsgi is an upstart job."""
-    if uwsgi_is_upstart_job():
-        print(green("uwsgi seems to be an upstart job. Leaving as is."))
-    else:
-        print(green("Forcing uwsgi to be an upstart job..."))
-        sudo("cp %(path)s/conf/uwsgi.conf /etc/init" % env)
-        with settings(warn_only=True):
-            sudo("initctl reload uwsgi")
-        if uwsgi_is_upstart_job():
-            print(green("Good. uwsgi is now an upstart job."))
-        else:
-            print(red("Could not make uwsgi an upstart job. Please check."))

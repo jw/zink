@@ -1,17 +1,32 @@
 
 INSTALL
 
-The required packages
-=====================
+Two virtualenv environments are used.  One environment to run the website
+in (containing all dependenicies, like Django, PostgreSQL,...); this
+virtualenv is called zink.  The other environment is needed to deploy
+the systen (locally and remotely), called fabric.
+
+So virtualenv and virtualenvwrapper are required.  Install them first!
+
+fabric
+------
+
+The Fabric tool is based on 2.7, so mkvirtualenv -p python2.7 fabric
+should be used to produce the virtualenv.
+
+Then make sure the python2.7-dev package is installed.
+
+Then run `pip install -r fabric.txt` to install the fabric dependencies.
+
+zink
+----
 
 These need to be installed first, using your package manager:
 
-- virtualenv
 - mercurial
 - python-dev (for psycopg)
-- pip
-- postgresql postgresql-server-dev-9.4
-- nginx
+- postgresql postgresql-server-dev-all (9.4 will do fine)
+- nginx 1.9.11
 - uwsgi-plugin-python3
 
 so, on a Debian based system, like Mint, you could do:
@@ -48,7 +63,7 @@ Fixtures
 ========
 
 Remember that a superuser needs to be added:
-> python manage createsuperuser
+> python manage.py createsuperuser
 
 Add the fixtures (if fabric did not do so):
 

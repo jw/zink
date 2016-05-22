@@ -1,4 +1,4 @@
-Django==1.9.1
+Django
 psycopg2==2.5.4
 
 hg+https://bitbucket.org/elevenbits/django-user-tracking
@@ -22,4 +22,3 @@ Whoosh==2.7.0
 twitter==1.15.0
 jsonfield==1.0.0
 
-pep8==1.5.7

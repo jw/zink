@@ -105,7 +105,7 @@ STATICFILES_FINDERS = (
 )
 
 STATIC_ROOT = '/var/www/static/zink/'
-STATIC_URL = 'http://static.elevenbits.com/'
+STATIC_URL = 'https://static.elevenbits.com/'
 
 FIXTURE_DIRS = (join(SITE_ROOT, 'fixtures'),)
 
@@ -131,14 +131,14 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.contrib.auth.context_processors.auth',
-                'django.core.context_processors.debug',
-                'django.core.context_processors.i18n',
-                'django.core.context_processors.media',
-                'django.core.context_processors.static',
-                'django.core.context_processors.tz',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
                 # needed for current menu identifier:
-                'django.core.context_processors.request'
+                'django.template.context_processors.request'
             ],
         },
     },

@@ -1,6 +1,5 @@
 
 this application runs on nginx with uwsgi.
-Note: make sure to create /etc/website/processes.properties
 
 There are four deployment areas:
 
@@ -21,3 +20,8 @@ Uses a database in the production environment.
 Use fab with the development task: 
 fab -k revision=42 production deploy
 Uses the production database.
+
+
+Note:
+We use a cronjob which uses a properties file, so
+make sure to create /etc/website/processes.properties
