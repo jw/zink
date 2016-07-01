@@ -1,9 +1,6 @@
-
 Zink
 ====
 
-[![Downloads](https://pypip.in/v/zink/badge.png)](https://crate.io/package/zink)
-[![Downloads](https://pypip.in/d/zink/badge.png)](https://crate.io/package/zink)
 [![Build Status](https://travis-ci.org/jw/zink.png)](https://travis-ci.org/jw/zink)
 
 Overview
