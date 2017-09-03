@@ -23,7 +23,6 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.conf import settings
 
 from blog.models import Entry, Tag
-from tweeter.models import Tweet
 
 from util.generic import get_static
 from util.deployment import get_deployment
@@ -43,8 +42,6 @@ def blog(request, page=1):
 
     entry_list = Entry.objects.filter(active=True).reverse()
     logger.info("Retrieved %s blog entries." % len(entry_list))
-
-    tweets = Tweet.objects.all()[:5]
 
     try:
         size = settings.BLOG_PAGE_SIZE
@@ -67,7 +64,6 @@ def blog(request, page=1):
     attributes = {'deployment': deployment,
                   'static': static,
                   'entries': entries,
-                  'tweets': tweets,
                   'tags': tags}
 
     return render(request, 'blog.html', attributes)
@@ -84,8 +80,6 @@ def tag(request, tag, page=1):
     logger.info("Retrieved %s tags." % len(tags))
 
     entry_list = Entry.objects.filter(active=True, tags__pk=tag).reverse()
-
-    tweets = Tweet.objects.all()[:5]
 
     # create the header
     try:
@@ -121,7 +115,6 @@ def tag(request, tag, page=1):
     attributes = {'deployment': deployment,
                   'static': static,
                   'entries': entries,
-                  'tweets': tweets,
                   'tag_id': tag_id,
                   'tags': tags}
 
@@ -138,14 +131,11 @@ def detail(request, id):
     tags = Tag.objects.all()
     logger.info("Retrieved %s tags." % len(tags))
 
-    tweets = Tweet.objects.all()[:5]
-
     entry = get_object_or_404(Entry, pk=id)
 
     attributes = {'deployment': deployment,
                   'static': static,
                   'tags': tags,
-                  'tweets': tweets,
                   'entry': entry}
 
     return render(request, 'detail.html', attributes)

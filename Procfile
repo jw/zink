@@ -1,0 +1,1 @@
+web: gunicorn elevenbits.wsgi:application --log-file -

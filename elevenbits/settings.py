@@ -151,9 +151,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'tracking.middleware.BannedIPMiddleware',
-    'tracking.middleware.VisitorTrackingMiddleware',
-    'tracking.middleware.VisitorCleanUpMiddleware',
+    # 'tracking.middleware.BannedIPMiddleware',
+    # 'tracking.middleware.VisitorTrackingMiddleware',
+    # 'tracking.middleware.VisitorCleanUpMiddleware',
     'django.middleware.gzip.GZipMiddleware',
 )
 
@@ -185,20 +185,20 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'haystack',
     # zink apps
-    'elevenbits.menu_extras',  # TODO: move this in apps root
+    #'elevenbits.menu_extras',  # TODO: move this in apps root
     'blog',
     'elevenbits.static',  # TODO: move this in apps root
     'contact',
     'home',
     'elevenbits.deployment',
     'elevenbits',
-    'search',
-    'treemenus',  # TODO: make sure to use the proper (Russian) one!
+    #'search',
+    #'treemenus',  # TODO: make sure to use the proper (Russian) one!
     # utilities
-    'tracking',
+    # 'tracking',
     'util',
     # 'django_crontab',
-    'tweeter',
+    #'tweeter',
     # 'debug_toolbar',
 )
 

@@ -1,8 +1,8 @@
-Django
+Django==1.11.4
 psycopg2==2.5.4
 
-hg+https://bitbucket.org/elevenbits/django-user-tracking
-git+https://github.com/jw/django-treemenus.git
+#hg+https://bitbucket.org/elevenbits/django-user-tracking
+#git+https://github.com/jw/django-treemenus.git
 #django-crontab==0.5.1
 django-debug-toolbar==1.4
 
@@ -12,7 +12,7 @@ Pygments==1.6
 beautifulsoup4
 
 # search
-git+https://github.com/django-haystack/django-haystack.git
+# git+https://github.com/django-haystack/django-haystack.git
 Whoosh==2.7.0
 
 # twitter
