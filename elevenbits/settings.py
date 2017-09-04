@@ -249,5 +249,5 @@ else:
     # localhost will enable DEBUG
     from .settings_localhost import *
 
-# security settings
-from .local_settings import *
+# FIXME
+SECRET_KEY=12345098563248723469823
