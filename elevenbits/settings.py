@@ -30,7 +30,8 @@ SITE_ROOT = dirname(realpath(join(__file__, "..")))
 
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost",
+ALLOWED_HOSTS = ["127.0.0.1",
+                 "localhost",
                  ".elevenbits.com",
                  ".elevenbits.org",
                  ".elevenbits.be",

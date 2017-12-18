@@ -30,32 +30,32 @@ app_name = "elevenbits"
 
 urlpatterns = [
     # robots.txt
-    path(r'^robots\.txt$',
+    path('robots.txt',
         TemplateView.as_view(template_name='robots.txt',
                              content_type='text/plain'),
         name='robots'),
 
     # 404 and 500 return codes
-    path(r'^500$', TemplateView.as_view(template_name='500.html'), name='500'),
-    path(r'^404$', TemplateView.as_view(template_name='404.html'), name='404'),
+    path('500', TemplateView.as_view(template_name='500.html'), name='500'),
+    path('404', TemplateView.as_view(template_name='404.html'), name='404'),
 
     # home, blog and contact sections
-    path(r'^$', RedirectView.as_view(url='/home')),
-    path(r'^home', include('home.urls')),
-    path(r'^blog', include('blog.urls')),
-    path(r'^contact', include('contact.urls')),
+    path('', RedirectView.as_view(url='/home')),
+    path('home', include('home.urls')),
+    path('blog', include('blog.urls')),
+    path('contact', include('contact.urls')),
 
-    path(r'^search', include('search.urls')),
+    path('search', include('search.urls')),
 
     # TODO: handle these later
-    # url(r'^tracking/', include('tracking.urls')),
+    # url('tracking/', include('tracking.urls')),
 
     # admin
-    path(r'^admin/', admin.site.urls),
-    path(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+    path('admin/', admin.site.urls),
+    path('admin/doc/', include('django.contrib.admindocs.urls')),
 
 ]  # + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
     import debug_toolbar
-    urlpatterns.append(path(r'^__debug__/', include(debug_toolbar.urls)))
+    urlpatterns.append(path('__debug__/', include(debug_toolbar.urls)))

@@ -23,18 +23,18 @@ from . import views
 
 urlpatterns = [
     # blog page
-    url(r'^$', views.blog, name='blog'),
+    url('', views.blog, name='blog'),
 
     # pages of blog entries
-    url(r'^page/(?P<page>\d+)/$', views.blog, name='page'),
-    url(r'^page/$', views.blog),
+    url('page/(?P<page>\d+)/', views.blog, name='page'),
+    url('page/', views.blog),
 
     # blog entries per tag (and pages thereof)
-    url(r'^tag/(?P<tag>\d+)/$', views.tag, name='tag'),
-    url(r'^tag/(?P<tag>\d+)/page/(?P<page>\d+)/$',
+    url('tag/(?P<tag>\d+)/', views.tag, name='tag'),
+    url('tag/(?P<tag>\d+)/page/(?P<page>\d+)/',
         views.tag,
         name='tagpage'),
 
     # one single blog entry
-    url(r'^(?P<id>\d+)/$', views.detail, name='detail'),
+    url('(?P<id>\d+)/', views.detail, name='detail'),
 ]
