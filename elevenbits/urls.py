@@ -18,7 +18,7 @@
 # along with Zink.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-from django.conf.urls import include, url
+from django.urls import include, path
 from django.views.generic.base import TemplateView, RedirectView
 
 from django.contrib import admin
@@ -26,34 +26,36 @@ admin.autodiscover()
 
 from . import settings
 
+app_name = "elevenbits"
+
 urlpatterns = [
     # robots.txt
-    url(r'^robots\.txt$',
+    path(r'^robots\.txt$',
         TemplateView.as_view(template_name='robots.txt',
                              content_type='text/plain'),
         name='robots'),
 
     # 404 and 500 return codes
-    url(r'^500$', TemplateView.as_view(template_name='500.html'), name='500'),
-    url(r'^404$', TemplateView.as_view(template_name='404.html'), name='404'),
+    path(r'^500$', TemplateView.as_view(template_name='500.html'), name='500'),
+    path(r'^404$', TemplateView.as_view(template_name='404.html'), name='404'),
 
     # home, blog and contact sections
-    url(r'^$', RedirectView.as_view(url='/home')),
-    url(r'^home', include('home.urls', namespace='home')),
-    url(r'^blog', include('blog.urls', namespace='blog')),
-    url(r'^contact', include('contact.urls', namespace='contact')),
+    path(r'^$', RedirectView.as_view(url='/home')),
+    path(r'^home', include('home.urls')),
+    path(r'^blog', include('blog.urls')),
+    path(r'^contact', include('contact.urls')),
 
-    url(r'^search', include('search.urls', namespace='search')),
+    path(r'^search', include('search.urls')),
 
     # TODO: handle these later
     # url(r'^tracking/', include('tracking.urls')),
 
     # admin
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+    path(r'^admin/', admin.site.urls),
+    path(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
 ]  # + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
     import debug_toolbar
-    urlpatterns.append(url(r'^__debug__/', include(debug_toolbar.urls)))
+    urlpatterns.append(path(r'^__debug__/', include(debug_toolbar.urls)))

@@ -71,7 +71,7 @@ class Comment(models.Model):
 
     body = models.TextField(help_text="The content of this comment")
 
-    entry = models.ForeignKey(Entry)
+    entry = models.ForeignKey(Entry, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Comment'

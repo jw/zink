@@ -18,7 +18,7 @@
 # along with Zink.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib import messages
