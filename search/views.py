@@ -3,8 +3,6 @@ from django.shortcuts import render
 from util.generic import get_static
 from util.deployment import get_deployment
 
-from haystack.forms import SearchForm
-
 from bs4 import BeautifulSoup
 
 from markdown.extensions import Extension
@@ -26,7 +24,7 @@ def remove_tags(text):
 def search(request):
     """The search page."""
 
-    form = SearchForm(request.GET, load_all=True)
+    form = Form(request.GET, load_all=True)
     entries = form.search()
     tags = []
     blogs = []
