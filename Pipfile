@@ -1,21 +1,27 @@
 [[source]]
+
 url = "https://pypi.python.org/simple"
 verify_ssl = true
 
+
 [packages]
-psycopg2 = "==2.5.4"
+
+"psycopg2" = "*"
 gunicorn = "*"
 django-heroku = "*"
-Django = "==2.0"
+django = "==2.0"
 django-debug-toolbar = "==1.9"
-Markdown = "==2.5"
-Pygments = "==1.6"
-beautifulsoup4 = "*"
+markdown = "==2.5"
+pygments = "==1.6"
+"beautifulsoup4" = "*"
 django-haystack = "*"
-Whoosh = "==2.7.0"
+whoosh = "==2.7.0"
 twitter = "==1.15.0"
 jsonfield = "==1.0.0"
+django-extensions = "*"
+
 
 [requires]
+
 python_version = "3.6"
 implementation_version = "3.6.3"

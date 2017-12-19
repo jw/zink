@@ -37,6 +37,19 @@ ALLOWED_HOSTS = ["127.0.0.1",
                  ".elevenbits.be",
                  ".m8n.be"]
 
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'zink',
+        'USER': 'postgres',
+        'PASSWORD': 'P4t3rsB3rg',
+        'HOST': 'localhost',
+        'DATABASE_PORT': '',
+    }
+}
+
+
 #
 # Test properties
 #
@@ -176,6 +189,7 @@ HAYSTACK_CONNECTIONS = {
 }
 
 INSTALLED_APPS = (
+    'django_extensions',
     # django contribs
     'django.contrib.auth',
     'django.contrib.contenttypes',
