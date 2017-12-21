@@ -446,7 +446,7 @@ def backup():
              '%(local)s/fixtures/treemenus.json' % env)
         sudo('python manage.py dumpdata --indent 4 menu_extras > '
              '%(local)s/fixtures/menus.json' % env)
-        sudo('python manage.py dumpdata --indent 4 blog > '
+        sudo('python manage.py dumpdata --indent 4 blogs > '
              '%(local)s/fixtures/blog.json' % env)
 
 
@@ -469,7 +469,7 @@ def update_deployment_time():
         # TODO: get tag
         tag = "n/a"
         # add this development
-        from elevenbits.deployment.models import Deployment
+        from deployment.models import Deployment
         deployment = Deployment(tag=tag, timestamp=now, version=version,
                                 deployer='Deployed via Fabric.')
         deployment.save()

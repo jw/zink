@@ -21,8 +21,8 @@
 from django.test import TestCase
 from django.test.client import Client
 
-from elevenbits.deployment.models import Deployment
-from elevenbits.static.models import Static
+from deployment.models import Deployment
+from static.models import Static
 from treemenus.models import Menu
 from treemenus.models import MenuItem
 from elevenbits.menu_extras.models import MenuItemExtension

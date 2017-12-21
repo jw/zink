@@ -201,11 +201,11 @@ INSTALLED_APPS = (
     'haystack',
     # zink apps
     #'elevenbits.menu_extras',  # TODO: move this in apps root
-    'blog',
+    'blog.apps.BlogConfig',
     'static.apps.StaticConfig',
     'contact',
     'home',
-    'elevenbits.deployment',
+    'deployment.apps.DeploymentConfig',
     'elevenbits',
     #'search',
     #'treemenus',  # TODO: make sure to use the proper (Russian) one!

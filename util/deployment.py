@@ -18,7 +18,7 @@
 # along with Zink.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-from elevenbits.deployment.models import Deployment
+from deployment.models import Deployment
 
 
 def get_deployment():
