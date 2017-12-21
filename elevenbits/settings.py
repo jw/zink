@@ -158,7 +158,7 @@ TEMPLATES = [
     },
 ]
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     # 'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -199,6 +199,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'haystack',
+    'django_markup',
     # zink apps
     #'elevenbits.menu_extras',  # TODO: move this in apps root
     'blog.apps.BlogConfig',
@@ -208,7 +209,7 @@ INSTALLED_APPS = (
     'deployment.apps.DeploymentConfig',
     'elevenbits',
     #'search',
-    #'treemenus',  # TODO: make sure to use the proper (Russian) one!
+    'sitetree',
     # utilities
     # 'tracking',
     'util',

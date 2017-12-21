@@ -1,7 +1,8 @@
 <header id="header" class="container clearfix">
 
     <a href="{% url 'home:home' %}" id="logo">
-        {% load staticfiles %}
+        {% load sitetree %}
+        {% load static %}
         <img src="{% static "img/red.png" %}" alt="ElevenBits">
     </a>
     <p id="name">elevenbits</p>
@@ -9,8 +10,7 @@
     <nav id="main-nav">
         <ul>
             {% block menu %}
-                {% load tree_menu_tags %}
-                {% show_menu "root" "top" %}
+                {% sitetree_menu from "root" include "trunk" %}
             {% endblock %}
             <li>
                 <a id="search">

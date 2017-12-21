@@ -6,8 +6,8 @@
 
 			<nav id="footer-nav" class="clearfix">
 
-                {% load tree_menu_tags %}
-                {% show_menu "root" "bottom" %}
+                {% load sitetree %}
+                {% sitetree_menu from "root" include "trunk" %}
 
 			</nav>
 
@@ -53,10 +53,11 @@
                 zink {{ deployment.version }} deployed {{ deployment.timestamp|relative_time }}
             </a></li>
             <li><a href="#">
-                {% load tracking_tags %}
-                {% visitors_on_site as visitors %}
-                There {{ visitors|pluralize:"is ,are " }}
-                {{ visitors }} active user{{ visitors|pluralize }}
+                TODO: visitors
+{#                {% load tracking_tags %}#}
+{#                {% visitors_on_site as visitors %}#}
+{#                There {{ visitors|pluralize:"is ,are " }}#}
+{#                {{ visitors }} active user{{ visitors|pluralize }}#}
             </a></li>
         </ul>
     </div>

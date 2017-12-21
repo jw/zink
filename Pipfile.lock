@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "96860bebf7c1f7307f59cba04c2193e26102afbd9048bd2087e6b1cd0194026c"
+            "sha256": "41d43042ba1f892df11245b6aae253f5afff57903e0db9bb8286e4eec9f6eef8"
         },
         "host-environment-markers": {
             "implementation_name": "cpython",
@@ -78,6 +78,19 @@
             ],
             "version": "==0.2.0"
         },
+        "django-markup": {
+            "hashes": [
+                "sha256:4ef5d268d9376253513f3a7897ac15da48795412b34c8c9c4b9ef0a472ff21b7"
+            ],
+            "version": "==1.2"
+        },
+        "django-sitetree": {
+            "hashes": [
+                "sha256:2dcd4f4854aef851c47686f4a11f7d2c78bb95d39163c2a8fe0b6a2e3663ea6c",
+                "sha256:112c3699169c7d90ce3c9211c39e60fce2e875f91349d3032b106af726689fbc"
+            ],
+            "version": "==1.9.0"
+        },
         "gunicorn": {
             "hashes": [
                 "sha256:75af03c99389535f218cc596c7de74df4763803f7b63eb09d77e92b3956b36c6",
@@ -93,10 +106,9 @@
         },
         "markdown": {
             "hashes": [
-                "sha256:6ba74a1e7141c9603750d80711b639a7577bffb785708e6260090239ee5bc76d",
-                "sha256:e16b754e986408c87f5dcdd79d5c4702cf105f175aa6ade4edfd7e469f8dbd96"
+                "sha256:cfa536d1ee8984007fcecc5a38a493ff05c174cb74cb2341dafd175e6bc30851"
             ],
-            "version": "==2.5"
+            "version": "==2.6.10"
         },
         "psycopg2": {
             "hashes": [

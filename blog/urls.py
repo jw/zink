@@ -21,6 +21,8 @@
 from django.conf.urls import url
 from blog import views
 
+app_name = 'blog'
+
 urlpatterns = [
     # blog page
     url('', views.blog, name='blog'),

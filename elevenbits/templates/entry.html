@@ -20,9 +20,9 @@
 
         <div class="image"></div>
 
-        {% load markup %}
+        {% load markup_tags %}
         <p>
-        {{ entry.body|markup }}
+        {{ entry.body|apply_markup:"markdown" }}
         </p>
 
     </div>
