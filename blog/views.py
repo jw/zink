@@ -62,7 +62,7 @@ def blog(request, page=1):
         entries = paginator.page(paginator.num_pages)
 
     attributes = {'deployment': deployment,
-                  'static': static,
+                  'assets': static,
                   'entries': entries,
                   'tags': tags}
 
@@ -113,7 +113,7 @@ def tag(request, tag, page=1):
         entries = paginator.page(paginator.num_pages)
 
     attributes = {'deployment': deployment,
-                  'static': static,
+                  'assets': static,
                   'entries': entries,
                   'tag_id': tag_id,
                   'tags': tags}
@@ -134,7 +134,7 @@ def detail(request, id):
     entry = get_object_or_404(Entry, pk=id)
 
     attributes = {'deployment': deployment,
-                  'static': static,
+                  'assets': static,
                   'tags': tags,
                   'entry': entry}
 

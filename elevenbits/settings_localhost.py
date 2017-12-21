@@ -23,5 +23,5 @@ DEBUG = True
 # TEMPLATE_DEBUG = DEBUG
 
 # hack for local statics
-STATIC_ROOT = "/var/www/static/zink/"
-STATIC_URL = "http://static/"
+STATIC_ROOT = "/var/www/assets/zink/"
+STATIC_URL = "http://assets/"

@@ -43,7 +43,7 @@ def search(request):
     deployment = get_deployment()
 
     attributes = {'deployment': deployment,
-                  'static': static,
+                  'assets': static,
                   'blogs': blogs,
                   'tags': tags,
                   'query': query}

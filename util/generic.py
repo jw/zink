@@ -18,14 +18,14 @@
 # along with Zink.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-from elevenbits.static.models import Static
+from static.models import Static
 
 import logging
 logger = logging.getLogger("elevenbits")
 
 
 def get_static(name):
-    """Get generic static information."""
+    """Get generic assets information."""
     static = {}
     static['copyright'] = Static.objects.get(name="copyright").value
     static['host'] = Static.objects.get(name="elevenbits").value

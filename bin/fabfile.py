@@ -440,8 +440,8 @@ def backup():
     """Dump the latest content of the portal and add it to the repository."""
     with cd(env.path):
         print(env.local)
-        sudo('python manage.py dumpdata --indent 4 static > '
-             '%(local)s/fixtures/static.json' % env)
+        sudo('python manage.py dumpdata --indent 4 assets > '
+             '%(local)s/fixtures/assets.json' % env)
         sudo('python manage.py dumpdata --indent 4 treemenus > '
              '%(local)s/fixtures/treemenus.json' % env)
         sudo('python manage.py dumpdata --indent 4 menu_extras > '
@@ -572,7 +572,7 @@ def populate_database():
         with cd(env.path):
             # run('./manage.py syncdb')
             run('./manage.py migrate')
-            run('./manage.py loaddata static.json')
+            run('./manage.py loaddata assets.json')
             run('./manage.py loaddata treemenus.json')
             run('./manage.py loaddata menu_extras.json')
             run('./manage.py loaddata blog.json')
@@ -639,9 +639,9 @@ def update_nginx():
     sudo("ln -sf /etc/nginx/sites-available/zink.conf "
          "/etc/nginx/sites-enabled/zink.conf" % env)
     # ...static conf
-    upload_template("%(local)s/conf/static.conf" % env,
-                    "/etc/nginx/sites-available/static.conf",
+    upload_template("%(local)s/conf/assets.conf" % env,
+                    "/etc/nginx/sites-available/assets.conf",
                     context=env, backup=False, use_sudo=True)
-    sudo("ln -sf /etc/nginx/sites-available/static.conf "
-         "/etc/nginx/sites-enabled/static.conf" % env)
+    sudo("ln -sf /etc/nginx/sites-available/assets.conf "
+         "/etc/nginx/sites-enabled/assets.conf" % env)
 

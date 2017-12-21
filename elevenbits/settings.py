@@ -110,7 +110,7 @@ USE_TZ = False
 
 # The statics (css and images) location
 STATICFILES_DIRS = (
-    join(SITE_ROOT, "static"),
+    join(SITE_ROOT, "assets"),
 )
 
 STATICFILES_FINDERS = (
@@ -118,8 +118,8 @@ STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.AppDirectoriesFinder"
 )
 
-STATIC_ROOT = '/var/www/static/zink/'
-STATIC_URL = 'https://static.elevenbits.com/'
+STATIC_ROOT = '/var/www/assets/zink/'
+STATIC_URL = 'https://assets.elevenbits.com/'
 
 FIXTURE_DIRS = (join(SITE_ROOT, 'fixtures'),)
 
@@ -202,7 +202,7 @@ INSTALLED_APPS = (
     # zink apps
     #'elevenbits.menu_extras',  # TODO: move this in apps root
     'blog',
-    'elevenbits.static',  # TODO: move this in apps root
+    'static.apps.StaticConfig',
     'contact',
     'home',
     'elevenbits.deployment',

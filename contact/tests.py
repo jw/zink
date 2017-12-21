@@ -28,7 +28,7 @@ logger = logging.getLogger('elevenbits')
 
 class FormTest(TestCase):
 
-    fixtures = ['static', 'contact', 'treemenus', 'menu_extras']
+    fixtures = ['assets', 'contact', 'treemenus', 'menu_extras']
 
     def setUp(self):
         pass

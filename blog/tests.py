@@ -46,7 +46,7 @@ class TagTestCase(TestCase):
 class BlogTest(TestCase):
     """Test all the blog features."""
 
-    fixtures = ['static', 'contact', 'menus', 'menu_extras', 'blog']
+    fixtures = ['assets', 'contact', 'menus', 'menu_extras', 'blog']
 
     def testBlog(self):
         """Test the full blog."""

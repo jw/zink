@@ -46,6 +46,6 @@ def home(request):
     attributes = {'deployment': deployment,
                   'entry': entry,
                   'entries': entry_list,
-                  'static': static}
+                  'assets': static}
 
     return render(request, 'index.html', attributes)

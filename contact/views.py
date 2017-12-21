@@ -89,7 +89,7 @@ def contact(request):
         form = ContactForm()
 
     attributes = {'deployment': deployment,
-                  'static': static,
+                  'assets': static,
                   'contact': contact,
                   'form': form}
     return render(request, 'contact.html', attributes)
