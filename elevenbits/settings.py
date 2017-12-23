@@ -101,6 +101,9 @@ MANAGERS = ADMINS
 TIME_ZONE = 'Europe/Brussels'
 LANGUAGE_CODE = 'en-BE'
 
+# TODO: fix this!
+SECRET_KEY=12345098563248723469823
+
 SITE_ID = 1
 
 # use i18n l10n and make dates time zone
@@ -119,7 +122,7 @@ STATICFILES_FINDERS = (
 )
 
 PROJECT_ROOT = abspath(dirname(__file__))
-STATIC_ROOT = join(PROJECT_ROOT, 'assets/')
+STATIC_ROOT = join(PROJECT_ROOT, 'staticfiles/')
 STATIC_URL = '/assets/'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -265,9 +268,7 @@ if "elevenbits" in hostname:
     from .settings_elevenbits import *
 elif "m8n" in hostname:
     from .settings_m8n import *
-else:
-    # localhost will enable DEBUG
-    from .settings_localhost import *
+
 
 # FIXME
 SECRET_KEY=12345098563248723469823
