@@ -32,6 +32,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["127.0.0.1",
                  "localhost",
+                 "elevenbits-zink.herokuapp.com",
                  ".elevenbits.com",
                  ".elevenbits.org",
                  ".elevenbits.be",
