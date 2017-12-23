@@ -21,6 +21,7 @@ jsonfield = "==1.0.0"
 django-extensions = "*"
 django-sitetree = "*"
 django-markup = "*"
+whitenoise = "*"
 
 
 [requires]

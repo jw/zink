@@ -23,7 +23,7 @@
 # [www.]elevenbits.org, [www.]elevenbits.com, vonk.elevenbits.org and m8n.be
 #
 
-from os.path import join, dirname, realpath
+from os.path import join, dirname, realpath, abspath
 from socket import gethostname
 
 SITE_ROOT = dirname(realpath(join(__file__, "..")))
@@ -118,8 +118,11 @@ STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.AppDirectoriesFinder"
 )
 
-STATIC_ROOT = '/var/www/assets/zink/'
-STATIC_URL = 'https://assets.elevenbits.com/'
+PROJECT_ROOT = abspath(dirname(__file__))
+STATIC_ROOT = join(PROJECT_ROOT, 'assets/')
+STATIC_URL = '/assets/'
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 FIXTURE_DIRS = (join(SITE_ROOT, 'fixtures'),)
 
@@ -169,6 +172,7 @@ MIDDLEWARE = (
     # 'tracking.middleware.VisitorTrackingMiddleware',
     # 'tracking.middleware.VisitorCleanUpMiddleware',
     'django.middleware.gzip.GZipMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 )
 
 ROOT_URLCONF = 'elevenbits.urls'
