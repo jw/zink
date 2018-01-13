@@ -22,6 +22,8 @@ django-extensions = "*"
 django-sitetree = "*"
 django-markup = "*"
 whitenoise = "*"
+django-pipeline = "*"
+django-static-precompiler = "*"
 
 
 [requires]

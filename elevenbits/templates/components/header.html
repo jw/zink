@@ -1,10 +1,11 @@
-<header id="header" class="container clearfix">
+<header>
 
     <a href="{% url 'home:home' %}" id="logo">
         {% load sitetree %}
         {% load static %}
         <img src="{% static "img/red.png" %}" alt="ElevenBits">
     </a>
+
     <p id="name">elevenbits</p>
 
     <nav id="main-nav">
@@ -23,3 +24,13 @@
     </nav>
 
 </header>
+
+<content>
+    <h1>This is a title</h1>
+    <p>This is content</p>
+
+</content>
+
+<footer>
+    <p>Hello there form the footer</p>
+</footer>

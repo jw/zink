@@ -1,4 +1,3 @@
-
 #
 # Copyright (c) 2013-2016 Jan Willems (ElevenBits)
 #
@@ -26,6 +25,8 @@
 from os.path import join, dirname, realpath, abspath
 from socket import gethostname
 
+import dj_database_url
+
 SITE_ROOT = dirname(realpath(join(__file__, "..")))
 
 DEBUG = True
@@ -38,7 +39,6 @@ ALLOWED_HOSTS = ["127.0.0.1",
                  ".elevenbits.be",
                  ".m8n.be"]
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -50,6 +50,8 @@ DATABASES = {
     }
 }
 
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
 
 #
 # Test properties
@@ -59,10 +61,10 @@ TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 try:
     import rainbowtests
+
     TEST_RUNNER = 'rainbowtests.RainbowTestSuiteRunner'
 except ImportError:
     pass
-
 
 #
 # Debug toolbar
@@ -103,7 +105,7 @@ TIME_ZONE = 'Europe/Brussels'
 LANGUAGE_CODE = 'en-BE'
 
 # TODO: fix this!
-SECRET_KEY=12345098563248723469823
+SECRET_KEY = 12345098563248723469823
 
 SITE_ID = 1
 
@@ -119,14 +121,48 @@ STATICFILES_DIRS = (
 
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
-    "django.contrib.staticfiles.finders.AppDirectoriesFinder"
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+    'static_precompiler.finders.StaticPrecompilerFinder',
+)
+
+STATIC_PRECOMPILER_COMPILERS = (
+    ('static_precompiler.compilers.Stylus',
+     {"executable": "/home/jw/.nvm/versions/node/v6.11.2/bin/stylus",
+      "sourcemap_enabled": True}),
 )
 
 PROJECT_ROOT = abspath(dirname(__file__))
 STATIC_ROOT = join(PROJECT_ROOT, 'staticfiles/')
 STATIC_URL = '/assets/'
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+
+PIPELINE = {
+    'STYLESHEETS': {
+        'colors': {
+            'source_filenames': (
+                'css/core.css',
+                'css/colors/*.css',
+                'css/layers.css'
+            ),
+            'output_filename': 'css/colors.css',
+            'extra_context': {
+                'media': 'screen,projection',
+            },
+        },
+    },
+    'JAVASCRIPT': {
+        'stats': {
+            'source_filenames': (
+                'js/jquery.js',
+                'js/d3.js',
+                'js/collections/*.js',
+                'js/application.js',
+            ),
+            'output_filename': 'js/stats.js',
+        }
+    }
+}
 
 FIXTURE_DIRS = (join(SITE_ROOT, 'fixtures'),)
 
@@ -158,7 +194,7 @@ TEMPLATES = [
                 'django.template.context_processors.static',
                 'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
-                # needed for current menu identifier:
+                # needed for current menu identifier (for sitetree):
                 'django.template.context_processors.request'
             ],
         },
@@ -206,23 +242,24 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'static_precompiler',
     'haystack',
     'django_markup',
     # zink apps
-    #'elevenbits.menu_extras',  # TODO: move this in apps root
+    # 'elevenbits.menu_extras',  # TODO: move this in apps root
     'blog.apps.BlogConfig',
     'static.apps.StaticConfig',
     'contact',
     'home',
     'deployment.apps.DeploymentConfig',
     'elevenbits',
-    #'search',
+    # 'search',
     'sitetree',
     # utilities
     # 'tracking',
     'util',
     # 'django_crontab',
-    #'tweeter',
+    # 'tweeter',
     # 'debug_toolbar',
 )
 
@@ -263,13 +300,5 @@ LOGGING = {
     },
 }
 
-# hostname based settings
-hostname = gethostname()
-if "elevenbits" in hostname:
-    from .settings_elevenbits import *
-elif "m8n" in hostname:
-    from .settings_m8n import *
-
-
 # FIXME
-SECRET_KEY=12345098563248723469823
+SECRET_KEY = 12345098563248723469823
