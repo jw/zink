@@ -9,9 +9,9 @@
             "os_name": "posix",
             "platform_machine": "x86_64",
             "platform_python_implementation": "CPython",
-            "platform_release": "4.10.0-40-generic",
+            "platform_release": "4.13.0-26-generic",
             "platform_system": "Linux",
-            "platform_version": "#44~16.04.1-Ubuntu SMP Thu Nov 9 15:37:44 UTC 2017",
+            "platform_version": "#29~16.04.2-Ubuntu SMP Tue Jan 9 22:00:44 UTC 2018",
             "python_full_version": "3.6.2",
             "python_version": "3.6",
             "sys_platform": "linux"
@@ -86,10 +86,10 @@
         },
         "django-pipeline": {
             "hashes": [
-                "sha256:d67ac0fc2556e3c5b5080ee96f8e661bda9a1e4b46b8fffbef3fb5524b6ef11e",
-                "sha256:81d8dd2db4c582bdfd0dc1df875c6b538c0a5ee233e954a52ae17f3ce904f604"
+                "sha256:b56f2cfdb113dc1cb05257d8eb8d145fc0ade6f0d1236fb425df15bd059dce15",
+                "sha256:ef67aaf58959a2959e13fc114001cee5beec05ac18a81cc700ea9f1c8e3f40a8"
             ],
-            "version": "==1.6.13"
+            "version": "==1.6.14"
         },
         "django-sitetree": {
             "hashes": [
@@ -103,13 +103,6 @@
                 "sha256:e6aaae21c4f97195846b52ba1a31fa4b142a214e3efa4b57366eebe640c7dc54"
             ],
             "version": "==1.7"
-        },
-        "futures": {
-            "hashes": [
-                "sha256:c4884a65654a7c45435063e14ae85280eb1f111d94e542396717ba9828c4337f",
-                "sha256:51ecb45f0add83c806c68e4b06106f90db260585b25ef2abfcda0bd95c0132fd"
-            ],
-            "version": "==3.1.1"
         },
         "gunicorn": {
             "hashes": [

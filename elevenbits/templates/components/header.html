@@ -1,44 +1,60 @@
-<header>
+{% load static %}
 
-    <logo>
+<header id="header" class="full-header">
 
-        <image>
-            <a href="{% url 'home:home' %}" id="logo">
-                {% load sitetree %}
-                {% load static %}
-                <img src="{% static "img/red.png" %}" alt="ElevenBits">
-            </a>
-        </image>
+    <ul id="header-wrap">
 
-        <brand>
-            <p>elevenbits</p>
-        </brand>
+        <div class="container clearfix">
 
-    </logo>
+            <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
 
-    <menu>
+            <div id="logo">
+                <a href="index.html" class="standard-logo"
+                   data-dark-logo="{% static "images/logo-dark.png" %}">
+                    <img src="{% static "images/elevenbits.png" %}"
+                         alt="ElevenBits Logo"></a>
+                <a href="index.html" class="retina-logo"
+                   data-dark-logo="{% static "images/logo-dark@2x.png" %}">
+                    <img src="{% static "images/elevenbits@2x.png" %}"
+                         alt="ElevenBits Logo"></a>
+            </div>
 
-        {% block menu %}
-            {% sitetree_menu from "root" include "trunk" %}
-        {% endblock %}
+            <nav id="primary-menu">
 
-        <search>
-            <p>Hello</p>
-{#            <form method="get" action="/search">#}
-{#                <input type="text" placeholder="Search" name="q"/>#}
-{#            </form>#}
-        </search>
+                {% block menu %}
+                    {% load sitetree %}
+                    {% sitetree_menu from "root" include "trunk" %}
+                {% endblock %}
 
-    </menu>
+                <div id="top-search">
+                    <a href="#" id="top-search-trigger">
+                        <i class="icon-search3"></i>
+                        <i class="icon-line-cross"></i>
+                    </a>
+                    <form action="search.html" method="get">
+                        <input type="text" name="q" class="form-control"
+                               value="" placeholder="Type &amp; Hit Enter..">
+                    </form>
+                </div>
+
+            </nav>
+
+        </div>
+
+    </ul>
 
 </header>
 
-<content>
-    <h1>This is a title</h1>
-    <p>This is content</p>
 
-</content>
+<section id="page-title">
 
-<footer>
-    <p>Hello there form the footer</p>
-</footer>
+    <div class="container clearfix">
+        <h1>Blog</h1>
+        <span>Our Latest News</span>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Blog</li>
+        </ol>
+    </div>
+
+</section><!-- #page-title end -->

@@ -1,27 +1,21 @@
 <!DOCTYPE html>
-{% block head%}{%  include "components/head.html" %}{% endblock %}
-<body>
-<container>
+{% block head %}{% include "components/head.html" %}{% endblock %}
+<body class="stretched">
 
-{% block header %}{% include "components/header.html" %}{% endblock %}
-{#{% block content%}{% include "components/content.html" %}{% endblock %}#}
-{#{% block footer%}{% include "components/footer.html" %}{% endblock %}#}
-{#{% block ie-bottom %}{% include "components/ie-bottom.html" %}{% endblock %}#}
+    <div id="wrapper" class="clearfix">
 
-</container>
+        {% block header %}{% include "components/header.html" %}{% endblock %}
+        {#{% block content%}{% include "components/content.html" %}{% endblock %}#}
+        {% block footer%}{% include "components/footer.html" %}{% endblock %}
+
+	</div><!-- #wrapper end -->
+
+	<div id="gotoTop" class="icon-angle-up"></div>
+
+    {% load static %}
+    <script src="{% static "js/jquery.js" %}"></script>
+	<script src="{% static "js/plugins.js" %}"></script>
+    <script src="{% static "js/functions.js" %}"></script>
+
 </body>
 </html>
-
-{# TODO: add the tracking and deployment info. #}
-{#            <div id="footer-bottom">#}
-{#                {{ static.copyright }} </br>#}
-{#                {% load tracking_tags %}#}
-{#                {% load relative_time %}#}
-{#                {% load version %}#}
-{#                {% visitors_on_site as visitors %}#}
-{#                Running on django {%  version "django" %}, uwsgi {%  version "uwsgi" %}, nginx 1.2.1</br>#}
-{#                This is zink release {{deployment.version}}, deployed {{deployment.timestamp|relative_time}}, {{ visitors }} active user{{ visitors|pluralize }}#}
-{#                <div id="scroll-top-top">#}
-{#                    <a href="#"></a>#}
-{#                </div>#}
-{#            </div>#}

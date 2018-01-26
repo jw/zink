@@ -122,7 +122,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-    'static_precompiler.finders.StaticPrecompilerFinder',
+    # 'static_precompiler.finders.StaticPrecompilerFinder',
 )
 
 STATIC_PRECOMPILER_COMPILERS = (
@@ -141,23 +141,23 @@ PIPELINE = {
     'STYLESHEETS': {
         'colors': {
             'source_filenames': (
-                'css/core.css',
-                'css/colors/*.css',
-                'css/layers.css'
+                # 'css/core.css',
+                # 'css/colors/*.css',
+                # 'css/layers.css'
             ),
             'output_filename': 'css/colors.css',
             'extra_context': {
-                'media': 'screen,projection',
+                'media': 'screen, projection',
             },
         },
     },
     'JAVASCRIPT': {
         'stats': {
             'source_filenames': (
-                'js/jquery.js',
-                'js/d3.js',
-                'js/collections/*.js',
-                'js/application.js',
+                # 'js/jquery.js',
+                # 'js/d3.js',
+                # 'js/collections/*.js',
+                # 'js/application.js',
             ),
             'output_filename': 'js/stats.js',
         }

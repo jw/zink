@@ -8,6 +8,13 @@ black = #fff
 dark-grey = #3a3a3a
 light-grey = #909090
 lighter-grey = #efefef
+menu-background-grey = #f8f8f8
+orange = #f15a23
+
+//
+
+header-height = 100px
+top-bar = 6px
 
 // font
 
@@ -20,15 +27,29 @@ font = 'Open Sans', 'Lucida Sans Unicode', 'Lucida Grande', sans-serif
 menu_tag()
   border-bottom 1px solid transparent
   border-top 6px solid transparent
-  color #3a3a3a
+  color dark-grey
   font-family font
-  font-size 12px
+  font-size 1em
   font-weight 800
-  display block
-  padding 26px 20px 40px
+  padding 39px 20px 39px
   text-align center
   text-transform uppercase
-  //z-index: 98  // FIXME
+  //vertical-align center
+  z-index: auto  // FIXME: needed?
+  text-decoration: none
+
+menu_search_tag()
+  border-bottom 1px solid transparent
+  border-top 6px solid transparent
+  color dark-grey
+  font-family font
+  font-size 1em
+  font-weight 800
+  padding 41px 20px 37px
+  text-align center
+  text-transform uppercase
+  //vertical-align center
+  z-index: auto  // FIXME: needed?
   text-decoration: none
 
 //
@@ -39,6 +60,7 @@ body
   margin 0 0 0 0
   border-top 6px solid dark-grey
   font 1em font
+  z-index auto
 
 container
   margin auto
@@ -48,7 +70,7 @@ container
   width 1200px  // FIXME: add media info here!
 
 //
-// Header: log, banner, menu items and search box.
+// Header: icon, banner, menu items and search box.
 //
 
 header
@@ -56,33 +78,64 @@ header
   flex-direction row
   justify-content space-between
   border-bottom 1px solid lighter-grey
+  height header-height
   margin 0
+  z-index auto
 
   logo
     display flex
     flex-direction row
     align-items center
     border solid 1px black // FIXME
-    image
+    icon
       border 1px green // FIXME
+      // a  // FIXME
+      // img  // FIXME
+      // padding 50% 25% 50% // FIXME
+
     brand
-      menu_tag()
+      color dark-grey
+      font-family font
+      font-size 1em
+      font-weight 800
+      text-align center
+      text-transform uppercase
+      vertical-align center
+      padding 25px 20px 25px
 
   menu
     display flex
     justify-content flex-end
+    align-items center
     margin 0
-    border solid 1px green // FIXME
+    //border solid 1px green // FIXME
     ul
       display flex
-      border solid 1px yellow // FIXME
+      //border solid 1px yellow // FIXME
       margin 0
       li
-        border solid 1px magenta
-        // border solid black // FIXME
+        //border solid 1px magenta  // FIXME
         list-style none
-        //margin 0
+        margin 0
         a
           menu_tag()
+        a:hover, .current_item
+          background menu-background-grey
+          border-top 6px solid orange
+          border-bottom 1px solid orange
+          color orange
+          z-index auto
+
     search
-      border solid 1px magenta
+      menu_search_tag()
+      //border solid 1px magenta  // FIXME
+      // vertical-align center
+      margin 0
+      //align-self flex-start
+    search:hover
+      padding 43px 20px 38px
+      background menu-background-grey
+      border-top 6px solid orange
+      border-bottom 1px solid orange
+      color orange
+      z-index auto
