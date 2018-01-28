@@ -135,7 +135,7 @@ PROJECT_ROOT = abspath(dirname(__file__))
 STATIC_ROOT = join(PROJECT_ROOT, 'staticfiles/')
 STATIC_URL = '/assets/'
 
-STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+# STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
 PIPELINE = {
     'STYLESHEETS': {
