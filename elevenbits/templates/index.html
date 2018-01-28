@@ -4,53 +4,56 @@
 
     <section id="content" class="container clearfix">
 
-    <h2 class="slogan align-center">
-        I am a software developer, designer and cyclist.<br>
-	    On this site I leave interesting findings and opinions.
-    </h2>
+        <div class="divcenter center clearfix" style="max-width: 900px;">
+            <img class="bottommargin" src="images/logo-side.png" alt="">
+            <h2>
+                I am a software developer, designer and cyclist.<br>
+                On this site I leave interesting findings and opinions.
+            </h2>
+        </div>
 
-    <h6 class="section-title">Latest blog entry</h6>
+        <h6 class="section-title">Latest blog entry</h6>
 
-    <hr/>
+        <hr/>
 
-    {% if entry %}
+        {% if entry %}
 
-        {% include "entry.html" %}
+            {% include "entry.html" %}
 
-    {% endif %}
+        {% endif %}
 
-    <h6 class="section-title">Latest stuff from my blog</h6>
+        <h6 class="section-title">Latest stuff from my blog</h6>
 
-    {% if entries %}
+        {% if entries %}
 
-        <ul class="post-carousel">
+            <ul class="post-carousel">
 
-            {% for entry in entries %}
-                <li>
+                {% for entry in entries %}
+                    <li>
 
-                    <div class="entry-meta">
+                        <div class="entry-meta">
 
-                        <a href="{% url 'blog:detail' entry.pk %}">
-                            <span class="post-format link">Permalink</span>
-                        </a>
+                            <a href="{% url 'blog:detail' entry.pk %}">
+                                <span class="post-format link">Permalink</span>
+                            </a>
 
-                    </div>
+                        </div>
 
-                    <div class="entry-body">
+                        <div class="entry-body">
 
-                        <a href="{% url 'blog:detail' entry.pk %}">
-                            <h5 class="title">{{ entry.title }}</h5>
-                        </a>
+                            <a href="{% url 'blog:detail' entry.pk %}">
+                                <h5 class="title">{{ entry.title }}</h5>
+                            </a>
 
-                    </div>
+                        </div>
 
-                </li>
+                    </li>
 
-            {% endfor %}
+                {% endfor %}
 
-        </ul>
+            </ul>
 
-    {% endif %}
+        {% endif %}
 
     </section>
 

@@ -1,30 +1,35 @@
+<div class="entry clearfix">
 
-<article class="entry clearfix">
+    <div class="entry-image">
 
-    <div class="entry-body">
+        <div class="entry-title">
+            <a href="{% url 'blog:detail' entry.pk %}">
+                <h1 class="title">
+                    {{ entry.title }}
+                </h1>
+            </a>
+        </div>
 
-        <a href="{% url 'blog:detail' entry.pk %}">
-            <h1 class="title">
-                {{ entry.title }}
-            </h1>
-        </a>
-        <h1 class="posted">
-            {{ entry.posted|date:"l, jS F Y, Hi\h\r\s" }}
-        </h1>
-        <h1 class="tags">
-            {% for tag in entry.tags.all %}
-                <a href="{% url 'blog:tag' tag.pk %}">{{tag.tag}}</a>
-                {% if not forloop.last %} | {% endif %}
-            {% endfor %}
-        </h1>
+        <ul class="entry-meta clearfix">
+            <li><i class="icon-calendar3"/>
+                {{ entry.posted|date:"l, jS F Y, Hi\h\r\s" }}
+            </li>
+            <li><a href="#"><i class="icon-user"></i>jw</a></li>
+            <li><i class="icon-folder-open"></i>
+                {% for tag in entry.tags.all %}
+                    <a href="{% url 'blog:tag' tag.pk %}">{{ tag.tag }}</a>
+                    {% if not forloop.last %} | {% endif %}
+                {% endfor %}
+            </li>
+        </ul>
 
-        <div class="image"></div>
-
-        {% load markup_tags %}
-        <p>
-        {{ entry.body|apply_markup:"markdown" }}
-        </p>
+        <div class="entry-content">
+            {% load markup_tags %}
+            <p>
+                {{ entry.body|apply_markup:"markdown" }}
+            </p>
+        </div>
 
     </div>
 
-</article>
+</div>

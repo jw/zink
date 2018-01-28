@@ -1,21 +1,50 @@
 <!DOCTYPE html>
-{% block head %}{% include "components/head.html" %}{% endblock %}
-<body class="stretched">
+
+{% load static %}
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="author" content="Jan Willems <jw@elevenbits>"/>
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Raleway:300,400,500,600,700|Crete+Round:400i"
+          rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="{% static "css/bootstrap.css" %}"
+          type="text/css"/>
+    <link rel="stylesheet" href="{% static "style.css" %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static "css/dark.css" %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static "css/font-icons.css" %}"
+          type="text/css"/>
+    <link rel="stylesheet" href="{% static "css/animate.css" %}"
+          type="text/css"/>
+    <link rel="stylesheet" href="{% static "css/magnific-popup.css" %}"
+          type="text/css"/>
+
+    <link rel="stylesheet" href="{% static "css/responsive.css" %}"
+          type="text/css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <title>{{ static.title }} - {{ static.host }}</title>
+
+</head>
+
+<body>
 
     <div id="wrapper" class="clearfix">
 
         {% block header %}{% include "components/header.html" %}{% endblock %}
-        {#{% block content%}{% include "components/content.html" %}{% endblock %}#}
-        {% block footer%}{% include "components/footer.html" %}{% endblock %}
+        {% block content %}{% include "components/content.html" %}{% endblock %}
+        {% block footer %}{% include "components/footer.html" %}{% endblock %}
 
-	</div><!-- #wrapper end -->
+    </div>
 
-	<div id="gotoTop" class="icon-angle-up"></div>
+    <div id="gotoTop" class="icon-angle-up"></div>
 
-    {% load static %}
     <script src="{% static "js/jquery.js" %}"></script>
-	<script src="{% static "js/plugins.js" %}"></script>
+    <script src="{% static "js/plugins.js" %}"></script>
     <script src="{% static "js/functions.js" %}"></script>
 
 </body>
+
 </html>

@@ -36,7 +36,7 @@ def home(request):
     deployment = get_deployment()
 
     entry_list = Entry.objects.filter(active=True).reverse()
-    logger.info("Retrieved %s blog entries." % len(entry_list))
+    logger.error("Retrieved %s blog entries." % len(entry_list))
 
     try:
         entry = entry_list[0]
