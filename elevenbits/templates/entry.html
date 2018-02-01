@@ -1,35 +1,43 @@
 <div class="entry clearfix">
 
-    <div class="entry-image">
-
-        <div class="entry-title">
-            <a href="{% url 'blog:detail' entry.pk %}">
-                <h1 class="title">
-                    {{ entry.title }}
-                </h1>
-            </a>
+    {% if entry.image %}
+        <div class="entry-image">
+            <iframe src="http://player.vimeo.com/video/87701971" width="500"
+                    height="281" frameborder="0" webkitallowfullscreen
+                    mozallowfullscreen allowfullscreen></iframe>
         </div>
+    {% endif %}
 
-        <ul class="entry-meta clearfix">
-            <li><i class="icon-calendar3"/>
+    <div class="entry-title">
+        <a href="{% url 'blog:detail' entry.pk %}">
+            <h2 class="title">
+                {{ entry.title }}
+            </h2>
+        </a>
+    </div>
+
+    <ul class="entry-meta clearfix">
+        <li>
+            <i class="icon-calendar3">
                 {{ entry.posted|date:"l, jS F Y, Hi\h\r\s" }}
-            </li>
-            <li><a href="#"><i class="icon-user"></i>jw</a></li>
-            <li><i class="icon-folder-open"></i>
-                {% for tag in entry.tags.all %}
-                    <a href="{% url 'blog:tag' tag.pk %}">{{ tag.tag }}</a>
-                    {% if not forloop.last %} | {% endif %}
-                {% endfor %}
-            </li>
-        </ul>
+            </i>
+        </li>
+        <li><a href="#"><i class="icon-user"></i>jw</a></li>
+        <li><i class="icon-folder-open"></i>
+            {% for tag in entry.tags.all %}
+                <a href="{% url 'blog:tag' tag.pk %}">{{ tag.tag }}</a>
+                {% if not forloop.last %} | {% endif %}
+            {% endfor %}
+        </li>
+        {#        <li><a href="#"><i class="icon-film"></i></a></li>#}
+    </ul>
 
-        <div class="entry-content">
-            {% load markup_tags %}
-            <p>
-                {{ entry.body|apply_markup:"markdown" }}
-            </p>
-        </div>
-
+    <div class="entry-content">
+        {% load markdownify %}
+        <p>
+            {{ entry.body | markdown | safe }}
+        </p>
     </div>
 
 </div>
+

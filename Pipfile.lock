@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "f844152abaa94910da2106e64a1f3d299aeeb09740331fb33e9da874f08360d4"
+            "sha256": "33f3d72fe2b016a85334c1e873c4a74efe60711ec4e18fc6bff0cdc3aa5399b9"
         },
         "host-environment-markers": {
             "implementation_name": "cpython",
@@ -78,12 +78,6 @@
             ],
             "version": "==0.2.0"
         },
-        "django-markup": {
-            "hashes": [
-                "sha256:4ef5d268d9376253513f3a7897ac15da48795412b34c8c9c4b9ef0a472ff21b7"
-            ],
-            "version": "==1.2"
-        },
         "django-pipeline": {
             "hashes": [
                 "sha256:b56f2cfdb113dc1cb05257d8eb8d145fc0ade6f0d1236fb425df15bd059dce15",
@@ -117,12 +111,12 @@
             ],
             "version": "==1.0.0"
         },
-        "markdown": {
+        "mistune": {
             "hashes": [
-                "sha256:9ba587db9daee7ec761cfc656272be6aabe2ed300fece21208e4aab2e457bc8f",
-                "sha256:a856869c7ff079ad84a3e19cd87a64998350c2b94e9e08e44270faef33400f81"
+                "sha256:b4c512ce2fc99e5a62eb95a4aba4b73e5f90264115c40b70a21e1f7d4e0eac91",
+                "sha256:bc10c33bfdcaa4e749b779f62f60d6e12f8215c46a292d05e486b869ae306619"
             ],
-            "version": "==2.6.11"
+            "version": "==0.8.3"
         },
         "psycopg2": {
             "hashes": [
@@ -205,11 +199,11 @@
         },
         "typing": {
             "hashes": [
-                "sha256:349b1f9c109c84b53ac79ac1d822eaa68fc91d63b321bd9392df15098f746f53",
-                "sha256:63a8255fe7c6269916baa440eb9b6a67139b0b97a01af632e7bd2842e1e02f15",
-                "sha256:d514bd84b284dd3e844f0305ac07511f097e325171f6cc4a20878d11ad771849"
+                "sha256:b2c689d54e1144bbcfd191b0832980a21c2dbcf7b5ff7a66248a60c90e951eb8",
+                "sha256:3a887b021a77b292e151afb75323dea88a7bc1b3dfa92176cff8e44c8b68bddf",
+                "sha256:d400a9344254803a2368533e4533a4200d21eb7b6b729c173bc38201a74db3f2"
             ],
-            "version": "==3.6.2"
+            "version": "==3.6.4"
         },
         "whitenoise": {
             "hashes": [

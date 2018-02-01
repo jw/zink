@@ -242,9 +242,8 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'static_precompiler',
+    # 'static_precompiler',
     'haystack',
-    'django_markup',
     # zink apps
     # 'elevenbits.menu_extras',  # TODO: move this in apps root
     'blog.apps.BlogConfig',
@@ -296,6 +295,11 @@ LOGGING = {
         'django': {
             'handlers': ['console'],
             'level': 'INFO'
+        },
+        'elevenbits': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False
         },
     },
 }

@@ -5,16 +5,6 @@ from util.deployment import get_deployment
 
 from bs4 import BeautifulSoup
 
-from markdown.extensions import Extension
-from markdown import markdown
-
-
-class EscapeHtml(Extension):
-
-    def extendMarkdown(self, md, md_globals):
-        del md.preprocessors['html_block']
-        del md.inlinePatterns['html']
-
 
 def remove_tags(text):
     soup = BeautifulSoup(text)
@@ -32,9 +22,6 @@ def search(request):
         if entry.model_name == 'tag':
             tags.append(entry)
         elif entry.model_name == 'entry' and entry.object.active:
-            entry.object.plain = remove_tags(
-                markdown(entry.object.body,
-                         extensions=[EscapeHtml()]))
             blogs.append(entry)
 
     query = form.data['q']
