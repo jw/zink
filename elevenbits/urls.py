@@ -42,7 +42,7 @@ urlpatterns = [
     # home, blog and contact sections
     path('', RedirectView.as_view(url='/home')),
     path('home', include('home.urls', namespace='home')),
-    path('blog', include('blog.urls', namespace='blog')),
+    path('blog/', include('blog.urls', namespace='blog')),
     path('contact', include('contact.urls', namespace='contact')),
 
     path('search', include('search.urls')),

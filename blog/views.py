@@ -43,6 +43,8 @@ def blog(request, page=1):
     entry_list = Entry.objects.filter(active=True).reverse()
     logger.info("Retrieved %s blog entries." % len(entry_list))
 
+    logger.info("Page: %s" % page)
+
     try:
         size = settings.BLOG_PAGE_SIZE
     except AttributeError:

@@ -24,6 +24,38 @@
                         <p>No entries yet!</p>
                     {% endif %}
 
+                    <ul class="pagination nobottommargin">
+
+                        {% if entries.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="{% url 'blog:page' entries.previous_page_number %}">«</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link" href="">«</a>
+                            </li>
+                        {% endif %}
+
+                        {% for page in entries.paginator.page_range %}
+                            <li class="page-item {% if page == entries.number %}active{% endif %}">
+                                <a class="page-link" href="{% url 'blog:page' page %}">
+                                    {{ page }}
+                                </a>
+                            </li>
+                        {% endfor %}
+
+                        {% if entries.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="{% url 'blog:page' entries.next_page_number %}">»</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link" href="">»</a>
+                            </li>
+                        {% endif %}
+
+                    </ul>
+
                 </div>
 
             </div>
