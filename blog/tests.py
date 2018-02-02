@@ -2,7 +2,7 @@ from unittest import skipIf
 
 from django.test import TestCase
 from django.test.client import Client
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from blog.models import Tag
 
@@ -27,7 +27,7 @@ class TagTestCase(TestCase):
 class BlogTest(TestCase):
     """Test all the blog features."""
 
-    fixtures = ['assets', 'contact', 'menus', 'menu_extras', 'blog']
+    fixtures = ['contact', 'menus', 'menu_extras', 'blog']
 
     def testBlog(self):
         """Test the full blog."""

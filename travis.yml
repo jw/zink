@@ -1,7 +1,7 @@
 language: python
 
 python:
-  - "2.7"
+  - "3.6"
 
 services: postgresql
 
@@ -9,8 +9,12 @@ script:
   - python setup.py test
 
 env:
-  - DJANGO=1.6.1 DB=postgres
+  - DJANGO=2.0.1 DB=postgres
 
-install:
-  - pip install .
-  - pip install -r requirements.txt --use-mirrors
+install: "make"
+
+before_script:
+  - psql -c "CREATE DATABASE zink;" -U postgres
+
+script:
+  - make test
