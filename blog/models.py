@@ -10,7 +10,8 @@ class Tag(models.Model):
         return self.tag
 
     def get_absolute_url(self):
-        return '%stag/%s/' % (settings.BLOG_ROOT, self.slug)
+        # return '%stag/%s/' % (settings.BLOG_ROOT, self.slug)
+        return 'tag/%s/' % (self.pk)
 
 
 class Entry(models.Model):
