@@ -9,12 +9,12 @@ verify_ssl = true
 "psycopg2" = "*"
 gunicorn = "*"
 django-heroku = "*"
-Django = "==2.0"
+django = "==2.0"
 django-debug-toolbar = "==1.9"
-Pygments = "==1.6"
+pygments = "==1.6"
 "beautifulsoup4" = "*"
 django-haystack = "*"
-Whoosh = "==2.7.0"
+whoosh = "==2.7.0"
 twitter = "==1.15.0"
 jsonfield = "==1.0.0"
 django-extensions = "*"
@@ -23,6 +23,7 @@ whitenoise = "*"
 django-pipeline = "*"
 django-static-precompiler = "*"
 mistune = "*"
+pillow = "*"
 
 
 [requires]

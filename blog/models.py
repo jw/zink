@@ -14,6 +14,15 @@ class Tag(models.Model):
         return 'tag/%s/' % (self.pk)
 
 
+class Image(models.Model):
+    image = models.ImageField(upload_to="tmp",
+                              height_field='height', width_field='width',
+                              max_length=255)
+    description = models.TextField(help_text='Description of the image.')
+    height = models.PositiveIntegerField(default=0, editable=False)
+    width = models.PositiveIntegerField(default=0, editable=False)
+
+
 class Entry(models.Model):
     """The blog entry."""
 
@@ -23,7 +32,7 @@ class Entry(models.Model):
 
     title = models.CharField(max_length=200)
 
-    body = models.TextField(help_text="The content of this entry")
+    body = models.TextField(help_text="The content of this entry.")
 
     active = models.BooleanField(default=False,
                                  help_text="Is this entry viewable on site?")
@@ -34,6 +43,8 @@ class Entry(models.Model):
                                   blank=True)
 
     tags = models.ManyToManyField(Tag, blank=True)
+
+    images = models.ManyToManyField(Image)
 
     class Meta:
         ordering = ['posted']
