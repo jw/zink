@@ -1,5 +1,4 @@
 from django.db import models
-from elevenbits import settings
 
 
 class Tag(models.Model):
@@ -15,7 +14,7 @@ class Tag(models.Model):
 
 
 class Image(models.Model):
-    image = models.ImageField(upload_to="tmp",
+    image = models.ImageField(upload_to="tmp/",
                               height_field='height', width_field='width',
                               max_length=255)
     description = models.TextField(help_text='Description of the image.')
