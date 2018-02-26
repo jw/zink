@@ -1,10 +1,34 @@
 <div class="entry clearfix">
 
-    {% if entry.image %}
+    {% if entry.images.all %}
         <div class="entry-image">
-            <iframe src="http://player.vimeo.com/video/87701971" width="500"
-                    height="281" frameborder="0" webkitallowfullscreen
-                    mozallowfullscreen allowfullscreen></iframe>
+            {% if entry.images.all|length_is:"1" %}
+                {% with entry.images.all|first as image %}
+                    <p>{{ image.image.name }}</p>
+                <a href="{{ image.image.name }}" data-lightbox="image">
+                    <img class="image_fade"
+                         src="{{ image.image.name }}"
+                         alt="" style="opacity: 1;"></a>
+                {% endwith %}
+            {% else %}
+                <div class="fslider" data-arrows="false"
+                     data-lightbox="gallery">
+                    <div class="flexslider">
+                        <div class="slider-wrap">
+                            {% for image in entry.images.all %}
+                                <div class="slide">
+                                    <a href="{{ image.image.name }}"
+                                       data-lightbox="gallery-item">
+                                        <img class="image_fade"
+                                             src="{{ image.image.name }}"
+                                             alt="{{ image.image.description }}">
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
         </div>
     {% endif %}
 

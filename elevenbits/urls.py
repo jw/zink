@@ -20,7 +20,7 @@
 
 from django.urls import include, path
 from django.views.generic.base import TemplateView, RedirectView
-
+from django.conf.urls.static import static
 from django.contrib import admin
 admin.autodiscover()
 
@@ -54,7 +54,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('admin/doc/', include('django.contrib.admindocs.urls')),
 
-]  # + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
     import debug_toolbar

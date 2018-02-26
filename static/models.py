@@ -8,4 +8,4 @@ class Static(models.Model):
     value = models.TextField(help_text="The value of the pair.")
 
     def __str__(self):
-        return self.name
+        return f'{self.name}: {self.value}'

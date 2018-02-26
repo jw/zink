@@ -24,10 +24,12 @@ import logging
 logger = logging.getLogger("elevenbits")
 
 
-def get_static(name):
-    """Get generic assets information."""
-    static = {}
-    static['copyright'] = Static.objects.get(name="copyright").value
-    static['host'] = Static.objects.get(name="elevenbits").value
-    static['title'] = Static.objects.get(name=name).value
-    return static
+def get_assets(*keys):
+    """Get generic assets.
+    :param keys: the keys to be retrieved
+    """
+    assets = {'copyright': Static.objects.get(name="copyright").value,
+              'title': Static.objects.get(name="title").value}
+    for key in keys:
+        assets[key] = Static.objects.get(name=key).value
+    return assets

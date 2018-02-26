@@ -1,27 +1,2 @@
 
-this application runs on nginx with uwsgi.
-
-There are four deployment areas:
-
-[1] Local, via django
-Use python manage.py runserver to deploy this website. Uses the local database.
-
-[2] Local, via fabric
-Use fab with the development task: 
-fab -k tip development deploy
-Uses the same local database.
-
-[3] Staging, via fabric
-Use fab with the development task: 
-fab -k tip staging deploy
-Uses a database in the production environment.
-
-[4] Production, via fabric
-Use fab with the development task: 
-fab -k revision=42 production deploy
-Uses the production database.
-
-
-Note:
-We use a cronjob which uses a properties file, so
-make sure to create /etc/website/processes.properties
+this application runs on heroku and needs a postgresql database.

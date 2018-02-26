@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from util.generic import get_static
+from util.generic import get_assets
 from util.deployment import get_deployment
 
 from bs4 import BeautifulSoup
@@ -26,7 +26,7 @@ def search(request):
 
     query = form.data['q']
 
-    static = get_static("search.header")
+    static = get_assets("blog.header")
     deployment = get_deployment()
 
     attributes = {'deployment': deployment,

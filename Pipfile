@@ -30,3 +30,8 @@ pillow = "*"
 
 python_version = "3.6"
 implementation_version = "3.6.3"
+
+
+[dev-packages]
+
+werkzeug = "*"

@@ -24,7 +24,7 @@ from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.core.mail import send_mail
 
-from util.generic import get_static
+from util.generic import get_assets
 from util.deployment import get_deployment
 
 from contact.models import Contact, ContactForm
@@ -43,7 +43,7 @@ def contact(request):
     # Generate generic statics, deployment and contact data
     #
 
-    static = get_static("contact.title")
+    static = get_assets("blog.header")
     deployment = get_deployment()
 
     try:

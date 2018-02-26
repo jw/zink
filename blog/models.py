@@ -22,6 +22,9 @@ class Image(models.Model):
     height = models.PositiveIntegerField(default=0, editable=False)
     width = models.PositiveIntegerField(default=0, editable=False)
 
+    def __str__(self):
+        return self.image.name + " (" + self.description + ")"
+
 
 class Entry(models.Model):
     """The blog entry."""

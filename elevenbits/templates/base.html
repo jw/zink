@@ -2,6 +2,7 @@
 <html lang="en">
 
 {% load static %}
+{% load lookup %}
 
 <head>
 
@@ -27,7 +28,7 @@
           type="text/css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    <title>{{ static.title }} - {{ static.host }}</title>
+    <title>{{ assets|lookup:'title' }}</title>
 
 </head>
 

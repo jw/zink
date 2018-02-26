@@ -7,8 +7,8 @@
         <div class="divcenter center clearfix" style="max-width: 900px;">
             <img class="bottommargin" src="images/logo-side.png" alt="">
             <h2>
-                I am a software developer, designer and cyclist.<br>
-                On this site I leave interesting findings and opinions.
+                {% load lookup %}
+                {{ assets|lookup:'index.header' }}
             </h2>
         </div>
 

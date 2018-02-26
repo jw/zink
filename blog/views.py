@@ -24,7 +24,7 @@ from django.conf import settings
 
 from blog.models import Entry, Tag
 
-from util.generic import get_static
+from util.generic import get_assets
 from util.deployment import get_deployment
 
 import logging
@@ -34,7 +34,7 @@ logger = logging.getLogger("elevenbits")
 def blog(request, page=1):
     """Get all blog entries for a specific page."""
 
-    static = get_static("blog.header")
+    static = get_assets("blog.header")
     deployment = get_deployment()
 
     tags = Tag.objects.all()
@@ -76,7 +76,7 @@ def tag(request, tag, page=1):
 
     deployment = get_deployment()
 
-    static = get_static("tags.title")
+    static = get_assets("blog.header")
 
     tags = Tag.objects.all()
     logger.info("Retrieved %s tags." % len(tags))
@@ -126,7 +126,7 @@ def tag(request, tag, page=1):
 def detail(request, id):
     """Get one specific entry."""
 
-    static = get_static("blog.header")
+    static = get_assets("blog.header")
 
     deployment = get_deployment()
 

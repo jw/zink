@@ -44,7 +44,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'zink',
         'USER': 'postgres',
-        'PASSWORD': 'P4t3rsB3rg',
+        'PASSWORD': 's3cr3t',
         'HOST': 'localhost',
         'DATABASE_PORT': '',
     }
@@ -117,6 +117,7 @@ USE_TZ = False
 # The statics (css and images) location
 STATICFILES_DIRS = (
     join(SITE_ROOT, "assets"),
+    join(SITE_ROOT, "tmp"),
 )
 
 STATICFILES_FINDERS = (
@@ -132,8 +133,12 @@ STATIC_PRECOMPILER_COMPILERS = (
 )
 
 PROJECT_ROOT = abspath(dirname(__file__))
+
 STATIC_ROOT = join(PROJECT_ROOT, 'staticfiles/')
 STATIC_URL = '/assets/'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = join(PROJECT_ROOT, 'media')
 
 # STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
@@ -166,24 +171,11 @@ PIPELINE = {
 
 FIXTURE_DIRS = (join(SITE_ROOT, 'fixtures'),)
 
-# TODO: read up on this
-# CONTEXT_PREPROCESSORS = (
-#    "django.contrib.auth.context_processors.auth",
-#    "django.core.context_processors.debug",
-#    "django.core.context_processors.i18n",
-#    "django.core.context_processors.media",
-#    "django.core.context_processors.static",
-#    "django.core.context_processors.tz",
-#    "django.contrib.messages.context_processors.messages",
-# )
-
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            join(dirname(__file__), 'templates').replace('\\', '/')
-        ],
+        'DIRS': [join(PROJECT_ROOT, 'uploads/templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -244,8 +236,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # 'static_precompiler',
     'haystack',
-    # zink apps
-    # 'elevenbits.menu_extras',  # TODO: move this in apps root
     'blog.apps.BlogConfig',
     'static.apps.StaticConfig',
     'contact',
@@ -303,6 +293,3 @@ LOGGING = {
         },
     },
 }
-
-# FIXME
-SECRET_KEY = 12345098563248723469823
