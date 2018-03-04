@@ -17,7 +17,7 @@
                         <div class="slider-wrap">
                             {% for image in entry.images.all %}
                                 <div class="slide">
-                                    <a href="{{ image.image.name }}"
+                                    <a href="{{ image.image.url }}"
                                        data-lightbox="gallery-item">
                                         <img class="image_fade"
                                              src="{{ image.image.url }}"
@@ -43,7 +43,7 @@
     <ul class="entry-meta clearfix">
         <li>
             <i class="icon-calendar3">
-                {{ entry.posted|date:"l, jS F Y, Hi\h\r\s" }}
+                {{ entry.posted | date:"l, jS F Y, Hi\h\r\s" }}
             </i>
         </li>
         <li><a href="#"><i class="icon-user"></i>jw</a></li>
@@ -63,11 +63,4 @@
         </p>
     </div>
 
-{#    <div class="tagcloud clearfix bottommargin">#}
-{#        {% for tag in entry.tags.all %}#}
-{#            <a href="{% url 'blog:tag' tag.pk %}">{{ tag.tag }}</a>#}
-{#        {% endfor %}#}
-{#    </div>#}
-
 </div>
-

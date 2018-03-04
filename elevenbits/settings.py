@@ -235,7 +235,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # 'static_precompiler',
-    'haystack',
     'blog.apps.BlogConfig',
     'static.apps.StaticConfig',
     'contact',

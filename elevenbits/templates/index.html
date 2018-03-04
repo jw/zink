@@ -4,6 +4,13 @@
 
     <section id="content" class="container clearfix">
 
+        <div class="alert alert-info topmargin">
+            Following the <a href="https://en.wikipedia.org/wiki/Eric_S._Raymond">Eric S. Raymond</a>
+            philosophy of <a href="http://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/ar01s04.html"><strong>Release early,
+            release often</strong></a>, you are visiting a real <em>bazaar</em>.
+            This website is a work in progress!
+        </div>
+
         <div class="divcenter center clearfix" style="max-width: 900px;">
             <img class="bottommargin" src="images/logo-side.png" alt="">
             <h2>
@@ -12,9 +19,9 @@
             </h2>
         </div>
 
-        <h6 class="section-title">Latest blog entry</h6>
-
-        <hr/>
+        <div class="fancy-title title-border">
+            <h3>Latest blog entry</h3>
+        </div>
 
         {% if entry %}
 
@@ -22,7 +29,9 @@
 
         {% endif %}
 
-        <h6 class="section-title">Latest stuff from my blog</h6>
+        <div class="fancy-title title-border">
+            <h3>Latest stuff from my blog</h3>
+        </div>
 
         {% if entries %}
 
