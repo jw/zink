@@ -9,34 +9,30 @@ TBD
 posgresql
 ---------
 
-TBD: docker
+$ docker run --name zink-postgres -p 5432:5432 -e POSTGRES_PASSWORD=s3cr3t -d postgres
 
-0) sudo -u postgres psql
+Through Postgres console:
 
-1) Make sure you own the database engine
-postgres=# ALTER USER postgres WITH PASSWORD '<your password>';
+Create a database user
+----------------------
 
-2) Create a database user
-postgres=# create role <db.username> with createdb login
-postgres-# password '<db.password>';
+ create role <db.username> with createdb login password '<db.password>';
 
-3) Create a database owned by this user
-postgres=# create database <db.name> owner <db.username>;
+Create a database owned by this user
+------------------------------------
 
-Run the instance
-----------------
+ create database <db.name> owner <db.username>;
 
-The Django instance can be run using ./manage.py runserver_plus.
-
-Fixtures
---------
+fixtures and co
+---------------
 
 Remember that a superuser needs to be added:
+> python manage.py migrate
 > python manage.py createsuperuser
 
-Add the fixtures (if fabric did not do so):
+Add the fixtures:
 
-> python manage.py loaddata fixtures/static.json
-> python manage.py loaddata fixtures/treemenus.json fixtures/menu_extras.json
 > python manage.py loaddata fixtures/blog.json
+> python manage.py loaddata fixtures/menus.json
+> python manage.py loaddata fixtures/static.json
 
