@@ -52,7 +52,7 @@
                             {% endif %}
 
                             <div class="entry-title">
-                                <h4><a href="blog-single.html">{{ entry.title }}</a></h4>
+                                <h4><a href="{% url 'blog:detail' entry.pk %}">{{ entry.title }}</a></h4>
                             </div>
 
                             <ul class="entry-meta clearfix">
