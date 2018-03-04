@@ -46,7 +46,7 @@ class Entry(models.Model):
 
     tags = models.ManyToManyField(Tag, blank=True)
 
-    images = models.ManyToManyField(Image)
+    images = models.ManyToManyField(Image, blank=True)
 
     class Meta:
         ordering = ['posted']
