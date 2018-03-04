@@ -43,7 +43,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'zink',
-        'USER': 'postgres',
+        'USER': 'zink',
         'PASSWORD': 's3cr3t',
         'HOST': 'localhost',
         'DATABASE_PORT': '',
