@@ -39,13 +39,13 @@ def home(request):
     logger.error("Retrieved %s blog entries." % len(entry_list))
 
     try:
-        entry = entry_list[0]
+        entry = entry_list.first()
     except IndexError:
         entry = None
 
     attributes = {'deployment': deployment,
                   'entry': entry,
-                  'entries': entry_list,
+                  'entries': entry_list[1:],
                   'assets': assets}
 
     return render(request, 'index.html', attributes)
