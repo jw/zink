@@ -2,13 +2,17 @@
 
 {% block content %}
 
+    {% load lookup %}
+
     <section id="content">
 
-        <div class="content-wrap">
-
-            <div class="container clearfix">
+            <div class="container clearfix topmargin">
 
                 <div class="postcontent nobottommargin clearfix">
+
+                    <div class="alert alert-info bottommargin">
+                        {{ assets | lookup:'rero' | safe }}
+                    </div>
 
                     <div id="posts">
 
@@ -278,8 +282,6 @@
                 </div>
 
             </div>
-
-        </div>
 
     </section>
 
