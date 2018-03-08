@@ -4,7 +4,8 @@ INSTALL
 pipenv
 ------
 
-TBD
+Install pipenv: pip install --user pipenv
+Then use it: pipenv shell and pipenv install.
 
 posgresql
 ---------

@@ -249,6 +249,7 @@ INSTALLED_APPS = (
     # 'django_crontab',
     # 'tweeter',
     # 'debug_toolbar',
+    'menu'
 )
 
 #

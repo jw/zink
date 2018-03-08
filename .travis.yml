@@ -5,6 +5,10 @@ python:
 
 services: postgresql
 
+before-script:
+  - psql -c 'create role zink with createdb login password 's3cr3t';
+  - psql -c 'create database zink owner zink;' -U postgres
+
 script:
   - python setup.py test
 
@@ -12,9 +16,6 @@ env:
   - DJANGO=2.0.1 DB=postgres
 
 install: "make"
-
-before_script:
-  - psql -c "CREATE DATABASE zink;" -U postgres
 
 script:
   - make test
