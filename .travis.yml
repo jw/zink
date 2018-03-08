@@ -6,8 +6,8 @@ python:
 services: postgresql
 
 before_script:
-  - psql -c 'create role zink with createdb login password 's3cr3t';
-  - psql -c 'create database zink owner zink;' -U postgres
+  - psql -c "create role zink with createdb login password 's3cr3t'" -U postgres;
+  - psql -c "create database zink owner zink;" -U postgres
 
 script:
   - python setup.py test
