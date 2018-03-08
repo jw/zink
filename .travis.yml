@@ -5,7 +5,7 @@ python:
 
 services: postgresql
 
-before-script:
+before_script:
   - psql -c 'create role zink with createdb login password 's3cr3t';
   - psql -c 'create database zink owner zink;' -U postgres
 
