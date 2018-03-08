@@ -1,0 +1,141 @@
+//
+// Generics
+//
+
+// Colors
+
+black = #fff
+dark-grey = #3a3a3a
+light-grey = #909090
+lighter-grey = #efefef
+menu-background-grey = #f8f8f8
+orange = #f15a23
+
+//
+
+header-height = 100px
+top-bar = 6px
+
+// font
+
+font = 'Open Sans', 'Lucida Sans Unicode', 'Lucida Grande', sans-serif
+
+//
+// Mixins
+//
+
+menu_tag()
+  border-bottom 1px solid transparent
+  border-top 6px solid transparent
+  color dark-grey
+  font-family font
+  font-size 1em
+  font-weight 800
+  padding 39px 20px 39px
+  text-align center
+  text-transform uppercase
+  //vertical-align center
+  z-index: auto  // FIXME: needed?
+  text-decoration: none
+
+menu_search_tag()
+  border-bottom 1px solid transparent
+  border-top 6px solid transparent
+  color dark-grey
+  font-family font
+  font-size 1em
+  font-weight 800
+  padding 41px 20px 37px
+  text-align center
+  text-transform uppercase
+  //vertical-align center
+  z-index: auto  // FIXME: needed?
+  text-decoration: none
+
+//
+// Body
+//
+
+body
+  margin 0 0 0 0
+  border-top 6px solid dark-grey
+  font 1em font
+  z-index auto
+
+container
+  margin auto
+  display flex
+  flex-direction column
+  justify-content center
+  width 1200px  // FIXME: add media info here!
+
+//
+// Header: icon, banner, menu items and search box.
+//
+
+header
+  display flex
+  flex-direction row
+  justify-content space-between
+  border-bottom 1px solid lighter-grey
+  height header-height
+  margin 0
+  z-index auto
+
+  logo
+    display flex
+    flex-direction row
+    align-items center
+    border solid 1px black // FIXME
+    icon
+      border 1px green // FIXME
+      // a  // FIXME
+      // img  // FIXME
+      // padding 50% 25% 50% // FIXME
+
+    brand
+      color dark-grey
+      font-family font
+      font-size 1em
+      font-weight 800
+      text-align center
+      text-transform uppercase
+      vertical-align center
+      padding 25px 20px 25px
+
+  menu
+    display flex
+    justify-content flex-end
+    align-items center
+    margin 0
+    //border solid 1px green // FIXME
+    ul
+      display flex
+      //border solid 1px yellow // FIXME
+      margin 0
+      li
+        //border solid 1px magenta  // FIXME
+        list-style none
+        margin 0
+        a
+          menu_tag()
+        a:hover, .current_item
+          background menu-background-grey
+          border-top 6px solid orange
+          border-bottom 1px solid orange
+          color orange
+          z-index auto
+
+    search
+      menu_search_tag()
+      //border solid 1px magenta  // FIXME
+      // vertical-align center
+      margin 0
+      //align-self flex-start
+    search:hover
+      padding 43px 20px 38px
+      background menu-background-grey
+      border-top 6px solid orange
+      border-bottom 1px solid orange
+      color orange
+      z-index auto

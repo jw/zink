@@ -1,0 +1,20 @@
+language: python
+
+python:
+  - "3.6"
+
+services: postgresql
+
+script:
+  - python setup.py test
+
+env:
+  - DJANGO=2.0.1 DB=postgres
+
+install: "make"
+
+before_script:
+  - psql -c "CREATE DATABASE zink;" -U postgres
+
+script:
+  - make test

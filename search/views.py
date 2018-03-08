@@ -1,21 +1,9 @@
 from django.shortcuts import render
 
-from util.generic import get_static
+from util.generic import get_assets
 from util.deployment import get_deployment
 
-from haystack.forms import SearchForm
-
 from bs4 import BeautifulSoup
-
-from markdown.extensions import Extension
-from markdown import markdown
-
-
-class EscapeHtml(Extension):
-
-    def extendMarkdown(self, md, md_globals):
-        del md.preprocessors['html_block']
-        del md.inlinePatterns['html']
 
 
 def remove_tags(text):
@@ -26,7 +14,7 @@ def remove_tags(text):
 def search(request):
     """The search page."""
 
-    form = SearchForm(request.GET, load_all=True)
+    form = Form(request.GET, load_all=True)
     entries = form.search()
     tags = []
     blogs = []
@@ -34,18 +22,15 @@ def search(request):
         if entry.model_name == 'tag':
             tags.append(entry)
         elif entry.model_name == 'entry' and entry.object.active:
-            entry.object.plain = remove_tags(
-                markdown(entry.object.body,
-                         extensions=[EscapeHtml()]))
             blogs.append(entry)
 
     query = form.data['q']
 
-    static = get_static("search.header")
+    static = get_assets("blog.header")
     deployment = get_deployment()
 
     attributes = {'deployment': deployment,
-                  'static': static,
+                  'assets': static,
                   'blogs': blogs,
                   'tags': tags,
                   'query': query}

@@ -1,6 +1,0 @@
-# /etc/cron.d/processes: crontab entries for the django application
-
-SHELL=/bin/sh
-PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-
-*/10 * * * *  root  /usr/bin/python /var/www/zink/bin/processes.py --properties /etc/website/processes.properties >> /tmp/processes.log 2>&1

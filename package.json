@@ -1,0 +1,9 @@
+{
+  "name": "zink",
+  "version": "0.1.0",
+  "description": "Basic JavaScipt libraries required for zink",
+  "dependencies": {
+    "yuglify": "^2.0.0"
+  }
+}
+

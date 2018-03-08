@@ -1,0 +1,40 @@
+{% load tree_menu_tags %}
+{% load menu_extension_filters %}
+
+{#                                                                         #}
+{# The 'class="current"' will add an extra marker in the html/css to show  #}
+{# that the specific menu entry was selected.                              #}
+{#                                                                         #}
+{# There are two menus in this website.  One on top, one at the bottom.    #}
+{# On the top one, all the children will be shown; on the bottom one only  #}
+{# the menus in rank 1 are displayed.                                      #}
+{#                                                                         #}
+
+<ul{% if menu_item.extension.selected_patterns|match_path:request.path %} class="current"{% endif %}>
+    <a href="{{ menu_item.url }}"
+        {% ifequal menu_item.level 1 %}
+            data-description="{{ menu_item.extension.description }}"
+        {% endifequal %}>
+        {{ menu_item.caption }}
+    </a>
+    {% if menu_item.has_children and menu_type == "top" %}
+        <ul style="display: none;">
+            {% for child in menu_item.children %}
+                {% show_menu_item child %}
+            {% endfor %}
+        </ul>
+    {% endif %}
+</ul>
+
+<ul class="navbar-nav mr-auto">
+    {% for item in sitetree_items %}
+        <li class="nav-item {% if item.has_children %}dropdown{% endif %}">
+            <a href="{% if item.has_children %}#{% else %}{% sitetree_url for item %}{% endif %}" class="nav-link {% if item.is_current or item.in_current_branch %}active{% endif %} {% if item.has_children %}dropdown-toggle" aria-haspopup="true" id="navitem-{{ item.id }}" data-toggle="dropdown{% endif %}">
+                {{ item.title_resolved }}
+            </a>
+            {% if item.has_children %}
+                {% sitetree_children of item for menu template "sitetree/menu_bootstrap4_dropdown.html" %}
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>

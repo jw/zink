@@ -1,25 +1,46 @@
-<header id="header" class="container clearfix">
+{% load static %}
 
-    <a href="{% url 'home:home' %}" id="logo">
-        {% load staticfiles %}
-        <img src="{% static "img/red.png" %}" alt="ElevenBits">
-    </a>
-    <p id="name">elevenbits</p>
+<header id="header" class="full-header">
 
-    <nav id="main-nav">
-        <ul>
-            {% block menu %}
-                {% load tree_menu_tags %}
-                {% show_menu "root" "top" %}
-            {% endblock %}
-            <li>
-                <a id="search">
-                    <form method="get" action="/search">
-                        <input type="text" placeholder="Search" name="q"/>
+    <div id="header-wrap">
+
+        <div class="container clearfix">
+
+            <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+
+            <div id="logo">
+                <a href="/home" class="standard-logo"
+                   data-dark-logo="{% static "images/logo-dark.png" %}">
+                    <img src="{% static "images/elevenbits-extra.png" %}"
+                         alt="ElevenBits Logo"></a>
+                <a href="/home" class="retina-logo"
+                   data-dark-logo="{% static "images/logo-dark@2x.png" %}">
+                    <img src="{% static "images/elevenbits-larger-extra.png" %}"
+                         alt="ElevenBits Logo"></a>
+            </div>
+
+            <nav id="primary-menu">
+
+                {% block menu %}
+                    {% load sitetree %}
+                    {% sitetree_menu from "root" include "trunk" %}
+                {% endblock %}
+
+                <div id="top-search">
+                    <a href="#" id="top-search-trigger">
+                        <i class="icon-search3"></i>
+                        <i class="icon-line-cross"></i>
+                    </a>
+                    <form action="search" method="post">
+                        <input type="text" name="q" class="form-control"
+                               value="" placeholder="Type &amp; Hit Enter..">
                     </form>
-                </a>
-            </li>
-        </ul>
-    </nav>
+                </div>
+
+            </nav>
+
+        </div>
+
+    </div>
 
 </header>

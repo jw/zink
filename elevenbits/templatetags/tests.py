@@ -24,11 +24,11 @@ from django.test.client import Client
 
 class DeploymentTest(TestCase):
 
-    fixtures = ['fixtures/static', 'fixtures/blog', 'fixtures/menus']
+    fixtures = ['fixtures/blog']
 
     def setUp(self):
         self.client = Client()
 
-    def test_details(self):
-        response = self.client.get('/home')
-        self.assertEqual(response.status_code, 200)
+    # def test_details(self):
+    #     response = self.client.get('/home')
+    #     self.assertEqual(response.status_code, 200)
