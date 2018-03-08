@@ -1,25 +1,4 @@
-
-#
-# Copyright (c) 2013-2016 Jan Willems (ElevenBits)
-#
-# This file is part of Zink.
-#
-# Zink is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# Zink is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Zink.  If not, see <http://www.gnu.org/licenses/>.
-#
-
 from django.db import models
-from elevenbits import settings
 
 
 class Tag(models.Model):
@@ -30,7 +9,20 @@ class Tag(models.Model):
         return self.tag
 
     def get_absolute_url(self):
-        return '%stag/%s/' % (settings.BLOG_ROOT, self.slug)
+        # return '%stag/%s/' % (settings.BLOG_ROOT, self.slug)
+        return 'tag/%s/' % (self.pk)
+
+
+class Image(models.Model):
+    image = models.ImageField(upload_to="tmp/",
+                              height_field='height', width_field='width',
+                              max_length=255)
+    description = models.TextField(help_text='Description of the image.')
+    height = models.PositiveIntegerField(default=0, editable=False)
+    width = models.PositiveIntegerField(default=0, editable=False)
+
+    def __str__(self):
+        return self.image.name + " (" + self.description + ")"
 
 
 class Entry(models.Model):
@@ -42,7 +34,7 @@ class Entry(models.Model):
 
     title = models.CharField(max_length=200)
 
-    body = models.TextField(help_text="The content of this entry")
+    body = models.TextField(help_text="The content of this entry.")
 
     active = models.BooleanField(default=False,
                                  help_text="Is this entry viewable on site?")
@@ -53,6 +45,8 @@ class Entry(models.Model):
                                   blank=True)
 
     tags = models.ManyToManyField(Tag, blank=True)
+
+    images = models.ManyToManyField(Image, blank=True)
 
     class Meta:
         ordering = ['posted']
@@ -71,7 +65,7 @@ class Comment(models.Model):
 
     body = models.TextField(help_text="The content of this comment")
 
-    entry = models.ForeignKey(Entry)
+    entry = models.ForeignKey(Entry, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Comment'

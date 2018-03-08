@@ -18,23 +18,23 @@
 # along with Zink.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-from django.conf.urls import url
-from . import views
+from django.urls import path
+from blog import views
+
+app_name = 'blog'
 
 urlpatterns = [
     # blog page
-    url(r'^$', views.blog, name='blog'),
+    path('', views.blog, name='blog'),
 
     # pages of blog entries
-    url(r'^page/(?P<page>\d+)/$', views.blog, name='page'),
-    url(r'^page/$', views.blog),
+    path('page/<int:page>/', views.blog, name='page'),
+    path('page/', views.blog),
 
     # blog entries per tag (and pages thereof)
-    url(r'^tag/(?P<tag>\d+)/$', views.tag, name='tag'),
-    url(r'^tag/(?P<tag>\d+)/page/(?P<page>\d+)/$',
-        views.tag,
-        name='tagpage'),
+    path('tag/<int:tag>/', views.tag, name='tag'),
+    path('tag/<int:tag>/page/<int:page>/', views.tag, name='tagpage'),
 
     # one single blog entry
-    url(r'^(?P<id>\d+)/$', views.detail, name='detail'),
+    path('<int:id>/', views.detail, name='detail'),
 ]

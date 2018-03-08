@@ -20,7 +20,7 @@
 
 from django.shortcuts import render
 
-from util.generic import get_static
+from util.generic import get_assets
 from util.deployment import get_deployment
 
 from blog.models import Entry
@@ -32,20 +32,20 @@ logger = logging.getLogger("elevenbits")
 def home(request):
     """Show the home page."""
 
-    static = get_static("home.header")
+    assets = get_assets("index.header")
     deployment = get_deployment()
 
     entry_list = Entry.objects.filter(active=True).reverse()
-    logger.info("Retrieved %s blog entries." % len(entry_list))
+    logger.error("Retrieved %s blog entries." % len(entry_list))
 
     try:
-        entry = entry_list[0]
+        entry = entry_list.first()
     except IndexError:
         entry = None
 
     attributes = {'deployment': deployment,
                   'entry': entry,
-                  'entries': entry_list,
-                  'static': static}
+                  'entries': entry_list[1:],
+                  'assets': assets}
 
     return render(request, 'index.html', attributes)

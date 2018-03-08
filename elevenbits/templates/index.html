@@ -2,55 +2,120 @@
 
 {% block content %}
 
+    {% load lookup %}
+
     <section id="content" class="container clearfix">
 
-    <h2 class="slogan align-center">
-        I am a software developer, designer and cyclist.<br>
-	    On this site I leave interesting findings and opinions.
-    </h2>
+        <div class="alert alert-info topmargin bottommargin">
+            {{ assets | lookup:'rero' | safe }}
+        </div>
 
-    <h6 class="section-title">Latest blog entry</h6>
+        <div class="divcenter center clearfix" style="max-width: 900px;">
+            <h2>
+                {{ assets | lookup:'index.header' }}
+            </h2>
+        </div>
 
-    <hr/>
+        <div class="fancy-title title-border">
+            <h3>Latest blog entry</h3>
+        </div>
 
-    {% if entry %}
+        {% if entry %}
 
-        {% include "entry.html" %}
+            <div id="posts" class="small-thumbs">
 
-    {% endif %}
+                <div class="entry clearfix">
+                    <div class="entry-image">
+                        {% if entry.images.all|length_is:"1" %}
+                            {% with entry.images.all|first as image %}
+                                <a href="{{ image.image.url }}" data-lightbox="image">
+                                    <img class="image_fade"
+                                         src="{{ image.image.url }}"
+                                         alt="{{ image.image.description }}">
+                                </a>
+                            {% endwith %}
+                        {% endif %}
+                    </div>
+                    <div class="entry-c">
 
-    <h6 class="section-title">Latest stuff from my blog</h6>
+                        <div class="entry-title">
+                            <a href="{% url 'blog:detail' entry.pk %}">
+                                <h2 class="title">{{ entry.title }}</h2>
+                            </a>
+                        </div>
 
-    {% if entries %}
+                        <ul class="entry-meta clearfix">
+                            <li>
+                                <i class="icon-calendar3">
+                                    {{ entry.posted | date:"l, jS F Y, Hi\h\r\s" }}
+                                </i>
+                            </li>
+                            <li><a href="#"><i class="icon-user"></i>jw</a></li>
+                            <li><i class="icon-folder-open"></i>
+                                {% for tag in entry.tags.all %}
+                                    <a href="{% url 'blog:tag' tag.pk %}">{{ tag.tag }}</a>
+                                    {% if not forloop.last %} | {% endif %}
+                                {% endfor %}
+                            </li>
 
-        <ul class="post-carousel">
+{#                            <li><a href="blog-single.html#comments"><i class="icon-comments"></i> 13</a></li>#}
+                        </ul>
 
-            {% for entry in entries %}
-                <li>
-
-                    <div class="entry-meta">
-
-                        <a href="{% url 'blog:detail' entry.pk %}">
-                            <span class="post-format link">Permalink</span>
-                        </a>
+                        <div class="entry-content">
+                            {% load markdownify %}
+                            <p>
+                                {{ entry.body | markdown | safe }}
+                            </p>
+                        </div>
 
                     </div>
+                </div>
 
-                    <div class="entry-body">
+            </div>
 
-                        <a href="{% url 'blog:detail' entry.pk %}">
-                            <h5 class="title">{{ entry.title }}</h5>
-                        </a>
+        {% endif %}
 
+        {% if entries %}
+
+            <div class="fancy-title title-border">
+                <h3>Latest stuff from my blog</h3>
+            </div>
+
+            <div id="oc-images"
+                 class="owl-carousel image-carousel carousel-widget bottommargin"
+                 data-margin="30" data-nav="false" data-items-xs="1"
+                 data-items-sm="2" data-items-md="3" data-items-xl="4">
+
+                {% for entry in entries %}
+
+                    <div class="oc-item">
+                        <div class="ipost clearfix">
+
+                            {% if entry.images.all %}
+                                {% with entry.images.all|first as image %}
+                                    <div class="entry-image">
+                                        <a href="#"><img class="image_fade" src="{{ image.image.url }}" alt="Image"></a>
+                                    </div>
+                                {% endwith %}
+                            {% endif %}
+
+                            <div class="entry-title">
+                                <h4><a href="{% url 'blog:detail' entry.pk %}">{{ entry.title }}</a></h4>
+                            </div>
+
+                            <ul class="entry-meta clearfix">
+                                <li><i class="icon-calendar3"></i>{{ entry.posted | date:"l, jS F Y, Hi\h\r\s" }}</li>
+{#                                <li><a href="blog-single.html#comments"><i class="icon-comments"></i> 53</a></li>#}
+                            </ul>
+
+                        </div>
                     </div>
 
-                </li>
+                {% endfor %}
 
-            {% endfor %}
+            </div>
 
-        </ul>
-
-    {% endif %}
+        {% endif %}
 
     </section>
 

@@ -1,121 +1,39 @@
 
 INSTALL
 
-Two virtualenv environments are used.  One environment to run the website
-in (containing all dependenicies, like Django, PostgreSQL,...); this
-virtualenv is called zink.  The other environment is needed to deploy
-the systen (locally and remotely), called fabric.
-
-So virtualenv and virtualenvwrapper are required.  Install them first!
-
-fabric
+pipenv
 ------
 
-The Fabric tool is based on 2.7, so mkvirtualenv -p python2.7 fabric
-should be used to produce the virtualenv.
+Install pipenv: pip install --user pipenv
+Then use it: pipenv shell and pipenv install.
 
-Then make sure the python2.7-dev package is installed.
+posgresql
+---------
 
-Then run `pip install -r fabric.txt` to install the fabric dependencies.
+$ docker run --name zink-postgres -p 5432:5432 -e POSTGRES_PASSWORD=s3cr3t -d postgres
 
-zink
-----
+Through Postgres console:
 
-These need to be installed first, using your package manager:
+Create a database user
+----------------------
 
-- mercurial
-- python-dev (for psycopg)
-- postgresql postgresql-server-dev-all (9.4 will do fine)
-- nginx 1.9.11
-- uwsgi-plugin-python3
+ create role <db.username> with createdb login password '<db.password>';
 
-so, on a Debian based system, like Mint, you could do:
+Create a database owned by this user
+------------------------------------
 
-sudo apt-get virtualenv mercurial python-dev pip posgresql \
-postgresql-server-dev-9.4 nginx uwsgi-plugin-python3
+ create database <db.name> owner <db.username>;
 
-The database
-============
-
-The database can be created using the fabric script (see below), but you
-can also create the database yourself.  Best to use the properties you
-need to specify in the zink.properties file.
-
-0) sudo -u postgres psql
-
-1) Make sure you own the database engine
-postgres=# ALTER USER postgres WITH PASSWORD '<your password>';
-
-2) Create a database user
-postgres=# create role <db.username> with createdb login
-postgres-# password '<db.password>';
-
-3) Create a database owned by this user
-postgres=# create database <db.name> owner <db.username>;
-
-Run the instance
-================
-
-The Django instance can run using the webserver (nginx and uwsgi) or
-via the regular runserver manage.py task.
-
-Fixtures
-========
+fixtures and co
+---------------
 
 Remember that a superuser needs to be added:
+> python manage.py migrate
 > python manage.py createsuperuser
 
-Add the fixtures (if fabric did not do so):
+Add the fixtures:
 
-> python manage.py loaddata fixtures/static.json
-> python manage.py loaddata fixtures/treemenus.json fixtures/menu_extras.json
 > python manage.py loaddata fixtures/blog.json
+> python manage.py loaddata fixtures/menus.json
+> python manage.py loaddata fixtures/static.json
 
-Fabric
-======
-
-zink.properties
-~~~~~~~~~~~~~~~
-
-Fabric uses the zink.properties file to get the authentication data
-(password, username) for three building environments:
-
- - development: your machine
- - staging: the staging environment
- - production: the production environments (like elevenbits.org, m8n.be)
-
-The zink.properties file also needs to contain these entries:
-
-[project]
-key: <the key of the project, used by Django to secure your application>
-
-[email]
-host: <your email host>
-port: <your email port>
-user: <your email user>
-password: <your email password>
-tls: <set True to use tls (secure) mailing, False otherwise>
-
-[twitter]
-name: <your twitter name>
-consumer.key: <your consumer key>
-consumer.secret: <your consumer secret>
-oauth.token: <your oauth token>
-oauth.token.secret: <your oauth token secret>
-
-settings.py
-~~~~~~~~~~~
-
-Using this file, Fabric will create a local settings file which will become
-part of settings.py.
-
-Database creation
-~~~~~~~~~~~~~~~~~
-
-Using the local settings file (containing all the database authentication
-rules), Fabric will make sure that the database user and database are
-present.  If they are not, they are created and the database is populated
-with some default data.  When the user and the database are available,
-no population is done during the deploy step.
-
-It is of course possible to populate the database using the populate task.

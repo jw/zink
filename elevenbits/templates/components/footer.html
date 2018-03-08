@@ -1,63 +1,91 @@
-<footer id="footer" class="clearfix">
+<footer id="footer" class="dark">
 
-	<div class="container">
-
-		<div class="three-fourth">
-
-			<nav id="footer-nav" class="clearfix">
-
-                {% load tree_menu_tags %}
-                {% show_menu "root" "bottom" %}
-
-			</nav>
-
-			<ul class="contact-info">
-				<li class="address">ElevenBits, Zénobe Grammestraat 22, 2018 Antwerpen, Belgium</li>
-				<li class="phone">+32.472.96.99.96</li>
-				<li class="email"><a href="mailto:jan.willems@elevenbits.com">jan.willems@elevenbits.com</a></li>
-			</ul>
-
-		</div>
-
-		<div class="one-fourth last">
-
-			<span class="title">Stay connected</span>
-
-			<ul class="social-links">
-				<li class="twitter"><a href="#">Twitter</a></li>
-				<li class="facebook"><a href="#">Facebook</a></li>
-				<li class="digg"><a href="#">Digg</a></li>
-				<li class="vimeo"><a href="#">Vimeo</a></li>
-				<li class="youtube"><a href="#">YouTube</a></li>
-				<li class="skype"><a href="#">Skype</a></li>
-			</ul>
-
-		</div>
-
-	</div>
-
-</footer>
-
-<footer id="footer-bottom" class="clearfix">
     <div class="container">
-        <ul>
-            <li>ElevenBits &copy; 2016</li>
-            <li><a href="#">
-                {% load version %}
-                Django {% version "django" %} on Python {% version "python" %}
-                uWSGI {% version "uwsgi" %}
-                nginx 1.2.6
-            </a></li>
-            <li><a href="#">
-                {% load relative_time %}
-                zink {{ deployment.version }} deployed {{ deployment.timestamp|relative_time }}
-            </a></li>
-            <li><a href="#">
-                {% load tracking_tags %}
-                {% visitors_on_site as visitors %}
-                There {{ visitors|pluralize:"is ,are " }}
-                {{ visitors }} active user{{ visitors|pluralize }}
-            </a></li>
-        </ul>
+
+        <div class="footer-widgets-wrap clearfix">
+
+{#            <div class="col_two_third">#}
+{##}
+{#                <div class="col_one_third">#}
+{##}
+{#                    <div class="widget clearfix">#}
+{##}
+{#                        <img src="images/footer-widget-logo.png" alt=""#}
+{#                             class="footer-logo">#}
+{##}
+{#                        <p>Pedal on, pedal on, for <strong>miles</strong>!</p>#}
+{##}
+{#                        <div style="background: url('images/world-map.png') no-repeat center center; background-size: 100%;">#}
+{#                            <address>#}
+{#                                <strong>Headquarters:</strong><br>#}
+{#                                Zenobe Grammestraat 22<br>#}
+{#                                2018 Antwerp<br>#}
+{#                                Belgium<br>#}
+{#                            </address>#}
+{#                            <abbr title="Phone Number"><strong>Phone:</strong></abbr>+32#}
+{#                            472 96 99 96<br>#}
+{#                            <abbr title="Email Address"><strong>Email:</strong></abbr>jw@elevenbits.com#}
+{#                        </div>#}
+{##}
+{#                    </div>#}
+{##}
+{#                </div>#}
+{##}
+{#            </div>#}
+
+        </div>
+
     </div>
+
+    <div id="copyrights">
+
+        <div class="container clearfix">
+
+            <div class="col_half">
+                Copyrights &copy; 2018 All Rights Reserved by ElevenBits.<br>
+                <div class="copyright-links"><a href="#">Terms of Use</a> / <a
+                        href="#">Privacy Policy</a></div>
+            </div>
+
+            <div class="col_half col_last tright">
+                <div class="fright clearfix">
+                    <a href="#"
+                       class="social-icon si-small si-borderless si-twitter">
+                        <i class="icon-twitter"></i>
+                        <i class="icon-twitter"></i>
+                    </a>
+
+                    <a href="#"
+                       class="social-icon si-small si-borderless si-pinterest">
+                        <i class="icon-pinterest"></i>
+                        <i class="icon-pinterest"></i>
+                    </a>
+
+                    <a href="#"
+                       class="social-icon si-small si-borderless si-github">
+                        <i class="icon-github"></i>
+                        <i class="icon-github"></i>
+                    </a>
+
+                    <a href="#"
+                       class="social-icon si-small si-borderless si-linkedin">
+                        <i class="icon-linkedin"></i>
+                        <i class="icon-linkedin"></i>
+                    </a>
+                </div>
+
+                <div class="clear"></div>
+
+                <i class="icon-envelope2"></i>
+                jw@elevenbits.com
+                <span class="middot">&middot;</span>
+                <i class="icon-headphones"></i> +32 742 96 99 96 <span
+                    class="middot">&middot;</span> <i class="icon-skype2"></i>
+                ElevenBits
+            </div>
+
+        </div>
+
+    </div>
+
 </footer>

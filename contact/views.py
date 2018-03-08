@@ -18,13 +18,13 @@
 # along with Zink.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.core.mail import send_mail
 
-from util.generic import get_static
+from util.generic import get_assets
 from util.deployment import get_deployment
 
 from contact.models import Contact, ContactForm
@@ -43,7 +43,7 @@ def contact(request):
     # Generate generic statics, deployment and contact data
     #
 
-    static = get_static("contact.title")
+    static = get_assets("blog.header")
     deployment = get_deployment()
 
     try:
@@ -89,7 +89,7 @@ def contact(request):
         form = ContactForm()
 
     attributes = {'deployment': deployment,
-                  'static': static,
+                  'assets': static,
                   'contact': contact,
                   'form': form}
     return render(request, 'contact.html', attributes)

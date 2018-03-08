@@ -1,2 +1,7 @@
 .idea/
 elevenbits/local_settings.py
+venv
+*.pyc
+staticfiles
+.env
+db.sqlite3

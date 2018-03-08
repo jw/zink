@@ -1,3 +1,29 @@
-<section id="content" class="clearfix">
+<section id="content">
+
+    <div class="content-wrap">
+
+        <div class="container clearfix">
+
+            <div class="postcontent nobottommargin clearfix">
+
+                {% if entries %}
+
+                    <div id="posts">
+
+                        {% for entry in entries.object_list %}
+                            {% include "entry.html" %}
+                        {% endfor %}
+
+                    </div>
+
+                {% else %}
+                    <p>No entries yet!</p>
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>

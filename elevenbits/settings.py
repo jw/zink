@@ -1,4 +1,3 @@
-
 #
 # Copyright (c) 2013-2016 Jan Willems (ElevenBits)
 #
@@ -23,18 +22,36 @@
 # [www.]elevenbits.org, [www.]elevenbits.com, vonk.elevenbits.org and m8n.be
 #
 
-from os.path import join, dirname, realpath
+from os.path import join, dirname, realpath, abspath
 from socket import gethostname
+
+import dj_database_url
 
 SITE_ROOT = dirname(realpath(join(__file__, "..")))
 
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost",
+ALLOWED_HOSTS = ["127.0.0.1",
+                 "localhost",
+                 "elevenbits-zink.herokuapp.com",
                  ".elevenbits.com",
                  ".elevenbits.org",
                  ".elevenbits.be",
                  ".m8n.be"]
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'zink',
+        'USER': 'zink',
+        'PASSWORD': 's3cr3t',
+        'HOST': 'localhost',
+        'DATABASE_PORT': '',
+    }
+}
+
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
 
 #
 # Test properties
@@ -44,10 +61,10 @@ TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 try:
     import rainbowtests
+
     TEST_RUNNER = 'rainbowtests.RainbowTestSuiteRunner'
 except ImportError:
     pass
-
 
 #
 # Debug toolbar
@@ -87,6 +104,9 @@ MANAGERS = ADMINS
 TIME_ZONE = 'Europe/Brussels'
 LANGUAGE_CODE = 'en-BE'
 
+# TODO: fix this!
+SECRET_KEY = 12345098563248723469823
+
 SITE_ID = 1
 
 # use i18n l10n and make dates time zone
@@ -96,37 +116,66 @@ USE_TZ = False
 
 # The statics (css and images) location
 STATICFILES_DIRS = (
-    join(SITE_ROOT, "static"),
+    join(SITE_ROOT, "assets"),
+    join(SITE_ROOT, "tmp"),
 )
 
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
-    "django.contrib.staticfiles.finders.AppDirectoriesFinder"
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+    # 'static_precompiler.finders.StaticPrecompilerFinder',
 )
 
-STATIC_ROOT = '/var/www/static/zink/'
-STATIC_URL = 'https://static.elevenbits.com/'
+STATIC_PRECOMPILER_COMPILERS = (
+    ('static_precompiler.compilers.Stylus',
+     {"executable": "/home/jw/.nvm/versions/node/v6.11.2/bin/stylus",
+      "sourcemap_enabled": True}),
+)
+
+PROJECT_ROOT = abspath(dirname(__file__))
+
+STATIC_ROOT = join(PROJECT_ROOT, 'staticfiles/')
+STATIC_URL = '/assets/'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = join(PROJECT_ROOT, 'media')
+
+# STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+
+PIPELINE = {
+    'STYLESHEETS': {
+        'colors': {
+            'source_filenames': (
+                # 'css/core.css',
+                # 'css/colors/*.css',
+                # 'css/layers.css'
+            ),
+            'output_filename': 'css/colors.css',
+            'extra_context': {
+                'media': 'screen, projection',
+            },
+        },
+    },
+    'JAVASCRIPT': {
+        'stats': {
+            'source_filenames': (
+                # 'js/jquery.js',
+                # 'js/d3.js',
+                # 'js/collections/*.js',
+                # 'js/application.js',
+            ),
+            'output_filename': 'js/stats.js',
+        }
+    }
+}
 
 FIXTURE_DIRS = (join(SITE_ROOT, 'fixtures'),)
-
-# TODO: read up on this
-# CONTEXT_PREPROCESSORS = (
-#    "django.contrib.auth.context_processors.auth",
-#    "django.core.context_processors.debug",
-#    "django.core.context_processors.i18n",
-#    "django.core.context_processors.media",
-#    "django.core.context_processors.static",
-#    "django.core.context_processors.tz",
-#    "django.contrib.messages.context_processors.messages",
-# )
 
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            join(dirname(__file__), 'templates').replace('\\', '/')
-        ],
+        'DIRS': [join(PROJECT_ROOT, 'uploads/templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -137,14 +186,14 @@ TEMPLATES = [
                 'django.template.context_processors.static',
                 'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
-                # needed for current menu identifier:
+                # needed for current menu identifier (for sitetree):
                 'django.template.context_processors.request'
             ],
         },
     },
 ]
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     # 'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -155,6 +204,7 @@ MIDDLEWARE_CLASSES = (
     # 'tracking.middleware.VisitorTrackingMiddleware',
     # 'tracking.middleware.VisitorCleanUpMiddleware',
     'django.middleware.gzip.GZipMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 )
 
 ROOT_URLCONF = 'elevenbits.urls'
@@ -175,6 +225,7 @@ HAYSTACK_CONNECTIONS = {
 }
 
 INSTALLED_APPS = (
+    'django_extensions',
     # django contribs
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -183,23 +234,22 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'haystack',
-    # zink apps
-    #'elevenbits.menu_extras',  # TODO: move this in apps root
-    'blog',
-    'elevenbits.static',  # TODO: move this in apps root
+    # 'static_precompiler',
+    'blog.apps.BlogConfig',
+    'static.apps.StaticConfig',
     'contact',
     'home',
-    'elevenbits.deployment',
+    'deployment.apps.DeploymentConfig',
     'elevenbits',
-    #'search',
-    #'treemenus',  # TODO: make sure to use the proper (Russian) one!
+    # 'search',
+    'sitetree',
     # utilities
     # 'tracking',
     'util',
     # 'django_crontab',
-    #'tweeter',
+    # 'tweeter',
     # 'debug_toolbar',
+    # 'menu'
 )
 
 #
@@ -236,18 +286,10 @@ LOGGING = {
             'handlers': ['console'],
             'level': 'INFO'
         },
+        'elevenbits': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False
+        },
     },
 }
-
-# hostname based settings
-hostname = gethostname()
-if "elevenbits" in hostname:
-    from .settings_elevenbits import *
-elif "m8n" in hostname:
-    from .settings_m8n import *
-else:
-    # localhost will enable DEBUG
-    from .settings_localhost import *
-
-# FIXME
-SECRET_KEY=12345098563248723469823

@@ -24,7 +24,7 @@ from django.conf import settings
 
 from blog.models import Entry, Tag
 
-from util.generic import get_static
+from util.generic import get_assets
 from util.deployment import get_deployment
 
 import logging
@@ -34,7 +34,7 @@ logger = logging.getLogger("elevenbits")
 def blog(request, page=1):
     """Get all blog entries for a specific page."""
 
-    static = get_static("blog.header")
+    static = get_assets("blog.header")
     deployment = get_deployment()
 
     tags = Tag.objects.all()
@@ -42,6 +42,8 @@ def blog(request, page=1):
 
     entry_list = Entry.objects.filter(active=True).reverse()
     logger.info("Retrieved %s blog entries." % len(entry_list))
+
+    logger.info("Page: %s" % page)
 
     try:
         size = settings.BLOG_PAGE_SIZE
@@ -62,7 +64,7 @@ def blog(request, page=1):
         entries = paginator.page(paginator.num_pages)
 
     attributes = {'deployment': deployment,
-                  'static': static,
+                  'assets': static,
                   'entries': entries,
                   'tags': tags}
 
@@ -74,7 +76,7 @@ def tag(request, tag, page=1):
 
     deployment = get_deployment()
 
-    static = get_static("tags.title")
+    static = get_assets("blog.header")
 
     tags = Tag.objects.all()
     logger.info("Retrieved %s tags." % len(tags))
@@ -113,7 +115,7 @@ def tag(request, tag, page=1):
         entries = paginator.page(paginator.num_pages)
 
     attributes = {'deployment': deployment,
-                  'static': static,
+                  'assets': static,
                   'entries': entries,
                   'tag_id': tag_id,
                   'tags': tags}
@@ -124,7 +126,7 @@ def tag(request, tag, page=1):
 def detail(request, id):
     """Get one specific entry."""
 
-    static = get_static("blog.header")
+    static = get_assets("blog.header")
 
     deployment = get_deployment()
 
@@ -134,7 +136,7 @@ def detail(request, id):
     entry = get_object_or_404(Entry, pk=id)
 
     attributes = {'deployment': deployment,
-                  'static': static,
+                  'assets': static,
                   'tags': tags,
                   'entry': entry}
 

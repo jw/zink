@@ -1,0 +1,21 @@
+language: python
+
+python:
+  - "3.6"
+
+services: postgresql
+
+before_script:
+  - psql -c "create role zink with createdb login password 's3cr3t'" -U postgres;
+  - psql -c "create database zink owner zink;" -U postgres
+
+script:
+  - python setup.py test
+
+env:
+  - DJANGO=2.0.1 DB=postgres
+
+install: "make"
+
+script:
+  - make test
