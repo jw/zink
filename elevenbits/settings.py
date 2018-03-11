@@ -142,6 +142,8 @@ MEDIA_ROOT = join(PROJECT_ROOT, 'media')
 
 # STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 PIPELINE = {
     'STYLESHEETS': {
         'colors': {
@@ -293,3 +295,8 @@ LOGGING = {
         },
     },
 }
+
+
+import django_heroku
+django_heroku.settings(locals())
+
