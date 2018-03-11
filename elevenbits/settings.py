@@ -246,13 +246,11 @@ INSTALLED_APPS = (
     'elevenbits',
     # 'search',
     'sitetree',
-    # utilities
-    # 'tracking',
     'util',
     # 'django_crontab',
     # 'tweeter',
     # 'debug_toolbar',
-    # 'menu'
+    #'menu'
 )
 
 #
@@ -296,8 +294,4 @@ LOGGING = {
         },
     },
 }
-
-
-import django_heroku
-django_heroku.settings(locals())
 
