@@ -60,10 +60,10 @@
         },
         "django-extensions": {
             "hashes": [
-                "sha256:1f6430bcee744a1a6dbf231302e35620a6388e173e5203f3bc5ad69dca5ac5ca",
-                "sha256:4cbea2156c96b1a3e78aed96b605096d23d16a84b0114670cbd6f9319bbb0d84"
+                "sha256:24c24bbc6ef6dd36fe6b2b7c48d171a9d22fe76895610fe19087af657fa27930",
+                "sha256:1f424a7f87974c2e2602b8b41cae52eb08105523f0c70320203abf58bcb84404"
             ],
-            "version": "==2.0.3"
+            "version": "==2.0.5"
         },
         "django-heroku": {
             "hashes": [

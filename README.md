@@ -6,20 +6,26 @@ Zink
 Overview
 --------
 
-Zink is the ElevenBits website.  I believe it will remain private for a long while...
+Zink is the ElevenBits website.
 
 
 Install
 -------
 
-    pip install zink
+    $ pip install zink
+
+Development
+-----------
+
+Use pipenv:
+
+	$ pip install pipenv
+	$ pipenv install --dev
+
 
 Test
 ----
 
-    tox
-    
-Development
------------
+    $ pipenv run python manage.py test
 
-    sudo apt-get install python3.5 python3.5-dev
+    
