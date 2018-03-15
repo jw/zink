@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "dc8c17ff89fed3a074d33e8825f4932293a3ced315faf433b65283c8daee7fe3"
+            "sha256": "c65c40478a4b3779723602e93f91a8526db8b7a18ee2cac196dba079a3309bad"
         },
         "host-environment-markers": {
             "implementation_name": "cpython",
@@ -18,7 +18,7 @@
         },
         "pipfile-spec": 6,
         "requires": {
-            "implementation_version": "3.6.3",
+            "implementation_version": "3.6.2",
             "python_version": "3.6"
         },
         "sources": [
@@ -46,10 +46,10 @@
         },
         "django": {
             "hashes": [
-                "sha256:af18618ce3291be5092893d8522fe3919661bf3a1fb60e3858ae74865a4f07c2",
-                "sha256:9614851d4a7ff8cbd32b73c6076441f377c45a5bbff7e771798fb02c43c31f47"
+                "sha256:7c8ff92285406fb349e765e9ade685eec7271d6f5c3f918e495a74768b765c99",
+                "sha256:dc3b61d054f1bced64628c62025d480f655303aea9f408e5996c339a543b45f0"
             ],
-            "version": "==2.0"
+            "version": "==2.0.2"
         },
         "django-debug-toolbar": {
             "hashes": [
@@ -58,12 +58,19 @@
             ],
             "version": "==1.9"
         },
+        "django-environ": {
+            "hashes": [
+                "sha256:e9c171b9d5f540e6f3bc42866941d9cd0bd77fb110a7c13a7c4857a2c08cfa40",
+                "sha256:ee2f8405d83137e3328b26b3de01bd715b5395fca22feb919dcc905fb6099cfa"
+            ],
+            "version": "==0.4.4"
+        },
         "django-extensions": {
             "hashes": [
-                "sha256:24c24bbc6ef6dd36fe6b2b7c48d171a9d22fe76895610fe19087af657fa27930",
-                "sha256:1f424a7f87974c2e2602b8b41cae52eb08105523f0c70320203abf58bcb84404"
+                "sha256:37a543af370ee3b0721ff50442d33c357dd083e6ea06c5b94a199283b6f9e361",
+                "sha256:bc9f2946c117bb2f49e5e0633eba783787790ae810ea112fe7fd82fa64de2ff1"
             ],
-            "version": "==2.0.5"
+            "version": "==2.0.6"
         },
         "django-heroku": {
             "hashes": [
@@ -88,9 +95,9 @@
         },
         "django-static-precompiler": {
             "hashes": [
-                "sha256:23a73e208f221d8ce854d7dd6d3e4d426ec1eb820e8b9a8405c25373863ca269"
+                "sha256:e4880e9bec5e64ea17f68f0787dc636e7c33a9dd68f497c5dd3733ca3e390bb2"
             ],
-            "version": "==1.8.1"
+            "version": "==1.8.2"
         },
         "gunicorn": {
             "hashes": [

@@ -1,53 +1,30 @@
-#
-# Copyright (c) 2013-2016 Jan Willems (ElevenBits)
-#
-# This file is part of Zink.
-#
-# Zink is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# Zink is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Zink.  If not, see <http://www.gnu.org/licenses/>.
-#
-
-#
-# public settings for all sites handled by this Django instance, i.e.
-# [www.]elevenbits.org, [www.]elevenbits.com, vonk.elevenbits.org and m8n.be
-#
 
 from os.path import join, dirname, realpath, abspath
 from socket import gethostname
 
+import environ
 import dj_database_url
 
-SITE_ROOT = dirname(realpath(join(__file__, "..")))
+root = environ.Path(__file__) - 2
+env = environ.Env()
+environ.Env.read_env()
 
-DEBUG = True
+SITE_ROOT = root()
+
+DEBUG = env.bool('DEBUG', False)
 
 ALLOWED_HOSTS = ["127.0.0.1",
                  "localhost",
                  "elevenbits-zink.herokuapp.com",
+                 "elevenbits-zink.herokudns.com",
+                 ".elevenbits.com.herokudns.com"
                  ".elevenbits.com",
                  ".elevenbits.org",
                  ".elevenbits.be",
                  ".m8n.be"]
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'zink',
-        'USER': 'zink',
-        'PASSWORD': 's3cr3t',
-        'HOST': 'localhost',
-        'DATABASE_PORT': '',
-    }
+    'default': env.db('DATABASE_URL'),
 }
 
 db_from_env = dj_database_url.config()
@@ -104,8 +81,7 @@ MANAGERS = ADMINS
 TIME_ZONE = 'Europe/Brussels'
 LANGUAGE_CODE = 'en-BE'
 
-# TODO: fix this!
-SECRET_KEY = 12345098563248723469823
+SECRET_KEY = env('SECRET_KEY')
 
 SITE_ID = 1
 
@@ -142,7 +118,21 @@ MEDIA_ROOT = join(PROJECT_ROOT, 'media')
 
 # STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# SECURE_HSTS_SECONDS = 60
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = env.bool(
+#     'DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS', default=True)
+# SECURE_CONTENT_TYPE_NOSNIFF = env.bool(
+#     'DJANGO_SECURE_CONTENT_TYPE_NOSNIFF', default=True)
+# SECURE_BROWSER_XSS_FILTER = True
+# SESSION_COOKIE_SECURE = True
+# SESSION_COOKIE_HTTPONLY = True
+# SECURE_SSL_REDIRECT = env.bool('DJANGO_SECURE_SSL_REDIRECT', default=True)
+# CSRF_COOKIE_SECURE = True
+# CSRF_COOKIE_HTTPONLY = True
+# X_FRAME_OPTIONS = 'DENY'
+
 
 PIPELINE = {
     'STYLESHEETS': {
