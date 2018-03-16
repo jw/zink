@@ -1,10 +1,7 @@
 language: python
 
 env:
-  - DATABASE_URL=postgres://zink:s3cr3t@localhost:5432/zink
-  - SECRET_KEY=a8q#701v8+(s%1dpmm9c=4-df5*3jcg(_aqyxt%6(os%mrpd5=
-  - DJANGO=2.0.2
-  - DB=postgres
+  - DATABASE_URL=postgres://zink:s3cr3t@localhost:5432/zink SECRET_KEY=a8q#701v8+(s%1dpmm9c=4-df5*3jcg(_aqyxt%6(os%mrpd5= DJANGO=2.0.2 DB=postgres
 
 python:
   - "3.6"
