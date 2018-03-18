@@ -13,11 +13,12 @@ SITE_ROOT = root()
 
 DEBUG = env.bool('DEBUG', False)
 
+# TODO: use .env for this
 ALLOWED_HOSTS = ["127.0.0.1",
                  "localhost",
                  "elevenbits-zink.herokuapp.com",
                  "elevenbits-zink.herokudns.com",
-                 ".elevenbits.com.herokudns.com"
+                 ".elevenbits.com.herokudns.com",
                  ".elevenbits.com",
                  ".elevenbits.org",
                  ".elevenbits.be",
