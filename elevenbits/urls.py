@@ -20,20 +20,29 @@
 
 from django.urls import include, path
 from django.views.generic.base import TemplateView, RedirectView
+from django.contrib.staticfiles.storage import staticfiles_storage
 from django.conf.urls.static import static
 from django.contrib import admin
-admin.autodiscover()
 
 from . import settings
+
+admin.autodiscover()
+
 
 app_name = "elevenbits"
 
 urlpatterns = [
     # robots.txt
     path('robots.txt',
-        TemplateView.as_view(template_name='robots.txt',
-                             content_type='text/plain'),
-        name='robots'),
+         TemplateView.as_view(template_name='robots.txt',
+                              content_type='text/plain'),
+         name='robots'),
+
+    path('favicon.ico',
+         RedirectView.as_view(
+            url=staticfiles_storage.url('favicon.ico'),
+            permanent=False),
+         name="favicon"),
 
     # 404 and 500 return codes
     path('500', TemplateView.as_view(template_name='500.html'), name='500'),
