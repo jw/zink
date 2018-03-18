@@ -12,7 +12,7 @@
 
         <div class="divcenter center clearfix" style="max-width: 900px;">
             <h2>
-                {{ assets | lookup:'index.header' }}
+                {{ assets | lookup:'index.header' | safe }}
             </h2>
         </div>
 
