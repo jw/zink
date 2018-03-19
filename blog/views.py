@@ -18,16 +18,16 @@
 # along with Zink.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-from django.shortcuts import get_object_or_404, render
-from django.core.paginator import Paginator, InvalidPage, EmptyPage
+import logging
+
 from django.conf import settings
+from django.core.paginator import Paginator, InvalidPage, EmptyPage
+from django.shortcuts import get_object_or_404, render
 
 from blog.models import Entry, Tag
-
-from util.generic import get_assets
 from util.deployment import get_deployment
+from util.generic import get_assets
 
-import logging
 logger = logging.getLogger("elevenbits")
 
 

@@ -18,14 +18,14 @@
 # along with Zink.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+import logging
+
 from django.shortcuts import render
 
-from util.generic import get_assets
+from blog.models import Entry, Text
 from util.deployment import get_deployment
+from util.generic import get_assets
 
-from blog.models import Entry
-
-import logging
 logger = logging.getLogger("elevenbits")
 
 
@@ -36,7 +36,10 @@ def home(request):
     deployment = get_deployment()
 
     entry_list = Entry.objects.filter(active=True).reverse()
-    logger.error("Retrieved %s blog entries." % len(entry_list))
+    logger.info("Retrieved %s blog entries." % len(entry_list))
+
+    book = Text.objects.filter(reading=True).first()
+    logger.info(f"Found a book: {book}.")
 
     try:
         entry = entry_list.first()
@@ -46,6 +49,7 @@ def home(request):
     attributes = {'deployment': deployment,
                   'entry': entry,
                   'entries': entry_list[1:],
+                  'book': book,
                   'assets': assets}
 
     return render(request, 'index.html', attributes)
