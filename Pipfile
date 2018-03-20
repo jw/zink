@@ -6,7 +6,6 @@ verify_ssl = true
 
 [packages]
 
-"psycopg2" = "*"
 gunicorn = "*"
 django-heroku = "*"
 django = "==2.0.2"
@@ -25,6 +24,7 @@ mistune = "*"
 pillow = "*"
 django-environ = "*"
 raven = "*"
+"psycopg2-binary" = "*"
 
 
 [requires]
