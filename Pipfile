@@ -30,7 +30,7 @@ raven = "*"
 [requires]
 
 python_version = "3.6"
-implementation_version = "3.6.4"
+implementation_version = "3.6.2"
 
 
 [dev-packages]
