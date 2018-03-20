@@ -1,7 +1,14 @@
 language: python
 
 env:
-  - DATABASE_URL=postgres://zink:s3cr3t@localhost:5432/zink SECRET_KEY=some_secret_key DJANGO=2.0.2 DB=postgres
+  global:
+    - DATABASE_URL=postgres://zink:s3cr3t@localhost:5432/zink
+    - SECRET_KEY=some_secret_key
+    - DJANGO=2.0.2
+    - DB=postgres
+    - SENTRY_PUBLIC_KEY=12345678
+    - SENTRY_SECRET_KEY=12345678
+    - SENTRY_PROJECT=12345678
 
 python:
   - "3.6"
