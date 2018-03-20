@@ -2,8 +2,8 @@
 from os.path import join, dirname, realpath, abspath
 from socket import gethostname
 
-import environ
 import dj_database_url
+import environ
 
 root = environ.Path(__file__) - 2
 env = environ.Env()
@@ -237,6 +237,7 @@ INSTALLED_APPS = (
     'elevenbits',
     # 'search',
     'sitetree',
+    'reading',
     'util',
     # 'django_crontab',
     # 'tweeter',

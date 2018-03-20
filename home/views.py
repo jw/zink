@@ -1,28 +1,11 @@
 
-#
-# Copyright (c) 2013-2016 Jan Willems (ElevenBits)
-#
-# This file is part of Zink.
-#
-# Zink is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# Zink is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Zink.  If not, see <http://www.gnu.org/licenses/>.
-#
-
 import logging
 
 from django.shortcuts import render
 
-from blog.models import Entry, Text
+from blog.models import Entry
+from reading.models import Text
+
 from util.deployment import get_deployment
 from util.generic import get_assets
 
@@ -36,7 +19,7 @@ def home(request):
     deployment = get_deployment()
 
     entry_list = Entry.objects.filter(active=True).reverse()
-    logger.info("Retrieved %s blog entries." % len(entry_list))
+    logger.info(f"Retrieved {len(entry_list)} blog entries.")
 
     book = Text.objects.filter(reading=True).first()
     logger.info(f"Found a book: {book}.")
