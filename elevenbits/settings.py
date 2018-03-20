@@ -1,4 +1,3 @@
-
 from os.path import join, dirname, realpath, abspath
 from socket import gethostname
 
@@ -164,11 +163,10 @@ PIPELINE = {
 
 FIXTURE_DIRS = (join(SITE_ROOT, 'fixtures'),)
 
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [join(PROJECT_ROOT, 'uploads/templates'),],
+        'DIRS': [join(PROJECT_ROOT, 'uploads/templates'), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -219,6 +217,7 @@ HAYSTACK_CONNECTIONS = {
 }
 
 INSTALLED_APPS = (
+    'raven.contrib.django.raven_compat',
     'django_extensions',
     # django contribs
     'django.contrib.auth',
@@ -242,7 +241,7 @@ INSTALLED_APPS = (
     # 'django_crontab',
     # 'tweeter',
     # 'debug_toolbar',
-    #'menu'
+    # 'menu'
 )
 
 #
@@ -251,6 +250,12 @@ INSTALLED_APPS = (
 
 BLOG_PAGE_SIZE = 4
 CLIENT_LOGO_MARGIN = 20
+
+RAVEN_CONFIG = {
+    'dsn': 'https://' + env('SENTRY_PUBLIC_KEY') + ':' +
+           env('SENTRY_SECRET_KEY') + '@sentry.io/' +
+           env('SENTRY_PROJECT')
+}
 
 #
 # TODO: update the logging part
@@ -286,4 +291,3 @@ LOGGING = {
         },
     },
 }
-

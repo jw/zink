@@ -24,6 +24,7 @@ django-static-precompiler = "*"
 mistune = "*"
 pillow = "*"
 django-environ = "*"
+raven = "*"
 
 
 [requires]
