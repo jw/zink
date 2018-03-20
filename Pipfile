@@ -35,3 +35,4 @@ implementation_version = "3.6.2"
 [dev-packages]
 
 werkzeug = "*"
+honcho = "*"
