@@ -25,8 +25,8 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.shortcuts import get_object_or_404, render
 
 from blog.models import Entry, Tag
+from elevenbits.generic import get_assets
 from util.deployment import get_deployment
-from util.generic import get_assets
 
 logger = logging.getLogger("elevenbits")
 

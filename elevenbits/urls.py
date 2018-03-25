@@ -1,10 +1,11 @@
 
-from django.urls import include, path
-from django.views.generic.base import TemplateView, RedirectView
-from django.contrib.staticfiles.storage import staticfiles_storage
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.staticfiles.storage import staticfiles_storage
+from django.urls import include, path
+from django.views.generic import TemplateView, RedirectView
 
+from . import generic
 from . import settings
 
 admin.autodiscover()
@@ -27,8 +28,12 @@ urlpatterns = [
          name="favicon"),
 
     # 404 and 500 return codes
-    path('500', TemplateView.as_view(template_name='500.html'), name='500'),
-    path('404', TemplateView.as_view(template_name='404.html'), name='404'),
+    path('500', TemplateView.as_view(template_name='500.html',
+                                     extra_context={'assets': generic.get_assets()}),
+         name='500'),
+    path('404', TemplateView.as_view(template_name='404.html',
+                                     extra_context={'assets': {'title': 'ElevenBits'}}),
+         name='404'),
 
     # home, blog and contact sections
     path('', RedirectView.as_view(url='/home')),

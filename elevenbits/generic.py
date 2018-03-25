@@ -18,9 +18,10 @@
 # along with Zink.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+import logging
+
 from static.models import Static
 
-import logging
 logger = logging.getLogger("elevenbits")
 
 

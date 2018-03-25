@@ -18,18 +18,18 @@
 # along with Zink.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-from django.urls import reverse
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
+import logging
+
 from django.contrib import messages
 from django.core.mail import send_mail
-
-from util.generic import get_assets
-from util.deployment import get_deployment
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
+from django.urls import reverse
 
 from contact.models import Contact, ContactForm
+from elevenbits.generic import get_assets
+from util.deployment import get_deployment
 
-import logging
 logger = logging.getLogger("elevenbits")
 
 

@@ -1,9 +1,8 @@
+from bs4 import BeautifulSoup
 from django.shortcuts import render
 
-from util.generic import get_assets
+from elevenbits.generic import get_assets
 from util.deployment import get_deployment
-
-from bs4 import BeautifulSoup
 
 
 def remove_tags(text):

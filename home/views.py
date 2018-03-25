@@ -4,10 +4,9 @@ import logging
 from django.shortcuts import render
 
 from blog.models import Entry
+from elevenbits.generic import get_assets
 from reading.models import Text
-
 from util.deployment import get_deployment
-from util.generic import get_assets
 
 logger = logging.getLogger("elevenbits")
 
