@@ -4,10 +4,12 @@
 
         <div class="footer-widgets-wrap clearfix">
 
-            <p>
-                Now reading {{ book.title }} by {{ book.author }}.
-                I'm at page {{ book.current_page }} of {{ book.pages }}.
-            </p>
+            {% if book %}
+                <p>
+                    Now reading {{ book.title }} by {{ book.author }}.
+                    I'm at page {{ book.current_page }} of {{ book.pages }}.
+                </p>
+            {% endif %}
 
         </div>
 

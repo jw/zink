@@ -20,8 +20,11 @@ def home(request):
     entry_list = Entry.objects.filter(active=True).reverse()
     logger.info(f"Retrieved {len(entry_list)} blog entries.")
 
-    book = Text.objects.filter(reading=True).first()
-    logger.info(f"Found a book: {book}.")
+    books = list(Text.objects.filter(reading=True))
+    if books:
+        logger.info(f"Reading one (or more) books: {books}.")
+    else:
+        logger.info("Not reading any book! So sad.")
 
     try:
         entry = entry_list.first()
@@ -31,7 +34,7 @@ def home(request):
     attributes = {'deployment': deployment,
                   'entry': entry,
                   'entries': entry_list[1:],
-                  'book': book,
+                  'books': books,
                   'assets': assets}
 
     return render(request, 'index.html', attributes)
