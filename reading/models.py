@@ -1,6 +1,6 @@
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils.timezone import now
-from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 class Type(models.Model):
@@ -39,7 +39,7 @@ class Text(models.Model):
 
     review = models.TextField(help_text="What you thought of it.")
 
-    type = models.OneToOneField(Type, on_delete=models.CASCADE)
+    type = models.ManyToManyField(Type, blank=True)
 
     pages = models.IntegerField(help_text="The number of pages.")
 

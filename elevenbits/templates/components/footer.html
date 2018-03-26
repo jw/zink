@@ -4,11 +4,29 @@
 
         <div class="footer-widgets-wrap clearfix">
 
-            {% if book %}
-                <p>
-                    Now reading {{ book.title }} by {{ book.author }}.
-                    I'm at page {{ book.current_page }} of {{ book.pages }}.
-                </p>
+            {% if books %}
+                {% if books|length == 1 %}
+                    {% with book=books|first %}
+                    <p>
+                        I'm reading {{ book.title }} by {{ book.author }}.
+                        Now at page {{ book.current_page }} of {{ book.pages }}.
+                    </p>
+                    {% endwith %}
+                {% else %}
+                    <div class="widget widget_links clearfix">
+                        <p class="nobottomborder">
+                            Reading these {{ books|length }} books at the same time:
+                        </p>
+                        <ul>
+                        {% for book in books %}
+                            <li>
+                                > {{ book.title }} (by {{ book.author }}) at
+                                page {{ book.current_page }} of {{ book.pages }}.
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
             {% endif %}
 
         </div>
