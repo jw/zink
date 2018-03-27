@@ -5,7 +5,7 @@ verify_ssl = true
 [packages]
 gunicorn = "*"
 django-heroku = "*"
-django = "==2.0.2"
+django = "*"
 django-debug-toolbar = "==1.9"
 pygments = "==1.6"
 "beautifulsoup4" = "*"
@@ -30,3 +30,4 @@ implementation_version = "3.6.2"
 [dev-packages]
 werkzeug = "*"
 honcho = "*"
+ipython = "*"
