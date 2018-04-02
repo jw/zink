@@ -1,23 +1,4 @@
 
-#
-# Copyright (c) 2013-2016 Jan Willems (ElevenBits)
-#
-# This file is part of Zink.
-#
-# Zink is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# Zink is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Zink.  If not, see <http://www.gnu.org/licenses/>.
-#
-
 import logging
 
 from django.contrib import messages
@@ -26,7 +7,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
-from contact.models import Contact, ContactForm
+from contact.models import ContactForm
 from elevenbits import settings
 from elevenbits.generic import get_assets
 from util.deployment import get_deployment
@@ -35,24 +16,9 @@ logger = logging.getLogger("elevenbits")
 
 
 def contact(request):
-    """
-    Show the contact page. If a POST arrives, check the contact form and
-    if valid redirect to yourself, otherwise show errors to user.
-    """
-
-    #
-    # Generate generic statics, deployment and contact data
-    #
 
     static = get_assets("blog.header")
     deployment = get_deployment()
-
-    try:
-        contact = Contact.objects.get(name="ElevenBits")
-    except Contact.DoesNotExist:
-        # TODO: mail administrator
-        contact = None
-        logger.warning("No ElevenBits contact available in the database!")
 
     #
     # create or check the form
