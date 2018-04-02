@@ -27,6 +27,7 @@ from django.shortcuts import render
 from django.urls import reverse
 
 from contact.models import Contact, ContactForm
+from elevenbits import settings
 from elevenbits.generic import get_assets
 from util.deployment import get_deployment
 
@@ -91,5 +92,6 @@ def contact(request):
     attributes = {'deployment': deployment,
                   'assets': static,
                   'contact': contact,
+                  'key': settings.GOOGLE_MAPS_KEY,
                   'form': form}
     return render(request, 'contact.html', attributes)

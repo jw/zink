@@ -23,6 +23,15 @@ ALLOWED_HOSTS = ["127.0.0.1",
                  ".elevenbits.be",
                  ".m8n.be"]
 
+EMAIL_HOST = env('MAILGUN_HOST')
+EMAIL_PORT = env('MAILGUN_PORT')
+EMAIL_HOST_USER = env('MAILGUN_HOST_USER')
+EMAIL_HOST_PASSWORD = env('MAILGUN_HOST_USER')
+EMAIL_USE_TLS = True
+EMAIL_BASE = env('MAILGUN_BASE_URL')
+
+GOOGLE_MAPS_KEY = env('GOOGLE_MAPS_KEY')
+
 DATABASES = {
     'default': env.db('DATABASE_URL'),
 }
@@ -218,6 +227,7 @@ HAYSTACK_CONNECTIONS = {
 
 INSTALLED_APPS = (
     'raven.contrib.django.raven_compat',
+    'widget_tweaks',
     'django_extensions',
     # django contribs
     'django.contrib.auth',

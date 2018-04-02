@@ -28,7 +28,7 @@
           type="text/css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    <title>{{ assets | lookup:'title' }}</title>
+    <title>{{ assets|lookup:'title' }}</title>
 
 </head>
 
@@ -46,7 +46,10 @@
 
     <script src="{% static "js/jquery.js" %}"></script>
     <script src="{% static "js/plugins.js" %}"></script>
+
     <script src="{% static "js/functions.js" %}"></script>
+
+    {% block map %}{% endblock %}
 
 </body>
 

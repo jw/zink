@@ -22,6 +22,7 @@ pillow = "*"
 django-environ = "*"
 raven = "*"
 "psycopg2-binary" = "*"
+django-widget-tweaks = "*"
 
 [requires]
 python_version = "3.6"
