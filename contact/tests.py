@@ -3,25 +3,11 @@ import logging
 
 from django.test import TestCase
 
-from static.models import Static
-
 logger = logging.getLogger('elevenbits')
 
 
 class FormTest(TestCase):
-
-    fixtures = ['contact.json', 'static.json']
-
-    def setUp(self):
-        pass
-
-    def test_animals_can_speak(self):
-        """Ensure that the default assets are there"""
-        rero = Static.objects.get(name="copyright").value
-        copyright = Static.objects.get(name="copyright").value,
-        title = Static.objects.get(name="title").value
-        self.assertEqual(title, 'ElevenBits')
-
+    pass
 
     # def test_get_contact_index_page(self):
     #     """Tests a valid contact post to the site."""

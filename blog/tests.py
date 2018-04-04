@@ -6,6 +6,7 @@ from django.test.client import Client
 from django.urls import reverse
 
 from blog.models import Tag, Static
+from elevenbits.generic import get_assets
 
 logger = logging.getLogger('elevenbits')
 
@@ -97,10 +98,29 @@ class StaticsTestCase(TestCase):
 
     fixtures = ['static']
 
-    def test_animals_can_speak(self):
+    def test_statics_are_available(self):
         """Ensure that the default assets are there"""
         logging.info("Trying to get static stuff...")
         rero = Static.objects.get(name="copyright").value
         copyright = Static.objects.get(name="copyright").value,
         title = Static.objects.get(name="title").value
-        self.assertEqual(title, 'ElevenBits')
+        self.assertIsNotNone(rero)
+        self.assertIsNotNone(copyright)
+        self.assertIsNotNone(title)
+
+    def test_get_statics(self):
+        """Get the generic assets and more"""
+        assets = get_assets('index.header')
+        self.assertIn('rero', assets)
+        self.assertIn('copyright', assets)
+        self.assertIn('title', assets)
+        self.assertIn('index.header', assets)
+
+    def test_get_bigger_statics(self):
+        """Get the generic assets and more"""
+        assets = get_assets('index.header', 'contact.title')
+        self.assertIn('rero', assets)
+        self.assertIn('copyright', assets)
+        self.assertIn('title', assets)
+        self.assertIn('index.header', assets)
+        self.assertIn('contact.title', assets)
