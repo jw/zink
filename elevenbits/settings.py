@@ -23,6 +23,7 @@ ALLOWED_HOSTS = ["127.0.0.1",
                  ".elevenbits.be",
                  ".m8n.be"]
 
+# email
 EMAIL_HOST = env('MAILGUN_HOST')
 EMAIL_PORT = env('MAILGUN_PORT')
 EMAIL_HOST_USER = env('MAILGUN_HOST_USER')

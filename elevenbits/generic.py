@@ -1,4 +1,3 @@
-
 #
 # Copyright (c) 2013-2016 Jan Willems (ElevenBits)
 #
@@ -29,9 +28,13 @@ def get_assets(*keys):
     """Get generic assets.
     :param keys: the keys to be retrieved
     """
-    assets = {'copyright': Static.objects.get(name="copyright").value,
-              'title': Static.objects.get(name="title").value,
-              'rero': Static.objects.get(name='rero').value}
-    for key in keys:
-        assets[key] = Static.objects.get(name=key).value
-    return assets
+    try:
+        assets = {'copyright': Static.objects.get(name="copyright").value,
+                  'title': Static.objects.get(name="title").value,
+                  'rero': Static.objects.get(name='rero').value}
+        for key in keys:
+            assets[key] = Static.objects.get(name=key).value
+        return assets
+    except Static.DoesNotExist as e:
+        print(f"Oops {e}")
+        # raise Static.DoesNotExist("Could not find assets!", Static, e)

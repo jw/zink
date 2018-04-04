@@ -1,13 +1,12 @@
+import logging
 from unittest import skipIf
 
 from django.test import TestCase
 from django.test.client import Client
 from django.urls import reverse
 
-from blog.models import Tag
+from blog.models import Tag, Static
 
-
-import logging
 logger = logging.getLogger('elevenbits')
 
 
@@ -28,6 +27,9 @@ class BlogTest(TestCase):
     """Test all the blog features."""
 
     fixtures = ['contact', 'menus', 'menu_extras', 'blog']
+
+    def setUp(self):
+        print("Hello there")
 
     def testBlog(self):
         """Test the full blog."""
@@ -89,3 +91,16 @@ class BlogTest(TestCase):
         client = Client()
         response = client.get("/this_page_does_not_exist")
         self.assertContains(response, "404 message", status_code=404)
+
+
+class StaticsTestCase(TestCase):
+
+    fixtures = ['static']
+
+    def test_animals_can_speak(self):
+        """Ensure that the default assets are there"""
+        logging.info("Trying to get static stuff...")
+        rero = Static.objects.get(name="copyright").value
+        copyright = Static.objects.get(name="copyright").value,
+        title = Static.objects.get(name="title").value
+        self.assertEqual(title, 'ElevenBits')
