@@ -9,6 +9,12 @@ env:
     - SENTRY_PUBLIC_KEY=12345678
     - SENTRY_SECRET_KEY=12345678
     - SENTRY_PROJECT=12345678
+    - MAILGUN_BASE_URL=https://api.mailgun.net/v3/mg.elevenbits.com
+    - MAILGUN_HOST=smtp.mailgun.org
+    - MAILGUN_PORT=587
+    - MAILGUN_HOST_USER=postmaster@mg.elevenbits.com
+    - MAILGUN_HOST_PASSWORD=12345678
+    - GOOGLE_MAPS_KEY=12345678
 
 python:
   - "3.6"

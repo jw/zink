@@ -14,7 +14,7 @@ logger = logging.getLogger("elevenbits")
 def home(request):
     """Show the home page."""
 
-    assets = get_assets("index.header")
+    assets = get_assets("index.header", "index.latest", "index.entries")
     deployment = get_deployment()
 
     entry_list = Entry.objects.filter(active=True).reverse()

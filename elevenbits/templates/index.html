@@ -17,7 +17,7 @@
         </div>
 
         <div class="fancy-title title-border">
-            <h3>Latest blog entry</h3>
+            <h3>{{ assets | lookup:'index.latest' | safe }}</h3>
         </div>
 
         {% if entry %}
@@ -78,7 +78,7 @@
         {% if entries %}
 
             <div class="fancy-title title-border">
-                <h3>Latest stuff from my blog</h3>
+                <h3>{{ assets | lookup:'index.entries' | safe }}</h3>
             </div>
 
             <div id="oc-images"
@@ -105,7 +105,7 @@
 
                             <ul class="entry-meta clearfix">
                                 <li><i class="icon-calendar3"></i>{{ entry.posted | date:"l, jS F Y, Hi\h\r\s" }}</li>
-{#                                <li><a href="blog-single.html#comments"><i class="icon-comments"></i> 53</a></li>#}
+{#                                <li><a href="blog-single.html#comments">c<i class="icon-comments"></i> 53</a></li>#}
                             </ul>
 
                         </div>
