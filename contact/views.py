@@ -17,7 +17,7 @@ logger = logging.getLogger("elevenbits")
 
 def contact(request):
 
-    static = get_assets("blog.header")
+    static = get_assets()
     deployment = get_deployment()
 
     #

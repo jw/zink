@@ -34,7 +34,7 @@ logger = logging.getLogger("elevenbits")
 def blog(request, page=1):
     """Get all blog entries for a specific page."""
 
-    static = get_assets("blog.header")
+    static = get_assets()
     deployment = get_deployment()
 
     tags = Tag.objects.all()
