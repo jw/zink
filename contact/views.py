@@ -17,7 +17,7 @@ logger = logging.getLogger("elevenbits")
 
 def contact(request):
 
-    static = get_assets()
+    static = get_assets(prefix='contact')
     deployment = get_deployment()
 
     #
@@ -49,7 +49,7 @@ def contact(request):
             return HttpResponseRedirect(reverse('contact:contact'))
         else:
             # report invalid form
-            logger.warn("Form is invalid.")
+            logger.warning("Form is invalid.")
     else:
         # create an empty form
         logger.debug("Created an unbound form.")

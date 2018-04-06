@@ -4,7 +4,7 @@ env:
   global:
     - DATABASE_URL=postgres://zink:s3cr3t@localhost:5432/zink
     - SECRET_KEY=some_secret_key
-    - DJANGO=2.0.2
+    - DJANGO=2.0.3
     - DB=postgres
     - SENTRY_PUBLIC_KEY=12345678
     - SENTRY_SECRET_KEY=12345678

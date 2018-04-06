@@ -10,32 +10,32 @@
 
         <div class="row">
 
-            <div class="col-4">
+            <div class="col_one_third">
 
-                <h3>Address</h3>
+                {% load lookup %}
+                <h3>{{ assets|lookup:'contact.address' }}</h3>
                 <p>
-{#                    {{ contact.name }}<br/>#}
-{#                    {{ contact.street }}<br/>#}
-{#                    {{ contact.city }}<br/>#}
-{#                    {{ contact.country }}#}
+                    {{ assets|lookup:'contact.name' }}<br/>
+                    {{ assets|lookup:'contact.street' }}<br/>
+                    {{ assets|lookup:'contact.city' }}<br/>
+                    {{ assets|lookup:'contact.country' }}
                 </p>
 
-                <h3>Phone and e-mail</h3>
+                <h3>{{ assets|lookup:'contact.phone_and_email' }}</h3>
                 <p>
-{#                    Phone: {{ contact.phone }}<br/>#}
-{#                    Email: {{ contact.email }}<br/>#}
+                    {{ assets|lookup:'contact.phone' }}<br/>
+                    {{ assets|lookup:'contact.email' }}<br/>
                 </p>
 
-                <h3>VAT and bank account</h3>
+                <h3>{{ assets|lookup:'contact.vat_and_bank_account' }}</h3>
                 <p>
-{#                    ElevenBits VAT number is {{ contact.vat }}.#}
-{#                    ElevenBits Belgian bank account is: {{ contact.account }}.#}
+                    {{ assets|lookup:'contact.vat' }}<br/>
+                    {{ assets|lookup:'contact.account'|safe }}.
                 </p>
-
 
             </div>
 
-            <div class="col-8">
+            <div class="col_two_third col_last">
 
                 <h3 id="form">Let's keep in touch</h3>
 

@@ -426,5 +426,109 @@
         "name": "index.header",
         "value": "I am a software developer, designer and cyclist.  On this site I leave interesting findings and opinions."
     }
+},
+{
+    "model": "blog.static",
+    "pk": 6,
+    "fields": {
+        "name": "index.latest",
+        "value": "Latest blog entry"
+    }
+},
+{
+    "model": "blog.static",
+    "pk": 7,
+    "fields": {
+        "name": "index.entries",
+        "value": "Latest stuff from my blog"
+    }
+},
+{
+    "model": "blog.static",
+    "pk": 8,
+    "fields": {
+        "name": "contact.address",
+        "value": "Address"
+    }
+},
+{
+    "model": "blog.static",
+    "pk": 9,
+    "fields": {
+        "name": "contact.name",
+        "value": "ElevenBits"
+    }
+},
+{
+    "model": "blog.static",
+    "pk": 10,
+    "fields": {
+        "name": "contact.street",
+        "value": "Z\u00e9nobe Grammestraat 22"
+    }
+},
+{
+    "model": "blog.static",
+    "pk": 11,
+    "fields": {
+        "name": "contact.city",
+        "value": "2018 Antwerp"
+    }
+},
+{
+    "model": "blog.static",
+    "pk": 12,
+    "fields": {
+        "name": "contact.country",
+        "value": "Belgium"
+    }
+},
+{
+    "model": "blog.static",
+    "pk": 13,
+    "fields": {
+        "name": "contact.phone_and_email",
+        "value": "Phone and e-mail"
+    }
+},
+{
+    "model": "blog.static",
+    "pk": 14,
+    "fields": {
+        "name": "contact.phone",
+        "value": "Phone: +32.472.96.99.96"
+    }
+},
+{
+    "model": "blog.static",
+    "pk": 15,
+    "fields": {
+        "name": "contact.email",
+        "value": "e-mail: jw@elevenbits.com"
+    }
+},
+{
+    "model": "blog.static",
+    "pk": 16,
+    "fields": {
+        "name": "contact.vat",
+        "value": "ElevenBits VAT number is BE.0.865.637.502."
+    }
+},
+{
+    "model": "blog.static",
+    "pk": 17,
+    "fields": {
+        "name": "contact.account",
+        "value": "ElevenBits Belgian bank account is: BE49&nbsp;7380&nbsp;2571&nbsp;9671"
+    }
+},
+{
+    "model": "blog.static",
+    "pk": 18,
+    "fields": {
+        "name": "contact.vat_and_bank_account",
+        "value": "VAT and bank account"
+    }
 }
 ]

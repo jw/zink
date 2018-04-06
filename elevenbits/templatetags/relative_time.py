@@ -76,4 +76,5 @@ def relative_time(obj):
             string = str(difference.days // one_year) + ' years ago'
     return string
 
+
 register.filter(relative_time)
