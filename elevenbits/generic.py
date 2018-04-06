@@ -8,7 +8,7 @@ from blog.models import Static
 logger = logging.getLogger("elevenbits")
 
 
-def get_assets(prefix=None, *keys):
+def get_assets(*keys, prefix=None):
     """Get generic assets.
     :param keys: the keys to be retrieved
     """

@@ -117,10 +117,40 @@ class StaticsTestCase(TestCase):
         self.assertIn('index.header', assets)
 
     def test_get_bigger_statics(self):
-        """Get the generic assets and more"""
+        """Get the generic assets and even more"""
         assets = get_assets('index.header', 'contact.title')
         self.assertIn('rero', assets)
         self.assertIn('copyright', assets)
         self.assertIn('title', assets)
         self.assertIn('index.header', assets)
         self.assertIn('contact.title', assets)
+
+    def test_get_prefix(self):
+        """Get the generic assets and a prefix"""
+        assets = get_assets(prefix="header")
+        self.assertIn('rero', assets)
+        self.assertIn('copyright', assets)
+        self.assertIn('title', assets)
+        self.assertIn('header.description', assets)
+        self.assertIn('header.host', assets)
+
+    def test_get_prefix_and_extra(self):
+        """Get the generic assets, a prefix set and an extra"""
+        assets = get_assets('static.author', prefix="header")
+        self.assertIn('rero', assets)
+        self.assertIn('copyright', assets)
+        self.assertIn('title', assets)
+        self.assertIn('header.description', assets)
+        self.assertIn('header.host', assets)
+        self.assertIn('static.author', assets)
+
+    def test_get_prefix_and_extra(self):
+        """Get the generic assets, a prefix set and two extras"""
+        assets = get_assets('static.author', 'index.header', prefix="header")
+        self.assertIn('rero', assets)
+        self.assertIn('copyright', assets)
+        self.assertIn('title', assets)
+        self.assertIn('header.description', assets)
+        self.assertIn('header.host', assets)
+        self.assertIn('static.author', assets)
+        self.assertIn('index.header', assets)
