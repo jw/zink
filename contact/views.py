@@ -2,7 +2,7 @@
 import logging
 
 from django.contrib import messages
-from django.core.mail import send_mail
+from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -20,44 +20,41 @@ def contact(request):
     static = get_assets(prefix='contact')
     deployment = get_deployment()
 
-    #
-    # create or check the form
-    #
-
     if request.method == 'POST':
-        # the form was submitted
-        logger.debug("Contact form submitted.")
+
         form = ContactForm(request.POST)
+
         if form.is_valid():
-            # valid form
-            logger.debug("Form is valid.")
+
             email = form.cleaned_data['email']
             subject = form.cleaned_data['subject']
             message = form.cleaned_data['message']
 
-            # send mail
-            logger.debug("Sending mail.")
-            send_mail(subject, message, 'jw@elevenbits.com', [email],
-                      fail_silently=False)
+            try:
+                send_mail(f"[ZINK] {subject}", message, 'jw@elevenbits.com',
+                          [email], fail_silently=False)
+            except BadHeaderError:
+                messages.warning(request, "Invalid header found!")
 
             # show success message to user
             highlight = "<strong>Thanks for your message!</strong>"
             question = "Want to send another one?"
-            messages.success(request, "%s %s" % (highlight, question))
+            messages.success(request, f"{highlight} {question}")
 
-            # do a redirect (302)
             return HttpResponseRedirect(reverse('contact:contact'))
+
         else:
             # report invalid form
-            logger.warning("Form is invalid.")
+            warning = "Form is invalid.  Please check carefully."
+            messages.warning(request, warning)
+
     else:
-        # create an empty form
-        logger.debug("Created an unbound form.")
-        form = ContactForm()
+        form = ContactForm()  # create an empty form
 
     attributes = {'deployment': deployment,
                   'assets': static,
                   'contact': contact,
                   'key': settings.GOOGLE_MAPS_KEY,
                   'form': form}
+
     return render(request, 'contact.html', attributes)

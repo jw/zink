@@ -2,8 +2,11 @@
 
 {% block content %}
 
+    {% load lookup %}
+
     <div id="map" style="height: 400px;" class="gmap">
-        <p class="container">Something went wrong... Try to enable your JavaScript!</p>
+        <p class="container">Something went wrong... Try to enable your
+            JavaScript!</p>
     </div>
 
     <section id="content" class="container clearfix topmargin bottommargin">
@@ -12,7 +15,6 @@
 
             <div class="col_one_third">
 
-                {% load lookup %}
                 <h3>{{ assets|lookup:'contact.address' }}</h3>
                 <p>
                     {{ assets|lookup:'contact.name' }}<br/>
@@ -37,25 +39,28 @@
 
             <div class="col_two_third col_last">
 
-                <h3 id="form">Let's keep in touch</h3>
+                <h3 id="form">{{ assets|lookup:'contact.lets_keep_in_touch' }}</h3>
 
                 {% if messages %}
-                    <ul class="success">
-                        {% for message in messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
                             {{ message|safe }}
-                        {% endfor %}
-                    </ul>
+                        </div>
+                    {% endfor %}
                 {% endif %}
 
-				<form action="{% url 'contact:contact' %}" method="post" novalidate>
+                <form action="{% url 'contact:contact' %}"
+                      method="post" novalidate>
 
                     {% csrf_token %}
                     {% include 'form.html' with form=form %}
 
-                    <button type="submit" class="btn btn-primary">Submit</button>
-	    			<div class="clear"></div>
+                    <button type="submit"
+                            class="button button-large button-rounded">
+                        Submit
+                    </button>
 
-	    		</form>
+                </form>
 
             </div>
 
@@ -94,7 +99,7 @@
                 overviewMapControl: true
             }
 
-    	});
+        });
 
     </script>
 
