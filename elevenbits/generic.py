@@ -11,7 +11,7 @@ logger = logging.getLogger("elevenbits")
 def get_assets(*keys, prefix=None):
     """Get generic assets.
     :param keys: the keys to be retrieved
-    :param prefix: the prefix if the keys to be retrieved
+    :param prefix: the prefix of the keys to be retrieved
     """
     try:
         assets = {'copyright': Static.objects.get(name="copyright").value,
