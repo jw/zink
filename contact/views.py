@@ -1,4 +1,3 @@
-
 import logging
 
 from django.contrib import messages
@@ -16,7 +15,6 @@ logger = logging.getLogger("elevenbits")
 
 
 def contact(request):
-
     static = get_assets(prefix='contact')
     deployment = get_deployment()
 
