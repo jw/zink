@@ -35,5 +35,4 @@ Add the fixtures:
 
 > python manage.py loaddata fixtures/blog.json
 > python manage.py loaddata fixtures/menus.json
-> python manage.py loaddata fixtures/static.json
 

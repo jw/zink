@@ -42,10 +42,10 @@ def contact(request):
 
             return HttpResponseRedirect(reverse('contact:contact'))
 
-        else:
-            # report invalid form
-            warning = "Form is invalid.  Please check carefully."
-            messages.warning(request, warning)
+        # else:
+        #     # report invalid form
+        #     warning = "Form is invalid.  Please check carefully."
+        #     messages.warning(request, warning)
 
     else:
         form = ContactForm()  # create an empty form
