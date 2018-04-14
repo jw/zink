@@ -126,7 +126,7 @@ def tag(request, tag, page=1):
 def detail(request, id):
     """Get one specific entry."""
 
-    static = get_assets("blog.header")
+    static = get_assets(prefix="static")
 
     deployment = get_deployment()
 

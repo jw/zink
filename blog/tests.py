@@ -23,23 +23,21 @@ class TagTestCase(TestCase):
         self.assertEqual(self.nginx.tag, 'nginx')
 
 
-@skipIf(True, "I don't want to run this test yet")
+# @skipIf(True, "I don't want to run this test yet")
 class BlogTest(TestCase):
     """Test all the blog features."""
 
-    fixtures = ['contact', 'menus', 'menu_extras', 'blog']
-
-    def setUp(self):
-        print("Hello there")
+    fixtures = ['menus', 'blog']
 
     def testBlog(self):
         """Test the full blog."""
         client = Client()
         response = client.get(reverse('blog:blog'))
-        self.assertContains(response, "Welcome to our blog")
-        self.assertContains(response, "Blog Categories")
-        self.assertContains(response, '/">Java (2)</a>')
+        self.assertContains(response, "Tag Cloud")
+        self.assertContains(response, "/blog")
+        self.assertContains(response, 'Running on')
 
+    @skipIf(True, "I don't want to run this test yet")
     def testTag(self):
         """Test one tag."""
         client = Client()
@@ -57,6 +55,7 @@ class BlogTest(TestCase):
         response = client.get(reverse('blog:detail', args=[21]))
         self.assertContains(response, 'How to access cherokee-admin')
 
+    @skipIf(True, "I don't want to run this test yet")
     def testPageTag(self):
         """Test the tag pages"""
         client = Client()
@@ -70,6 +69,7 @@ class BlogTest(TestCase):
         self.assertContains(response, 'My first own blog!')
         self.assertContains(response, 'Howto create your own Ubuntu')
 
+    @skipIf(True, "I don't want to run this test yet")
     def testInactiveTag(self):
         """Only active tags must be shown."""
         client = Client()
@@ -79,6 +79,7 @@ class BlogTest(TestCase):
         # the inactive one must not be there!
         self.assertNotContains(response, 'Temporary entry')
 
+    @skipIf(True, "I don't want to run this test yet")
     def testMarkup(self):
         """Make sure the codehilite works."""
         client = Client()

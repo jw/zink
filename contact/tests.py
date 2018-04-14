@@ -22,14 +22,6 @@ class FormTest(TestCase):
                             '<title>ElevenBits</title>',
                             status_code=200)
 
-    # def test_current_menu_selection(self):
-    #     """Tests the current menu selection."""
-    #     c = Client()
-    #     response = c.get(reverse('contact:contact'))
-    #     self.assertContains(response,
-    #                         '<li class="current">',
-    #                         status_code=200)
-
     def test_valid_post(self):
         """Tests a valid contact post to the site."""
         c = Client()
@@ -39,6 +31,14 @@ class FormTest(TestCase):
                            'subject': 'test',
                            'message': 'Test message.'})
         self.assertEquals(response.status_code, 302)
+
+    def test_empty_post(self):
+        """Tests post of a form without a name."""
+        c = Client()
+        response = c.post(reverse('contact:contact'), {})
+        self.assertContains(response,
+                            '<div class="alert alert-danger" role="alert">',
+                            status_code=200)
 
     def test_no_name_post(self):
         """Tests post of a form without a name."""

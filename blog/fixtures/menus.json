@@ -1,0 +1,82 @@
+[
+{
+    "model": "sitetree.tree",
+    "pk": 1,
+    "fields": {
+        "title": "root",
+        "alias": "root"
+    }
+},
+{
+    "model": "sitetree.treeitem",
+    "pk": 1,
+    "fields": {
+        "title": "home",
+        "hint": "",
+        "url": "/home",
+        "urlaspattern": false,
+        "tree": 1,
+        "hidden": false,
+        "alias": null,
+        "description": "",
+        "inmenu": true,
+        "inbreadcrumbs": true,
+        "insitetree": true,
+        "access_loggedin": false,
+        "access_guest": false,
+        "access_restricted": false,
+        "access_perm_type": 1,
+        "parent": null,
+        "sort_order": 1,
+        "access_permissions": []
+    }
+},
+{
+    "model": "sitetree.treeitem",
+    "pk": 2,
+    "fields": {
+        "title": "blog",
+        "hint": "",
+        "url": "/blog",
+        "urlaspattern": false,
+        "tree": 1,
+        "hidden": false,
+        "alias": null,
+        "description": "",
+        "inmenu": true,
+        "inbreadcrumbs": true,
+        "insitetree": true,
+        "access_loggedin": false,
+        "access_guest": false,
+        "access_restricted": false,
+        "access_perm_type": 1,
+        "parent": null,
+        "sort_order": 2,
+        "access_permissions": []
+    }
+},
+{
+    "model": "sitetree.treeitem",
+    "pk": 3,
+    "fields": {
+        "title": "contact",
+        "hint": "",
+        "url": "/contact",
+        "urlaspattern": false,
+        "tree": 1,
+        "hidden": false,
+        "alias": null,
+        "description": "",
+        "inmenu": true,
+        "inbreadcrumbs": true,
+        "insitetree": true,
+        "access_loggedin": false,
+        "access_guest": false,
+        "access_restricted": false,
+        "access_perm_type": 1,
+        "parent": null,
+        "sort_order": 3,
+        "access_permissions": []
+    }
+}
+]
