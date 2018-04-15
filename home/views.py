@@ -1,4 +1,3 @@
-
 import logging
 
 from django.shortcuts import render
@@ -6,7 +5,6 @@ from django.shortcuts import render
 from blog.models import Entry
 from elevenbits.generic import get_assets
 from reading.models import Text
-from util.deployment import get_deployment
 
 logger = logging.getLogger("elevenbits")
 
@@ -14,8 +12,7 @@ logger = logging.getLogger("elevenbits")
 def home(request):
     """Show the home page."""
 
-    assets = get_assets("index.header", "index.latest", "index.entries")
-    deployment = get_deployment()
+    assets = get_assets(prefix="index")
 
     entry_list = Entry.objects.filter(active=True).reverse()
     logger.info(f"Retrieved {len(entry_list)} blog entries.")
@@ -31,8 +28,7 @@ def home(request):
     except IndexError:
         entry = None
 
-    attributes = {'deployment': deployment,
-                  'entry': entry,
+    attributes = {'entry': entry,
                   'entries': entry_list[1:],
                   'books': books,
                   'assets': assets}

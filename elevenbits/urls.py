@@ -40,11 +40,6 @@ urlpatterns = [
     path('blog/', include('blog.urls', namespace='blog')),
     path('contact/', include('contact.urls', namespace='contact')),
 
-    path('search', include('search.urls')),
-
-    # TODO: handle these later
-    # url('tracking/', include('tracking.urls')),
-
     # admin
     path('admin/', admin.site.urls),
     path('admin/doc/', include('django.contrib.admindocs.urls')),

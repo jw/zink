@@ -23,7 +23,6 @@ class TagTestCase(TestCase):
         self.assertEqual(self.nginx.tag, 'nginx')
 
 
-# @skipIf(True, "I don't want to run this test yet")
 class BlogTest(TestCase):
     """Test all the blog features."""
 

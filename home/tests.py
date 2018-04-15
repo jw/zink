@@ -1,20 +1,16 @@
+from django.test import TestCase, Client
+from django.urls import reverse
 
-#
-# Copyright (c) 2013-2016 Jan Willems (ElevenBits)
-#
-# This file is part of Zink.
-#
-# Zink is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# Zink is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Zink.  If not, see <http://www.gnu.org/licenses/>.
-#
 
+class IndexTest(TestCase):
+    """Test the home page."""
+
+    fixtures = ['menus', 'blog']
+
+    def testBlog(self):
+        """Test the full home page."""
+        client = Client()
+        response = client.get(reverse('home:home'))
+        self.assertContains(response, "Latest blog entry")
+        self.assertContains(response, "Latest stuff from my blog")
+        self.assertContains(response, 'Running on')
