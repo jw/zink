@@ -74,7 +74,7 @@
 .owl-carousel.owl-loading {
 	display:block;
 	min-height: 100px;
-	background: url('../images/preloader.gif') no-repeat center center
+	background: url('images/preloader.gif') no-repeat center center
 }
 
 .owl-carousel .owl-refresh .owl-item { display:none }
@@ -242,6 +242,7 @@
 
 .owl-carousel.with-carousel-dots .owl-nav [class*=owl-] { margin-top: -38px; }
 
+.slider-element .owl-nav [class*=owl-],
 .owl-carousel-full .owl-nav [class*=owl-] {
 	margin-top: -30px;
 	left: 0 !important;
@@ -261,6 +262,7 @@
 	right: -36px;
 }
 
+.slider-element .owl-nav .owl-next,
 .owl-carousel-full  .owl-nav .owl-next {
 	left: auto !important;
 	right: 0 !important;

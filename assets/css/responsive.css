@@ -288,7 +288,7 @@
 		transition: none;
 	}
 
-	#primary-menu > div > ul { margin-top: 60px !important; }
+	#primary-menu > div > ul { padding-top: 60px !important; }
 
 	body:not(.top-search-open) #primary-menu-trigger {
 		opacity: 1;

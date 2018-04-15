@@ -103,6 +103,8 @@ var SEMICOLON = SEMICOLON || {};
 			SEMICOLON.initialize.pageTransition();
 			SEMICOLON.initialize.dataResponsiveClasses();
 			SEMICOLON.initialize.dataResponsiveHeights();
+			SEMICOLON.initialize.stickFooterOnSmall();
+			SEMICOLON.initialize.stickyFooter();
 
 			$('.fslider').addClass('preloader2');
 
@@ -1535,7 +1537,7 @@ var SEMICOLON = SEMICOLON || {};
 						grabCursor: elementGrabCursor,
 						pagination: {
 							el: elementPagination,
-							paginationClickable: elementPaginationClickable
+							clickable: elementPaginationClickable
 						},
 						navigation: {
 							prevEl: elementNavPrev,
@@ -2070,7 +2072,7 @@ var SEMICOLON = SEMICOLON || {};
 			SEMICOLON.widget.progress();
 			SEMICOLON.widget.twitterFeed();
 			SEMICOLON.widget.flickrFeed();
-			SEMICOLON.widget.instagramPhotos( '20524966.1677ed0.bf5dbdbfdd884927a421ffe2b639b1da', '5125dda742b5492488c790c2a440ace3' );
+			SEMICOLON.widget.instagramPhotos( '5834720953.1677ed0.a0a26ba4c90845f9a844d64c316bf77a', '8e000fefe3024b2ead6a50ff005bf036' );
 			SEMICOLON.widget.dribbbleShots( '012d3d72d12f93e1d41a19195d7da2fc87e6b5afa48a184256e398eb793cfe56' );
 			SEMICOLON.widget.navTree();
 			SEMICOLON.widget.textRotater();
@@ -2223,6 +2225,9 @@ var SEMICOLON = SEMICOLON || {};
 								$('.grid-container.portfolio-full').isotope('layout');
 								SEMICOLON.portfolio.portfolioDescMargin();
 							}
+							if( $('.post-grid').hasClass('post-masonry-full') ) {
+								$('.post-grid.post-masonry-full').isotope('layout');
+							}
 						}
 					});
 				});
@@ -2265,7 +2270,7 @@ var SEMICOLON = SEMICOLON || {};
 
 		youtubeBgVideo: function(){
 
-			if( !$().mb_YTPlayer ) {
+			if( !$().YTPlayer ) {
 				console.log('youtubeBgVideo: YoutubeBG Plugin not Defined.');
 				return true;
 			}
@@ -2303,9 +2308,8 @@ var SEMICOLON = SEMICOLON || {};
 					if( ytbgAutoPlay == 'false' ) { ytbgAutoPlay = false; } else { ytbgAutoPlay = true; }
 					if( ytbgFullScreen == 'true' ) { ytbgFullScreen = true; } else { ytbgFullScreen = false; }
 
-					element.mb_YTPlayer({
+					element.YTPlayer({
 						videoURL: ytbgVideo,
-						showControls: true,
 						mute: ytbgMute,
 						ratio: ytbgRatio,
 						quality: ytbgQuality,
@@ -2316,7 +2320,7 @@ var SEMICOLON = SEMICOLON || {};
 						vol: Number(ytbgVolume),
 						startAt: Number(ytbgStart),
 						stopAt: Number(ytbgStop),
-						autoplay: ytbgAutoPlay,
+						autoPlay: ytbgAutoPlay,
 						realfullscreen: ytbgFullScreen,
 						showYTLogo: false,
 						showControls: false
@@ -2355,7 +2359,7 @@ var SEMICOLON = SEMICOLON || {};
 
 		tabsJustify: function(){
 			if( !$('body').hasClass('device-xs') && !$('body').hasClass('device-sm') ){
-				var $tabsJustify = $('.tabs.tabs-justify:not(.customjs)');
+				var $tabsJustify = $('.tabs.tabs-justify');
 				if( $tabsJustify.length > 0 ) {
 					$tabsJustify.each( function(){
 						var element = $(this),
@@ -2389,7 +2393,7 @@ var SEMICOLON = SEMICOLON || {};
 				return true;
 			}
 
-			var $tabsResponsive = $('.tabs.tabs-responsive:not(.customjs)');
+			var $tabsResponsive = $('.tabs.tabs-responsive');
 			if( $tabsResponsive.length < 1 ) { return true; }
 
 			$tabsResponsive.each( function(){
@@ -2415,7 +2419,7 @@ var SEMICOLON = SEMICOLON || {};
 				return true;
 			}
 
-			var $tabsResponsive = $('.tabs.tabs-responsive:not(.customjs)');
+			var $tabsResponsive = $('.tabs.tabs-responsive');
 			if( $tabsResponsive.length < 1 ) { return true; }
 
 			$tabsResponsive.each( function(){
@@ -2936,7 +2940,9 @@ var SEMICOLON = SEMICOLON || {};
 					elementCenter = element.attr('data-center'),
 					elementLazy = element.attr('data-lazyload'),
 					elementVideo = element.attr('data-video'),
-					elementRTL = element.attr('data-rtl');
+					elementRTL = element.attr('data-rtl'),
+					elementAutoPlayTime = 5000,
+					elementAutoPlayHoverPause = true;
 
 				if( !elementItems ) { elementItems = 4; }
 				if( !elementItemsXl ) { elementItemsXl = Number(elementItems); }
@@ -2959,9 +2965,9 @@ var SEMICOLON = SEMICOLON || {};
 				if( elementLoop == 'true' ){ elementLoop = true; } else { elementLoop = false; }
 				if( !elementAutoPlay ){
 					elementAutoPlay = false;
-					var elementAutoPlayTime = 0;
+					elementAutoPlayHoverPause = false;
 				} else {
-					var elementAutoPlayTime = Number(elementAutoPlay);
+					elementAutoPlayTime = Number(elementAutoPlay);
 					elementAutoPlay = true;
 				}
 				if( !elementAnimateIn ) { elementAnimateIn = false; }
@@ -2989,7 +2995,7 @@ var SEMICOLON = SEMICOLON || {};
 					navText: ['<i class="icon-angle-left"></i>','<i class="icon-angle-right"></i>'],
 					autoplay: elementAutoPlay,
 					autoplayTimeout: elementAutoPlayTime,
-					autoplayHoverPause: true,
+					autoplayHoverPause: elementAutoPlayHoverPause,
 					dots: elementPagi,
 					smartSpeed: Number(elementSpeed),
 					fluidSpeed: Number(elementSpeed),
@@ -2999,7 +3005,7 @@ var SEMICOLON = SEMICOLON || {};
 					rtl: elementRTL,
 					responsive:{
 						0:{ items:Number(elementItemsXs) },
-						480:{ items:Number(elementItemsSm) },
+						576:{ items:Number(elementItemsSm) },
 						768:{ items:Number(elementItemsMd) },
 						992:{ items:Number(elementItemsLg) },
 						1200:{ items:Number(elementItemsXl) }
@@ -3348,6 +3354,69 @@ var SEMICOLON = SEMICOLON || {};
 			});
 		},
 
+		ticker: function(){
+
+			var $ticker = jQuery('.scw-ticker');
+			if( $ticker.length < 1 ){ return true; }
+
+			$ticker.each( function(){
+
+				var element = $(this),
+					elementItem = element.find('.scw-ticker-item'),
+					tickerItemWidth = 0,
+					tickerItemCount = elementItem.length,
+					tickerWidth = 0,
+					elementSpeed = element.attr('data-speed'),
+					elementHover = element.attr('data-hover'),
+					elementItems = element.attr('data-items'),
+					elementItemsXl = element.attr('data-items-xl'),
+					elementItemsLg = element.attr('data-items-lg'),
+					elementItemsMd = element.attr('data-items-md'),
+					elementItemsSm = element.attr('data-items-sm'),
+					elementItemsXs = element.attr('data-items-xs');
+
+				if( !elementItems ) { elementItems = 5; }
+				if( !elementItemsXl ) { elementItemsXl = Number(elementItems); }
+				if( !elementItemsLg ) { elementItemsLg = Number(elementItemsXl); }
+				if( !elementItemsMd ) { elementItemsMd = Number(elementItemsLg); }
+				if( !elementItemsSm ) { elementItemsSm = Number(elementItemsMd); }
+				if( !elementItemsXs ) { elementItemsXs = Number(elementItemsSm); }
+
+				tickerItemWidth = windowWidth / elementItems;
+				tickerWidth = ( tickerItemWidth * tickerItemCount );
+
+				element.find('.scw-ticker-wrap').after('<div class="scw-ticker-wrap-clone"></div>');
+
+				var elementWrap = element.find('.scw-ticker-wrap,.scw-ticker-wrap-clone');
+
+				elementItem.css({ 'width':tickerItemWidth });
+
+				setTimeout( function(){
+					elementWrap.css({ 'width': tickerWidth });
+					element.css({ 'width': (tickerWidth*2) });
+					elementItem.clone().appendTo( element.find('.scw-ticker-wrap-clone') );
+				}, 300);
+
+				if( !elementSpeed ) { elementSpeed = 30000; }
+				if( elementHover == 'false' ) { elementHover = false; } else { elementHover = true; }
+
+				var speedFactor = tickerWidth / windowWidth;
+
+				elementWrap.css({ 'animation-duration': ( Number(elementSpeed)*speedFactor )+'ms' });
+
+				if( elementHover == true ) {
+					element.on( 'mouseover', function(){
+						elementWrap.addClass('scw-ticker-paused');
+					});
+
+					element.on( 'mouseout', function(){
+						elementWrap.removeClass('scw-ticker-paused');
+					});
+				}
+			});
+
+		},
+
 		stickySidebar: function(){
 
 			if( !$().scwStickySidebar ) {
@@ -3479,8 +3548,9 @@ var SEMICOLON = SEMICOLON || {};
 				SEMICOLON.header.fullWidthMenu();
 				SEMICOLON.header.overlayMenu();
 				SEMICOLON.initialize.fullScreen();
-				SEMICOLON.initialize.verticalMiddle();
+				SEMICOLON.initialize.dataResponsiveHeights();
 				SEMICOLON.initialize.maxHeight();
+				SEMICOLON.initialize.verticalMiddle();
 				SEMICOLON.initialize.testimonialsGrid();
 				SEMICOLON.initialize.stickFooterOnSmall();
 				SEMICOLON.initialize.stickyFooter();
@@ -3493,7 +3563,6 @@ var SEMICOLON = SEMICOLON || {};
 				SEMICOLON.widget.html5Video();
 				SEMICOLON.widget.masonryThumbs();
 				SEMICOLON.initialize.dataResponsiveClasses();
-				SEMICOLON.initialize.dataResponsiveHeights();
 				if( $gridContainer.length > 0 ) {
 					if( !$gridContainer.hasClass('.customjs') ) {
 						if( $().isotope ) {
@@ -3604,6 +3673,7 @@ var SEMICOLON = SEMICOLON || {};
 			SEMICOLON.widget.loadFlexSlider();
 			SEMICOLON.widget.html5Video();
 			SEMICOLON.widget.masonryThumbs();
+			SEMICOLON.widget.ticker();
 			SEMICOLON.header.topsocial();
 			SEMICOLON.header.responsiveMenuClass();
 			SEMICOLON.initialize.modal();

@@ -51,12 +51,9 @@
 
 .img-circle { border-radius: 50% !important; }
 
-.pagination > .active > a,
-.pagination > .active > span,
-.pagination > .active > a:hover,
-.pagination > .active > span:hover,
-.pagination > .active > a:focus,
-.pagination > .active > span:focus {
+.page-item.active .page-link,
+.page-link:hover,
+.page-link:focus {
 	color: #FFF !important;
 	background-color: #1ABC9C !important;
 	border-color: #1ABC9C !important;
@@ -1069,5 +1066,33 @@ body:not(.no-transition) #wrapper,
 
   100% {
 	opacity: 0.0; }
+}
+
+/* ----------------------------------------------------------------
+	Datepicker Component
+-----------------------------------------------------------------*/
+
+.datepicker td,
+.datepicker th { padding: 5px; }
+
+/* ----------------------------------------------------------------
+	Star Ratings Component
+-----------------------------------------------------------------*/
+
+.rating-xl { font-size: 3rem !important; }
+
+.rating-lg { font-size: 2.5rem !important; }
+
+.rating-md { font-size: 2rem !important; }
+
+.rating-sm { font-size: 1.75rem !important; }
+
+.rating-xs { font-size: 1.25rem !important; }
+
+.rating-container .star { margin: 0 2px !important; }
+
+.rating-container .filled-stars {
+	-webkit-text-stroke: 0px !important;
+	text-shadow: none !important;
 }
 

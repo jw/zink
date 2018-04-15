@@ -133,6 +133,8 @@ span.middot {
 
 .noshadow { box-shadow: none !important; }
 
+.notextshadow { text-shadow: none !important; }
+
 .hidden { display: none !important; }
 
 .nothidden { display: block !important; }
@@ -283,6 +285,10 @@ span.middot {
 .vertical-middle {
 	height: auto !important;
 	left: 0;
+	max-width: none !important;
+	z-index: 2;
 }
+
+.vertical-middle + .video-wrap { z-index: 1 !important; }
 
 .magnific-max-width .mfp-content { max-width: 800px; }

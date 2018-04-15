@@ -817,6 +817,7 @@ body:not(.device-touch):not(.device-sm):not(.device-xs) .portfolio-1.portfolio-f
 	width: 100% !important;
 	height: 500px !important;
 	margin: 0 !important;
+	padding: 0 !important;
 }
 
 .portfolio.portfolio-parallax .portfolio-item .portfolio-image {
