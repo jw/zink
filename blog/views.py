@@ -74,9 +74,8 @@ def blog(request, page=1):
 def tag(request, tag, page=1):
     """Get all entries for a specific tag."""
 
+    static = get_assets()
     deployment = get_deployment()
-
-    static = get_assets("blog.header")
 
     tags = Tag.objects.all()
     logger.info("Retrieved %s tags." % len(tags))
