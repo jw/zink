@@ -9,8 +9,7 @@ class Tag(models.Model):
         return self.tag
 
     def get_absolute_url(self):
-        # return '%stag/%s/' % (settings.BLOG_ROOT, self.slug)
-        return 'tag/%s/' % (self.pk)
+        return f'tag/{self.pk}'
 
 
 class Image(models.Model):
@@ -22,7 +21,7 @@ class Image(models.Model):
     width = models.PositiveIntegerField(default=0, editable=False)
 
     def __str__(self):
-        return self.image.name + " (" + self.description + ")"
+        return f'{self.image.name} ({self.description})'
 
 
 class Entry(models.Model):
