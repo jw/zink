@@ -1,23 +1,4 @@
 
-#
-# Copyright (c) 2013-2016 Jan Willems (ElevenBits)
-#
-# This file is part of Zink.
-#
-# Zink is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# Zink is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Zink.  If not, see <http://www.gnu.org/licenses/>.
-#
-
 import os
 
 from setuptools import setup
@@ -32,17 +13,17 @@ setup(
     version='2.0.0',
     packages=['blog', 'contact', 'home', 'tweeter', 'versions'],
     include_package_data=True,
-    license='BSD License',  # example license
+    license='MIT License',
     description='ElevenBits website.',
     long_description=README,
-    url='http://www.example.com/',
+    url='https://elevenbits.com',
     author='Jan Willems',
     author_email='jw@elevenbits.com',
     classifiers=[
         'Environment :: Web Environment',
         'Framework :: Django',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: BSD License',  # example license
+        'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3.6',

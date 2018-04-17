@@ -8,7 +8,6 @@ Overview
 
 Zink is the ElevenBits website.
 
-
 Install
 -------
 
@@ -22,10 +21,14 @@ Use pipenv:
 	$ pip install pipenv
 	$ pipenv install --dev
 
-
 Test
 ----
 
     $ pipenv run python manage.py test
+
+License
+-------
+
+MIT Licensed.
 
     
