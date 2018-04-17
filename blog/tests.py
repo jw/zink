@@ -95,7 +95,6 @@ class BlogTest(TestCase):
 
 
 class StaticsTestCase(TestCase):
-
     fixtures = ['static']
 
     def test_statics_are_available(self):

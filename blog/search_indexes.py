@@ -1,5 +1,7 @@
 import datetime
+
 from haystack import indexes
+
 from blog.models import Tag, Entry
 
 
