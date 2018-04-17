@@ -8,3 +8,14 @@
 
 
 
+.entry:after {
+	height: 0px;
+}
+
+#header.full-header #logo {
+    border-right: 0px;
+}
+
+#header.full-header #primary-menu > ul {
+    border-right: 0px;
+}
