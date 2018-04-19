@@ -10,6 +10,9 @@
 
                 <div class="entry clearfix">
 
+                    {% load lookup %}
+                    <h1>{{ assets | lookup:'header' | safe }}</h1>
+
                     {% if entries %}
 
                         {% for entry in entries.object_list %}

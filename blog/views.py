@@ -18,12 +18,10 @@ def blog(request, page=1):
     deployment = get_deployment()
 
     tags = Tag.objects.all()
-    logger.info("Retrieved %s tags." % len(tags))
+    logger.info(f"Retrieved {len(tags)} tags.")
 
     entry_list = Entry.objects.filter(active=True).reverse()
-    logger.info("Retrieved %s blog entries." % len(entry_list))
-
-    logger.info("Page: %s" % page)
+    logger.info(f"Retrieved {len(entry_list)} blog entries.")
 
     try:
         size = settings.BLOG_PAGE_SIZE
@@ -58,36 +56,36 @@ def tag(request, tag, page=1):
     deployment = get_deployment()
 
     tags = Tag.objects.all()
-    logger.info("Retrieved %s tags." % len(tags))
+    logger.info(f"Retrieved {len(tags)} tags.")
 
     entry_list = Entry.objects.filter(active=True, tags__pk=tag).reverse()
 
     # create the header
     try:
         tag = Tag.objects.get(id=tag)
-        static['header'] = "%s entries tagged with '%s'" % \
-                           (entry_list.count(), tag.tag)
+        static['header'] = f"{entry_list.count()} entries " \
+                           f"tagged with '{tag.tag}'"
         tag_id = tag.id
     except Tag.DoesNotExist:
-        static['header'] = "Tag with id %s not found." % tag
+        static['header'] = f"Tag with id {tag} not found."
         tag_id = None
 
     try:
         size = settings.BLOG_PAGE_SIZE
     except AttributeError:
-        logger.warn("No blog page size found in settings. Defaulting to 5.")
+        logger.warning("No blog page size found in settings. Defaulting to 5.")
         size = 5
     paginator = Paginator(entry_list, size)
 
-    # Make sure page request is an int. If not, deliver first page.
+    # make sure page request is an int; if not, deliver the first page
     try:
         page = int(page)
     except ValueError:
-        logger.debug("'%s' is an invalid page number; showing first page." %
-                     page)
+        logger.debug(f"'{page}' is an invalid page number; "
+                     f"showing first page.")
         page = 1
 
-    # If page is out of range, deliver last page.
+    # if page is out of range, deliver last page
     try:
         entries = paginator.page(page)
     except (EmptyPage, InvalidPage):
@@ -110,7 +108,7 @@ def detail(request, id):
     deployment = get_deployment()
 
     tags = Tag.objects.all()
-    logger.info("Retrieved %s tags." % len(tags))
+    logger.info(f"Retrieved {len(tags)} tags.")
 
     entry = get_object_or_404(Entry, pk=id)
 
