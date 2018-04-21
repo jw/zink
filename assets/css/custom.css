@@ -19,3 +19,7 @@
 #header.full-header #primary-menu > ul {
     border-right: 0px;
 }
+
+.pagination {
+    justify-content: center;
+}

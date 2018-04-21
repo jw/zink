@@ -8,6 +8,8 @@
 
         <div class="container clearfix topmargin">
 
+            {# left column #}
+
             <div class="postcontent nobottommargin clearfix">
 
                 <div class="alert alert-info bottommargin">
@@ -26,58 +28,60 @@
 
                 </div>
 
-{#                    <ul class="pagination nobottommargin">#}
-{##}
-{#                        {% if entries.has_previous %}#}
-{#                            <li class="page-item">#}
-{#                                <a class="page-link"#}
-{#                                   href="{% url 'blog:page' entries.previous_page_number %}">«</a>#}
-{#                            </li>#}
-{#                        {% else %}#}
-{#                            <li class="page-item disabled">#}
-{#                                <a class="page-link" href="">«</a>#}
-{#                            </li>#}
-{#                        {% endif %}#}
-{##}
-{#                        {% for page in entries.paginator.page_range %}#}
-{#                            <li class="page-item {% if page == entries.number %}active{% endif %}">#}
-{#                                <a class="page-link"#}
-{#                                   href="{% url 'blog:page' page %}">#}
-{#                                    {{ page }}#}
-{#                                </a>#}
-{#                            </li>#}
-{#                        {% endfor %}#}
-{##}
-{#                        {% if entries.has_next %}#}
-{#                            <li class="page-item">#}
-{#                                <a class="page-link"#}
-{#                                   href="{% url 'blog:page' entries.next_page_number %}">»</a>#}
-{#                            </li>#}
-{#                        {% else %}#}
-{#                            <li class="page-item disabled">#}
-{#                                <a class="page-link" href="">»</a>#}
-{#                            </li>#}
-{#                        {% endif %}#}
-{##}
-{#                    </ul>#}
+                <div class="pagination bottommargin">
+
+                    {% if entries.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link"
+                               href="{% url 'blog:page' entries.previous_page_number %}">«</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="">«</a>
+                        </li>
+                    {% endif %}
+
+                    {% for page in entries.paginator.page_range %}
+                        <li class="page-item {% if page == entries.number %}active{% endif %}">
+                            <a class="page-link"
+                               href="{% url 'blog:page' page %}">
+                                {{ page }}
+                            </a>
+                        </li>
+                    {% endfor %}
+
+                    {% if entries.has_next %}
+                        <li class="page-item">
+                            <a class="page-link"
+                               href="{% url 'blog:page' entries.next_page_number %}">»</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="">»</a>
+                        </li>
+                    {% endif %}
 
                 </div>
 
-				<div class="sidebar nobottommargin col_last clearfix">
+            </div>
 
-                    <div class="sidebar-widgets-wrap">
+            {# right column #}
 
-                        <div class="widget clearfix">
+            <div class="sidebar nobottommargin col_last clearfix">
 
-                            <h4>Tag Cloud</h4>
+                <div class="sidebar-widgets-wrap">
 
-                            <div class="tagcloud">
-                                {% for tag in tags %}
-                                    <a href="{{ tag.get_absolute_url }}">{{ tag.tag }}</a>
-                                {% endfor %}
-                            </div>
+                    <div class="widget clearfix">
 
+                        <h4>Tag Cloud</h4>
+
+                        <div class="tagcloud">
+                            {% for tag in tags %}
+                                <a href="{{ tag.get_absolute_url }}">{{ tag.tag }}</a>
+                            {% endfor %}
                         </div>
+
+                    </div>
 
 {#                        <div class="widget clearfix">#}
 {##}
@@ -280,12 +284,11 @@
 {#                            </div>#}
 {##}
 {#                        </div>#}
-
-                    </div>
-
                 </div>
 
             </div>
+
+        </div>
 
     </section>
 
