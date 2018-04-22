@@ -23,3 +23,9 @@
 .pagination {
     justify-content: center;
 }
+
+::selection {
+	background: red;
+	color: #FFF;
+	text-shadow: none;
+}
