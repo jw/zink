@@ -1,8 +1,8 @@
-from os.path import join, dirname, realpath, abspath
 from socket import gethostname
 
 import dj_database_url
 import environ
+from os.path import join, dirname, realpath, abspath
 
 root = environ.Path(__file__) - 2
 env = environ.Env()
@@ -126,6 +126,7 @@ STATIC_URL = '/assets/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = join(PROJECT_ROOT, 'media')
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -197,6 +198,7 @@ TEMPLATES = [
 MIDDLEWARE = (
     # 'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -205,8 +207,8 @@ MIDDLEWARE = (
     # 'tracking.middleware.BannedIPMiddleware',
     # 'tracking.middleware.VisitorTrackingMiddleware',
     # 'tracking.middleware.VisitorCleanUpMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.gzip.GZipMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 )
 
 ROOT_URLCONF = 'elevenbits.urls'
@@ -237,7 +239,11 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.messages',
+
+    # statics
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
+
     # 'static_precompiler',
     'blog.apps.BlogConfig',
     'contact',
