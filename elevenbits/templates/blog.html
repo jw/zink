@@ -20,7 +20,7 @@
 
                     <div class="timeline-border"></div>
 
-                    {% for entry in entries.object_list %}
+                    {% for entry in page_entries.object_list %}
 
                         {% include "timeline-entry.html" %}
 
@@ -30,10 +30,10 @@
 
                 <div class="pagination bottommargin">
 
-                    {% if entries.has_previous %}
+                    {% if page_entries.has_previous %}
                         <li class="page-item">
                             <a class="page-link"
-                               href="{% url 'blog:page' entries.previous_page_number %}">«</a>
+                               href="{% url 'blog:page' page_entries.previous_page_number %}">«</a>
                         </li>
                     {% else %}
                         <li class="page-item disabled">
@@ -41,8 +41,8 @@
                         </li>
                     {% endif %}
 
-                    {% for page in entries.paginator.page_range %}
-                        <li class="page-item {% if page == entries.number %}active{% endif %}">
+                    {% for page in page_entries.paginator.page_range %}
+                        <li class="page-item {% if page == page_entries.number %}active{% endif %}">
                             <a class="page-link"
                                href="{% url 'blog:page' page %}">
                                 {{ page }}
@@ -50,10 +50,10 @@
                         </li>
                     {% endfor %}
 
-                    {% if entries.has_next %}
+                    {% if page_entries.has_next %}
                         <li class="page-item">
                             <a class="page-link"
-                               href="{% url 'blog:page' entries.next_page_number %}">»</a>
+                               href="{% url 'blog:page' page_entries.next_page_number %}">»</a>
                         </li>
                     {% else %}
                         <li class="page-item disabled">
@@ -83,207 +83,6 @@
 
                     </div>
 
-{#                        <div class="widget clearfix">#}
-{##}
-{#                            <div class="tabs nobottommargin clearfix"#}
-{#                                 id="sidebar-tabs">#}
-{##}
-{#                                <ul class="tab-nav clearfix">#}
-{#                                    <li><a href="#tabs-1">Popular</a></li>#}
-{#                                    <li><a href="#tabs-2">Recent</a></li>#}
-{#                                    <li><a href="#tabs-3"><i#}
-{#                                            class="icon-comments-alt norightmargin"></i></a>#}
-{#                                    </li>#}
-{#                                </ul>#}
-{##}
-{#                                <div class="tab-container">#}
-{##}
-{#                                    <div class="tab-content clearfix" id="tabs-1">#}
-{#                                        <div id="popular-post-list-sidebar">#}
-{##}
-{#                                            <div class="spost clearfix">#}
-{#                                                <div class="entry-image">#}
-{#                                                    <a href="#" class="nobg"><img#}
-{#                                                            class="rounded-circle"#}
-{#                                                            src="images/magazine/small/3.jpg"#}
-{#                                                            alt=""></a>#}
-{#                                                </div>#}
-{#                                                <div class="entry-c">#}
-{#                                                    <div class="entry-title">#}
-{#                                                        <h4><a href="#">Debitis#}
-{#                                                            nihil placeat, illum#}
-{#                                                            est nisi</a></h4>#}
-{#                                                    </div>#}
-{#                                                    <ul class="entry-meta">#}
-{#                                                        <li>#}
-{#                                                            <i class="icon-comments-alt"></i>#}
-{#                                                            35 Comments#}
-{#                                                        </li>#}
-{#                                                    </ul>#}
-{#                                                </div>#}
-{#                                            </div>#}
-{##}
-{#                                            <div class="spost clearfix">#}
-{#                                                <div class="entry-image">#}
-{#                                                    <a href="#" class="nobg"><img#}
-{#                                                            class="rounded-circle"#}
-{#                                                            src="images/magazine/small/2.jpg"#}
-{#                                                            alt=""></a>#}
-{#                                                </div>#}
-{#                                                <div class="entry-c">#}
-{#                                                    <div class="entry-title">#}
-{#                                                        <h4><a href="#">Elit#}
-{#                                                            Assumenda vel amet#}
-{#                                                            dolorum quasi</a></h4>#}
-{#                                                    </div>#}
-{#                                                    <ul class="entry-meta">#}
-{#                                                        <li>#}
-{#                                                            <i class="icon-comments-alt"></i>#}
-{#                                                            24 Comments#}
-{#                                                        </li>#}
-{#                                                    </ul>#}
-{#                                                </div>#}
-{#                                            </div>#}
-{##}
-{#                                            <div class="spost clearfix">#}
-{#                                                <div class="entry-image">#}
-{#                                                    <a href="#" class="nobg"><img#}
-{#                                                            class="rounded-circle"#}
-{#                                                            src="images/magazine/small/1.jpg"#}
-{#                                                            alt=""></a>#}
-{#                                                </div>#}
-{#                                                <div class="entry-c">#}
-{#                                                    <div class="entry-title">#}
-{#                                                        <h4><a href="#">Lorem ipsum#}
-{#                                                            dolor sit amet,#}
-{#                                                            consectetur</a></h4>#}
-{#                                                    </div>#}
-{#                                                    <ul class="entry-meta">#}
-{#                                                        <li>#}
-{#                                                            <i class="icon-comments-alt"></i>#}
-{#                                                            19 Comments#}
-{#                                                        </li>#}
-{#                                                    </ul>#}
-{#                                                </div>#}
-{#                                            </div>#}
-{##}
-{#                                        </div>#}
-{#                                    </div>#}
-{#                                    <div class="tab-content clearfix" id="tabs-2">#}
-{#                                        <div id="recent-post-list-sidebar">#}
-{##}
-{#                                            <div class="spost clearfix">#}
-{#                                                <div class="entry-image">#}
-{#                                                    <a href="#" class="nobg"><img#}
-{#                                                            class="rounded-circle"#}
-{#                                                            src="images/magazine/small/1.jpg"#}
-{#                                                            alt=""></a>#}
-{#                                                </div>#}
-{#                                                <div class="entry-c">#}
-{#                                                    <div class="entry-title">#}
-{#                                                        <h4><a href="#">Lorem ipsum#}
-{#                                                            dolor sit amet,#}
-{#                                                            consectetur</a></h4>#}
-{#                                                    </div>#}
-{#                                                    <ul class="entry-meta">#}
-{#                                                        <li>10th July 2014</li>#}
-{#                                                    </ul>#}
-{#                                                </div>#}
-{#                                            </div>#}
-{##}
-{#                                            <div class="spost clearfix">#}
-{#                                                <div class="entry-image">#}
-{#                                                    <a href="#" class="nobg"><img#}
-{#                                                            class="rounded-circle"#}
-{#                                                            src="images/magazine/small/2.jpg"#}
-{#                                                            alt=""></a>#}
-{#                                                </div>#}
-{#                                                <div class="entry-c">#}
-{#                                                    <div class="entry-title">#}
-{#                                                        <h4><a href="#">Elit#}
-{#                                                            Assumenda vel amet#}
-{#                                                            dolorum quasi</a></h4>#}
-{#                                                    </div>#}
-{#                                                    <ul class="entry-meta">#}
-{#                                                        <li>10th July 2014</li>#}
-{#                                                    </ul>#}
-{#                                                </div>#}
-{#                                            </div>#}
-{##}
-{#                                            <div class="spost clearfix">#}
-{#                                                <div class="entry-image">#}
-{#                                                    <a href="#" class="nobg"><img#}
-{#                                                            class="rounded-circle"#}
-{#                                                            src="images/magazine/small/3.jpg"#}
-{#                                                            alt=""></a>#}
-{#                                                </div>#}
-{#                                                <div class="entry-c">#}
-{#                                                    <div class="entry-title">#}
-{#                                                        <h4><a href="#">Debitis#}
-{#                                                            nihil placeat, illum#}
-{#                                                            est nisi</a></h4>#}
-{#                                                    </div>#}
-{#                                                    <ul class="entry-meta">#}
-{#                                                        <li>10th July 2014</li>#}
-{#                                                    </ul>#}
-{#                                                </div>#}
-{#                                            </div>#}
-{##}
-{#                                        </div>#}
-{#                                    </div>#}
-{#                                    <div class="tab-content clearfix" id="tabs-3">#}
-{#                                        <div id="recent-post-list-sidebar">#}
-{##}
-{#                                            <div class="spost clearfix">#}
-{#                                                <div class="entry-image">#}
-{#                                                    <a href="#" class="nobg"><img#}
-{#                                                            class="rounded-circle"#}
-{#                                                            src="images/icons/avatar.jpg"#}
-{#                                                            alt=""></a>#}
-{#                                                </div>#}
-{#                                                <div class="entry-c">#}
-{#                                                    <strong>John Doe:</strong>#}
-{#                                                    Veritatis recusandae sunt#}
-{#                                                    repellat distinctio...#}
-{#                                                </div>#}
-{#                                            </div>#}
-{##}
-{#                                            <div class="spost clearfix">#}
-{#                                                <div class="entry-image">#}
-{#                                                    <a href="#" class="nobg"><img#}
-{#                                                            class="rounded-circle"#}
-{#                                                            src="images/icons/avatar.jpg"#}
-{#                                                            alt=""></a>#}
-{#                                                </div>#}
-{#                                                <div class="entry-c">#}
-{#                                                    <strong>Mary Jane:</strong>#}
-{#                                                    Possimus libero, earum officia#}
-{#                                                    architecto maiores....#}
-{#                                                </div>#}
-{#                                            </div>#}
-{##}
-{#                                            <div class="spost clearfix">#}
-{#                                                <div class="entry-image">#}
-{#                                                    <a href="#" class="nobg"><img#}
-{#                                                            class="rounded-circle"#}
-{#                                                            src="images/icons/avatar.jpg"#}
-{#                                                            alt=""></a>#}
-{#                                                </div>#}
-{#                                                <div class="entry-c">#}
-{#                                                    <strong>Site Admin:</strong>#}
-{#                                                    Deleniti magni labore#}
-{#                                                    laboriosam odio...#}
-{#                                                </div>#}
-{#                                            </div>#}
-{##}
-{#                                        </div>#}
-{#                                    </div>#}
-{##}
-{#                                </div>#}
-{##}
-{#                            </div>#}
-{##}
-{#                        </div>#}
                 </div>
 
             </div>

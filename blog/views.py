@@ -20,30 +20,18 @@ def blog(request, page=1):
     tags = Tag.objects.all()
     logger.info(f"Retrieved {len(tags)} tags.")
 
-    entry_list = Entry.objects.filter(active=True).reverse()
-    logger.info(f"Retrieved {len(entry_list)} blog entries.")
+    all_entries = Entry.objects.filter(active=True).reverse()
+    logger.info(f"Retrieved total of {len(all_entries)} blog entries.")
 
     try:
         size = settings.BLOG_PAGE_SIZE
     except AttributeError:
         size = 5
-    paginator = Paginator(entry_list, size)
-
-    # make sure page request is an int - if not, deliver first page
-    try:
-        page = int(page)
-    except ValueError:
-        page = 1
-
-    # if page is out of range, deliver last page
-    try:
-        entries = paginator.page(page)
-    except (EmptyPage, InvalidPage):
-        entries = paginator.page(paginator.num_pages)
+    paginator = Paginator(all_entries, size)
 
     attributes = {'deployment': deployment,
                   'assets': static,
-                  'entries': entries,
+                  'page_entries': paginator.get_page(page),
                   'tags': tags}
 
     return render(request, 'blog.html', attributes)
