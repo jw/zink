@@ -103,7 +103,7 @@ USE_TZ = False
 # The statics (css and images) location
 STATICFILES_DIRS = (
     join(SITE_ROOT, "assets"),
-    join(SITE_ROOT, "tmp"),
+    # join(SITE_ROOT, "tmp"),
 )
 
 STATICFILES_FINDERS = (
@@ -112,11 +112,11 @@ STATICFILES_FINDERS = (
     # 'static_precompiler.finders.StaticPrecompilerFinder',
 )
 
-STATIC_PRECOMPILER_COMPILERS = (
-    ('static_precompiler.compilers.Stylus',
-     {"executable": "/home/jw/.nvm/versions/node/v6.11.2/bin/stylus",
-      "sourcemap_enabled": True}),
-)
+# STATIC_PRECOMPILER_COMPILERS = (
+#     ('static_precompiler.compilers.Stylus',
+#      {"executable": "/home/jw/.nvm/versions/node/v6.11.2/bin/stylus",
+#       "sourcemap_enabled": True}),
+# )
 
 PROJECT_ROOT = abspath(dirname(__file__))
 
@@ -126,7 +126,7 @@ STATIC_URL = '/assets/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = join(PROJECT_ROOT, 'media')
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
