@@ -3,6 +3,8 @@ from socket import gethostname
 import dj_database_url
 import environ
 from os.path import join, dirname, realpath, abspath
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 root = environ.Path(__file__) - 2
 env = environ.Env()
@@ -229,7 +231,6 @@ HAYSTACK_CONNECTIONS = {
 }
 
 INSTALLED_APPS = (
-    'raven.contrib.django.raven_compat',
     'widget_tweaks',
     'django_extensions',
     # django contribs
@@ -267,18 +268,23 @@ INSTALLED_APPS = (
 BLOG_PAGE_SIZE = 4
 CLIENT_LOGO_MARGIN = 20
 
-RAVEN_CONFIG = {
-    'dsn': 'https://' + env('SENTRY_PUBLIC_KEY') + ':' +
-           env('SENTRY_SECRET_KEY') + '@sentry.io/' +
-           env('SENTRY_PROJECT')
-}
+sentry_sdk.init(
+    dsn="https://" + env('SENTRY_PUBLIC_KEY') + ':' +
+        env('SENTRY_SECRET_KEY') + "@sentry.io/" +
+        env('SENTRY_PROJECT'),
+    integrations=[DjangoIntegration()],
+
+    # If you wish to associate users to errors (assuming you are using
+    # django.contrib.auth) you may enable sending PII data.
+    send_default_pii=True
+)
 
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
     'root': {
         'level': 'WARNING',
-        'handlers': ['console', 'sentry'],
+        'handlers': ['console'],  # sentry
     },
     'formatters': {
         'verbose': {
@@ -290,11 +296,11 @@ LOGGING = {
         },
     },
     'handlers': {
-        'sentry': {
-            'level': 'WARNING',
-            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
-            'tags': {'custom-tag': 'x'},
-        },
+        # 'sentry': {
+        #     'level': 'WARNING',
+        #     'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
+        #     'tags': {'custom-tag': 'x'},
+        # },
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
@@ -316,15 +322,15 @@ LOGGING = {
             'handlers': ['console'],
             'propagate': False,
         },
-        'raven': {
-            'level': 'DEBUG',
-            'handlers': ['console'],
-            'propagate': False,
-        },
-        'sentry.errors': {
-            'level': 'DEBUG',
-            'handlers': ['console'],
-            'propagate': False,
-        },
+        # 'raven': {
+        #     'level': 'DEBUG',
+        #     'handlers': ['console'],
+        #     'propagate': False,
+        # },
+        # 'sentry.errors': {
+        #     'level': 'DEBUG',
+        #     'handlers': ['console'],
+        #     'propagate': False,
+        # },
     },
 }
