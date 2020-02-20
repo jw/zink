@@ -4,7 +4,7 @@ env:
   global:
     - DATABASE_URL=postgres://zink:s3cr3t@localhost:5432/zink
     - SECRET_KEY=some_secret_key
-    - DJANGO=2.0.3
+    - DJANGO=3.0.3
     - DB=postgres
     - SENTRY_PUBLIC_KEY=12345678
     - SENTRY_SECRET_KEY=12345678
@@ -17,7 +17,7 @@ env:
     - GOOGLE_MAPS_KEY=12345678
 
 python:
-  - "3.6"
+  - "3.8"
 
 services: postgresql
 
@@ -25,10 +25,11 @@ before_script:
   - psql -c "create role zink with createdb login password 's3cr3t'" -U postgres;
   - psql -c "create database zink owner zink;" -U postgres
 
-script:
-  - python setup.py test
+before_install:
+  - pip install poetry
 
-install: "make"
+install:
+  - poetry install -v
 
 script:
-  - make test
+  - poetry run python manage.py test
