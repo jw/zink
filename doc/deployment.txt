@@ -5,4 +5,3 @@ this application runs on heroku and needs a postgresql database.
 1) sudo snap install --classic heroku
 2) heroku login  # via website
 1) heroku config -a elevenbits-zink -s > .env
-

@@ -36,6 +36,5 @@ Remember that a superuser needs to be added:
 
 Add the fixtures:
 
-> poetry python manage.py loaddata fixtures/blog.json
-> poetry python manage.py loaddata fixtures/menus.json
-
+> poetry run python manage.py loaddata fixtures/blog.json
+> poetry run python manage.py loaddata fixtures/menus.json

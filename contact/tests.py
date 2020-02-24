@@ -48,11 +48,7 @@ class FormTest(TestCase):
                            'subject': 'test',
                            'message': 'Test message.'})
         self.assertContains(response,
-                            '<input type="text" name="name" '
-                            'class="form-control is-invalid" '
-                            'aria-describedby="nameHelp" maxlength="256" '
-                            'placeholder="Your name" required '
-                            'id="id_name" />',
+                            'name="name" class="form-control is-invalid"',
                             status_code=200)
 
     def test_no_email_post(self):
@@ -63,10 +59,9 @@ class FormTest(TestCase):
                            'subject': '[TEST]',
                            'message': 'Test message.'})
         self.assertContains(response,
-                            '<input type="email" name="email" '
-                            'placeholder="Your email address" '
+                            '"Your email address" '
                             'class="form-control is-invalid" '
-                            'required id="id_email" />',
+                            'required id="id_email">',
                             status_code=200)
 
     def test_no_message_post(self):
@@ -77,10 +72,7 @@ class FormTest(TestCase):
                            'subject': '[TEST]',
                            'email': 'jw@elevenbits.com'})
         self.assertContains(response,
-                            '<textarea name="message" cols="40" rows="10" '
-                            'maxlength="1024" placeholder="The message" '
-                            'class="form-control is-invalid" '
-                            'required id="id_message">',
+                            'placeholder="The message" class="form-control is-invalid"',
                             status_code=200)
 
 
