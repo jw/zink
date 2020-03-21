@@ -3,10 +3,11 @@
         {% if entry.images.all|length_is:"1" %}
             {% with entry.images.all|first as image %}
 {#                    <p>{{ image.image.name }}</p>#}
-            <a href="{{ image.image.url }}" data-lightbox="image">
-                <img class="image_fade"
-                     src="{{ image.image.url }}"
-                     alt="" style="opacity: 1;"></a>
+                <a href="{{ image.image.url }}" data-lightbox="image">
+                    <img class="image_fade"
+                         src="{{ image.image.url }}"
+                         alt="" style="opacity: 1;">
+                </a>
             {% endwith %}
         {% else %}
             <div class="fslider" data-arrows="false"

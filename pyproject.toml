@@ -27,9 +27,11 @@ sentry-sdk = "^0.14.1"
 twitter = "^1.18.0"
 whitenoise = "^5.0.1"
 whoosh = "^2.7.4"
+django-haystack = "3.0b1"
 
 [tool.poetry.dev-dependencies]
 pytest = "flake8"
+werkzeug = "^1.0.0"
 
 [build-system]
 requires = ["poetry>=0.12"]

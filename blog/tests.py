@@ -86,11 +86,22 @@ class BlogTest(TestCase):
         self.assertContains(response, '<div class="codehilite"><pre>'
                                       '<span class="gp">')
 
-    # TODO: this must be somewhere else
+
+class HttpErrorHandling(TestCase):
+    """Test the Http Error pages."""
+
+    fixtures = ['menus', 'blog']
+
     def test404(self):
         """Test the 404 response."""
         client = Client()
         response = client.get("/this_page_does_not_exist")
+        self.assertContains(response, "404 message", status_code=404)
+
+    def test404(self):
+        """Test the 404 response."""
+        client = Client()
+        response = client.post("/foobar", data={'q': 'Python'})
         self.assertContains(response, "404 message", status_code=404)
 
 

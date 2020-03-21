@@ -245,6 +245,8 @@ INSTALLED_APPS = (
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
 
+    'haystack',
+
     # 'static_precompiler',
     'blog.apps.BlogConfig',
     'contact',

@@ -7,31 +7,14 @@
 <head>
 
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <meta name="author" content="Jan Willems <jw@elevenbits>"/>
+    <meta name="author" content="Jan Willems <jw@elevenbits.com>"/>
 
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Raleway:300,400,500,600,700|Crete+Round:400i"
-          rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="{% static "css/bootstrap.css" %}"
-          type="text/css"/>
-
-    <link rel="stylesheet" href="{% static "style.css" %}" type="text/css"/>
-
-    <link rel="stylesheet" href="{% static "css/code.css" %}" type="text/css"/>
-    <link rel="stylesheet" href="{% static "css/dark.css" %}" type="text/css"/>
-    <link rel="stylesheet" href="{% static "css/font-icons.css" %}"
-          type="text/css"/>
-    <link rel="stylesheet" href="{% static "css/animate.css" %}"
-          type="text/css"/>
-    <link rel="stylesheet" href="{% static "css/magnific-popup.css" %}"
-          type="text/css"/>
-
-    <link rel="stylesheet" href="{% static "css/responsive.css" %}"
-          type="text/css"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-
-    <link rel="stylesheet" href="{% static "css/colors.css" %}" type="text/css" />
-    <link rel="stylesheet" href="{% static "css/custom.css" %}" type="text/css" />
+    <link rel="stylesheet" href="css/uikit.min.css" />
+    <script src="js/uikit.min.js"></script>
+    <script src="js/uikit-icons.min.js"></script>
 
     <title>{{ assets|lookup:'title' }}</title>
 
@@ -48,11 +31,6 @@
     </div>
 
     <div id="gotoTop" class="icon-angle-up"></div>
-
-    <script src="{% static "js/jquery.js" %}"></script>
-    <script src="{% static "js/plugins.js" %}"></script>
-
-    <script src="{% static "js/functions.js" %}"></script>
 
     {% block map %}{% endblock %}
 
