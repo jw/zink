@@ -4,115 +4,115 @@
 
     {% load lookup %}
 
-    <section id="content" class="container clearfix">
+    {# work in progress... #}
+    <div class="uk-alert-primary" uk-alert>
+        <a class="uk-alert-close" uk-close></a>
+        <p>{{ assets | lookup:'rero' | safe }}</p>
+    </div>
 
-        <div class="alert alert-info topmargin bottommargin">
-            {{ assets | lookup:'rero' | safe }}
-        </div>
+    {# main title #}
+    <div class="uk-container">
+        <h1 class="uk-heading-medium">
+            {{ assets | lookup:'index.header' | safe }}
+        </h1>
+    </div>
 
-        <div class="divcenter center clearfix" style="max-width: 900px;">
-            <h2>
-                {{ assets | lookup:'index.header' | safe }}
-            </h2>
-        </div>
+    {% if entry %}
 
-        {% if entry %}
+        <p>Last entry</p>
 
-            <div id="posts" class="small-thumbs">
-
-                <div class="entry clearfix">
-                    <div class="entry-image">
-                        {% if entry.images.all|length_is:"1" %}
-                            {% with entry.images.all|first as image %}
-                                <a href="{{ image.image.url }}" data-lightbox="image">
-                                    <img class="image_fade"
-                                         src="{{ image.image.url }}"
-                                         alt="{{ image.image.description }}">
-                                </a>
-                            {% endwith %}
-                        {% endif %}
-                    </div>
-                    <div class="entry-c">
-
-                        <div class="entry-title">
-                            <a href="{% url 'blog:detail' entry.pk %}">
-                                <h2 class="title">{{ entry.title }}</h2>
-                            </a>
-                        </div>
-
-                        <ul class="entry-meta clearfix">
-                            <li>
-                                <i class="icon-calendar3">
-                                    {{ entry.posted | date:"l, jS F Y, Hi\h\r\s" }}
-                                </i>
-                            </li>
-                            <li><a href="#"><i class="icon-user"></i>jw</a></li>
-                            <li><i class="icon-folder-open"></i>
-                                {% for tag in entry.tags.all %}
-                                    <a href="{% url 'blog:tag' tag.pk %}">{{ tag.tag }}</a>
-                                    {% if not forloop.last %} | {% endif %}
-                                {% endfor %}
-                            </li>
-
+{#            <div id="posts" class="small-thumbs">#}
+{##}
+{#                <div class="entry clearfix">#}
+{#                    <div class="entry-image">#}
+{#                        {% if entry.images.all|length_is:"1" %}#}
+{#                            {% with entry.images.all|first as image %}#}
+{#                                <a href="{{ image.image.url }}" data-lightbox="image">#}
+{#                                    <img class="image_fade"#}
+{#                                         src="{{ image.image.url }}"#}
+{#                                         alt="{{ image.image.description }}">#}
+{#                                </a>#}
+{#                            {% endwith %}#}
+{#                        {% endif %}#}
+{#                    </div>#}
+{#                    <div class="entry-c">#}
+{##}
+{#                        <div class="entry-title">#}
+{#                            <a href="{% url 'blog:detail' entry.pk %}">#}
+{#                                <h2 class="title">{{ entry.title }}</h2>#}
+{#                            </a>#}
+{#                        </div>#}
+{##}
+{#                        <ul class="entry-meta clearfix">#}
+{#                            <li>#}
+{#                                <i class="icon-calendar3">#}
+{#                                    {{ entry.posted | date:"l, jS F Y, Hi\h\r\s" }}#}
+{#                                </i>#}
+{#                            </li>#}
+{#                            <li><a href="#"><i class="icon-user"></i>jw</a></li>#}
+{#                            <li><i class="icon-folder-open"></i>#}
+{#                                {% for tag in entry.tags.all %}#}
+{#                                    <a href="{% url 'blog:tag' tag.pk %}">{{ tag.tag }}</a>#}
+{#                                    {% if not forloop.last %} | {% endif %}#}
+{#                                {% endfor %}#}
+{#                            </li>#}
+{##}
 {#                            <li><a href="blog-single.html#comments"><i class="icon-comments"></i> 13</a></li>#}
-                        </ul>
+{#                        </ul>#}
+{##}
+{#                        <div class="entry-content">#}
+{#                            {% load markdownify %}#}
+{#                            <p>#}
+{#                                {{ entry.body | markdown | safe }}#}
+{#                            </p>#}
+{#                        </div>#}
+{##}
+{#                    </div>#}
+{#                </div>#}
+{##}
+{#            </div>#}
 
-                        <div class="entry-content">
-                            {% load markdownify %}
-                            <p>
-                                {{ entry.body | markdown | safe }}
-                            </p>
-                        </div>
+    {% endif %}
 
-                    </div>
-                </div>
+    {% if entries %}
 
-            </div>
+        <div class="uk-heading-line">
+            <h3>{{ assets | lookup:'index.entries' | safe }}</h3>
+        </div>
 
-        {% endif %}
+        <div uk-slider="sets: true; finite: true">
 
-        {% if entries %}
+            <div class="uk-position-relative uk-visible-toggle" tabindex="-1">
 
-            <div class="fancy-title title-border">
-                <h3>{{ assets | lookup:'index.entries' | safe }}</h3>
-            </div>
-
-            <div id="oc-images"
-                 class="owl-carousel image-carousel carousel-widget bottommargin"
-                 data-margin="30" data-nav="false" data-items-xs="1"
-                 data-items-sm="2" data-items-md="3" data-items-xl="4">
-
-                {% for entry in entries %}
-
-                    <div class="oc-item">
-                        <div class="ipost clearfix">
-
+                <ul class="uk-slider-items uk-child-width-1-4@s uk-grid">
+                    {% for entry in entries %}
+                        <div class="uk-panel">
                             {% if entry.images.all %}
                                 {% with entry.images.all|first as image %}
                                     <div class="entry-image">
-                                        <a href="#"><img class="image_fade" src="{{ image.image.url }}" alt="Image"></a>
+                                        <img class="image_fade" src="{{ image.image.url }}">
                                     </div>
                                 {% endwith %}
                             {% endif %}
-
-                            <div class="entry-title">
-                                <h4><a href="{% url 'blog:detail' entry.pk %}">{{ entry.title }}</a></h4>
+                            <div class="uk-card">
+                                <h3 class="uk-card-title">
+                                    <a href="{% url 'blog:detail' entry.pk %}">{{ entry.title }}</a>
+                                </h3>
+                                <p class="uk-text-meta">
+                                    <span uk-icon="icon: calendar"></span>
+                                    {{ entry.posted | date:"l, jS F Y, Hi\h\r\s" }}
+                                </p>
                             </div>
-
-                            <ul class="entry-meta clearfix">
-                                <li><i class="icon-calendar3"></i>{{ entry.posted | date:"l, jS F Y, Hi\h\r\s" }}</li>
-{#                                <li><a href="blog-single.html#comments">c<i class="icon-comments"></i> 53</a></li>#}
-                            </ul>
-
                         </div>
-                    </div>
-
-                {% endfor %}
+                    {% endfor %}
+                </ul>
 
             </div>
 
-        {% endif %}
+            <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
 
-    </section>
+        </div>
+
+    {% endif %}
 
 {% endblock %}

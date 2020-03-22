@@ -1,59 +1,59 @@
-{% if entry.images.all %}
-    <div class="entry-image">
-        {% if entry.images.all|length_is:"1" %}
-            {% with entry.images.all|first as image %}
+{#{% if entry.images.all %}#}
+{#    <div class="entry-image">#}
+{#        {% if entry.images.all|length_is:"1" %}#}
+{#            {% with entry.images.all|first as image %}#}
 {#                    <p>{{ image.image.name }}</p>#}
-                <a href="{{ image.image.url }}" data-lightbox="image">
-                    <img class="image_fade"
-                         src="{{ image.image.url }}"
-                         alt="" style="opacity: 1;">
-                </a>
-            {% endwith %}
-        {% else %}
-            <div class="fslider" data-arrows="false"
-                 data-lightbox="gallery">
-                <div class="flexslider">
-                    <div class="slider-wrap">
-                        {% for image in entry.images.all %}
-                            <div class="slide">
-                                <a href="{{ image.image.url }}"
-                                   data-lightbox="gallery-item">
-                                    <img class="image_fade"
-                                         src="{{ image.image.url }}"
-                                         alt="{{ image.image.description }}">
-                                </a>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        {% endif %}
-    </div>
-{% endif %}
-
-<div class="entry-title">
-    <a href="{% url 'blog:detail' entry.pk %}">
-        <h2 class="title">
-            {{ entry.title }}
-        </h2>
-    </a>
-</div>
-
-<ul class="entry-meta clearfix">
-    <li>
-        <i class="icon-calendar3">
-            {{ entry.posted | date:"l, jS F Y, Hi\h\r\s" }}
-        </i>
-    </li>
-    <li><a href="#"><i class="icon-user"></i>jw</a></li>
-    <li><i class="icon-folder-open"></i>
-        {% for tag in entry.tags.all %}
-            <a href="{% url 'blog:tag' tag.pk %}">{{ tag.tag }}</a>
-            {% if not forloop.last %} | {% endif %}
-        {% endfor %}
-    </li>
+{#                <a href="{{ image.image.url }}" data-lightbox="image">#}
+{#                    <img class="image_fade"#}
+{#                         src="{{ image.image.url }}"#}
+{#                         alt="" style="opacity: 1;">#}
+{#                </a>#}
+{#            {% endwith %}#}
+{#        {% else %}#}
+{#            <div class="fslider" data-arrows="false"#}
+{#                 data-lightbox="gallery">#}
+{#                <div class="flexslider">#}
+{#                    <div class="slider-wrap">#}
+{#                        {% for image in entry.images.all %}#}
+{#                            <div class="slide">#}
+{#                                <a href="{{ image.image.url }}"#}
+{#                                   data-lightbox="gallery-item">#}
+{#                                    <img class="image_fade"#}
+{#                                         src="{{ image.image.url }}"#}
+{#                                         alt="{{ image.image.description }}">#}
+{#                                </a>#}
+{#                            </div>#}
+{#                        {% endfor %}#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        {% endif %}#}
+{#    </div>#}
+{#{% endif %}#}
+{##}
+{#<div class="entry-title">#}
+{#    <a href="{% url 'blog:detail' entry.pk %}">#}
+{#        <h2 class="title">#}
+{#            {{ entry.title }}#}
+{#        </h2>#}
+{#    </a>#}
+{#</div>#}
+{##}
+{#<ul class="entry-meta clearfix">#}
+{#    <li>#}
+{#        <i class="icon-calendar3">#}
+{#            {{ entry.posted | date:"l, jS F Y, Hi\h\r\s" }}#}
+{#        </i>#}
+{#    </li>#}
+{#    <li><a href="#"><i class="icon-user"></i>jw</a></li>#}
+{#    <li><i class="icon-folder-open"></i>#}
+{#        {% for tag in entry.tags.all %}#}
+{#            <a href="{% url 'blog:tag' tag.pk %}">{{ tag.tag }}</a>#}
+{#            {% if not forloop.last %} | {% endif %}#}
+{#        {% endfor %}#}
+{#    </li>#}
     {#        <li><a href="#"><i class="icon-film"></i></a></li>#}
-</ul>
+{#</ul>#}
 
 <div class="entry-content">
     {% load markdownify %}

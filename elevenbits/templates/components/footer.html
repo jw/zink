@@ -1,86 +1,24 @@
-<footer id="footer" class="dark">
+    <div class="uk-grid">
 
-    <div class="container">
+        <div class="uk-width-1-2">
+            <div class="uk-flex-column">
+                <div class="">
+                     <a href="#">Terms of Use</a> |
+                     <a href="#">Privacy Policy</a>
+                </div>
+                <div>
+                    {% load version %}
+                    Running on Python {% version 'python' %} and
+                    Django {% version 'Django' %}.
+                </div>
+            </div>
+        </div>
 
-        <div class="footer-widgets-wrap clearfix">
-
-            {% if books %}
-                {% if books|length == 1 %}
-                    {% with book=books|first %}
-                    <p>
-                        I'm reading {{ book.title }} by {{ book.author }}.
-                        Now at page {{ book.current_page }} of {{ book.pages }}.
-                    </p>
-                    {% endwith %}
-                {% else %}
-                    <div class="widget widget_links clearfix">
-                        <p class="nobottomborder">
-                            Reading these {{ books|length }} books at the same time:
-                        </p>
-                        <ul>
-                        {% for book in books %}
-                            <li>
-                                > {{ book.title }} (by {{ book.author }}) at
-                                page {{ book.current_page }} of {{ book.pages }}.
-                            </li>
-                        {% endfor %}
-                        </ul>
-                    </div>
-                {% endif %}
-            {% endif %}
-
+        <div class="uk-width-1-2 uk-text-right">
+            <a href="https://twitter.com/ElevenBits" uk-icon="icon: twitter"></a>
+            <a href="https://www.pinterest.com/elevenbits/" uk-icon="icon: pinterest"></a>
+            <a href="https://github.com/jw" uk-icon="icon: github"></a>
+            <a href="https://github.com/jw" uk-icon="icon: linkedin"></a>
         </div>
 
     </div>
-
-    <div id="copyrights">
-
-        <div class="container clearfix">
-
-            <div class="col_half">
-
-                <div class="copyright-links">
-                    <a href="#">Terms of Use</a> |
-                    <a href="#">Privacy Policy</a>
-                </div>
-
-                {% load version %}
-                Running on Python {% version 'python' %} and
-                Django {% version 'Django' %}.
-
-            </div>
-
-            <div class="col_half col_last tright">
-                <div class="fright clearfix">
-                    <a href="https://twitter.com/ElevenBits"
-                       class="social-icon si-small si-borderless si-twitter">
-                        <i class="icon-twitter"></i>
-                        <i class="icon-twitter"></i>
-                    </a>
-
-                    <a href="https://www.pinterest.com/elevenbits/"
-                       class="social-icon si-small si-borderless si-pinterest">
-                        <i class="icon-pinterest"></i>
-                        <i class="icon-pinterest"></i>
-                    </a>
-
-                    <a href="https://github.com/jw"
-                       class="social-icon si-small si-borderless si-github">
-                        <i class="icon-github"></i>
-                        <i class="icon-github"></i>
-                    </a>
-
-                    <a href="https://www.linkedin.com/in/elevenbits/"
-                       class="social-icon si-small si-borderless si-linkedin">
-                        <i class="icon-linkedin"></i>
-                        <i class="icon-linkedin"></i>
-                    </a>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</footer>

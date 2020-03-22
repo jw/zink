@@ -1,29 +1,15 @@
-<section id="content">
+<div class="uk-container">
 
-    <div class="content-wrap">
-
-        <div class="container clearfix">
-
-            <div class="postcontent nobottommargin clearfix">
-
-                {% if entries %}
-
-                    <div id="posts">
-
-                        {% for entry in entries.object_list %}
-                            {% include "entry.html" %}
-                        {% endfor %}
-
-                    </div>
-
-                {% else %}
-                    <p>No entries yet!</p>
-                {% endif %}
-
-            </div>
-
-        </div>
-
+    <div class="uk-alert-warning">
+        HELLO THERE!
     </div>
 
-</section>
+    {% if entries %}
+        {% for entry in entries.object_list %}
+            {% include "entry.html" %}
+        {% endfor %}
+    {% else %}
+        <p>No entries yet!</p>
+    {% endif %}
+
+</div>

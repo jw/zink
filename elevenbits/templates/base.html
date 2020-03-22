@@ -20,22 +20,16 @@
 
 </head>
 
-<body>
+<body class="uk-flex uk-flex-column">
 
-    <div>
-
-        {% block header %}{% include "components/header.html" %}{% endblock %}
-        {% block content %}{% include "components/content.html" %}{% endblock %}
-        {% block footer %}{% include "components/footer.html" %}{% endblock %}
-
-    </div>
+{# {% block header %}{% include "components/header.html" %}{% endblock %}#}
+    {% block content %}{% include "components/content.html" %}{% endblock %}
+    {% block footer %}{% include "components/footer.html" %}{% endblock %}
 
     {# scroll to top #}
     <a class="uk-button uk-button-primary" target="#top" type="button"
        uk-scroll uk-icon="icon: chevron-up">
     </a>
-
-    {% block map %}{% endblock %}
 
 </body>
 
