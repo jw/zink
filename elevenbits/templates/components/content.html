@@ -1,15 +1,7 @@
-<div class="uk-container">
-
-    <div class="uk-alert-warning">
-        HELLO THERE!
-    </div>
-
-    {% if entries %}
-        {% for entry in entries.object_list %}
-            {% include "entry.html" %}
-        {% endfor %}
-    {% else %}
-        <p>No entries yet!</p>
-    {% endif %}
-
-</div>
+{% if entries %}
+    {% for entry in entries.object_list %}
+        {% include "entry.html" %}
+    {% endfor %}
+{% else %}
+    <p>No entries yet!</p>
+{% endif %}

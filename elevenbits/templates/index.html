@@ -80,38 +80,7 @@
             <h3>{{ assets | lookup:'index.entries' | safe }}</h3>
         </div>
 
-        <div uk-slider="sets: true; finite: true">
-
-            <div class="uk-position-relative uk-visible-toggle" tabindex="-1">
-
-                <ul class="uk-slider-items uk-child-width-1-4@s uk-grid">
-                    {% for entry in entries %}
-                        <div class="uk-panel">
-                            {% if entry.images.all %}
-                                {% with entry.images.all|first as image %}
-                                    <div class="entry-image">
-                                        <img class="image_fade" src="{{ image.image.url }}">
-                                    </div>
-                                {% endwith %}
-                            {% endif %}
-                            <div class="uk-card">
-                                <h3 class="uk-card-title">
-                                    <a href="{% url 'blog:detail' entry.pk %}">{{ entry.title }}</a>
-                                </h3>
-                                <p class="uk-text-meta">
-                                    <span uk-icon="icon: calendar"></span>
-                                    {{ entry.posted | date:"l, jS F Y, Hi\h\r\s" }}
-                                </p>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </ul>
-
-            </div>
-
-            <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
-
-        </div>
+        {% block slider %}{% include "components/slider.html" %}{% endblock %}
 
     {% endif %}
 
