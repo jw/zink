@@ -60,13 +60,12 @@ class BlogTest(TestCase):
         self.assertContains(response, "Blog Categories")
         self.assertContains(response, 'Java (2)')
 
-    @skip
     def testDetail(self):
         """Test one single blog entry."""
         client = Client()
         # get the 'how to access cherokee-admin...' entry
         response = client.get(reverse('blog:detail', args=[21]))
-        self.assertContains(response, 'How to access cherokee-admin')
+        self.assertContains(response, 'Create an SSH tunnel.')
 
     @skipIf(True, "I don't want to run this test yet")
     def testPageTag(self):
