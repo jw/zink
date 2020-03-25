@@ -1,5 +1,5 @@
 import logging
-from unittest import skipIf
+from unittest import skipIf, skip
 
 from django.test import TestCase
 from django.test.client import Client
@@ -9,6 +9,19 @@ from blog.models import Tag, Static
 from elevenbits.generic import get_assets
 
 logger = logging.getLogger('elevenbits')
+
+
+class IndexTest(TestCase):
+    """Test the home page."""
+
+    fixtures = ['blog']
+
+    def testBlog(self):
+        """Test the full home page."""
+        client = Client()
+        response = client.get(reverse('blog:home'))
+        self.assertContains(response, "Latest stuff from my blog")
+        self.assertContains(response, 'Running on')
 
 
 class TagTestCase(TestCase):
@@ -26,7 +39,7 @@ class TagTestCase(TestCase):
 class BlogTest(TestCase):
     """Test all the blog features."""
 
-    fixtures = ['menus', 'blog']
+    fixtures = ['blog']
 
     def testBlog(self):
         """Test the full blog."""
@@ -47,6 +60,7 @@ class BlogTest(TestCase):
         self.assertContains(response, "Blog Categories")
         self.assertContains(response, 'Java (2)')
 
+    @skip
     def testDetail(self):
         """Test one single blog entry."""
         client = Client()
@@ -90,7 +104,7 @@ class BlogTest(TestCase):
 class HttpErrorHandling(TestCase):
     """Test the Http Error pages."""
 
-    fixtures = ['menus', 'blog']
+    fixtures = ['blog']
 
     def test404(self):
         """Test the 404 response."""
@@ -106,7 +120,7 @@ class HttpErrorHandling(TestCase):
 
 
 class StaticsTestCase(TestCase):
-    fixtures = ['static']
+    fixtures = ['blog']
 
     def test_statics_are_available(self):
         """Ensure that the default assets are there"""
@@ -128,39 +142,39 @@ class StaticsTestCase(TestCase):
 
     def test_get_bigger_statics(self):
         """Get the generic assets and even more"""
-        assets = get_assets('index.header', 'contact.title')
+        assets = get_assets('index.header', 'index.latest')
         self.assertIn('rero', assets)
         self.assertIn('copyright', assets)
         self.assertIn('title', assets)
         self.assertIn('index.header', assets)
-        self.assertIn('contact.title', assets)
+        self.assertIn('index.latest', assets)
 
     def test_get_prefix(self):
         """Get the generic assets and a prefix"""
-        assets = get_assets(prefix="header")
+        assets = get_assets(prefix="index")
         self.assertIn('rero', assets)
         self.assertIn('copyright', assets)
         self.assertIn('title', assets)
-        self.assertIn('header.description', assets)
-        self.assertIn('header.host', assets)
+        self.assertIn('index.header', assets)
+        self.assertIn('index.latest', assets)
+        self.assertIn('index.entries', assets)
 
     def test_get_prefix_and_extra(self):
         """Get the generic assets, a prefix set and an extra"""
-        assets = get_assets('static.author', prefix="header")
+        assets = get_assets('contact.country', prefix="index")
         self.assertIn('rero', assets)
         self.assertIn('copyright', assets)
         self.assertIn('title', assets)
-        self.assertIn('header.description', assets)
-        self.assertIn('header.host', assets)
-        self.assertIn('static.author', assets)
-
-    def test_get_prefix_and_extra(self):
-        """Get the generic assets, a prefix set and two extras"""
-        assets = get_assets('static.author', 'index.header', prefix="header")
-        self.assertIn('rero', assets)
-        self.assertIn('copyright', assets)
-        self.assertIn('title', assets)
-        self.assertIn('header.description', assets)
-        self.assertIn('header.host', assets)
-        self.assertIn('static.author', assets)
+        self.assertIn('contact.country', assets)
         self.assertIn('index.header', assets)
+        self.assertIn('index.latest', assets)
+        self.assertIn('index.entries', assets)
+
+    def test_get_prefix_and_two_extras(self):
+        """Get the generic assets, a prefix set and two extras"""
+        assets = get_assets('title', 'index.header', prefix="contact")
+        self.assertIn('rero', assets)
+        self.assertIn('copyright', assets)
+        self.assertIn('title', assets)
+        self.assertIn('index.header', assets)
+        self.assertIn('contact.name', assets)

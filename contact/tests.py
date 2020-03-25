@@ -9,7 +9,7 @@ logger = logging.getLogger('elevenbits')
 
 class FormTest(TestCase):
 
-    fixtures = ['static']
+    fixtures = ['blog']
 
     def test_get_contact_index_page(self):
         """Tests a valid contact post to the site."""

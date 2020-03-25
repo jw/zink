@@ -5,6 +5,11 @@ from blog import views
 app_name = 'blog'
 
 urlpatterns = [
+
+    # todo: place these somewhere else!
+    path('home/', views.home, name='home'),
+    path('stilus/', views.stilus, name='stilus'),
+
     # blog page
     path('', views.blog, name='blog'),
 

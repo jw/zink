@@ -248,7 +248,6 @@ INSTALLED_APPS = (
     # 'static_precompiler',
     'blog.apps.BlogConfig',
     'contact',
-    'home',
     'deployment.apps.DeploymentConfig',
     'elevenbits',
     # 'search',

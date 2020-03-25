@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404, render
 
 from blog.models import Entry, Tag, Menu
 from elevenbits.generic import get_assets
+from reading.models import Text
 from util.deployment import get_deployment
 
 logger = logging.getLogger("elevenbits")
@@ -15,8 +16,54 @@ def create_menus(root, active=None):
     def create_menu(menu, active):
         if active and menu.name.upper() == active.upper():
             menu.active = True
+        else:
+            menu.active = False
         return menu
     return [create_menu(menu, active) for menu in root.children]
+
+
+def home(request):
+    """Show the home page."""
+
+    assets = get_assets(prefix="index")
+
+    menus = create_menus(Menu.roots[0])
+    logger.info(f"Retrieved {len(menus)} menu items.")
+
+    entry_list = Entry.objects.filter(active=True).reverse()
+    logger.info(f"Retrieved {len(entry_list)} blog entries.")
+
+    books = list(Text.objects.filter(reading=True))
+    if books:
+        logger.info(f"Reading one (or more) books: {books}.")
+    else:
+        logger.info("Not reading any book! So sad.")
+
+    try:
+        entry = entry_list.first()
+    except IndexError:
+        entry = None
+
+    attributes = {'entry': entry,
+                  'entries': entry_list[1:],
+                  'books': books,
+                  'menus': menus,
+                  'assets': assets}
+
+    return render(request, 'index.html', attributes)
+
+
+def stilus(request):
+
+    assets = get_assets(prefix="index")
+
+    menus = create_menus(Menu.roots[0], 'stilus')
+    logger.info(f"Retrieved {len(menus)} menu items.")
+
+    attributes = {'menus': menus,
+                  'assets': assets}
+
+    return render(request, 'stilus.html', attributes)
 
 
 def blog(request, page=1):
