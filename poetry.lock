@@ -155,11 +155,14 @@ version = "1.7.0"
 
 [[package]]
 category = "main"
-description = "This reusable Django app introduces site tree, menu and breadcrumbs navigation elements"
-name = "django-sitetree"
+description = "django-treenode is probably the best abstract model / admin for your tree based stuff."
+name = "django-treenode"
 optional = false
 python-versions = "*"
-version = "1.14.0"
+version = "0.14.2"
+
+[package.dependencies]
+six = ">=1.9.0,<2.0.0"
 
 [[package]]
 category = "main"
@@ -425,7 +428,7 @@ python-versions = "*"
 version = "2.7.4"
 
 [metadata]
-content-hash = "ceb19623f8acfab1825487b8057ed80d5fcd0121e2c940eb21759c6c83ea8cf9"
+content-hash = "d17cdd40216bc76d8a29f1510aceff2648a9f368b6cf989f89f7b5bfab7955cf"
 python-versions = "^3.8"
 
 [metadata.files]
@@ -486,9 +489,9 @@ django-pipeline = [
     {file = "django-pipeline-1.7.0.tar.gz", hash = "sha256:0ded22b974e3d627c27fc490ef5b23fcdcf0cdb00b704d628b5ca6d0b010d6fe"},
     {file = "django_pipeline-1.7.0-py2.py3-none-any.whl", hash = "sha256:f7da70f00aa4baea3e0811f88927a116425deee05871fa2bfd2f8247f42d8847"},
 ]
-django-sitetree = [
-    {file = "django-sitetree-1.14.0.tar.gz", hash = "sha256:60e2151e984a65760eb78f00a1308362aa38f333934aeff6c95753b34a4d3bdc"},
-    {file = "django_sitetree-1.14.0-py2.py3-none-any.whl", hash = "sha256:f78270f93b1707d37903146ddf8631e764967de338e797896dbfda2197c176fc"},
+django-treenode = [
+    {file = "django-treenode-0.14.2.tar.gz", hash = "sha256:1d871cd452cd86ce53a3a703b1853d256f318a83a77af421238a1932dcceaaa6"},
+    {file = "django_treenode-0.14.2-py2-none-any.whl", hash = "sha256:bd4a030016049a7d52ad161ae534301ae00276e3cca0ee4fc39729ff87cf7ba1"},
 ]
 django-widget-tweaks = [
     {file = "django-widget-tweaks-1.4.5.tar.gz", hash = "sha256:f2e2c9c9be1ccc59061e248dcc2144f4906d594abe1a563902f4bdf6aa14e432"},

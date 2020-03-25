@@ -190,8 +190,6 @@ TEMPLATES = [
                 'django.template.context_processors.static',
                 'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
-                # needed for current menu identifier (for sitetree):
-                'django.template.context_processors.request'
             ],
         },
     },
@@ -254,7 +252,6 @@ INSTALLED_APPS = (
     'deployment.apps.DeploymentConfig',
     'elevenbits',
     # 'search',
-    'sitetree',
     'reading',
     'util',
     # 'django_crontab',

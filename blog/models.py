@@ -1,4 +1,14 @@
 from django.db import models
+from treenode.models import TreeNodeModel
+
+
+class Menu(TreeNodeModel):
+
+    treenode_display_field = 'name'
+
+    name = models.CharField(max_length=255)
+    url = models.CharField(max_length=255)
+    active = False
 
 
 class Tag(models.Model):

@@ -7,6 +7,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
+from blog.models import Menu
+from blog.views import create_menus
 from contact.models import ContactForm
 from elevenbits import settings
 from elevenbits.generic import get_assets
@@ -18,6 +20,9 @@ logger = logging.getLogger("elevenbits")
 def contact(request):
     static = get_assets(prefix='contact')
     deployment = get_deployment()
+
+    menus = create_menus(Menu.roots[0], 'contact')
+    logger.info(f"Retrieved {len(menus)} menu items.")
 
     if request.method == 'POST':
 
@@ -53,6 +58,7 @@ def contact(request):
     attributes = {'deployment': deployment,
                   'assets': static,
                   'contact': contact,
+                  'menus': menus,
                   'key': settings.GOOGLE_MAPS_KEY,
                   'form': form}
 

@@ -4,11 +4,19 @@ from django.conf import settings
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.shortcuts import get_object_or_404, render
 
-from blog.models import Entry, Tag
+from blog.models import Entry, Tag, Menu
 from elevenbits.generic import get_assets
 from util.deployment import get_deployment
 
 logger = logging.getLogger("elevenbits")
+
+
+def create_menus(root, active=None):
+    def create_menu(menu, active):
+        if active and menu.name.upper() == active.upper():
+            menu.active = True
+        return menu
+    return [create_menu(menu, active) for menu in root.children]
 
 
 def blog(request, page=1):
@@ -19,6 +27,9 @@ def blog(request, page=1):
 
     tags = Tag.objects.all()
     logger.info(f"Retrieved {len(tags)} tags.")
+
+    menus = create_menus(Menu.roots[0], 'blog')
+    logger.info(f"Retrieved {len(menus)} menu items.")
 
     all_entries = Entry.objects.filter(active=True).reverse()
     logger.info(f"Retrieved total of {len(all_entries)} blog entries.")
@@ -32,6 +43,7 @@ def blog(request, page=1):
     attributes = {'deployment': deployment,
                   'assets': static,
                   'page_entries': paginator.get_page(page),
+                  'menus': menus,
                   'tags': tags}
 
     return render(request, 'blog.html', attributes)
@@ -45,6 +57,9 @@ def tag(request, tag, page=1):
 
     tags = Tag.objects.all()
     logger.info(f"Retrieved {len(tags)} tags.")
+
+    menus = create_menus(Menu.roots[0])
+    logger.info(f"Retrieved {len(menus)} menu items.")
 
     entry_list = Entry.objects.filter(active=True, tags__pk=tag).reverse()
 
@@ -83,6 +98,7 @@ def tag(request, tag, page=1):
                   'assets': static,
                   'entries': entries,
                   'tag_id': tag_id,
+                  'menus': menus,
                   'tags': tags}
 
     return render(request, 'tags.html', attributes)
@@ -98,11 +114,15 @@ def detail(request, id):
     tags = Tag.objects.all()
     logger.info(f"Retrieved {len(tags)} tags.")
 
+    menus = create_menus(Menu.roots[0])
+    logger.info(f"Retrieved {len(menus)} menu items.")
+
     entry = get_object_or_404(Entry, pk=id)
 
     attributes = {'deployment': deployment,
                   'assets': static,
                   'tags': tags,
+                  'menus': menus,
                   'entry': entry}
 
     return render(request, 'detail.html', attributes)
