@@ -1,83 +1,49 @@
 {% extends "base.html" %}
 
+{% load lookup %}
+{% load markdownify %}
+
 {% block content %}
 
-    {% load lookup %}
-
-    {# work in progress... #}
-    <div class="uk-alert-primary" uk-alert>
-        <a class="uk-alert-close" uk-close></a>
-        <p>{{ assets | lookup:'rero' | safe }}</p>
-    </div>
-
-    {# main title #}
     <div class="uk-container">
-        <h1 class="uk-heading-medium">
-            {{ assets | lookup:'index.header' | safe }}
-        </h1>
-    </div>
 
-    {% include "components/entry.html" %}
-
-{#            <div id="posts" class="small-thumbs">#}
-{##}
-{#                <div class="entry clearfix">#}
-{#                    <div class="entry-image">#}
-{#                        {% if entry.images.all|length_is:"1" %}#}
-{#                            {% with entry.images.all|first as image %}#}
-{#                                <a href="{{ image.image.url }}" data-lightbox="image">#}
-{#                                    <img class="image_fade"#}
-{#                                         src="{{ image.image.url }}"#}
-{#                                         alt="{{ image.image.description }}">#}
-{#                                </a>#}
-{#                            {% endwith %}#}
-{#                        {% endif %}#}
-{#                    </div>#}
-{#                    <div class="entry-c">#}
-{##}
-{#                        <div class="entry-title">#}
-{#                            <a href="{% url 'blog:detail' entry.pk %}">#}
-{#                                <h2 class="title">{{ entry.title }}</h2>#}
-{#                            </a>#}
-{#                        </div>#}
-{##}
-{#                        <ul class="entry-meta clearfix">#}
-{#                            <li>#}
-{#                                <i class="icon-calendar3">#}
-{#                                    {{ entry.posted | date:"l, jS F Y, Hi\h\r\s" }}#}
-{#                                </i>#}
-{#                            </li>#}
-{#                            <li><a href="#"><i class="icon-user"></i>jw</a></li>#}
-{#                            <li><i class="icon-folder-open"></i>#}
-{#                                {% for tag in entry.tags.all %}#}
-{#                                    <a href="{% url 'blog:tag' tag.pk %}">{{ tag.tag }}</a>#}
-{#                                    {% if not forloop.last %} | {% endif %}#}
-{#                                {% endfor %}#}
-{#                            </li>#}
-{##}
-{#                            <li><a href="blog-single.html#comments"><i class="icon-comments"></i> 13</a></li>#}
-{#                        </ul>#}
-{##}
-{#                        <div class="entry-content">#}
-{#                            {% load markdownify %}#}
-{#                            <p>#}
-{#                                {{ entry.body | markdown | safe }}#}
-{#                            </p>#}
-{#                        </div>#}
-{##}
-{#                    </div>#}
-{#                </div>#}
-{##}
-{#            </div>#}
-
-    {% if entries %}
-
-        <div class="uk-heading-line">
-            <h3>{{ assets | lookup:'index.entries' | safe }}</h3>
+        {# work in progress... #}
+        <div class="uk-alert-primary uk-margin-top" uk-alert>
+            <a class="uk-alert-close" uk-close></a>
+            <p>{{ assets | lookup:'rero' | safe }}</p>
         </div>
 
-        {% block slider %}{% include "components/slider.html" %}{% endblock %}
+        {# main title #}
+        <div class="uk-text-center uk-margin">
+            <h1 class="uk-heading-medium">
+                {{ assets | lookup:'index.header' | safe }}
+            </h1>
+        </div>
 
-    {% endif %}
+        {# entry #}
+        {% if entry %}
+            <article class="uk-article uk-margin">
+                <h1 class="uk-article-title">
+                    <a href="{% url 'blog:detail' entry.pk %}">
+                        {{ entry.title }}
+                    </a>
+                </h1>
+                <div>
+                    <p>
+                        {{ entry.body | markdown | safe }}
+                    </p>
+                </div>
+            </article>
+        {% endif %}
+
+        {# slider #}
+        {% if entries %}
+            <div class="uk-heading-line">
+                <h3>{{ assets | lookup:'index.entries' | safe }}</h3>
+            </div>
+            {% include "components/slider.html" %}
+        {% endif %}
+
+    </div>
 
 {% endblock %}

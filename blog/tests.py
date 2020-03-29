@@ -17,7 +17,7 @@ class IndexTest(TestCase):
     fixtures = ['blog']
 
     def testBlog(self):
-        """Test the full home page."""
+        """Test the home page."""
         client = Client()
         response = client.get('/')
         self.assertContains(response, "Latest stuff from my blog")

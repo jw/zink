@@ -1,33 +1,60 @@
 {% extends "base.html" %}
 
+{% load lookup %}
+{% load markdownify %}
+
 {% block content %}
 
-    {% load lookup %}
+    <div class="uk-container">
 
-    {# left column #}
-    {# todo: some grid magic #}
+    <div class="uk-margin-top" uk-grid>
 
-    <article class="uk-article">
+        <div class="uk-width-3-4"> {# left column #}
 
-        <h1 class="uk-article-title">
-{#            <a href="{% url 'blog:detail' entry.pk %}">#}
-{#                {{ entry.title }}#}
-{#            </a>#}
-        </h1>
+            {% for entry in page_entries %}
+                <article class="uk-article">
+                    <h4 class="uk-article-title">
+                        <a href="{% url 'blog:detail' entry.pk %}">
+                            {{ entry.title }}
+                        </a>
+                    </h4>
+                    <p class="uk-article-meta">
+                        <span uk-icon="calendar"></span>
+                        {{ entry.posted | date:"l, jS F Y, Hi\h\r\s" }}
+                        <span uk-icon="user"></span>
+                        jw  {# add user to entry #}
+                        <span uk-icon="tag"></span>
+                        {% for tag in entry.tags.all %}
+                            <a href="{% url 'blog:tag' tag.pk %}">{{ tag.tag }}</a>
+                            {% if not forloop.last %} | {% endif %}
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ entry.body | markdown | safe }}
+                    </p>
+                </article>
+            {% endfor %}
 
-        <div class="entry-content">
-    {% load markdownify %}
-    <p>
-        {{ entry.body | markdown | safe }}
-    </p>
-</div>
+        </div>
 
+        <div class="uk-width-1-4"> {# right column #}
 
-    </article>
+            <h4>Tag Cloud</h4>
 
+            <div class="tagcloud">
+                {% for tag in tags %}
+                    <a href="{{ tag.get_absolute_url }}">{{ tag.tag }}</a>
+                {% endfor %}
+            </div>
 
+        </div>
 
-    {#                <div class="pagination bottommargin">#}
+    </div>
+
+    </div>
+{% endblock %}
+
+{#                <div class="pagination bottommargin">#}
 {##}
 {#                    {% if page_entries.has_previous %}#}
 {#                        <li class="page-item">#}
@@ -63,33 +90,3 @@
 {#                </div>#}
 {##}
 {#            </div>#}
-
-            {# right column #}
-
-            <div class="sidebar nobottommargin col_last clearfix">
-
-                <div class="sidebar-widgets-wrap">
-
-                    <div class="widget clearfix">
-
-                        <h4>Tag Cloud</h4>
-
-                        <div class="tagcloud">
-                            {% for tag in tags %}
-                                <a href="{{ tag.get_absolute_url }}">{{ tag.tag }}</a>
-                            {% endfor %}
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-{% endblock %}
-
-

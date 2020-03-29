@@ -19,11 +19,11 @@
         <script src="{% static "js/uikit.min.js" %}" type="text/javascript"></script>
         <script src="{% static "js/uikit-icons.min.js" %}" type="text/javascript"></script>
 
-        <title>{{ assets|lookup:'title' }}</title>
+        <title>{{ assets | lookup:'title' }}</title>
 
     </head>
 
-    <body class="uk-flex uk-flex-column">
+    <body>
 
         {% block header %}{% include "components/header.html" %}{% endblock %}
         {% block content %}{% include "components/content.html" %}{% endblock %}

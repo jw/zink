@@ -23,5 +23,5 @@ def get_assets(*keys, prefix=None):
         for key in keys:
             assets[key] = Static.objects.get(name=key).value
         return assets
-    except Static.DoesNotExist as e:
+    except Static.DoesNotExist:
         raise ObjectDoesNotExist("Could not find some of the assets!")
