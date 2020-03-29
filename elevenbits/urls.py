@@ -5,6 +5,7 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 from django.urls import include, path
 from django.views.generic import TemplateView, RedirectView
 
+from blog import views
 from . import settings
 
 admin.autodiscover()
@@ -12,6 +13,12 @@ admin.autodiscover()
 app_name = "elevenbits"
 
 urlpatterns = [
+
+    path('', views.home, name='home'),
+    path('stilus/', views.stilus, name='stilus'),
+    path('blog/', include('blog.urls', namespace='blog')),
+    path('contact/', include('contact.urls', namespace='contact')),
+    path('search', include('haystack.urls')),
 
     # robots.txt
     path('robots.txt',
@@ -27,19 +34,18 @@ urlpatterns = [
          name="favicon"),
 
     # 404 and 500 return codes
-    path('500', TemplateView.as_view(template_name='500.html',
-                                     extra_context={'assets': {'title': 'ElevenBits'}}),
+    path('500',
+         TemplateView.as_view(
+             template_name='500.html',
+             extra_context={'assets': {'title': 'ElevenBits'}}
+         ),
          name='500'),
-    path('404', TemplateView.as_view(template_name='404.html',
-                                     extra_context={'assets': {'title': 'ElevenBits'}}),
+    path('404',
+         TemplateView.as_view(
+            template_name='404.html',
+            extra_context={'assets': {'title': 'ElevenBits'}}
+         ),
          name='404'),
-
-    # home, blog and contact sections
-    path('', RedirectView.as_view(url='/blog')),
-    path('blog/', include('blog.urls', namespace='blog')),
-    path('contact/', include('contact.urls', namespace='contact')),
-
-    path('search', include('haystack.urls')),
 
     # admin
     path('admin/', admin.site.urls),

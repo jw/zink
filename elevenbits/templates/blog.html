@@ -4,66 +4,65 @@
 
     {% load lookup %}
 
-    <section id="content">
+    {# left column #}
+    {# todo: some grid magic #}
 
-        <div class="container clearfix topmargin">
+    <article class="uk-article">
 
-            {# left column #}
+        <h1 class="uk-article-title">
+{#            <a href="{% url 'blog:detail' entry.pk %}">#}
+{#                {{ entry.title }}#}
+{#            </a>#}
+        </h1>
 
-            <div class="postcontent nobottommargin clearfix">
+        <div class="entry-content">
+    {% load markdownify %}
+    <p>
+        {{ entry.body | markdown | safe }}
+    </p>
+</div>
 
-                <div class="alert alert-info bottommargin">
-                    {{ assets|lookup:'rero' | safe }}
-                </div>
 
-                <div id="posts" class="post-timeline clearfix">
+    </article>
 
-                    <div class="timeline-border"></div>
 
-                    {% for entry in page_entries.object_list %}
 
-                        {% include "timeline-entry.html" %}
-
-                    {% endfor %}
-
-                </div>
-
-                <div class="pagination bottommargin">
-
-                    {% if page_entries.has_previous %}
-                        <li class="page-item">
-                            <a class="page-link"
-                               href="{% url 'blog:page' page_entries.previous_page_number %}">«</a>
-                        </li>
-                    {% else %}
-                        <li class="page-item disabled">
-                            <a class="page-link" href="">«</a>
-                        </li>
-                    {% endif %}
-
-                    {% for page in page_entries.paginator.page_range %}
-                        <li class="page-item {% if page == page_entries.number %}active{% endif %}">
-                            <a class="page-link"
-                               href="{% url 'blog:page' page %}">
-                                {{ page }}
-                            </a>
-                        </li>
-                    {% endfor %}
-
-                    {% if page_entries.has_next %}
-                        <li class="page-item">
-                            <a class="page-link"
-                               href="{% url 'blog:page' page_entries.next_page_number %}">»</a>
-                        </li>
-                    {% else %}
-                        <li class="page-item disabled">
-                            <a class="page-link" href="">»</a>
-                        </li>
-                    {% endif %}
-
-                </div>
-
-            </div>
+    {#                <div class="pagination bottommargin">#}
+{##}
+{#                    {% if page_entries.has_previous %}#}
+{#                        <li class="page-item">#}
+{#                            <a class="page-link"#}
+{#                               href="{% url 'blog:page' page_entries.previous_page_number %}">«</a>#}
+{#                        </li>#}
+{#                    {% else %}#}
+{#                        <li class="page-item disabled">#}
+{#                            <a class="page-link" href="">«</a>#}
+{#                        </li>#}
+{#                    {% endif %}#}
+{##}
+{#                    {% for page in page_entries.paginator.page_range %}#}
+{#                        <li class="page-item {% if page == page_entries.number %}active{% endif %}">#}
+{#                            <a class="page-link"#}
+{#                               href="{% url 'blog:page' page %}">#}
+{#                                {{ page }}#}
+{#                            </a>#}
+{#                        </li>#}
+{#                    {% endfor %}#}
+{##}
+{#                    {% if page_entries.has_next %}#}
+{#                        <li class="page-item">#}
+{#                            <a class="page-link"#}
+{#                               href="{% url 'blog:page' page_entries.next_page_number %}">»</a>#}
+{#                        </li>#}
+{#                    {% else %}#}
+{#                        <li class="page-item disabled">#}
+{#                            <a class="page-link" href="">»</a>#}
+{#                        </li>#}
+{#                    {% endif %}#}
+{##}
+{#                </div>#}
+{##}
+{#            </div>#}
 
             {# right column #}
 

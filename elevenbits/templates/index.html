@@ -17,9 +17,7 @@
         </h1>
     </div>
 
-    {% if entry %}
-
-        <p>Last entry</p>
+    {% include "components/entry.html" %}
 
 {#            <div id="posts" class="small-thumbs">#}
 {##}
@@ -71,8 +69,6 @@
 {#                </div>#}
 {##}
 {#            </div>#}
-
-    {% endif %}
 
     {% if entries %}
 

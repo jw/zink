@@ -6,16 +6,12 @@ app_name = 'blog'
 
 urlpatterns = [
 
-    # todo: place these somewhere else!
-    path('home/', views.home, name='home'),
-    path('stilus/', views.stilus, name='stilus'),
-
     # blog page
     path('', views.blog, name='blog'),
 
     # pages of blog entries
     path('page/<int:page>/', views.blog, name='page'),
-    path('page/', views.blog),
+    path('page/', views.blog, name='page'),
 
     # blog entries per tag (and pages thereof)
     path('tag/<int:tag>/', views.tag, name='tag'),

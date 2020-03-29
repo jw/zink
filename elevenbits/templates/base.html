@@ -4,36 +4,36 @@
 {% load static %}
 {% load lookup %}
 
-<head>
+    <head>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <meta name="author" content="Jan Willems <jw@elevenbits.com>"/>
+        <meta name="author" content="Jan Willems <jw@elevenbits.com>"/>
 
-    {# add fonts #}
-    {# add colours #}
+        {# add fonts #}
+        {# add colours #}
 
-    <link rel="stylesheet" href="{% static "css/uikit.min.css" %}" type="text/css"/>
-    <script src="{% static "js/uikit.min.js" %}" type="text/javascript"></script>
-    <script src="{% static "js/uikit-icons.min.js" %}" type="text/javascript"></script>
+        <link rel="stylesheet" href="{% static "css/code.css" %}" type="text/css"/>
+        <link rel="stylesheet" href="{% static "css/uikit.min.css" %}" type="text/css"/>
+        <script src="{% static "js/uikit.min.js" %}" type="text/javascript"></script>
+        <script src="{% static "js/uikit-icons.min.js" %}" type="text/javascript"></script>
 
-    <title>{{ assets|lookup:'title' }}</title>
+        <title>{{ assets|lookup:'title' }}</title>
 
-</head>
+    </head>
 
-<body class="uk-flex uk-flex-column">
+    <body class="uk-flex uk-flex-column">
 
-    {% block header %}{% include "components/header.html" %}{% endblock %}
-    {% block content %}{% include "components/content.html" %}{% endblock %}
-    {% block footer %}{% include "components/footer.html" %}{% endblock %}
+        {% block header %}{% include "components/header.html" %}{% endblock %}
+        {% block content %}{% include "components/content.html" %}{% endblock %}
+        {% block footer %}{% include "components/footer.html" %}{% endblock %}
 
-    {# scroll to top #}
-    <a class="uk-button uk-button-primary" target="#top" type="button"
-       uk-scroll uk-icon="icon: chevron-up">
-    </a>
+        {# scroll to top #}
+        <a class="uk-button uk-button-primary" target="#top" type="button"
+           uk-scroll uk-icon="icon: chevron-up">
+        </a>
 
-</body>
+    </body>
 
 </html>

@@ -1,3 +1,21 @@
+{% if entry %}
+    <article class="uk-article">
+        <h1 class="uk-article-title">
+            <a href="{% url 'blog:detail' entry.pk %}">
+                {{ entry.title }}
+            </a>
+        </h1>
+
+        <div>
+            {% load markdownify %}
+            <p>
+                {{ entry.body | markdown | safe }}
+            </p>
+        </div>
+
+    </article>
+{% endif %}
+
 {#{% if entry.images.all %}#}
 {#    <div class="entry-image">#}
 {#        {% if entry.images.all|length_is:"1" %}#}
@@ -55,9 +73,3 @@
     {#        <li><a href="#"><i class="icon-film"></i></a></li>#}
 {#</ul>#}
 
-<div class="entry-content">
-    {% load markdownify %}
-    <p>
-        {{ entry.body | markdown | safe }}
-    </p>
-</div>

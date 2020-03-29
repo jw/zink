@@ -19,7 +19,7 @@ class IndexTest(TestCase):
     def testBlog(self):
         """Test the full home page."""
         client = Client()
-        response = client.get(reverse('blog:home'))
+        response = client.get('/')
         self.assertContains(response, "Latest stuff from my blog")
         self.assertContains(response, 'Running on')
 
