@@ -37,9 +37,23 @@ class Image(models.Model):
 class Entry(models.Model):
     """The blog entry."""
 
+    BLOG = 'BG'
+    STILUS = 'SS'
+    CONTACT = 'CT'
+    MISC = 'MC'
+    PAGE_CHOICES = [
+        (BLOG, 'Blog'),
+        (STILUS, 'Stilus'),
+        (CONTACT, 'Contact'),
+        (MISC, 'Miscellaneous')
+    ]
+
     created = models.DateTimeField('created',
                                    help_text='Date and time when '
                                              'this entry was created')
+
+    page = models.CharField(max_length=2, choices=PAGE_CHOICES, default=BLOG,
+                            help_text='The page this entry is for.')
 
     title = models.CharField(max_length=200)
 

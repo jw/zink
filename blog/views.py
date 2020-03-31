@@ -30,7 +30,7 @@ def home(request):
     menus = create_menus(Menu.roots[0])
     logger.info(f"Retrieved {len(menus)} menu items.")
 
-    entry_list = Entry.objects.filter(active=True).reverse()
+    entry_list = Entry.objects.filter(page=Entry.BLOG, active=True).reverse()
     logger.info(f"Retrieved {len(entry_list)} blog entries.")
 
     books = list(Text.objects.filter(reading=True))
@@ -60,7 +60,13 @@ def stilus(request):
     menus = create_menus(Menu.roots[0], 'stilus')
     logger.info(f"Retrieved {len(menus)} menu items.")
 
+    stilus = Entry.objects.filter(page=Entry.STILUS, active=True)
+    if stilus:
+        stilus = stilus[0]
+        logger.info(f"Retrieved stilus entry.")
+
     attributes = {'menus': menus,
+                  'stilus': stilus,
                   'assets': assets}
 
     return render(request, 'stilus.html', attributes)
@@ -78,7 +84,7 @@ def blog(request, page=1):
     menus = create_menus(Menu.roots[0], 'blog')
     logger.info(f"Retrieved {len(menus)} menu items.")
 
-    all_entries = Entry.objects.filter(active=True).reverse()
+    all_entries = Entry.objects.filter(page=Entry.BLOG, active=True).reverse()
     logger.info(f"Retrieved total of {len(all_entries)} blog entries.")
 
     try:
