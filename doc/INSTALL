@@ -4,7 +4,7 @@ INSTALL
 poetry
 ------
 
-Make sure you are in python 3 in the project root.  Preferably python 3.8.1.
+Make sure you are in python 3 in the project root.  Preferably python 3.8.2.
 Install poetry: curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
 Then use it: poetry install.
 
@@ -37,4 +37,3 @@ Remember that a superuser needs to be added:
 Add the fixtures:
 
 > poetry run python manage.py loaddata fixtures/blog.json
-> poetry run python manage.py loaddata fixtures/menus.json
