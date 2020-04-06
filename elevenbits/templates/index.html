@@ -14,13 +14,13 @@
         </div>
 
         {# main title #}
-        <div class="uk-text-center uk-margin">
-            <h1 class="uk-heading-medium">
-                {{ assets | lookup:'index.header' | safe }}
-            </h1>
+        <div class="uk-padding uk-text-center uk-margin">
+            <p class="uk-heading-medium">
+                <b>{{ assets | lookup:'index.header' | safe }}</b>
+            </p>
         </div>
 
-        {# entry #}
+        {# last entry #}
         {% if entry %}
             <article class="uk-article uk-margin">
                 <h1 class="uk-article-title">
