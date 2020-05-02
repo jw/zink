@@ -11,6 +11,19 @@ from elevenbits.generic import get_assets
 logger = logging.getLogger('elevenbits')
 
 
+class IndexTest(TestCase):
+    """Test the home page."""
+
+    fixtures = ['blog']
+
+    def testBlog(self):
+        """Test the home page."""
+        client = Client()
+        response = client.get('/')
+        self.assertContains(response, "Latest stuff from my blog")
+        self.assertContains(response, 'Running on')
+
+
 class TagTestCase(TestCase):
     """Test the basic tag creation."""
 
@@ -26,7 +39,7 @@ class TagTestCase(TestCase):
 class BlogTest(TestCase):
     """Test all the blog features."""
 
-    fixtures = ['menus', 'blog']
+    fixtures = ['blog']
 
     def testBlog(self):
         """Test the full blog."""
@@ -52,7 +65,7 @@ class BlogTest(TestCase):
         client = Client()
         # get the 'how to access cherokee-admin...' entry
         response = client.get(reverse('blog:detail', args=[21]))
-        self.assertContains(response, 'How to access cherokee-admin')
+        self.assertContains(response, 'Create an SSH tunnel.')
 
     @skipIf(True, "I don't want to run this test yet")
     def testPageTag(self):
@@ -86,16 +99,28 @@ class BlogTest(TestCase):
         self.assertContains(response, '<div class="codehilite"><pre>'
                                       '<span class="gp">')
 
-    # TODO: this must be somewhere else
+
+class HttpErrorHandling(TestCase):
+    """Test the Http Error pages."""
+
+    fixtures = ['blog']
+
     def test404(self):
         """Test the 404 response."""
         client = Client()
         response = client.get("/this_page_does_not_exist")
         self.assertContains(response, "404 message", status_code=404)
 
+    # todo: rename me!
+    def test404_bis(self):
+        """Test the 404 response."""
+        client = Client()
+        response = client.post("/foobar", data={'q': 'Python'})
+        self.assertContains(response, "404 message", status_code=404)
+
 
 class StaticsTestCase(TestCase):
-    fixtures = ['static']
+    fixtures = ['blog']
 
     def test_statics_are_available(self):
         """Ensure that the default assets are there"""
@@ -117,39 +142,39 @@ class StaticsTestCase(TestCase):
 
     def test_get_bigger_statics(self):
         """Get the generic assets and even more"""
-        assets = get_assets('index.header', 'contact.title')
+        assets = get_assets('index.header', 'index.latest')
         self.assertIn('rero', assets)
         self.assertIn('copyright', assets)
         self.assertIn('title', assets)
         self.assertIn('index.header', assets)
-        self.assertIn('contact.title', assets)
+        self.assertIn('index.latest', assets)
 
     def test_get_prefix(self):
         """Get the generic assets and a prefix"""
-        assets = get_assets(prefix="header")
+        assets = get_assets(prefix="index")
         self.assertIn('rero', assets)
         self.assertIn('copyright', assets)
         self.assertIn('title', assets)
-        self.assertIn('header.description', assets)
-        self.assertIn('header.host', assets)
+        self.assertIn('index.header', assets)
+        self.assertIn('index.latest', assets)
+        self.assertIn('index.entries', assets)
 
     def test_get_prefix_and_extra(self):
         """Get the generic assets, a prefix set and an extra"""
-        assets = get_assets('static.author', prefix="header")
+        assets = get_assets('contact.country', prefix="index")
         self.assertIn('rero', assets)
         self.assertIn('copyright', assets)
         self.assertIn('title', assets)
-        self.assertIn('header.description', assets)
-        self.assertIn('header.host', assets)
-        self.assertIn('static.author', assets)
-
-    def test_get_prefix_and_extra(self):
-        """Get the generic assets, a prefix set and two extras"""
-        assets = get_assets('static.author', 'index.header', prefix="header")
-        self.assertIn('rero', assets)
-        self.assertIn('copyright', assets)
-        self.assertIn('title', assets)
-        self.assertIn('header.description', assets)
-        self.assertIn('header.host', assets)
-        self.assertIn('static.author', assets)
+        self.assertIn('contact.country', assets)
         self.assertIn('index.header', assets)
+        self.assertIn('index.latest', assets)
+        self.assertIn('index.entries', assets)
+
+    def test_get_prefix_and_two_extras(self):
+        """Get the generic assets, a prefix set and two extras"""
+        assets = get_assets('title', 'index.header', prefix="contact")
+        self.assertIn('rero', assets)
+        self.assertIn('copyright', assets)
+        self.assertIn('title', assets)
+        self.assertIn('index.header', assets)
+        self.assertIn('contact.name', assets)

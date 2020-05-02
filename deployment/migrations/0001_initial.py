@@ -14,9 +14,18 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Deployment',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('tag', models.CharField(help_text='The tag of this deployment.', max_length=255, verbose_name='tag')),
-                ('version', models.CharField(max_length=255, verbose_name='version')),
+                ('id', models.AutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID')),
+                ('tag', models.CharField(
+                    help_text='The tag of this deployment.',
+                    max_length=255,
+                    verbose_name='tag')),
+                ('version', models.CharField(
+                    max_length=255,
+                    verbose_name='version')),
                 ('timestamp', models.DateTimeField(unique=True)),
                 ('deployer', models.CharField(max_length=255)),
             ],

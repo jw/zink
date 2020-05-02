@@ -1,8 +1,6 @@
-from socket import gethostname
-
 import dj_database_url
 import environ
-from os.path import join, dirname, realpath, abspath
+from os.path import join, dirname, abspath
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
@@ -49,7 +47,7 @@ DATABASES['default'].update(db_from_env)
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 try:
-    import rainbowtests
+    import rainbowtests  # noqa
 
     TEST_RUNNER = 'rainbowtests.RainbowTestSuiteRunner'
 except ImportError:
@@ -100,7 +98,7 @@ SITE_ID = 1
 # use i18n l10n and make dates time zone
 USE_I18N = True
 USE_L10N = True
-USE_TZ = False
+USE_TZ = True
 
 # The statics (css and images) location
 STATICFILES_DIRS = (
@@ -128,7 +126,8 @@ STATIC_URL = '/assets/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = join(PROJECT_ROOT, 'media')
 
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.'
+#                       'CompressedManifestStaticFilesStorage'
 # STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -190,8 +189,6 @@ TEMPLATES = [
                 'django.template.context_processors.static',
                 'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
-                # needed for current menu identifier (for sitetree):
-                'django.template.context_processors.request'
             ],
         },
     },
@@ -245,14 +242,14 @@ INSTALLED_APPS = (
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
 
+    'haystack',
+
     # 'static_precompiler',
     'blog.apps.BlogConfig',
     'contact',
-    'home',
     'deployment.apps.DeploymentConfig',
     'elevenbits',
     # 'search',
-    'sitetree',
     'reading',
     'util',
     # 'django_crontab',
@@ -298,7 +295,8 @@ LOGGING = {
     'handlers': {
         # 'sentry': {
         #     'level': 'WARNING',
-        #     'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
+        #     'class': 'raven.contrib.django.raven_compat.'
+        #              'handlers.SentryHandler',
         #     'tags': {'custom-tag': 'x'},
         # },
         'console': {

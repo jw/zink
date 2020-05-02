@@ -4,11 +4,72 @@ from django.conf import settings
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.shortcuts import get_object_or_404, render
 
-from blog.models import Entry, Tag
+from blog.models import Entry, Tag, Menu
 from elevenbits.generic import get_assets
+from reading.models import Text
 from util.deployment import get_deployment
 
 logger = logging.getLogger("elevenbits")
+
+
+def create_menus(root, active=None):
+    def create_menu(menu, active):
+        if active and menu.name.upper() == active.upper():
+            menu.active = True
+        else:
+            menu.active = False
+        return menu
+    return [create_menu(menu, active) for menu in root.children]
+
+
+def home(request):
+    """Show the home page."""
+
+    assets = get_assets(prefix="index")
+
+    menus = create_menus(Menu.roots[0])
+    logger.info(f"Retrieved {len(menus)} menu items.")
+
+    entry_list = Entry.objects.filter(page=Entry.BLOG, active=True).reverse()
+    logger.info(f"Retrieved {len(entry_list)} blog entries.")
+
+    books = list(Text.objects.filter(reading=True))
+    if books:
+        logger.info(f"Reading one (or more) books: {books}.")
+    else:
+        logger.info("Not reading any book! So sad.")
+
+    try:
+        entry = entry_list.first()
+    except IndexError:
+        entry = None
+
+    attributes = {'entry': entry,
+                  'entries': entry_list[1:],
+                  'books': books,
+                  'menus': menus,
+                  'assets': assets}
+
+    return render(request, 'index.html', attributes)
+
+
+def stilus(request):
+
+    assets = get_assets(prefix="index")
+
+    menus = create_menus(Menu.roots[0], 'stilus')
+    logger.info(f"Retrieved {len(menus)} menu items.")
+
+    stilus = Entry.objects.filter(page=Entry.STILUS, active=True)
+    if stilus:
+        stilus = stilus[0]
+        logger.info(f"Retrieved stilus entry.")
+
+    attributes = {'menus': menus,
+                  'stilus': stilus,
+                  'assets': assets}
+
+    return render(request, 'stilus.html', attributes)
 
 
 def blog(request, page=1):
@@ -20,7 +81,10 @@ def blog(request, page=1):
     tags = Tag.objects.all()
     logger.info(f"Retrieved {len(tags)} tags.")
 
-    all_entries = Entry.objects.filter(active=True).reverse()
+    menus = create_menus(Menu.roots[0], 'blog')
+    logger.info(f"Retrieved {len(menus)} menu items.")
+
+    all_entries = Entry.objects.filter(page=Entry.BLOG, active=True).reverse()
     logger.info(f"Retrieved total of {len(all_entries)} blog entries.")
 
     try:
@@ -32,6 +96,7 @@ def blog(request, page=1):
     attributes = {'deployment': deployment,
                   'assets': static,
                   'page_entries': paginator.get_page(page),
+                  'menus': menus,
                   'tags': tags}
 
     return render(request, 'blog.html', attributes)
@@ -45,6 +110,9 @@ def tag(request, tag, page=1):
 
     tags = Tag.objects.all()
     logger.info(f"Retrieved {len(tags)} tags.")
+
+    menus = create_menus(Menu.roots[0])
+    logger.info(f"Retrieved {len(menus)} menu items.")
 
     entry_list = Entry.objects.filter(active=True, tags__pk=tag).reverse()
 
@@ -83,6 +151,7 @@ def tag(request, tag, page=1):
                   'assets': static,
                   'entries': entries,
                   'tag_id': tag_id,
+                  'menus': menus,
                   'tags': tags}
 
     return render(request, 'tags.html', attributes)
@@ -98,11 +167,15 @@ def detail(request, id):
     tags = Tag.objects.all()
     logger.info(f"Retrieved {len(tags)} tags.")
 
+    menus = create_menus(Menu.roots[0])
+    logger.info(f"Retrieved {len(menus)} menu items.")
+
     entry = get_object_or_404(Entry, pk=id)
 
     attributes = {'deployment': deployment,
                   'assets': static,
                   'tags': tags,
+                  'menus': menus,
                   'entry': entry}
 
     return render(request, 'detail.html', attributes)

@@ -1,106 +1,143 @@
 {% extends "base.html" %}
 
+{% load lookup %}
+{% load static %}
+
 {% block content %}
 
-    {% load lookup %}
+<div class="uk-container uk-container-expand uk-padding-remove-left uk-padding-remove-right">
 
-    <div id="map" style="height: 400px;" class="gmap">
-        <p class="container">Something went wrong... Try to enable your
-            JavaScript!</p>
+    <div uk-grid>
+
+        <div class="uk-width-1-1">
+            <div id="map" class="map">  {# less! #}
+                <p>Something went wrong... Try to enable your JavaScript!</p>
+            </div>
+        </div>
+
     </div>
 
-    <section id="content" class="container clearfix topmargin bottommargin">
+</div>
 
-        <div class="row">
+<div class="uk-container uk-container-expand uk-margin-top">
 
-            <div class="col_one_third">
+    <div class="uk-margin-top" uk-grid>
 
-                <h3>{{ assets|lookup:'contact.address' }}</h3>
-                <p>
-                    {{ assets|lookup:'contact.name' }}<br/>
-                    {{ assets|lookup:'contact.street' }}<br/>
-                    {{ assets|lookup:'contact.city' }}<br/>
-                    {{ assets|lookup:'contact.country' }}
-                </p>
+        <div class="uk-width-1-3"> {# left column #}
 
-                <h3>{{ assets|lookup:'contact.phone_and_email' }}</h3>
-                <p>
-                    {{ assets|lookup:'contact.phone' }}<br/>
-                    {{ assets|lookup:'contact.email' }}<br/>
-                </p>
+            <dl class="uk-description-list">
+                <dt>{{ assets | lookup:'contact.address' }}</dt>
+                <dd>{{ assets | lookup:'contact.name' }}</dd>
+                <dd>{{ assets | lookup:'contact.street' }}</dd>
+                <dd>{{ assets | lookup:'contact.city' }}</dd>
+                <dd>{{ assets | lookup:'contact.country' }}</dd>
+            </dl>
 
-                <h3>{{ assets|lookup:'contact.vat_and_bank_account' }}</h3>
-                <p>
-                    {{ assets|lookup:'contact.vat' }}<br/>
-                    {{ assets|lookup:'contact.account'|safe }}.
-                </p>
+            <dl class="uk-description-list">
+                <dt>{{ assets | lookup:'contact.phone_and_email' }}</dt>
+                <dd>{{ assets | lookup:'contact.phone' }}</dd>
+                <dd>{{ assets | lookup:'contact.email' }}</dd>
+            </dl>
 
-            </div>
-
-            <div class="col_two_third col_last">
-
-                <h3 id="form">{{ assets|lookup:'contact.lets_keep_in_touch' }}</h3>
-
-                {% if messages %}
-                    {% for message in messages %}
-                        <div class="alert alert-{{ message.tags }}">
-                            {{ message|safe }}
-                        </div>
-                    {% endfor %}
-                {% endif %}
-
-                <form action="{% url 'contact:contact' %}"
-                      method="post" novalidate>
-
-                    {% csrf_token %}
-                    {% include 'form.html' with form=form %}
-
-                    <button type="submit"
-                            class="button button-large button-rounded">
-                        Submit
-                    </button>
-
-                </form>
-
-            </div>
+            <dl class="uk-description-list">
+                <dt>{{ assets | lookup:'contact.vat_and_bank_account' }}</dt>
+                <dd>{{ assets | lookup:'contact.vat' }}</dd>
+                <dd>{{ assets | lookup:'contact.account'|safe }}</dd>
+            </dl>
 
         </div>
 
-    </section>
+        <div class="uk-width-2-3"> {# right column #}
 
-{% endblock %}
+            <h3 class="uk-card-title">{{ assets | lookup:'contact.lets_keep_in_touch' }}</h3>
 
-{% block map %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="uk-alert-primary uk-margin-top" uk-alert>
+                        <a class="uk-alert-close" uk-close></a>
+                        <p>{{ message | safe }}</p>
+                    </div>
+                {% endfor %}
+            {% endif %}
 
-    {% load static %}
+            <form class="uk-form-stacked"
+                  action="{% url 'contact:contact' %}"
+                  method="post">
 
-    <script src="https://maps.google.com/maps/api/js?key={{ key }}"></script>
-    <script src="{% static "js/jquery.gmap.js" %}"></script>
+                {% csrf_token %}
 
-    <script type="text/javascript">
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="{{ form.name.id_for_label }}">
+                        {{ form.name.label }}
+                    </label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input"
+                               type="text"
+                               name="name"
+                               placeholder="{{ form.name.help_text }}">
+                    </div>
+                    {{ form.name.errors|safe }}
+                </div>
 
-        $('#map').gMap({
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="{{ form.email.id_for_label }}">
+                        {{ form.email.label }}
+                    </label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input"
+                               type="text"
+                               name="email"
+                               placeholder="{{ form.email.help_text }}">
+                    </div>
+                    {{ form.email.errors|safe }}
+                </div>
 
-            address: 'Zenobe Grammestraat 22, 2018 Antwerpen, Belgium',
-            maptype: 'ROADMAP',
-            zoom: 16,
-            markers: [
-                {
-                    address: "Zenobe Grammestraat 22, 2018 Antwerpen, Belgium"
-                }
-            ],
-            doubleclickzoom: true,
-            controls: {
-                panControl: true,
-                zoomControl: true,
-                mapTypeControl: false,
-                scaleControl: false,
-                streetViewControl: true,
-                overviewMapControl: true
-            }
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="{{ form.subject.id_for_label }}">
+                        {{ form.subject.label }}
+                    </label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input"
+                               type="text"
+                               name="subject"
+                               placeholder="{{ form.subject.help_text }}">
+                    </div>
+                    {{ form.subject.errors|safe }}
+                </div>
 
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="{{ form.message.id_for_label }}">
+                        {{ form.message.label }}
+                    </label>
+                    <div class="uk-form-controls">
+                        <textarea class="uk-textarea"
+                                  rows="5"
+                                  name="message"
+                                  placeholder="{{ form.message.help_text }}"></textarea>
+                    </div>
+                    {{ form.message.errors|safe }}
+                </div>
+
+                <input type="submit" class="uk-button uk-button-primary" value="Submit">
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <script>
+      function initMap() {
+        var elevenbits = {lat: 51.201481, lng: 4.428795};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: elevenbits,
+          zoom: 16
         });
-
+        var marker = new google.maps.Marker({position: elevenbits, map: map});
+      }
     </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ key }}&callback=initMap" async defer></script>
+
+</div>
 
 {% endblock %}

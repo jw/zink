@@ -1,46 +1,32 @@
 {% load static %}
 
-<header id="header" class="full-header">
-
-    <div id="header-wrap">
-
-        <div class="container clearfix">
-
-            <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
-
-            <div id="logo">
-                <a href="/home" class="standard-logo"
-                   data-dark-logo="{% static "images/logo-dark.png" %}">
-                    <img src="{% static "images/elevenbits-extra.png" %}"
-                         alt="ElevenBits Logo"></a>
-                <a href="/home" class="retina-logo"
-                   data-dark-logo="{% static "images/logo-dark@2x.png" %}">
-                    <img src="{% static "images/elevenbits-larger-extra.png" %}"
-                         alt="ElevenBits Logo"></a>
-            </div>
-
-            <nav id="primary-menu">
-
-                {% block menu %}
-                    {% load sitetree %}
-                    {% sitetree_menu from "root" include "trunk" %}
-                {% endblock %}
-
-                <div id="top-search">
-                    <a href="#" id="top-search-trigger">
-                        <i class="icon-search3"></i>
-                        <i class="icon-line-cross"></i>
-                    </a>
-                    <form action="search" method="post">
-                        <input type="text" name="q" class="form-control"
-                               value="" placeholder="Type &amp; Hit Enter..">
-                    </form>
-                </div>
-
-            </nav>
-
-        </div>
-
+<nav class="uk-navbar-container uk-container-expand" uk-navbar>
+    <div class="uk-navbar-left">
+        <a class="uk-navbar-item uk-logo" href="/">
+            <img src="{% static "images/elevenbits-extra.png" %}"
+                 alt="ElevenBits Logo"></a>
+        </a>
     </div>
-
-</header>
+    <div class="nav-overlay uk-navbar-right">
+        <ul class="uk-navbar-nav">
+            {% for menu in menus %}
+                <li {% if menu.active %}class="uk-active"{% endif %}>
+                    <a href="{{ menu.url }}">{{ menu.name }}</a>
+                </li>
+            {% endfor %}
+            <li>
+                <a class="uk-navbar-toggle" uk-search-icon
+                   uk-toggle="target: .nav-overlay; animation: uk-animation-fade" href="#"></a>
+            </li>
+        </ul>
+    </div>
+    <div class="nav-overlay uk-navbar-left uk-flex-1" hidden>
+        <div class="uk-navbar-item uk-width-expand">
+            <form action="/search" method="get" class="uk-search uk-search-navbar uk-width-1-1">
+                <input class="uk-search-input" type="search" placeholder="Search..." autofocus>
+            </form>
+        </div>
+        <a class="uk-navbar-toggle" uk-close
+           uk-toggle="target: .nav-overlay; animation: uk-animation-fade" href="#"></a>
+    </div>
+</nav>

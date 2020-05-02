@@ -5,12 +5,13 @@ from blog import views
 app_name = 'blog'
 
 urlpatterns = [
+
     # blog page
     path('', views.blog, name='blog'),
 
     # pages of blog entries
     path('page/<int:page>/', views.blog, name='page'),
-    path('page/', views.blog),
+    path('page/', views.blog, name='page'),
 
     # blog entries per tag (and pages thereof)
     path('tag/<int:tag>/', views.tag, name='tag'),

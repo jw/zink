@@ -1,34 +1,23 @@
 {% extends "base.html" %}
 
+{% load lookup %}
+
 {% block content %}
 
-    <section id="content">
+    <div class="uk-container uk-margin-top">
 
-        <div class="container clearfix topmargin">
-
-            <div id="posts">
-
-                <div class="entry clearfix">
-
-                    {% load lookup %}
                     <h1>{{ assets | lookup:'header' | safe }}</h1>
 
                     {% if entries %}
 
                         {% for entry in entries.object_list %}
-                            {% include "entry.html" %}
+                            {% include "components/entry.html" %}
                         {% endfor %}
 
                     {% else %}
                         <p>No blog entries are available.  How weird.</p>
                     {% endif %}
 
-                </div>
-
-            </div>
-
         </div>
-
-    </section>
 
 {% endblock %}

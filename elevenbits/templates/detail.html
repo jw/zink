@@ -1,23 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-    <section id="content">
-
-        <div class="container clearfix topmargin">
-
-            <div id="posts">
-
-                <div class="entry clearfix">
-
-                    {% include "entry.html" %}
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
+    <div class="uk-container uk-margin-top">
+        {% include "components/entry.html" %}
+    </div>
 {% endblock %}

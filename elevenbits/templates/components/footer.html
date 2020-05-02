@@ -1,86 +1,45 @@
-<footer id="footer" class="dark">
+<div class="uk-container uk-margin-top uk-container-expand top-footer">
+    <div class="uk-padding-large">
+        {# todo: add stuff here! #}
+    </div>
+</div>
 
-    <div class="container">
+<div class="uk-container uk-container-expand bottom-footer">
 
-        <div class="footer-widgets-wrap clearfix">
+    <div class="uk-padding uk-padding-remove-left uk-padding-remove-right" uk-grid>
 
-            {% if books %}
-                {% if books|length == 1 %}
-                    {% with book=books|first %}
-                    <p>
-                        I'm reading {{ book.title }} by {{ book.author }}.
-                        Now at page {{ book.current_page }} of {{ book.pages }}.
-                    </p>
-                    {% endwith %}
-                {% else %}
-                    <div class="widget widget_links clearfix">
-                        <p class="nobottomborder">
-                            Reading these {{ books|length }} books at the same time:
-                        </p>
-                        <ul>
-                        {% for book in books %}
-                            <li>
-                                > {{ book.title }} (by {{ book.author }}) at
-                                page {{ book.current_page }} of {{ book.pages }}.
-                            </li>
-                        {% endfor %}
-                        </ul>
-                    </div>
-                {% endif %}
-            {% endif %}
+        <div class="uk-width-3-4">
+            <div class="uk-flex-column">
+                <div class="">
+                     <a href="#">Terms of Use</a> |
+                     <a href="#">Privacy Policy</a>
+                </div>
+                <div>
+                    {% load version %}
+                    Running on Python {% version 'python' %} and
+                    Django {% version 'Django' %}.
+                </div>
+            </div>
+        </div>
 
+        <div class="uk-width-1-4 uk-text-right">
+            <a href="https://twitter.com/ElevenBits" uk-icon="icon: twitter"></a>
+            <a href="https://www.pinterest.com/elevenbits/" uk-icon="icon: pinterest"></a>
+            <a href="https://github.com/jw" uk-icon="icon: github"></a>
+            <a href="https://github.com/jw" uk-icon="icon: linkedin"></a>
         </div>
 
     </div>
 
-    <div id="copyrights">
-
-        <div class="container clearfix">
-
-            <div class="col_half">
-
-                <div class="copyright-links">
-                    <a href="#">Terms of Use</a> |
-                    <a href="#">Privacy Policy</a>
-                </div>
-
-                {% load version %}
-                Running on Python {% version 'python' %} and
-                Django {% version 'Django' %}.
-
-            </div>
-
-            <div class="col_half col_last tright">
-                <div class="fright clearfix">
-                    <a href="https://twitter.com/ElevenBits"
-                       class="social-icon si-small si-borderless si-twitter">
-                        <i class="icon-twitter"></i>
-                        <i class="icon-twitter"></i>
-                    </a>
-
-                    <a href="https://www.pinterest.com/elevenbits/"
-                       class="social-icon si-small si-borderless si-pinterest">
-                        <i class="icon-pinterest"></i>
-                        <i class="icon-pinterest"></i>
-                    </a>
-
-                    <a href="https://github.com/jw"
-                       class="social-icon si-small si-borderless si-github">
-                        <i class="icon-github"></i>
-                        <i class="icon-github"></i>
-                    </a>
-
-                    <a href="https://www.linkedin.com/in/elevenbits/"
-                       class="social-icon si-small si-borderless si-linkedin">
-                        <i class="icon-linkedin"></i>
-                        <i class="icon-linkedin"></i>
-                    </a>
-                </div>
-
-            </div>
-
+    {# scroll to top #}
+    <div class="uk-padding uk-padding-remove-top uk-padding-remove-left uk-padding-remove-right" uk-grid>
+        <div class="uk-overlay uk-width-1-1 uk-padding-remove-right uk-padding-remove-top uk-padding-remove-bottom uk-text-right">
+            <a class="uk-button uk-button-primary scroll-up scroll-up:active scroll-up:hover"
+               target="#top"
+               type="button"
+               uk-scroll uk-icon="icon: chevron-up">
+            </a>
         </div>
-
     </div>
 
-</footer>
+</div>

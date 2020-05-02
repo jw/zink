@@ -3,5 +3,5 @@ elevenbits/local_settings.py
 venv
 *.pyc
 staticfiles
-.env
+elevenbits/.env
 db.sqlite3
