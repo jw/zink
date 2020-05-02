@@ -1,4 +1,3 @@
-
 from django import forms
 
 
@@ -7,25 +6,29 @@ class ContactForm(forms.Form):
         A user can contact the admin via this form.
     """
 
-    name = forms.CharField(max_length=256, help_text="Add your name.",
-                           label="Your name",
-                           widget=forms.TextInput(
-                               attrs={'class': 'form-control',
-                                      'aria-describedby': 'nameHelp'}))
+    name = forms.CharField(
+        max_length=256,
+        help_text="Add your name.",
+        label="Your name"
+    )
 
     email = forms.EmailField(help_text="Add your email address.",
                              label="Your email address")
 
-    subject = forms.CharField(max_length=256, required=False,
+    subject = forms.CharField(max_length=256,
+                              required=False,
                               help_text="Add your subject.",
                               label="The subject")
 
-    message = forms.CharField(max_length=1024, help_text="Your message.",
-                              widget=forms.Textarea, label="The message")
+    message = forms.CharField(max_length=1024,
+                              help_text="Your message.",
+                              widget=forms.Textarea,
+                              label="The message")
 
     spam = forms.CharField(max_length=0,
                            help_text='This should never be filled out!',
-                           required=False, label="A very basic spam filter",
+                           required=False,
+                           label="A very basic spam filter",
                            widget=forms.HiddenInput())
 
     def clean(self):

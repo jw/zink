@@ -3,6 +3,7 @@ import logging
 
 from django.contrib import messages
 from django.core.mail import send_mail, BadHeaderError
+from django.forms.utils import ErrorList
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -17,6 +18,14 @@ from util.deployment import get_deployment
 logger = logging.getLogger("elevenbits")
 
 
+class UiKitErrorList(ErrorList):
+    def __str__(self):
+        if not self:
+            return ''
+        return ''.join([f'<div class="uk-text-danger">{e}</div>'
+                        for e in self])
+
+
 def contact(request):
     static = get_assets(prefix='contact')
     deployment = get_deployment()
@@ -26,8 +35,7 @@ def contact(request):
 
     if request.method == 'POST':
 
-        form = ContactForm(request.POST)
-
+        form = ContactForm(request.POST, error_class=UiKitErrorList)
         if form.is_valid():
 
             email = form.cleaned_data['email']
@@ -46,11 +54,6 @@ def contact(request):
             messages.success(request, f"{highlight} {question}")
 
             return HttpResponseRedirect(reverse('contact:contact'))
-
-        # else:
-        #     # report invalid form
-        #     warning = "Form is invalid.  Please check carefully."
-        #     messages.warning(request, warning)
 
     else:
         form = ContactForm()  # create an empty form

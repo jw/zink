@@ -31,7 +31,15 @@
 
     </div>
 
-    <div class="uk-padding uk-padding-remove-top" uk-grid>
+    {# scroll to top #}
+    <div class="uk-padding uk-padding-remove-top uk-padding-remove-left uk-padding-remove-right" uk-grid>
+        <div class="uk-overlay uk-width-1-1 uk-padding-remove-right uk-padding-remove-top uk-padding-remove-bottom uk-text-right">
+            <a class="uk-button uk-button-primary scroll-up scroll-up:active scroll-up:hover"
+               target="#top"
+               type="button"
+               uk-scroll uk-icon="icon: chevron-up">
+            </a>
+        </div>
     </div>
 
 </div>

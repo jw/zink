@@ -1,9 +1,11 @@
+from datetime import datetime
 from socket import gethostname
 
 import dj_database_url
 import environ
 from os.path import join, dirname, realpath, abspath
 import sentry_sdk
+from dateutil.tz import gettz, tzutc
 from sentry_sdk.integrations.django import DjangoIntegration
 
 root = environ.Path(__file__) - 2
@@ -100,7 +102,7 @@ SITE_ID = 1
 # use i18n l10n and make dates time zone
 USE_I18N = True
 USE_L10N = True
-USE_TZ = False
+USE_TZ = True
 
 # The statics (css and images) location
 STATICFILES_DIRS = (

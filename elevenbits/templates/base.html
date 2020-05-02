@@ -23,18 +23,11 @@
 
     </head>
 
-    <body class="uk-inline">
+    <body>
 
         {% block header %}{% include "components/header.html" %}{% endblock %}
         {% block content %}{% include "components/content.html" %}{% endblock %}
         {% block footer %}{% include "components/footer.html" %}{% endblock %}
-
-        {# scroll to top #}
-        <div class="uk-position-bottom-right uk-overlay">
-            <a class="uk-button uk-button-primary scroll-up scroll-up:active scroll-up:hover" target="#top" type="button"
-               uk-scroll uk-icon="icon: chevron-up">
-            </a>
-        </div>
 
 {#        <script src="assets/bundle.js"></script>#}
 
