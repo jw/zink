@@ -35,10 +35,11 @@ class ContactForm(forms.Form):
         cleaned_data = super(ContactForm, self).clean()
         name = cleaned_data.get('name')
         email = cleaned_data.get('email')
-        subject = cleaned_data.get('subject')
         message = cleaned_data.get('message')
         spam = cleaned_data.get('spam')
         if spam:
-            raise forms.ValidationError("No robots (or spam) allowed here!")
+            raise forms.ValidationError(
+                "No robots (or spam) allowed here!"
+            )
         if not name and not email and not message:
             raise forms.ValidationError('You have to write something!')

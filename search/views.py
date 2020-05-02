@@ -30,7 +30,7 @@ def search(request):
     """The search page."""
 
     form = Form(request.GET, load_all=True)
-    entries = form.search()
+    # entries = form.search()
     tags = []
     blogs = []
     # for entry in entries:

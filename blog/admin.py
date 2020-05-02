@@ -6,7 +6,8 @@ from blog.models import Entry, Tag, Comment, Image, Static, Menu
 
 
 class MenuAdmin(TreeNodeModelAdmin):
-    treenode_display_mode = TreeNodeModelAdmin.TREENODE_DISPLAY_MODE_INDENTATION
+    treenode_display_mode = \
+        TreeNodeModelAdmin.TREENODE_DISPLAY_MODE_INDENTATION
     form = TreeNodeForm
 
 

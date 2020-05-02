@@ -13,6 +13,13 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='entry',
             name='page',
-            field=models.CharField(choices=[('BG', 'Blog'), ('SS', 'Stilus'), ('CT', 'Contact'), ('MC', 'Miscellaneous')], default='BG', help_text='The page this entry is for.', max_length=2),
+            field=models.CharField(
+                choices=[('BG', 'Blog'),
+                         ('SS', 'Stilus'),
+                         ('CT', 'Contact'),
+                         ('MC', 'Miscellaneous')],
+                default='BG',
+                help_text='The page this entry is for.',
+                max_length=2),
         ),
     ]

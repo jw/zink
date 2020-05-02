@@ -1,5 +1,5 @@
 import logging
-from unittest import skipIf, skip
+from unittest import skipIf
 
 from django.test import TestCase
 from django.test.client import Client
@@ -111,7 +111,8 @@ class HttpErrorHandling(TestCase):
         response = client.get("/this_page_does_not_exist")
         self.assertContains(response, "404 message", status_code=404)
 
-    def test404(self):
+    # todo: rename me!
+    def test404_bis(self):
         """Test the 404 response."""
         client = Client()
         response = client.post("/foobar", data={'q': 'Python'})

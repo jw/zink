@@ -17,29 +17,59 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Text',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', models.DateTimeField(default=django.utils.timezone.now, help_text='Date and time when this text came into my hands.', verbose_name='created')),
-                ('read', models.DateTimeField(default=django.utils.timezone.now, help_text='Date and time when this text was read.', verbose_name='created')),
-                ('reading', models.BooleanField(default=False, help_text='Reading this next now.')),
-                ('title', models.TextField(help_text='Title of the text.')),
-                ('author', models.TextField(help_text='Authors of the text.')),
-                ('review', models.TextField(help_text='What you thought of it.')),
-                ('pages', models.IntegerField(help_text='The number of pages.')),
-                ('current_page', models.IntegerField(help_text='The current page.')),
-                ('ranking', models.IntegerField(validators=[django.core.validators.MaxValueValidator(10), django.core.validators.MinValueValidator(-1)])),
+                ('id', models.AutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID')),
+                ('created', models.DateTimeField(
+                    default=django.utils.timezone.now,
+                    help_text='Date and time when this text '
+                              'came into my hands.',
+                    verbose_name='created')),
+                ('read', models.DateTimeField(
+                    default=django.utils.timezone.now,
+                    help_text='Date and time when this text was read.',
+                    verbose_name='created')),
+                ('reading', models.BooleanField(
+                    default=False,
+                    help_text='Reading this next now.')),
+                ('title', models.TextField(
+                    help_text='Title of the text.')),
+                ('author', models.TextField(
+                    help_text='Authors of the text.')),
+                ('review', models.TextField(
+                    help_text='What you thought of it.')),
+                ('pages', models.IntegerField(
+                    help_text='The number of pages.')),
+                ('current_page', models.IntegerField(
+                    help_text='The current page.')),
+                ('ranking', models.IntegerField(
+                    validators=[
+                        django.core.validators.MaxValueValidator(10),
+                        django.core.validators.MinValueValidator(-1)]
+                )),
             ],
         ),
         migrations.CreateModel(
             name='Topic',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID')),
                 ('topic', models.CharField(max_length=255, unique=True)),
             ],
         ),
         migrations.CreateModel(
             name='Type',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID')),
                 ('type', models.CharField(max_length=255, unique=True)),
             ],
         ),
@@ -51,6 +81,9 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='text',
             name='type',
-            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='reading.Type'),
+            field=models.OneToOneField(
+                on_delete=django.db.models.deletion.CASCADE,
+                to='reading.Type'
+            ),
         ),
     ]

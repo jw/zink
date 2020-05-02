@@ -15,9 +15,16 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Comment',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', models.DateTimeField(help_text='Date and time when this comment was written', verbose_name='created')),
-                ('body', models.TextField(help_text='The content of this comment')),
+                ('id', models.AutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID')),
+                ('created', models.DateTimeField(
+                    help_text='Date and time when this comment was written',
+                    verbose_name='created')),
+                ('body', models.TextField(
+                    help_text='The content of this comment')),
             ],
             options={
                 'verbose_name': 'Comment',
@@ -27,12 +34,24 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Entry',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', models.DateTimeField(help_text='Date and time when this entry was created', verbose_name='created')),
+                ('id', models.AutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID')),
+                ('created', models.DateTimeField(
+                    help_text='Date and time when this entry was created',
+                    verbose_name='created')),
                 ('title', models.CharField(max_length=200)),
-                ('body', models.TextField(help_text='The content of this entry.')),
-                ('active', models.BooleanField(default=False, help_text='Is this entry viewable on site?')),
-                ('posted', models.DateTimeField(blank=True, help_text='Date and time when this entry went public', verbose_name='posted')),
+                ('body', models.TextField(
+                    help_text='The content of this entry.')),
+                ('active', models.BooleanField(
+                    default=False,
+                    help_text='Is this entry viewable on site?')),
+                ('posted', models.DateTimeField(
+                    blank=True,
+                    help_text='Date and time when this entry went public',
+                    verbose_name='posted')),
             ],
             options={
                 'verbose_name_plural': 'Entries',
@@ -42,25 +61,49 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Image',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('image', models.ImageField(height_field='height', max_length=255, upload_to='tmp/', width_field='width')),
-                ('description', models.TextField(help_text='Description of the image.')),
-                ('height', models.PositiveIntegerField(default=0, editable=False)),
-                ('width', models.PositiveIntegerField(default=0, editable=False)),
+                ('id', models.AutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID')),
+                ('image', models.ImageField(
+                    height_field='height',
+                    max_length=255,
+                    upload_to='tmp/',
+                    width_field='width')),
+                ('description', models.TextField(
+                    help_text='Description of the image.')),
+                ('height', models.PositiveIntegerField(
+                    default=0,
+                    editable=False)),
+                ('width', models.PositiveIntegerField(
+                    default=0,
+                    editable=False)),
             ],
         ),
         migrations.CreateModel(
             name='Static',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(help_text='The name of the pair.', max_length=200)),
-                ('value', models.TextField(help_text='The value of the pair.')),
+                ('id', models.AutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID')),
+                ('name', models.CharField(
+                    help_text='The name of the pair.',
+                    max_length=200)),
+                ('value', models.TextField(
+                    help_text='The value of the pair.')),
             ],
         ),
         migrations.CreateModel(
             name='Tag',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID')),
                 ('tag', models.CharField(max_length=255, unique=True)),
             ],
         ),
@@ -77,6 +120,8 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='comment',
             name='entry',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='blog.Entry'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to='blog.Entry'),
         ),
     ]

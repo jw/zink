@@ -36,9 +36,11 @@ class FormTest(TestCase):
         """Tests post of a form without a name."""
         c = Client()
         response = c.post(reverse('contact:contact'), {})
-        self.assertContains(response,
-                            '<div class="alert alert-danger" role="alert">',
-                            status_code=200)
+        self.assertContains(
+            response,
+            '<div class="alert alert-danger" role="alert">',
+            status_code=200
+        )
 
     def test_no_name_post(self):
         """Tests post of a form without a name."""
@@ -47,9 +49,11 @@ class FormTest(TestCase):
                           {'email': 'jw@elevenbits.com',
                            'subject': 'test',
                            'message': 'Test message.'})
-        self.assertContains(response,
-                            'name="name" class="form-control is-invalid"',
-                            status_code=200)
+        self.assertContains(
+            response,
+            'name="name" class="form-control is-invalid"',
+            status_code=200
+        )
 
     def test_no_email_post(self):
         """Tests post of a form without an email."""
@@ -71,9 +75,11 @@ class FormTest(TestCase):
                           {'name': 'test',
                            'subject': '[TEST]',
                            'email': 'jw@elevenbits.com'})
-        self.assertContains(response,
-                            'placeholder="The message" class="form-control is-invalid"',
-                            status_code=200)
+        self.assertContains(
+            response,
+            'placeholder="The message" class="form-control is-invalid"',
+            status_code=200
+        )
 
 
 class DataTest(TestCase):
