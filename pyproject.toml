@@ -6,7 +6,7 @@ authors = ["Jan Willems <jw@elevenbits.com>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "3.8.2"
 beautifulsoup4 = "^4.8.2"
 django = "^3.0.3"
 django-debug-toolbar = "^2.2"
