@@ -8,7 +8,7 @@
         </a>
     </div>
     <div class="nav-overlay uk-navbar-right">
-        <ul class="uk-navbar-nav">
+        <ul class="uk-navbar-nav uk-text-bold">
             {% for menu in menus %}
                 <li {% if menu.active %}class="uk-active"{% endif %}>
                     <a href="{{ menu.url }}">{{ menu.name }}</a>
