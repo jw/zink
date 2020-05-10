@@ -110,13 +110,17 @@ STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
     # 'static_precompiler.finders.StaticPrecompilerFinder',
+    "compressor.finders.CompressorFinder",
 )
 
-# STATIC_PRECOMPILER_COMPILERS = (
-#     ('static_precompiler.compilers.Stylus',
-#      {"executable": "/home/jw/.nvm/versions/node/v6.11.2/bin/stylus",
-#       "sourcemap_enabled": True}),
-# )
+# compressor
+COMPRESS_ENABLED = True
+if not env('COMPRESS_OFFLINE'):
+    COMPRESS_OFFLINE = True
+COMPRESS_PRECOMPILERS = (
+    ('text/less', 'lessc {infile} {outfile}'),
+)
+COMPRESS_ROOT = join(SITE_ROOT, "elevenbits", "theme")
 
 PROJECT_ROOT = abspath(dirname(__file__))
 
@@ -237,6 +241,9 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.messages',
+
+    # css
+    "compressor",
 
     # statics
     'whitenoise.runserver_nostatic',

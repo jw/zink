@@ -3,6 +3,7 @@
 
 {% load static %}
 {% load lookup %}
+{% load compress %}
 
     <head>
 
@@ -15,7 +16,11 @@
 
         <link rel="stylesheet" href="{% static "css/code.css" %}" type="text/css"/>
         <link rel="stylesheet" href="{% static "css/uikit.min.css" %}" type="text/css"/>
-        <link rel="stylesheet" href="{% static "css/elevenbits.css" %}" type="text/css"/>
+
+        {% compress css %}
+            <link rel="stylesheet" href="{% static "elevenbits.less" %}" type="text/less"/>
+        {% endcompress %}
+
         <script src="{% static "js/uikit.min.js" %}" type="text/javascript"></script>
         <script src="{% static "js/uikit-icons.min.js" %}" type="text/javascript"></script>
 

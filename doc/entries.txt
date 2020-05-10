@@ -1,0 +1,25 @@
+
+STARS
+
+I have noticed that terminals in Linux Mint 19.1 Tessa (XFCE4-panel 12.2, 64-bits,
+kernel 4.15.0-43 generic) display asterisks when the user needs to type their root
+password. I've tried this is UXTerm, Gnome-Terminal, Terminator and XFCE4 Terminal.
+I believe this is universal. I've looked on the advanced tab on the documentation
+page of the terminal and found no mention of that (at least explicitly). I've
+searched on the terminal settings a way to disable this feature -- so far, nothing
+related to it. I've also tried the visudo way of showing asterisks by adding the
+pwfeedback line, but in my case, this line doesn't exist, so I can't delete it to
+try a fix. It's become a standard feature.
+
+I'd like to know how to disable this feature and maintain the plain invisible
+ feature when typing password in terminals.
+
+sudo mv /etc/sudoers.d/0pwfeedback /etc/sudoers.d/0pwfeedback.disabled
+
+ALIASES
+
+- https://git-scm.com/book/en/v2/Git-Basics-Git-Aliases
+- https://jonsuh.com/blog/git-command-line-shortcuts/
+
+(Add extras)
+https://about.gitlab.com/blog/2016/12/08/git-tips-and-tricks/#the-git-extras-plugin
