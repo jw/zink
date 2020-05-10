@@ -15,6 +15,7 @@ env:
     - MAILGUN_HOST_USER=postmaster@mg.elevenbits.com
     - MAILGUN_HOST_PASSWORD=12345678
     - GOOGLE_MAPS_KEY=12345678
+    - COMPRESS_OFFLINE=True
 
 python:
   - "3.8"

@@ -116,7 +116,10 @@ STATICFILES_FINDERS = (
 # compressor
 COMPRESS_ENABLED = True
 if not env('COMPRESS_OFFLINE'):
+    print("Not running compress, since we are in OFFLINE mode.")
     COMPRESS_OFFLINE = True
+else:
+    print("Compress is ONLINE.")
 COMPRESS_PRECOMPILERS = (
     ('text/less', 'lessc {infile} {outfile}'),
 )
