@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "description": "Basic JavaScipt libraries required for zink",
   "dependencies": {
-    "uikit": "^3.3.7"
+    "uikit": "^3.3.7",
+    "less": "^3.11.1"
   },
   "devDependencies": {
-    "less": "^3.11.1",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11"
   }
