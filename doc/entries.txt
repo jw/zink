@@ -23,3 +23,15 @@ ALIASES
 
 (Add extras)
 https://about.gitlab.com/blog/2016/12/08/git-tips-and-tricks/#the-git-extras-plugin
+
+
+GEEKBENCH
+
+Geekbench is a cross-platform processor benchmark, with a scoring system that
+separates single-core and multi-core performance,[2][3] and workloads that simulate
+real-world scenarios. The software benchmark is available for macOS, Windows, Linux,
+Android and iOS. Geekbench has also measured GPU performance in areas such as image
+processing and computer vision since Geekbench 4.
+
+
+
