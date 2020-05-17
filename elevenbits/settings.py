@@ -115,11 +115,11 @@ STATICFILES_FINDERS = (
 
 # compressor
 COMPRESS_ENABLED = True
-if env('COMPRESS_OFFLINE'):
-    print(f"Not running compress, since we are in OFFLINE mode: {env('COMPRESS_OFFLINE')}.")
+if not env('COMPRESS_OFFLINE'):
+    print(f"IN HEROKU, so not running compress, since we are in OFFLINE mode: {env('COMPRESS_OFFLINE')}.")
     COMPRESS_OFFLINE = True
 else:
-    print("Compress is ONLINE.")
+    print("LOCAL (not in Heroku land), so compress is ONLINE.")
 COMPRESS_PRECOMPILERS = (
     ('text/less', 'lessc {infile} {outfile}'),
 )
