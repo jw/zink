@@ -116,7 +116,7 @@ STATICFILES_FINDERS = (
 # compressor
 COMPRESS_ENABLED = True
 if env('COMPRESS_OFFLINE'):
-    print("Not running compress, since we are in OFFLINE mode.")
+    print(f"Not running compress, since we are in OFFLINE mode: {env('COMPRESS_OFFLINE')}.")
     COMPRESS_OFFLINE = True
 else:
     print("Compress is ONLINE.")
