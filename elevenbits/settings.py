@@ -13,7 +13,8 @@ print(__file__)
 print(Path(__file__).parents[1])
 root = Path(__file__).parents[1]
 print(root)
-
+print(os.environ['MAILGUN_HOST'])
+print(os.environ.get('DATABASE_URL'))
 SITE_ROOT = str(root)
 
 DEBUG = env.bool('DEBUG', False)

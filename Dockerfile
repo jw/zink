@@ -12,9 +12,6 @@ ENV PATH="${PATH}:/root/.poetry/bin"
 # postgresql
 RUN apt-get install -y libpq-dev gcc
 
-#RUN useradd --create-home zink
-#USER zink
-
 WORKDIR /app
 
 COPY . .
@@ -23,6 +20,9 @@ RUN poetry install
 
 RUN poetry config virtualenvs.create false \
   && poetry install --no-interaction --no-ansi
+
+#RUN useradd --create-home zink
+#USER zink
 
 ENV DJANGO_SETTINGS_MODULE=elevenbits.settings
 ENV PORT=8000
@@ -33,7 +33,7 @@ EXPOSE 8000
 RUN poetry run python manage.py collectstatic --no-input --clear
 # RUN poetry run python manage.py compress -v 2
 
-CMD poetry run gunicorn elevenbits.wsgi:application
+CMD poetry run gunicorn elevenbits.wsgi:application --bind 0.0.0.0:$PORT
 
 ## add and run as non-root user
 #RUN adduser -D myuser
