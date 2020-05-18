@@ -17,6 +17,10 @@ Start a Postgres console:
 
 $ docker exec -it zink-postgres psql -U postgres
 
+In the compose world:
+
+$ docker-compose exec db psql -U postgres
+
 Create a database user
 ----------------------
 
