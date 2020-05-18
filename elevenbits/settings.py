@@ -1,14 +1,20 @@
+import os
+from pathlib import Path
+
 import dj_database_url
-import environ
+from environs import Env
 from os.path import join, dirname, abspath
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
-root = environ.Path(__file__) - 2
-env = environ.Env()
-# environ.Env.read_env()
+env = Env()
+env.read_env()
+print(__file__)
+print(Path(__file__).parents[1])
+root = Path(__file__).parents[1]
+print(root)
 
-SITE_ROOT = root()
+SITE_ROOT = str(root)
 
 DEBUG = env.bool('DEBUG', False)
 
@@ -34,7 +40,7 @@ EMAIL_BASE = env('MAILGUN_BASE_URL')
 GOOGLE_MAPS_KEY = env('GOOGLE_MAPS_KEY')
 
 DATABASES = {
-    'default': env.db('DATABASE_URL'),
+    'default': env.dj_db_url('DATABASE_URL'),
 }
 
 db_from_env = dj_database_url.config()
