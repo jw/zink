@@ -6,7 +6,7 @@ from sentry_sdk.integrations.django import DjangoIntegration
 
 root = environ.Path(__file__) - 2
 env = environ.Env()
-environ.Env.read_env()
+# environ.Env.read_env()
 
 SITE_ROOT = root()
 
