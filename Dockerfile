@@ -27,7 +27,7 @@ ENV PATH="${PATH}:/root/.poetry/bin"
 # some magic for heroku
 RUN mkdir -p ${HOME}/.config/pypoetry/ && \
     touch ${HOME}/.config/pypoetry/config.toml && \
-    poetry config settings virtualenvs.create false
+    poetry config virtualenvs.create false
 
 # install postgresql requirements
 RUN apt-get install -y libpq-dev gcc
