@@ -11,7 +11,7 @@ ENV PYTHONUNBUFFERED 1
 RUN apt-get update && \
     apt-get install -y curl wget netcat libpq-dev gcc
 
-# install node
+# install node (and cleanup the tar.gz)
 RUN mkdir /node && \
     cd /node && \
     curl https://nodejs.org/dist/$NODE_VERSION/node-$NODE_VERSION-$NODE_DISTRO.tar.gz -o node-$NODE_VERSION-$NODE_DISTRO.tar.gz && \
@@ -19,7 +19,8 @@ RUN mkdir /node && \
     cd node-$NODE_VERSION-$NODE_DISTRO && \
     mv * .. && \
     cd .. && \
-    rm node-$NODE_VERSION-$NODE_DISTRO && \
+    rm node-$NODE_VERSION-$NODE_DISTRO.tar.gz && \
+    rm -rf node-$NODE_VERSION-$NODE_DISTRO && \
     cd /
 ENV PATH /node/bin:$PATH
 
