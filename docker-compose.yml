@@ -6,13 +6,13 @@
       environment:
         - POSTGRES_DB=zink
         - POSTGRES_USER=zink
-        - POSTGRES_PASSWORD=s3cr3t
+        - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
     web:
       build: .
-      command: poetry run python manage.py runserver 0.0.0.0:8000
+      command: ./entrypoint.sh
       volumes:
         - .:/code
       ports:
-        - "6666:8000"
+        - "8000:8000"
       depends_on:
         - db

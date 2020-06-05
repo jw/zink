@@ -9,15 +9,14 @@ from sentry_sdk.integrations.django import DjangoIntegration
 
 env = Env()
 env.read_env()
-print(__file__)
-print(Path(__file__).parents[1])
 root = Path(__file__).parents[1]
-print(root)
-print(os.environ['MAILGUN_HOST'])
-print(os.environ.get('DATABASE_URL'))
 SITE_ROOT = str(root)
-
+PORT = os.environ.get('PORT', 8000)
 DEBUG = env.bool('DEBUG', False)
+
+# print(f"DATABASE_URL={os.environ.get('DATABASE_URL')}")
+# print(f"DEBUG={DEBUG}")
+# print(f"PORT={PORT}")
 
 # TODO: use .env for this
 ALLOWED_HOSTS = ["127.0.0.1",
@@ -45,7 +44,7 @@ DATABASES = {
 }
 
 db_from_env = dj_database_url.config()
-print(db_from_env)
+# print(f"DB env: {db_from_env}")
 DATABASES['default'].update(db_from_env)
 
 #
