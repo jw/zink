@@ -23,6 +23,10 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 RUN pip install -U pip \
     && curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
+# some magic for heroku
+RUN mkdir -p ${HOME}/.config/pypoetry/ && \
+    touch ${HOME}/.config/pypoetry/config.toml && \
+    poetry config settings.virtualenvs.create false
 ENV PATH="${PATH}:/root/.poetry/bin"
 
 # install postgresql requirements
