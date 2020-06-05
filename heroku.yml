@@ -7,4 +7,5 @@ build:
 release:
   image: web
   command:
-    - ./deploment-tasks.sh
+    - ls -la .
+    - /app/deployment-tasks.sh
