@@ -46,7 +46,6 @@ ENV DJANGO_SETTINGS_MODULE=elevenbits.settings
 ENV WEB_CONCURRENCY=3
 
 RUN poetry run python manage.py collectstatic --no-input --clear
-# RUN poetry run python manage.py compress -v 2
 
 # install yarn and javascript dependencies
 RUN npm install -g yarn && \
@@ -56,6 +55,8 @@ ENV PATH /app/node_modules/.bin:$PATH
 RUN echo path $PATH
 
 RUN lessc -v
+
+RUN poetry run python manage.py compress -v 2
 
 ## add and run as non-root user
 #RUN adduser -D myuser
