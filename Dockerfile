@@ -3,7 +3,7 @@ FROM python:3.8-slim
 ENV NODE_VERSION v12.18.0
 ENV NODE_DISTRO linux-x64
 
-# install jsvascript
+# install node
 RUN mkdir /node && \
     cd /node && \
     apt-get update && \
@@ -16,26 +16,22 @@ RUN mkdir /node && \
     cd /
 ENV PATH /node/bin:$PATH
 
-RUN node -v
-
+# install latest poetry
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
-
 RUN pip install -U pip \
     && apt-get update \
     && apt-get install -y curl netcat \
     && curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
 ENV PATH="${PATH}:/root/.poetry/bin"
 
-# postgresql
+# install postgresql requirements
 RUN apt-get install -y libpq-dev gcc
 
+# build zink
 WORKDIR /app
-
 COPY . .
-
 RUN poetry install
-
 RUN poetry config virtualenvs.create false \
   && poetry install --no-interaction --no-ansi
 

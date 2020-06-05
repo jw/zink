@@ -30,7 +30,7 @@ ALLOWED_HOSTS = ["127.0.0.1",
                  ".m8n.be"]
 
 # email
-EMAIL_HOST = os.environ['MAILGUN_HOST']
+EMAIL_HOST = env('MAILGUN_HOST')
 EMAIL_PORT = os.environ['MAILGUN_PORT']
 EMAIL_HOST_USER = os.environ['MAILGUN_HOST_USER']
 EMAIL_HOST_PASSWORD = os.environ['MAILGUN_HOST_PASSWORD']
