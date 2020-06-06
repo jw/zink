@@ -18,4 +18,4 @@ poetry config virtualenvs.create true
 poetry install -v
 
 poetry run python manage.py collectstatic --no-input --clear
-poetry run python manage.py compress -v 2
+poetry run python manage.py compress --force -v 2
