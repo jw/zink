@@ -24,12 +24,10 @@ RUN mkdir /node && \
     cd /
 ENV PATH /node/bin:$PATH
 
-# install latest poetry
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-
 # build zink
 WORKDIR /app
+COPY deploy/requirements.txt .
+RUN pip install -r requirements.txt
 COPY . .
 
 ENV DJANGO_SETTINGS_MODULE=elevenbits.settings
@@ -41,11 +39,6 @@ ENV PATH /app/node_modules/.bin:$PATH
 
 #RUN useradd --create-home zink
 #USER zink
-
-#RUN poetry run python manage.py collectstatic --no-input --clear
-#RUN poetry run python manage.py compress -v 2
-#CMD gunicorn hello_django.wsgi:application --bind 0.0.0.0:$PORT
-
 #RUN adduser -D myuser
 #USER myuser
 
