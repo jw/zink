@@ -1,4 +1,10 @@
 __pycache__
 *.pyc
-env/
 db.sqlite3
+.env
+doc
+.git
+.cache
+node_modules
+.idea
+tmp
