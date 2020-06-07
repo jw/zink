@@ -27,11 +27,11 @@ urlpatterns = [
          name='robots'),
 
     # favicon.ico
-    path('favicon.ico',
-         RedirectView.as_view(
-             url=staticfiles_storage.url('favicon.ico'),
-             permanent=False),
-         name="favicon"),
+    # path('favicon.ico',
+    #      RedirectView.as_view(
+    #          url=staticfiles_storage.url('favicon.ico'),
+    #          permanent=False),
+    #      name="favicon"),
 
     # 404 and 500 return codes
     path('500',
