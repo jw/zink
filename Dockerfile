@@ -25,19 +25,12 @@ RUN mkdir /node && \
 ENV PATH /node/bin:$PATH
 
 # install latest poetry
-RUN pip install -U pip \
-    && curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
-ENV PATH="${PATH}:/root/.poetry/bin"
-RUN mkdir -p ${HOME}/.config/pypoetry/ && \
-    touch ${HOME}/.config/pypoetry/config.toml && \
-    poetry config virtualenvs.create false  # some magic for heroku
+COPY requirement.txt .
+RUN pip install -r requirements.txt
 
 # build zink
 WORKDIR /app
 COPY . .
-RUN poetry install && \
-    poetry config virtualenvs.create false && \
-    poetry install --no-interaction --no-ansi
 
 ENV DJANGO_SETTINGS_MODULE=elevenbits.settings
 ENV WEB_CONCURRENCY=3
@@ -56,5 +49,4 @@ ENV PATH /app/node_modules/.bin:$PATH
 #RUN adduser -D myuser
 #USER myuser
 
-CMD poetry run gunicorn elevenbits.wsgi:application --bind 0.0.0.0:$PORT
-
+CMD gunicorn elevenbits.wsgi:application --bind 0.0.0.0:$PORT
