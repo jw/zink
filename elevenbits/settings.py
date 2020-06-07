@@ -135,7 +135,7 @@ COMPRESS_ROOT = join(SITE_ROOT, "elevenbits", "theme")
 
 PROJECT_ROOT = abspath(dirname(__file__))
 
-STATIC_ROOT = join(PROJECT_ROOT, 'assets')
+STATIC_ROOT = join(PROJECT_ROOT, 'assets/')
 STATIC_URL = '/assets/'
 
 MEDIA_URL = '/media/'
