@@ -25,7 +25,7 @@ RUN mkdir /node && \
 ENV PATH /node/bin:$PATH
 
 # install latest poetry
-COPY requirement.txt .
+COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 # build zink

@@ -14,9 +14,9 @@ SITE_ROOT = str(root)
 PORT = os.environ.get('PORT', 8000)
 DEBUG = env.bool('DEBUG', False)
 
-# print(f"DATABASE_URL={os.environ.get('DATABASE_URL')}")
-# print(f"DEBUG={DEBUG}")
-# print(f"PORT={PORT}")
+print(f"DATABASE_URL={os.environ.get('DATABASE_URL')}")
+print(f"DEBUG={DEBUG}")
+print(f"PORT={PORT}")
 
 # TODO: use .env for this
 ALLOWED_HOSTS = ["127.0.0.1",
