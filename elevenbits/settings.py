@@ -138,7 +138,7 @@ COMPRESS_ROOT = join(BASE_DIR, "elevenbits", "theme")
 
 PROJECT_ROOT = abspath(dirname(__file__))
 
-STATIC_ROOT = join(BASE_DIR, 'assets')
+STATIC_ROOT = join(BASE_DIR, 'assets/')
 STATIC_URL = '/assets/'
 
 MEDIA_URL = '/media/'
