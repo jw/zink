@@ -123,7 +123,7 @@ STATICFILES_FINDERS = (
 # compressor
 COMPRESS_ENABLED = True
 print(os.environ['COMPRESS_OFFLINE'])
-if os.environ['COMPRESS_OFFLINE']:
+if not os.environ['COMPRESS_OFFLINE']:
     print(f"IN HEROKU, so not running compress, since we are in OFFLINE mode: {os.environ['COMPRESS_OFFLINE']}.")
     COMPRESS_OFFLINE = True
 else:
