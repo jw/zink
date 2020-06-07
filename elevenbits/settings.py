@@ -110,7 +110,6 @@ USE_TZ = True
 # The statics (css and images) location
 STATICFILES_DIRS = (
     join(SITE_ROOT, "assets"),
-    # join(SITE_ROOT, "tmp"),
 )
 
 STATICFILES_FINDERS = (
@@ -122,12 +121,13 @@ STATICFILES_FINDERS = (
 
 # compressor
 COMPRESS_ENABLED = True
-print(os.environ['COMPRESS_OFFLINE'])
-if not os.environ['COMPRESS_OFFLINE']:
-    print(f"IN HEROKU, so not running compress, since we are in OFFLINE mode: {os.environ['COMPRESS_OFFLINE']}.")
-    COMPRESS_OFFLINE = True
-else:
-    print("LOCAL (not in Heroku land), so compress is ONLINE.")
+COMPRESS_OFFLINE = True
+# print(os.environ['COMPRESS_OFFLINE'])
+# if not os.environ['COMPRESS_OFFLINE']:
+#     print(f"IN HEROKU, so not running compress, since we are in OFFLINE mode: {os.environ['COMPRESS_OFFLINE']}.")
+#     COMPRESS_OFFLINE = True
+# else:
+#     print("LOCAL (not in Heroku land), so compress is ONLINE.")
 COMPRESS_PRECOMPILERS = (
     ('text/less', 'lessc {infile} {outfile}'),
 )
@@ -135,14 +135,14 @@ COMPRESS_ROOT = join(SITE_ROOT, "elevenbits", "theme")
 
 PROJECT_ROOT = abspath(dirname(__file__))
 
-STATIC_ROOT = join(PROJECT_ROOT, 'assets/')
+STATIC_ROOT = join(PROJECT_ROOT, 'assets')
 STATIC_URL = '/assets/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = join(PROJECT_ROOT, 'media')
 
-# STATICFILES_STORAGE = 'whitenoise.storage.' \
-#                       'CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.' \
+                      'CompressedManifestStaticFilesStorage'
 # STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -212,7 +212,7 @@ TEMPLATES = [
 MIDDLEWARE = (
     # 'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    # 'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
