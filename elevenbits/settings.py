@@ -9,7 +9,8 @@ from sentry_sdk.integrations.django import DjangoIntegration
 
 env = Env()
 env.read_env()
-root = Path(__file__).parents[2]
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+root = Path(__file__).parents[1]
 SITE_ROOT = str(root)
 PORT = os.environ.get('PORT', 8000)
 DEBUG = env.bool('DEBUG', False)
@@ -18,6 +19,7 @@ print(f"DATABASE_URL={os.environ.get('DATABASE_URL')}")
 print(f"DEBUG={DEBUG}")
 print(f"PORT={PORT}")
 print(f"SITE_ROOT={SITE_ROOT}")
+print(f"BASE_DIR={BASE_DIR}")
 
 # TODO: use .env for this
 ALLOWED_HOSTS = ["127.0.0.1",
@@ -110,7 +112,7 @@ USE_TZ = True
 
 # The statics (css and images) location
 STATICFILES_DIRS = (
-    join(SITE_ROOT, "assets"),
+    join(BASE_DIR, "assets"),
 )
 
 STATICFILES_FINDERS = (
@@ -132,7 +134,7 @@ COMPRESS_OFFLINE = True
 COMPRESS_PRECOMPILERS = (
     ('text/less', 'lessc {infile} {outfile}'),
 )
-COMPRESS_ROOT = join(SITE_ROOT, "elevenbits", "theme")
+COMPRESS_ROOT = join(BASE_DIR, "elevenbits", "theme")
 
 PROJECT_ROOT = abspath(dirname(__file__))
 
