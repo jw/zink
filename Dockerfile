@@ -9,7 +9,7 @@ ENV PYTHONUNBUFFERED 1
 
 # install required dependencies and tools
 RUN apt-get update && \
-    apt-get install -y curl wget netcat libpq-dev gcc
+    apt-get install -y curl wget netcat libpq-dev gcc tree
 
 # install node (and cleanup the tar.gz)
 RUN mkdir /node && \
