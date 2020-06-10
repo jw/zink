@@ -8,3 +8,5 @@ release:
   image: web
   command:
     - ./deployment-tasks.sh
+run:
+  web: gunicorn elevenbits.wsgi:application --bind 0.0.0.0:$PORT

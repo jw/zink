@@ -42,4 +42,3 @@ ENV PATH /app/node_modules/.bin:$PATH
 #RUN adduser -D myuser
 #USER myuser
 
-CMD gunicorn elevenbits.wsgi:application --bind 0.0.0.0:$PORT
