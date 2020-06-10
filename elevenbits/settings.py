@@ -112,7 +112,7 @@ USE_TZ = True
 
 # The statics (css and images) location
 STATICFILES_DIRS = (
-    join(BASE_DIR, "assets"),
+    # join(BASE_DIR, "assets"),
 )
 
 STATICFILES_FINDERS = (
