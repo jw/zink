@@ -134,7 +134,7 @@ COMPRESS_OFFLINE = True
 COMPRESS_PRECOMPILERS = (
     ('text/less', 'lessc {infile} {outfile}'),
 )
-COMPRESS_ROOT = join(BASE_DIR, "elevenbits", "theme")
+# COMPRESS_ROOT = join(BASE_DIR, "elevenbits", "theme")
 
 PROJECT_ROOT = abspath(dirname(__file__))
 
