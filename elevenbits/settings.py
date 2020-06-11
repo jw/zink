@@ -139,7 +139,7 @@ COMPRESS_PRECOMPILERS = (
 PROJECT_ROOT = abspath(dirname(__file__))
 
 STATIC_ROOT = join(BASE_DIR, 'assets')
-STATIC_URL = '/assets/'
+STATIC_URL = '/'
 print(f"STATIC_ROOT={STATIC_ROOT}")
 print(f"STATIC_URL={STATIC_URL}")
 
