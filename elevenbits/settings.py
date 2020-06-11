@@ -140,6 +140,8 @@ PROJECT_ROOT = abspath(dirname(__file__))
 
 STATIC_ROOT = join(BASE_DIR, 'assets')
 STATIC_URL = '/assets/'
+print(f"STATIC_ROOT={STATIC_ROOT}")
+print(f"STATIC_URL={STATIC_URL}")
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = join(PROJECT_ROOT, 'media')
