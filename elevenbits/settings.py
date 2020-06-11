@@ -146,8 +146,8 @@ print(f"STATIC_URL={STATIC_URL}")
 MEDIA_URL = '/media/'
 MEDIA_ROOT = join(PROJECT_ROOT, 'media')
 
-STATICFILES_STORAGE = 'whitenoise.storage.' \
-                      'CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.' \
+#                       'CompressedManifestStaticFilesStorage'
 # STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
