@@ -1,9 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static "css/code.css" %}"/>
+    </head>
+<body>
+
 {% load static %}
 
-<html>
-<body>
-Hello {{ hello }}
+<p>Hello {{ hello }}</p>
+
 <p>Properties</p>
+
         'STATIC_ROOT': {{ STATIC_ROOT }},
         'STATIC_URL': {{ STATIC_URL }},
         'STATICFILES_DIRS': {{ STATICFILES_DIRS }},
@@ -12,9 +19,13 @@ Hello {{ hello }}
         'BASE_DIR': {{ BASE_DIR }},
 
 <p>
-{% static "css/code.css" as foobar %}
+
+    {% static "css/code.css" as foobar %}
 Try: {{ foobar }}.
 </p>
+
+<hr/>
+
 
 </body>
 </html>
