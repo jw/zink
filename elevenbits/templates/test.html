@@ -8,5 +8,11 @@ Hello {{ hello }}
         'STATICFILES_FINDERS': {{ STATICFILES_FINDERS }},
         'SITE_ROOT': {{ SITE_ROOT }},
         'BASE_DIR': {{ BASE_DIR }},
+
+<p>
+{% static "css/code.css" as foobar %}
+Try: {{ foobar }}.
+</p>
+
 </body>
 </html>
