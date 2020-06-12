@@ -179,3 +179,8 @@ def detail(request, id):
                   'entry': entry}
 
     return render(request, 'detail.html', attributes)
+
+
+def test(request):
+    attributes = {'hello': 'there'}
+    return render(request, 'test.html', attributes)
