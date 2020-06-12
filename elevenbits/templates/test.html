@@ -1,4 +1,12 @@
 <html>
-<head>Test</head>
-<body>Hello {{ hello }}</body>
+<body>
+Hello {{ hello }}
+<p>Properties</p>
+        'STATIC_ROOT': {{ STATIC_ROOT }},
+        'STATIC_URL': {{ STATIC_URL }},
+        'STATICFILES_DIRS': {{ STATICFILES_DIRS }},
+        'STATICFILES_FINDERS': {{ STATICFILES_FINDERS }},
+        'SITE_ROOT': {{ SITE_ROOT }},
+        'BASE_DIR': {{ BASE_DIR }},
+</body>
 </html>

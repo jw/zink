@@ -182,5 +182,13 @@ def detail(request, id):
 
 
 def test(request):
-    attributes = {'hello': 'there'}
+    attributes = {
+        'hello': 'there',
+        'STATIC_ROOT': settings.STATIC_ROOT,
+        'STATIC_URL': settings.STATIC_URL,
+        'STATICFILES_DIRS': settings.STATICFILES_DIRS,
+        'STATICFILES_FINDERS': settings.STATICFILES_FINDERS,
+        'SITE_ROOT': settings.SITE_ROOT,
+        'BASE_DIR': settings.BASE_DIR,
+    }
     return render(request, 'test.html', attributes)
