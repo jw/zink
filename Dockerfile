@@ -46,6 +46,7 @@ ENV DJANGO_SETTINGS_MODULE=elevenbits.settings
 ENV WEB_CONCURRENCY=3
 
 # create statics
+RUN env
 RUN poetry run python manage.py collectstatic --noinput -v 2
 
 # install yarn and zinks javascript dependencies and run lessc
