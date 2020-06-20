@@ -111,9 +111,9 @@ USE_L10N = True
 USE_TZ = True
 
 # The statics (css and images) location
-STATICFILES_DIRS = (
-    # join(BASE_DIR, "assets"),
-)
+# STATICFILES_DIRS = (
+#     # join(BASE_DIR, "assets"),
+# )
 
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
@@ -138,8 +138,8 @@ COMPRESS_PRECOMPILERS = (
 
 PROJECT_ROOT = abspath(dirname(__file__))
 
-STATIC_ROOT = join(BASE_DIR, 'assets')
-STATIC_URL = 'http://elevenbits.com/assets/'
+STATIC_ROOT = join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
 print(f"STATIC_ROOT={STATIC_ROOT}")
 print(f"STATIC_URL={STATIC_URL}")
 

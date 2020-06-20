@@ -1,12 +1,12 @@
-setup:
-  config:
-    MAILGUN_HOST: foobar
+#setup:
+#  config:
+#    MAILGUN_HOST: foobar
 build:
   docker:
     web: Dockerfile
-release:
-  image: web
-  command:
-    - ./deployment-tasks.sh
-run:
-  web: gunicorn elevenbits.wsgi:application --bind 0.0.0.0:$PORT
+#release:
+#  image: web
+#  command:
+#    - ./deployment-tasks.sh
+#run:
+#  web: gunicorn elevenbits.wsgi:application --bind 0.0.0.0:$PORT

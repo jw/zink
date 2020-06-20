@@ -33,5 +33,12 @@ real-world scenarios. The software benchmark is available for macOS, Windows, Li
 Android and iOS. Geekbench has also measured GPU performance in areas such as image
 processing and computer vision since Geekbench 4.
 
+PYTHON LINE LENGTH
 
+Limit all lines to a maximum of 79 characters. Makes sense.
+[...] For flowing long blocks of text (docstrings or comments),
+limiting the length to 72 characters is recommended.
 
+RESUME UBUNTU RELEASE UPGRADE
+
+https://askubuntu.com/a/522615/11216

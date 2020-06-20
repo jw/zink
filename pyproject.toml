@@ -34,8 +34,8 @@ environs = "^7.4.0"
 pytest = "flake8"
 werkzeug = "^1.0.0"
 flake8 = "^3.7.9"
-lesscpy = "^0.14.0"
 watchdog = "^0.10.2"
+pre-commit = "^2.4.0"
 
 [build-system]
 requires = ["poetry>=0.12"]
