@@ -47,13 +47,13 @@ ENV WEB_CONCURRENCY=3
 
 # create statics
 RUN env
-RUN poetry run python manage.py collectstatic --noinput -v 2
+#RUN poetry run python manage.py collectstatic --noinput -v 2
 
 # install yarn and zinks javascript dependencies and run lessc
 RUN npm install -g yarn && yarn
 ENV PATH /app/node_modules/.bin:$PATH
 RUN lessc -v
-RUN poetry run python manage.py compress -v 2
+#RUN poetry run python manage.py compress -v 2
 
 # at last, start it!
-CMD poetry run gunicorn zink.wsgi:application --bind 0.0.0.0:$PORT
+#CMD poetry run gunicorn zink.wsgi:application --bind 0.0.0.0:$PORT
