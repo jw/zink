@@ -123,8 +123,8 @@ STATICFILES_FINDERS = (
 )
 
 # compressor
-COMPRESS_ENABLED = True
-COMPRESS_OFFLINE = True
+# COMPRESS_ENABLED = "Hello"
+COMPRESS_OFFLINE = "Hello"
 # print(os.environ['COMPRESS_OFFLINE'])
 # if not os.environ['COMPRESS_OFFLINE']:
 #     print(f"IN HEROKU, so not running compress, since we are in OFFLINE mode: {os.environ['COMPRESS_OFFLINE']}.")
@@ -146,8 +146,7 @@ print(f"STATIC_URL={STATIC_URL}")
 MEDIA_URL = '/media/'
 MEDIA_ROOT = join(PROJECT_ROOT, 'media')
 
-# STATICFILES_STORAGE = 'whitenoise.storage.' \
-#                       'CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

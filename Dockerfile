@@ -53,6 +53,10 @@ RUN env
 RUN npm install -g yarn && yarn
 ENV PATH /app/node_modules/.bin:$PATH
 RUN lessc -v
+
+#python manage.py collectstatic --no-input --clear
+#python manage.py compress --force -v 2
+
 #RUN poetry run python manage.py compress -v 2
 
 # at last, start it!
