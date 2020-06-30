@@ -7,6 +7,7 @@ build:
 release:
   image: web
   command:
-    - ./deployment-tasks.sh
+    - python manage.py collectstatic --noinput --clear
+    - python manage.py compress --force -v 2
 run:
   web: gunicorn elevenbits.wsgi:application --bind 0.0.0.0:$PORT

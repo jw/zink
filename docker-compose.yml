@@ -2,16 +2,18 @@
 
   services:
     db:
-      image: postgres
+      image: postgres:latest
       environment:
         - POSTGRES_DB=zink
         - POSTGRES_USER=zink
         - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+      ports:
+        - "5432:5432"
     web:
       build: .
-      command: ./entrypoint.sh
       volumes:
         - .:/code
+      env_file: .env
       ports:
         - "8000:8000"
       depends_on:

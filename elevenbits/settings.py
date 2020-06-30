@@ -43,8 +43,22 @@ EMAIL_BASE = os.environ['MAILGUN_BASE_URL']
 GOOGLE_MAPS_KEY = os.environ['GOOGLE_MAPS_KEY']
 
 DATABASES = {
-    'default': env.dj_db_url('DATABASE_URL'),
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
+
+DATABASE_URL = os.environ.get('DATABASE_URL')
+db_from_env = dj_database_url.config(default=DATABASE_URL, conn_max_age=500, ssl_require=True)
+DATABASES['default'].update(db_from_env)
+
+# DATABASES = {
+#     'default': env.dj_db_url('DATABASE_URL'),
+# }
+
+print(f'DATABASE_URL: {DATABASE_URL}')
+print(f'DATABASES: {DATABASES}')
 
 db_from_env = dj_database_url.config()
 # print(f"DB env: {db_from_env}")
