@@ -19,6 +19,7 @@ urlpatterns = [
     path('blog/', include('blog.urls', namespace='blog')),
     path('contact/', include('contact.urls', namespace='contact')),
     path('search', include('haystack.urls')),
+    path('foo', views.empty, name='empty'),
 
     # robots.txt
     path('robots.txt',

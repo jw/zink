@@ -53,6 +53,10 @@ def home(request):
     return render(request, 'index.html', attributes)
 
 
+def empty(request):
+    return render(request, 'ebtry.html')
+
+
 def stilus(request):
 
     assets = get_assets(prefix="index")
