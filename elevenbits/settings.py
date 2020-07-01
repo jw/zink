@@ -1,24 +1,23 @@
 import os
+from os.path import join, dirname, abspath
 from pathlib import Path
 
 import dj_database_url
-from environs import Env
-from os.path import join, dirname, abspath
 import sentry_sdk
+from environs import Env
 from sentry_sdk.integrations.django import DjangoIntegration
 
 env = Env()
 env.read_env()
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-root = Path(__file__).parents[1]
-SITE_ROOT = str(root)
+
 PORT = os.environ.get('PORT', 8000)
 DEBUG = env.bool('DEBUG', False)
 
-print(f"DATABASE_URL={os.environ.get('DATABASE_URL')}")
+print(f"DATABASE_URL={env('DATABASE_URL')}")
 print(f"DEBUG={DEBUG}")
-print(f"PORT={PORT}")
-print(f"SITE_ROOT={SITE_ROOT}")
+print(f"PORT={env('PORT')}")
 print(f"BASE_DIR={BASE_DIR}")
 
 # TODO: use .env for this
@@ -33,36 +32,38 @@ ALLOWED_HOSTS = ["127.0.0.1",
                  ".m8n.be"]
 
 # email
-EMAIL_HOST = env('MAILGUN_HOST')
-EMAIL_PORT = os.environ['MAILGUN_PORT']
-EMAIL_HOST_USER = os.environ['MAILGUN_HOST_USER']
-EMAIL_HOST_PASSWORD = os.environ['MAILGUN_HOST_PASSWORD']
-EMAIL_USE_TLS = True
-EMAIL_BASE = os.environ['MAILGUN_BASE_URL']
+# EMAIL_HOST = env('MAILGUN_HOST')
+# EMAIL_PORT = os.environ['MAILGUN_PORT']
+# EMAIL_HOST_USER = os.environ['MAILGUN_HOST_USER']
+# EMAIL_HOST_PASSWORD = os.environ['MAILGUN_HOST_PASSWORD']
+# EMAIL_USE_TLS = True
+# EMAIL_BASE = os.environ['MAILGUN_BASE_URL']
 
-GOOGLE_MAPS_KEY = os.environ['GOOGLE_MAPS_KEY']
+# GOOGLE_MAPS_KEY = os.environ['GOOGLE_MAPS_KEY']
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
-DATABASE_URL = os.environ.get('DATABASE_URL')
-db_from_env = dj_database_url.config(default=DATABASE_URL, conn_max_age=500, ssl_require=True)
-DATABASES['default'].update(db_from_env)
+DATABASES = {"default": env.dj_db_url("DATABASE_URL")}
+#
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+#
+# DATABASE_URL = os.environ.get('DATABASE_URL')
+# db_from_env = dj_database_url.config(default=DATABASE_URL, conn_max_age=500, ssl_require=True)
+# DATABASES['default'].update(db_from_env)
 
 # DATABASES = {
 #     'default': env.dj_db_url('DATABASE_URL'),
 # }
 
-print(f'DATABASE_URL: {DATABASE_URL}')
+print(f'DATABASE_URL: {env("DATABASE_URL")}')
 print(f'DATABASES: {DATABASES}')
 
-db_from_env = dj_database_url.config()
+# db_from_env = dj_database_url.config()
 # print(f"DB env: {db_from_env}")
-DATABASES['default'].update(db_from_env)
+# DATABASES['default'].update(db_from_env)
 
 #
 # Test properties
@@ -115,7 +116,7 @@ MANAGERS = ADMINS
 TIME_ZONE = 'Europe/Brussels'
 LANGUAGE_CODE = 'en-BE'
 
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = env('SECRET_KEY', 'invalid_secret_key')
 
 SITE_ID = 1
 
@@ -124,94 +125,33 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-# The statics (css and images) location
-# STATICFILES_DIRS = (
-#     # join(BASE_DIR, "assets"),
-# )
+# statics and compress
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-    # 'static_precompiler.finders.StaticPrecompilerFinder',
     "compressor.finders.CompressorFinder",
 )
 
-# compressor
-# COMPRESS_ENABLED = "Hello"
-COMPRESS_OFFLINE = "Hello"
-# print(os.environ['COMPRESS_OFFLINE'])
-# if not os.environ['COMPRESS_OFFLINE']:
-#     print(f"IN HEROKU, so not running compress, since we are in OFFLINE mode: {os.environ['COMPRESS_OFFLINE']}.")
-#     COMPRESS_OFFLINE = True
-# else:
-#     print("LOCAL (not in Heroku land), so compress is ONLINE.")
 COMPRESS_PRECOMPILERS = (
     ('text/less', 'lessc {infile} {outfile}'),
 )
-# COMPRESS_ROOT = join(BASE_DIR, "elevenbits", "theme")
 
-PROJECT_ROOT = abspath(dirname(__file__))
-
-STATIC_ROOT = join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/static/'
-print(f"STATIC_ROOT={STATIC_ROOT}")
-print(f"STATIC_URL={STATIC_URL}")
+COMPRESS_OFFLINE = 'Hello'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = join(PROJECT_ROOT, 'media')
+MEDIA_ROOT = join(BASE_DIR, 'media')
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-# STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
-
-# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-# SECURE_HSTS_SECONDS = 60
-# SECURE_HSTS_INCLUDE_SUBDOMAINS = env.bool(
-#     'DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS', default=True)
-# SECURE_CONTENT_TYPE_NOSNIFF = env.bool(
-#     'DJANGO_SECURE_CONTENT_TYPE_NOSNIFF', default=True)
-# SECURE_BROWSER_XSS_FILTER = True
-# SESSION_COOKIE_SECURE = True
-# SESSION_COOKIE_HTTPONLY = True
-# SECURE_SSL_REDIRECT = env.bool('DJANGO_SECURE_SSL_REDIRECT', default=True)
-# CSRF_COOKIE_SECURE = True
-# CSRF_COOKIE_HTTPONLY = True
-# X_FRAME_OPTIONS = 'DENY'
-
-
-PIPELINE = {
-    'STYLESHEETS': {
-        'colors': {
-            'source_filenames': (
-                # 'css/core.css',
-                # 'css/colors/*.css',
-                # 'css/layers.css'
-            ),
-            'output_filename': 'css/colors.css',
-            'extra_context': {
-                'media': 'screen, projection',
-            },
-        },
-    },
-    'JAVASCRIPT': {
-        'stats': {
-            'source_filenames': (
-                # 'js/jquery.js',
-                # 'js/d3.js',
-                # 'js/collections/*.js',
-                # 'js/application.js',
-            ),
-            'output_filename': 'js/stats.js',
-        }
-    }
-}
-
-FIXTURE_DIRS = (join(SITE_ROOT, 'fixtures'),)
+FIXTURE_DIRS = (join(BASE_DIR, 'fixtures'),)
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [join(PROJECT_ROOT, 'uploads/templates'), ],
+        'DIRS': [join(BASE_DIR, 'uploads/templates'), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

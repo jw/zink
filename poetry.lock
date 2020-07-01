@@ -174,28 +174,6 @@ Django = ">=2.2"
 
 [[package]]
 category = "main"
-description = "This is a Django library for Heroku apps."
-name = "django-heroku"
-optional = false
-python-versions = "*"
-version = "0.3.1"
-
-[package.dependencies]
-dj-database-url = ">=0.5.0"
-django = "*"
-psycopg2 = "*"
-whitenoise = "*"
-
-[[package]]
-category = "main"
-description = "Pipeline is an asset packaging library for Django."
-name = "django-pipeline"
-optional = false
-python-versions = "*"
-version = "1.7.0"
-
-[[package]]
-category = "main"
 description = "django-treenode is probably the best abstract model / admin for your tree based stuff."
 name = "django-treenode"
 optional = false
@@ -292,18 +270,6 @@ version = "3.1.0"
 Django = ">=2.2"
 
 [[package]]
-category = "dev"
-description = "Python LESS compiler"
-name = "lesscpy"
-optional = false
-python-versions = "*"
-version = "0.14.0"
-
-[package.dependencies]
-ply = "*"
-six = "*"
-
-[[package]]
 category = "main"
 description = "A lightweight library for converting complex datatypes to and from native Python datatypes."
 name = "marshmallow"
@@ -387,14 +353,6 @@ version = "0.13.1"
 
 [package.extras]
 dev = ["pre-commit", "tox"]
-
-[[package]]
-category = "dev"
-description = "Python Lex & Yacc"
-name = "ply"
-optional = false
-python-versions = "*"
-version = "3.11"
 
 [[package]]
 category = "dev"
@@ -684,7 +642,7 @@ python-versions = "*"
 version = "2.7.4"
 
 [metadata]
-content-hash = "2bc4be86a711614b0c0c2ef66531d8cf259bb75f77141e09747f3dc76d711d1b"
+content-hash = "304a4d504a3b11df3774e8e4d8459b94e4d634fb57a2c957a4fdbe3d8ee3b264"
 python-versions = "^3.8"
 
 [metadata.files]
@@ -752,14 +710,6 @@ django-haystack = [
     {file = "django-haystack-3.0b1.tar.gz", hash = "sha256:9dba64f5c76cf147ac382d4a4a270f30d30a45a3a7a1738a9d05c96d18777c07"},
     {file = "django_haystack-3.0b1-py3-none-any.whl", hash = "sha256:b83705e1cf8141cd1755fc6683ac65fea4e1281f4b4306bc9224af96495b0df3"},
 ]
-django-heroku = [
-    {file = "django-heroku-0.3.1.tar.gz", hash = "sha256:6af4bc3ae4a9b55eaad6dbe5164918982d2762661aebc9f83d9fa49f6009514e"},
-    {file = "django_heroku-0.3.1-py2.py3-none-any.whl", hash = "sha256:2bc690aab89eedbe01311752320a9a12e7548e3b0ed102681acc5736a41a4762"},
-]
-django-pipeline = [
-    {file = "django-pipeline-1.7.0.tar.gz", hash = "sha256:0ded22b974e3d627c27fc490ef5b23fcdcf0cdb00b704d628b5ca6d0b010d6fe"},
-    {file = "django_pipeline-1.7.0-py2.py3-none-any.whl", hash = "sha256:f7da70f00aa4baea3e0811f88927a116425deee05871fa2bfd2f8247f42d8847"},
-]
 django-treenode = [
     {file = "django-treenode-0.14.2.tar.gz", hash = "sha256:1d871cd452cd86ce53a3a703b1853d256f318a83a77af421238a1932dcceaaa6"},
     {file = "django_treenode-0.14.2-py2-none-any.whl", hash = "sha256:bd4a030016049a7d52ad161ae534301ae00276e3cca0ee4fc39729ff87cf7ba1"},
@@ -791,10 +741,6 @@ identify = [
 jsonfield = [
     {file = "jsonfield-3.1.0-py3-none-any.whl", hash = "sha256:df857811587f252b97bafba42e02805e70a398a7a47870bc6358a0308dd689ed"},
     {file = "jsonfield-3.1.0.tar.gz", hash = "sha256:7e4e84597de21eeaeeaaa7cc5da08c61c48a9b64d0c446b2d71255d01812887a"},
-]
-lesscpy = [
-    {file = "lesscpy-0.14.0-py2.py3-none-any.whl", hash = "sha256:b0f2f853ee1dfb0891b147b57028057d5389510e079581e7b533d07dc0d95d3e"},
-    {file = "lesscpy-0.14.0.tar.gz", hash = "sha256:7b664f60818a16afa8cc9f1dd6d9b17f944e0ce94e50787d76f81bc7a8648cce"},
 ]
 marshmallow = [
     {file = "marshmallow-3.6.1-py2.py3-none-any.whl", hash = "sha256:9aa20f9b71c992b4782dad07c51d92884fd0f7c5cb9d3c737bea17ec1bad765f"},
@@ -850,10 +796,6 @@ pillow = [
 pluggy = [
     {file = "pluggy-0.13.1-py2.py3-none-any.whl", hash = "sha256:966c145cd83c96502c3c3868f50408687b38434af77734af1e9ca461a4081d2d"},
     {file = "pluggy-0.13.1.tar.gz", hash = "sha256:15b2acde666561e1298d71b523007ed7364de07029219b604cf808bfa1c765b0"},
-]
-ply = [
-    {file = "ply-3.11-py2.py3-none-any.whl", hash = "sha256:096f9b8350b65ebd2fd1346b12452efe5b9607f7482813ffca50c22722a807ce"},
-    {file = "ply-3.11.tar.gz", hash = "sha256:00c7c1aaa88358b9c765b6d3000c6eec0ba42abca5351b095321aef446081da3"},
 ]
 pre-commit = [
     {file = "pre_commit-2.4.0-py2.py3-none-any.whl", hash = "sha256:5559e09afcac7808933951ffaf4ff9aac524f31efbc3f24d021540b6c579813c"},
