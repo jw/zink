@@ -1,6 +1,3 @@
-#setup:
-#  config:
-#    MAILGUN_HOST: foobar
 build:
   docker:
     web: Dockerfile

@@ -151,16 +151,18 @@ FIXTURE_DIRS = (join(BASE_DIR, 'fixtures'),)
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [join(BASE_DIR, 'uploads/templates'), ],
+        'DIRS': [],
+        # 'DIRS': [join(BASE_DIR, 'uploads/templates'), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.contrib.auth.context_processors.auth',
                 'django.template.context_processors.debug',
-                'django.template.context_processors.i18n',
-                'django.template.context_processors.media',
-                'django.template.context_processors.static',
-                'django.template.context_processors.tz',
+                # 'django.template.context_processors.i18n',
+                # 'django.template.context_processors.media',
+                # 'django.template.context_processors.static',
+                # 'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
             ],
         },
@@ -171,8 +173,8 @@ MIDDLEWARE = (
     # 'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -180,7 +182,7 @@ MIDDLEWARE = (
     # 'tracking.middleware.VisitorTrackingMiddleware',
     # 'tracking.middleware.VisitorCleanUpMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.gzip.GZipMiddleware',
+    # 'django.middleware.gzip.GZipMiddleware',
 )
 
 ROOT_URLCONF = 'elevenbits.urls'
@@ -201,8 +203,8 @@ HAYSTACK_CONNECTIONS = {
 }
 
 INSTALLED_APPS = (
-    'widget_tweaks',
-    'django_extensions',
+    # 'widget_tweaks',
+    # 'django_extensions',
     # django contribs
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -210,15 +212,11 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.messages',
-
-    # css
-    "compressor",
-
-    # statics
-    # 'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
 
-    'haystack',
+    "compressor",
+
+    # 'haystack',
 
     # 'static_precompiler',
     'blog.apps.BlogConfig',
