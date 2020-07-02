@@ -177,7 +177,7 @@ sentry_sdk.init(
 # # EMAIL_USE_TLS = True
 # # EMAIL_BASE = os.environ['MAILGUN_BASE_URL']
 #
-# # GOOGLE_MAPS_KEY = os.environ['GOOGLE_MAPS_KEY']
+GOOGLE_MAPS_KEY = os.environ['GOOGLE_MAPS_KEY']
 #
 # DATABASES = {"default": env.dj_db_url("DATABASE_URL")}
 # print(f'DATABASES: {DATABASES}')
