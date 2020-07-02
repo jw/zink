@@ -36,7 +36,7 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /app
 
 # zink environmemt settings
-ENV DJANGO_SETTINGS_MODULE=elevenbits.settings
+ENV DJANGO_SETTINGS_MODULE=zink.settings
 ENV WEB_CONCURRENCY=3
 ENV DEBUG=0
 
