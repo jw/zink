@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'reading',
     'compressor',
 ]
 
@@ -45,7 +46,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'elevenbits.urls'
+ROOT_URLCONF = 'reading.urls'
 
 TEMPLATES = [
     {
