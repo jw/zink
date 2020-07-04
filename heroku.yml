@@ -1,0 +1,9 @@
+build:
+  docker:
+    web: Dockerfile
+#release:
+#  image: web
+#  command:
+#    - mkdir -p /app/staticfiles && python manage.py collectstatic --noinput --clear && python manage.py compress -v 2
+run:
+  web: gunicorn zink.wsgi:application --bind 0.0.0.0:$PORT
