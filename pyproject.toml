@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "zink"
+version = "4.0.0"
+description = "ElevenBits website"
+authors = ["Jan Willems <jw@elevenbts.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+django = "^3.0.8"
+gunicorn = "^20.0.4"
+psycopg2 = "^2.8.5"
+environs = "^8.0.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.4.3"
+black = "^19.10b0"
+pre-commit = "^2.6.0"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
