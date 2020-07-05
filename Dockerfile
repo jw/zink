@@ -11,7 +11,7 @@ ENV NODE_DISTRO linux-x64
 # install node
 RUN mkdir /node && \
     cd /node && \
-    curl https://nodejs.org/dist/$NODE_VERSION/node-$NODE_VERSION-$NODE_DISTRO.tar.gz -o node-$NODE_VERSION-$NODE_DISTRO.tar.gz && \
+    curl -s -S https://nodejs.org/dist/$NODE_VERSION/node-$NODE_VERSION-$NODE_DISTRO.tar.gz -o node-$NODE_VERSION-$NODE_DISTRO.tar.gz && \
     tar xfz node-$NODE_VERSION-$NODE_DISTRO.tar.gz && \
     cd node-$NODE_VERSION-$NODE_DISTRO && \
     mv * .. && \
@@ -41,7 +41,7 @@ ENV DEBUG=False
 
 COPY . .
 
-# install yarn and zinks javascript dependencies and run lessc
+# install yarn and zinks javascript dependencies and run lessc -v
 RUN npm install -g yarn && yarn
 ENV PATH /app/node_modules/.bin:$PATH
 RUN lessc -v
