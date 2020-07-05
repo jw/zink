@@ -1,33 +1,89 @@
 import os
-import logging
+import logging.config
+from django.utils.log import DEFAULT_LOGGING
 
 from environs import Env
 
-log = logging.getLogger(__name__)
+logger = logging.getLogger('zink')
 
 env = Env()
 env.read_env()
 
+# Disable Django's logging setup
+LOGGING_CONFIG = None
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # get the environment variables from .env
-# note: by default a non debug system at port 8000 without any
-#       database and an open allowed host list will be set up
+
+# note: By default a non debug system at port 8000 without any
+#       database and an open allowed host list will be set up.
+#       The logging level of this system will be warning.
 
 SECRET_KEY = env("DJANGO_SECRET_KEY", "some_invalid_secret_key")
 PORT = env.int('PORT', 8000)
 DEBUG = env.bool('DEBUG', False)
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", ['*'])
 HAS_DB_URL = env.str("DATABASE_URL", None)
+LOGLEVEL = env.str('LOGLEVEL', 'WARNING').upper()
 
+logging.config.dictConfig({
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'default': {
+            # exact format is not important, this is the minimum information
+            'format': '%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
+        },
+        'django.server': DEFAULT_LOGGING['formatters']['django.server'],
+    },
+    'handlers': {
+        # console logs to stderr
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'default',
+        },
+        # Add Handler for Sentry for `warning` and above
+        # 'sentry': {
+        #     'level': 'WARNING',
+        #     'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
+        # },
+        'django.server': DEFAULT_LOGGING['handlers']['django.server'],
+    },
+    'loggers': {
+        # default for all undefined Python modules
+        '': {
+            'level': 'WARNING',
+            'handlers': ['console'],  # , 'sentry'],
+        },
+        # Our application code
+        'zink': {
+            'level': LOGLEVEL,
+            'handlers': ['console'],  # , 'sentry'],
+            # Avoid double logging because of root logger
+            'propagate': False,
+        },
+        # Prevent noisy modules from logging to Sentry
+        'noisy_module': {
+            'level': 'ERROR',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        # Default runserver request logging
+        'django.server': DEFAULT_LOGGING['loggers']['django.server'],
+    },
+})
+
+logger.info('ENVIRONMENT SETTINGS:')
 if HAS_DB_URL:
-    log.info(f"DATABASE_URL={HAS_DB_URL}")
+    logger.info(f" > DATABASE_URL={HAS_DB_URL}")
 else:
-    log.warning('No database url specified; '
-                'should be in docker build.')
-log.info(f"DEBUG={DEBUG}")
-log.info(f"PORT={PORT}")
-log.info(f"BASE_DIR={BASE_DIR}")
+    logger.warning('No database url specified; '
+                   'should be in docker build.')
+logger.info(f" > DEBUG={DEBUG}")
+logger.info(f" > PORT={PORT}")
+logger.info(f" > BASE_DIR={BASE_DIR}")
+logger.info(f" > LOGLEVEL={LOGLEVEL}")
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -73,7 +129,7 @@ WSGI_APPLICATION = 'zink.wsgi.application'
 
 if HAS_DB_URL:
     DATABASES = {"default": env.dj_db_url("DATABASE_URL")}
-    log.info(f'DATABASES: {DATABASES}')
+    logger.info(f' > DATABASES={DATABASES}')
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -111,10 +167,12 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
 )
-log.info(f"static_url: {STATIC_URL}")
-log.info(f"static_root: {STATIC_ROOT}")
+logger.info(f" > STATIC_URL={STATIC_URL}")
+logger.info(f" > STATIC_ROOT={STATIC_ROOT}")
 
 COMPRESS_OFFLINE = True
 COMPRESS_PRECOMPILERS = (
     ('text/less', 'lessc {infile} {outfile}'),
 )
+
+logger.info('')  # cleanup

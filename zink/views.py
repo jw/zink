@@ -6,10 +6,13 @@ from django.shortcuts import render
 
 from zink import settings
 
-log = logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
 
 def stilus(request):
+
+    logger.info('Stilus view called.')
+    logger.warning('Stilus view called.')
 
     p = Path(settings.BASE_DIR)
     app_exists = p.exists()
@@ -19,9 +22,6 @@ def stilus(request):
     cache_exists = p.exists()
 
     p = Path(settings.STATIC_ROOT)
-    dir = p.glob('**')
-
-    print(f'dir: {list(dir)}')
     dir = p.glob('**')
 
     attributes = {'stilus': "Stilus!",
