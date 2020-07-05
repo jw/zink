@@ -1,7 +1,10 @@
 {% extends "base.html" %}
+d
+{% load static %}
 
 {% block content %}
 {#    <div class="uk-container uk-margin-top">#}
     <p>In the stilus content block: {{ stilus }}</p>
+    <img src="{% static "images/elevenbits-extra.png" %}" alt="logo"/>
 {#    </div>#}
 {% endblock %}
