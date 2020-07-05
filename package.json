@@ -1,0 +1,12 @@
+{
+  "name": "zink",
+  "version": "4.0.0",
+  "description": "Basic JavaScript libraries required for Zink",
+  "license": "MIT",
+  "dependencies": {
+    "uikit": "^3.5.3"
+  },
+  "devDependencies": {
+    "less": "^3.11.1"
+  }
+}
