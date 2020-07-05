@@ -8,5 +8,10 @@
         <img src="{% static "images/elevenbits-extra.png" %}" alt="logo"/>
         <button class="uk-button uk-button-default">Button</button>
         <p class="top-footer">DEBUG: {{ debug }}</p>
+        <ul>
+        {% for f in dir %}
+            <li>{{ f }}</li>
+        {% endfor %}
+        </ul>
     </div>
 {% endblock %}
