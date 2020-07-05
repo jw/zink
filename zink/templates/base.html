@@ -2,6 +2,7 @@
 <html lang="en">
 
 {% load static %}
+{% load lookup %}
 {% load compress %}
 
     <head>
@@ -20,7 +21,7 @@
         <script src="{% static "js/uikit.min.js" %}" type="text/javascript"></script>
         <script src="{% static "js/uikit-icons.min.js" %}" type="text/javascript"></script>
 
-        <title>Hello there!</title>
+        <title>{{ assets | lookup:'title' }}</title>
 
     </head>
 
