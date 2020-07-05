@@ -51,7 +51,7 @@ RUN lessc -v
 # install dependencies
 RUN POETRY_VIRTUALENVS_CREATE=false poetry install --no-interaction
 
-RUN python manage.py collectstatic --noinput --clear -v 2
-RUN python manage.py compress --force -v 2
+RUN python manage.py collectstatic --noinput --clear
+RUN python manage.py compress -v 2
 
 CMD gunicorn zink.wsgi:application --bind 0.0.0.0:$PORT
