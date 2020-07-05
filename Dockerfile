@@ -1,9 +1,8 @@
 FROM python:3.8-buster
 
 # install required dependencies
-# todo: cleanup necessary
 RUN apt-get update \
-    && apt-get install -y curl libpq-dev gcc tree
+    && apt-get install -y curl libpq-dev gcc
 
 # node version
 ENV NODE_VERSION v12.18.0
@@ -28,7 +27,6 @@ RUN pip install -U pip \
     && curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
 ENV PATH="${PATH}:/root/.poetry/bin"
 RUN poetry --version
-RUN poetry config --list
 
 # python stuff
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -51,7 +49,8 @@ RUN lessc -v
 # install dependencies
 RUN POETRY_VIRTUALENVS_CREATE=false poetry install --no-interaction
 
+# create statics
 RUN python manage.py collectstatic --noinput --clear
-RUN python manage.py compress -v 2
+RUN python manage.py compress
 
 CMD gunicorn zink.wsgi:application --bind 0.0.0.0:$PORT
