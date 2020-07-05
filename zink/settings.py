@@ -1,6 +1,9 @@
 import os
+import logging
 
 from environs import Env
+
+log = logging.getLogger(__name__)
 
 env = Env()
 env.read_env()
@@ -17,14 +20,14 @@ DEBUG = env.bool('DEBUG', False)
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", ['*'])
 HAS_DB_URL = env.str("DATABASE_URL", None)
 
-# todo: use logging
 if HAS_DB_URL:
-    print(f"DATABASE_URL={HAS_DB_URL}")
+    log.info(f"DATABASE_URL={HAS_DB_URL}")
 else:
-    print('No database url specified; should be in docker build.')
-print(f"DEBUG={DEBUG}")
-print(f"PORT={PORT}")
-print(f"BASE_DIR={BASE_DIR}")
+    log.warning('No database url specified; '
+                'should be in docker build.')
+log.info(f"DEBUG={DEBUG}")
+log.info(f"PORT={PORT}")
+log.info(f"BASE_DIR={BASE_DIR}")
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -70,9 +73,7 @@ WSGI_APPLICATION = 'zink.wsgi.application'
 
 if HAS_DB_URL:
     DATABASES = {"default": env.dj_db_url("DATABASE_URL")}
-    print(f'DATABASES: {DATABASES}')
-else:
-    print('No database url specified; should be in docker build.')
+    log.info(f'DATABASES: {DATABASES}')
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -110,8 +111,8 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
 )
-print(f"static_url: {STATIC_URL}")
-print(f"static_root: {STATIC_ROOT}")
+log.info(f"static_url: {STATIC_URL}")
+log.info(f"static_root: {STATIC_ROOT}")
 
 COMPRESS_OFFLINE = True
 COMPRESS_PRECOMPILERS = (
