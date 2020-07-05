@@ -8,7 +8,7 @@ env.read_env()
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # get these from emv
-SECRET_KEY = env("DJANGO_SECRET_KEY")
+SECRET_KEY = env("DJANGO_SECRET_KEY", "some_invalid_secret_key")
 PORT = env.int('PORT', 8000)
 DEBUG = env.bool('DEBUG', False)
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
