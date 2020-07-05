@@ -4,6 +4,6 @@ build:
 release:
   image: web
   command:
-    - python manage.py collectstatic --noinput --clear -v 2
+    - python manage.py collectstatic --noinput --clear -v 2 && python manage.py compress
 run:
   web: gunicorn zink.wsgi:application --bind 0.0.0.0:$PORT

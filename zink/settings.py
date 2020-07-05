@@ -32,11 +32,8 @@ print(f"BASE_DIR={BASE_DIR}")
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
+# todo: use .env
 SECRET_KEY = 'w-+**mq9)my)l&u+^9$376-owzpzbn40a0b07rvinezp9)#^n('
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 # todo: use .env
 ALLOWED_HOSTS = ["127.0.0.1",
@@ -54,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'zink',
+    'compressor',
 ]
 
 MIDDLEWARE = [
@@ -133,6 +131,15 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
 print(f"static_url: {STATIC_URL}")
 print(f"static_root: {STATIC_ROOT}")
+
+COMPRESS_OFFLINE = True
+COMPRESS_PRECOMPILERS = (
+    ('text/less', 'lessc {infile} {outfile}'),
+)
