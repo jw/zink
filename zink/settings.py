@@ -23,8 +23,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PORT = os.environ.get('PORT', 8000)
 DEBUG = env.bool('DEBUG', False)
 
+DB_URL = env.str("DATABASE_URL", None)
+
 # todo: use logging
-print(f"DATABASE_URL={env('DATABASE_URL')}")
+if DB_URL:
+    print(f"DATABASE_URL={DB_URL}")
+else:
+    print('No database url specified; should be in docker build.')
 print(f"DEBUG={DEBUG}")
 print(f"PORT={PORT}")
 print(f"BASE_DIR={BASE_DIR}")
@@ -89,8 +94,11 @@ WSGI_APPLICATION = 'zink.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {"default": env.dj_db_url("DATABASE_URL")}
-print(f'DATABASES: {DATABASES}')
+if DB_URL:
+    DATABASES = {"default": env.dj_db_url("DATABASE_URL")}
+    print(f'DATABASES: {DATABASES}')
+else:
+    print('No database url specified; should be in docker build.')
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
