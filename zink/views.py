@@ -14,6 +14,7 @@ def stilus(request):
     dir = p.glob('**')
 
     print(f'dir: {list(dir)}')
+    dir = p.glob('**')
 
     attributes = {'stilus': "Stilus!",
                   'debug': settings.DEBUG,
