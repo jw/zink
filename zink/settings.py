@@ -7,11 +7,14 @@ env.read_env()
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# get these from emv
+# get the environment variables from .env
+# note: by default a non debug system at port 8000 without any
+#       database and an open allowed host list will be set up
+
 SECRET_KEY = env("DJANGO_SECRET_KEY", "some_invalid_secret_key")
 PORT = env.int('PORT', 8000)
 DEBUG = env.bool('DEBUG', False)
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", ['*'])
 HAS_DB_URL = env.str("DATABASE_URL", None)
 
 # todo: use logging
