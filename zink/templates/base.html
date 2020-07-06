@@ -27,7 +27,9 @@
 
     <body>
 
+        {% block header %}{% include "header.html" %}{% endblock %}
         {% block content %}{% endblock %}
+        {% block footer %}{% include "footer.html" %}{% endblock %}
 
     </body>
 

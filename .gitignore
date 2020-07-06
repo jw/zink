@@ -5,3 +5,5 @@ venv
 staticfiles
 .env
 db.sqlite3
+node_modules
+zink.egg-info
