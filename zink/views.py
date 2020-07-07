@@ -44,24 +44,18 @@ def home(request):
 
 def stilus(request):
 
-    logger.info('Stilus view called.')
-    logger.warning('Stilus view called.')
+    assets = get_assets(prefix="index")
 
-    p = Path(settings.BASE_DIR)
-    app_exists = p.exists()
-    p = Path(settings.STATIC_ROOT)
-    staticfiles_exists = p.exists()
-    p = Path(join(settings.STATIC_ROOT, 'CACHE'))
-    cache_exists = p.exists()
+    menus = create_menus(Menu.roots[0], 'stilus')
+    logger.info(f"Retrieved {len(menus)} menu items.")
 
-    p = Path(settings.STATIC_ROOT)
-    dir = p.glob('**')
+    stilus = Entry.objects.filter(page=Entry.STILUS, active=True)
+    if stilus:
+        stilus = stilus[0]
+        logger.info(f"Retrieved stilus entry.")
 
-    attributes = {'stilus': "Stilus!",
-                  'debug': settings.DEBUG,
-                  'app_exists': app_exists,
-                  'staticfiles_exists': staticfiles_exists,
-                  'cache_exists': cache_exists,
-                  'dir': dir}
+    attributes = {'menus': menus,
+                  'stilus': stilus,
+                  'assets': assets}
 
     return render(request, 'stilus.html', attributes)
