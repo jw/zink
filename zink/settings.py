@@ -27,15 +27,16 @@ ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", ['*'])
 HAS_DB_URL = env.str("DATABASE_URL", None)
 LOGLEVEL = env.str('LOGLEVEL', 'WARNING').upper()
 
-GOOGLE_MAPS_KEY = env('GOOGLE_MAPS_KEY')
+GOOGLE_MAPS_KEY = env.str('GOOGLE_MAPS_KEY', "some_invalid_google_maps_key")
 
 # email
-EMAIL_HOST = env('MAILGUN_HOST')
-EMAIL_PORT = env('MAILGUN_PORT')
-EMAIL_HOST_USER = env('MAILGUN_HOST_USER')
-EMAIL_HOST_PASSWORD = env('MAILGUN_HOST_PASSWORD')
+EMAIL_HOST = env.str('MAILGUN_HOST', "some_invalid_email_host")
+EMAIL_PORT = env.str('MAILGUN_PORT', "some_invalid_email_port")
+EMAIL_HOST_USER = env.str('MAILGUN_HOST_USER', "some_invalid_email_host_user")
+EMAIL_HOST_PASSWORD = env.str('MAILGUN_HOST_PASSWORD',
+                              "some_invalid_email_host_password")
 EMAIL_USE_TLS = True
-EMAIL_BASE = env('MAILGUN_BASE_URL')
+EMAIL_BASE = env.str('MAILGUN_BASE_URL', "some_invalid_email_base")
 
 logging.config.dictConfig({
     'version': 1,
