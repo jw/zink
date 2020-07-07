@@ -1,22 +1,18 @@
 {% extends "base.html" %}
 
-{% load static %}
+{% load markdownify %}
 
 {% block content %}
+
     <div class="uk-container uk-margin-top">
-        <p>In the stilus content block: {{ stilus }}</p>
-        <img src="{% static "images/elevenbits-extra.png" %}" alt="logo"/>
-        <button class="uk-button uk-button-default">Button</button>
-        <p class="top-footer">DEBUG: {{ debug }}</p>
-        <p>
-            app_exists: {{ app_exists }},
-            staticfiles_exists: {{ staticfiles_exists }},
-            cache_exists: {{ cache_exists }}
-        </p>
-        <ul>
-        {% for f in dir %}
-            <li>{{ f }}</li>
-        {% endfor %}
-        </ul>
+        <article class="uk-article">
+            <h4 class="uk-article-title">
+                {{ stilus.title }}
+            </h4>
+            <p>
+                {{ stilus.body | markdown | safe }}
+            </p>
+        </article>
     </div>
+
 {% endblock %}
