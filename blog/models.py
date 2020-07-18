@@ -1,6 +1,11 @@
+import re
 
+import mistune
+from bs4 import BeautifulSoup
 from django.db import models
 from treenode.models import TreeNodeModel
+
+from zink import settings
 
 
 class Menu(TreeNodeModel):
@@ -77,7 +82,19 @@ class Entry(models.Model):
         verbose_name_plural = 'Entries'
 
     def __str__(self):
-        return self.title
+        page = [choice[1] for choice in self.PAGE_CHOICES
+                if choice[0] == self.page][0]
+        return f"[{page}] {self.title}"
+
+    @property
+    def slug(self):
+        html = mistune.markdown(self.body)
+        text = ''.join(BeautifulSoup(html).findAll(text=True))
+        no_hash = text.replace("#", "").strip()
+        if len(no_hash) < settings.SLUG_LENGTH:
+            return no_hash
+
+        return f"{no_hash[:settings.SLUG_LENGTH]}..."
 
 
 class Comment(models.Model):

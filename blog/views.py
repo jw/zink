@@ -4,6 +4,9 @@ from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.shortcuts import get_object_or_404, render
+from haystack.forms import SearchForm
+from haystack.generic_views import SearchView
+from haystack.query import SearchQuerySet
 
 from blog.models import Entry, Tag, Menu, Static
 
@@ -180,3 +183,26 @@ def detail(request, id):
                   'entry': entry}
 
     return render(request, 'detail.html', attributes)
+
+
+class MySearchView(SearchView):
+    """My custom search view."""
+
+    template_name = 'search/search.html'
+    queryset = SearchQuerySet().all()
+    form_class = SearchForm
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(MySearchView, self).get_context_data(*args, **kwargs)
+        context['tags'] = [tag for tag in context['object_list']
+                           if tag.model_name == 'tag']
+        # entry_list = Entry.objects.filter(active=True, tags__pk=tag).reverse()
+
+        context['entries'] = [entry for entry in context['object_list']
+                              if entry.model_name == 'entry']
+        context['statics'] = [static for static in context['object_list']
+                              if static.model_name == 'static']
+        context['assets'] = get_assets(prefix="static")
+        context['menus'] = create_menus(Menu.roots[0])
+        logger.info(f"Retrieved {len(context['menus'])} menu items.")
+        return context

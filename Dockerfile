@@ -49,8 +49,9 @@ RUN lessc -v
 # install dependencies
 RUN POETRY_VIRTUALENVS_CREATE=false poetry install --no-interaction
 
-# create statics
+# create statics and build search index
 RUN python manage.py collectstatic --noinput --clear
 RUN python manage.py compress
+RUN python manage.py rebuild_index
 
 CMD gunicorn zink.wsgi:application --bind 0.0.0.0:$PORT

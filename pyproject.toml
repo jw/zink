@@ -17,6 +17,8 @@ django_compressor = "^2.4"
 mistune = "^0.8.4"
 pygments = "^2.6.1"
 django-treenode = "^0.14.2"
+Whoosh = "^2.7.4"
+django-haystack = "3.0b2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.4.3"

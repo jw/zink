@@ -100,6 +100,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'haystack',
     'zink',
     'blog',
     'compressor',
@@ -165,6 +166,13 @@ USE_L10N = True
 
 USE_TZ = True
 
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+    },
+}
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
@@ -185,3 +193,6 @@ COMPRESS_PRECOMPILERS = (
 )
 
 logger.info('')  # cleanup
+
+
+SLUG_LENGTH = 200
