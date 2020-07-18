@@ -7,3 +7,4 @@ staticfiles
 db.sqlite3
 node_modules
 zink.egg-info
+whoosh_index
