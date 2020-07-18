@@ -19,6 +19,8 @@ pygments = "^2.6.1"
 django-treenode = "^0.14.2"
 Whoosh = "^2.7.4"
 django-haystack = "3.0b2"
+beautifulsoup4 = "^4.9.1"
+lxml = "^4.5.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.4.3"
