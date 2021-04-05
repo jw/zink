@@ -1,4 +1,4 @@
-fink
+zink
 ====
 
 Zink
@@ -42,7 +42,7 @@ Running type checks with mypy:
 
 ::
 
-  $ mypy fink
+  $ mypy zink
 
 Test coverage
 ^^^^^^^^^^^^^
