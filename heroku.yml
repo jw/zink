@@ -1,7 +1,0 @@
-build:
-  docker:
-    web: Dockerfile
-release:
-  command:
-    - python manage.py rebuild_index --noinput
-  image: web
