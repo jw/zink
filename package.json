@@ -4,7 +4,7 @@
   "description": "Basic JavaScript libraries required for Zink",
   "license": "MIT",
   "dependencies": {
-    "uikit": "^3.5.3"
+    "uikit": "^3.6.18"
   },
   "devDependencies": {
     "less": "^3.11.1"
