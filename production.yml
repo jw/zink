@@ -10,7 +10,7 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/django/Dockerfile
-    image: fink_production_django
+    image: zink_production_django
     depends_on:
       - postgres
       - redis
@@ -23,7 +23,7 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/postgres/Dockerfile
-    image: fink_production_postgres
+    image: zink_production_postgres
     volumes:
       - production_postgres_data:/var/lib/postgresql/data:Z
       - production_postgres_data_backups:/backups:z
@@ -34,7 +34,7 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/traefik/Dockerfile
-    image: fink_production_traefik
+    image: zink_production_traefik
     depends_on:
       - django
     volumes:
@@ -46,7 +46,7 @@ services:
   redis:
     image: redis:5.0
 
-  
+
   awscli:
     build:
       context: .
