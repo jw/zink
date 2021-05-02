@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% load lookup %}
+{% load markdownify %}
+
+{% block content %}
+
+    <div class="uk-container">
+
+        {# work in progress... #}
+        <div class="uk-alert-primary uk-margin-top" uk-alert>
+            <p>{{ assets | lookup:'rero' | safe }}</p>
+        </div>
+
+        {# main title #}
+        <div class="uk-padding uk-text-center uk-margin">
+            <p class="uk-heading-medium">
+                <b>{{ assets | lookup:'index.header' | safe }}</b>
+            </p>
+        </div>
+
+        {# last entry #}
+        {% if entry %}
+            <article class="uk-article uk-margin">
+                <h1 class="uk-article-title">
+                    <a href="{% url 'blog:detail' entry.pk %}">
+                        {{ entry.title }}
+                    </a>
+                </h1>
+                <div>
+                    <p>
+                        {{ entry.body | markdown | safe }}
+                    </p>
+                </div>
+            </article>
+        {% endif %}
+
+        {# slider #}
+        {% if entries %}
+            <div class="uk-heading-line">
+                <h3>{{ assets | lookup:'index.entries' | safe }}</h3>
+            </div>
+            {% include "slider.html" %}
+        {% endif %}
+
+    </div>
+
+{% endblock %}

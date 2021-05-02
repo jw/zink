@@ -1,0 +1,45 @@
+<div class="uk-container uk-margin-top uk-container-expand top-footer">
+    <div class="uk-padding-large">
+        {# todo: add stuff here! #}
+    </div>
+</div>
+
+<div class="uk-container uk-container-expand bottom-footer">
+
+    <div class="uk-padding uk-padding-remove-left uk-padding-remove-right" uk-grid>
+
+        <div class="uk-width-3-4@s">
+            <div class="uk-flex-column">
+                <div class="">
+                     <a href="#">Terms of Use</a> |
+                     <a href="#">Privacy Policy</a>
+                </div>
+                <div>
+                    {% load version %}
+                    Running on Python {% version 'python' %} and
+                    Django {% version 'Django' %}.
+                </div>
+            </div>
+        </div>
+
+        <div class="uk-width-1-4@s uk-text-left@s uk-text-right@m">
+            <a href="https://twitter.com/ElevenBits" uk-icon="icon: twitter"></a>
+            <a href="https://www.pinterest.com/elevenbits/" uk-icon="icon: pinterest"></a>
+            <a href="https://github.com/jw" uk-icon="icon: github"></a>
+            <a href="https://github.com/jw" uk-icon="icon: linkedin"></a>
+        </div>
+
+    </div>
+
+    {# scroll to top #}
+    <div class="uk-padding uk-padding-remove-top uk-padding-remove-left uk-padding-remove-right" uk-grid>
+        <div class="uk-overlay uk-width-1-1 uk-padding-remove-right uk-padding-remove-top uk-padding-remove-bottom uk-text-right">
+            <a class="uk-button uk-button-primary scroll-up scroll-up:active scroll-up:hover"
+               target="#top"
+               type="button"
+               uk-scroll uk-icon="icon: chevron-up">
+            </a>
+        </div>
+    </div>
+
+</div>

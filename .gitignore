@@ -329,3 +329,6 @@ zink/media/
 .env
 .envs/*
 !.envs/.local/
+.yarn
+.yarnrc
+theme/uikit-3.6.20/
