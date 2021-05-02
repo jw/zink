@@ -1,7 +1,0 @@
-# PostgreSQL
-# ------------------------------------------------------------------------------
-POSTGRES_HOST=postgres
-POSTGRES_PORT=5432
-POSTGRES_DB=zink
-POSTGRES_USER=rHurrfNWKvSOOYSIwotcfkkPYFkqajMf
-POSTGRES_PASSWORD=sInHO39XLPGzHupGPkFvMCgLOidZWTJbCPTvgJpIEF21ybbig4RnvP3nAsu0EoSt

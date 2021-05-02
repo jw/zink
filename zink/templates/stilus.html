@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% load markdownify %}
+
+{% block content %}
+
+    <div class="uk-container uk-margin-top">
+        <article class="uk-article">
+            <h4 class="uk-article-title">
+                {{ stilus.title }}
+            </h4>
+            <p>
+                {{ stilus.body | markdown | safe }}
+            </p>
+        </article>
+    </div>
+
+{% endblock %}

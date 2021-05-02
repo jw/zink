@@ -121,3 +121,5 @@ EXTRA
 -----
 
 docker run --name zink -e POSTGRES_PASSWORD=s3cr3t -e POSTGRES_USER=zink -e POSTGRES_DB=zink -p 43210:5432 -d postgres
+export USE_DOCKER=yes
+export DATABASE_URL=postgres://zink:s3cr3t@localhost:43210/zink
