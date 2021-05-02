@@ -332,3 +332,4 @@ zink/media/
 .yarn
 .yarnrc
 theme/uikit-3.6.20/
+.idea
