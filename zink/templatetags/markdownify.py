@@ -2,18 +2,22 @@ from django import template
 import mistune
 from pygments import highlight
 from pygments.formatters import html
-from pygments.lexers import get_lexer_by_name
+from pygments.lexers import get_lexer_by_name, guess_lexer
+from pygments.util import ClassNotFound
 
 register = template.Library()
 
 
 class HighlightRenderer(mistune.Renderer):
     def block_code(self, code, lang):
-        if lang:
-            lexer = get_lexer_by_name(lang, stripall=True)
+        first_line, _, code = code.partition('\n')
+        name = first_line.replace(":", "")
+        try:
+            lexer = get_lexer_by_name(name)
             formatter = html.HtmlFormatter()
             return highlight(code, lexer, formatter)
-        return f'<pre><code>{mistune.escape(code)}</code></pre>'
+        except ClassNotFound as e:
+            return f'<pre><em>{e}</em><code>{mistune.escape(code)}</code></pre>'
 
 
 @register.filter
