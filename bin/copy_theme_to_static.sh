@@ -18,3 +18,6 @@ STATIC_JS=${STATIC_ROOT}/js
 cp ${UIKIT_CSS}/uikit.elevenbits.min.css ${STATIC_CSS}
 cp ${UIKIT_JS}/uikit.min.js ${STATIC_JS}
 cp ${UIKIT_JS}/uikit-icons.min.js ${STATIC_JS}
+
+echo "Copied js to ${STATIC_JS}."
+echo "Copied css and ElevenBits theme to ${STATIC_CSS}."

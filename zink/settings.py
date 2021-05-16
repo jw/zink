@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 import logging.config
 from django.utils.log import DEFAULT_LOGGING
@@ -85,9 +86,7 @@ logging.config.dictConfig({
 logger.info('ENVIRONMENT SETTINGS:')
 if HAS_DB_URL:
     logger.info(f" > DATABASE_URL={HAS_DB_URL}")
-else:
-    logger.warning('No database url specified; '
-                   'should be in docker build.')
+
 logger.info(f" > DEBUG={DEBUG}")
 logger.info(f" > PORT={PORT}")
 logger.info(f" > BASE_DIR={BASE_DIR}")
@@ -140,8 +139,10 @@ TEMPLATES = [
 WSGI_APPLICATION = 'zink.wsgi.application'
 
 if HAS_DB_URL:
+    logger.warning(f"The default database is in {env.dj_db_url('DATABASE_URL')['HOST']}.")
     DATABASES = {"default": env.dj_db_url("DATABASE_URL")}
-    logger.info(f' > DATABASES={DATABASES}')
+else:
+    logger.warning(f"No database created! Use the DATABASE_URL environment variable.")
 
 AUTH_PASSWORD_VALIDATORS = [
     {

@@ -5,7 +5,7 @@ RUN apt-get update \
     && apt-get install -y curl libpq-dev gcc
 
 # node version
-ENV NODE_VERSION v12.18.0
+ENV NODE_VERSION v14.17.0
 ENV NODE_DISTRO linux-x64
 
 # install node
