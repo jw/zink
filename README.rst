@@ -123,3 +123,53 @@ EXTRA
 docker run --name zink -e POSTGRES_PASSWORD=s3cr3t -e POSTGRES_USER=zink -e POSTGRES_DB=zink -p 43210:5432 -d postgres
 export USE_DOCKER=yes
 export DATABASE_URL=postgres://zink:s3cr3t@localhost:43210/zink
+
+
+STUFF
+-----
+
+docker build -t zink-web .
+docker run -p 5000:5000 -e PORT=5000 -e DATABASE_URL=postgres://zink:s3cr3t@192.168.0.185:43210/zink -e DEBUG=1 --name zink-web zink-web
+
+
+UPDATES
+-------
+
+node update
+python update
+poetry update
+dockerfile
+
+LOCAL
+-----
+
+static
+~~~~~~
+
+localhost:8000
+
+database:
+docker run --name zink-db -e POSTGRES_PASSWORD=s3cr3t -e POSTGRES_USER=zink -e POSTGRES_DB=zink -p 43210:5432 -d postgres
+
+web:
+./bin/bootstrap.sh
+./bin/build_theme.sh
+./bin/copy_theme_to_static.sh
+
+./manage.py collectstatic --noinput --clear
+
+export DATABASE_URL=postgres://zink:s3cr3t@192.168.0.185:43210/zink
+./manage.py runserver_plus
+
+docker
+~~~~~~
+
+localhost:5000
+
+database:
+docker run --name zink-db -e POSTGRES_PASSWORD=s3cr3t -e POSTGRES_USER=zink -e POSTGRES_DB=zink -p 43210:5432 -d postgres
+
+web:
+docker build -t zink-web .
+docker run -p 5000:5000 -e PORT=5000 -e DATABASE_URL=postgres://zink:s3cr3t@192.168.0.185:43210/zink -e DEBUG=1 --name zink-web zink-web
+

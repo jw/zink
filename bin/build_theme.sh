@@ -9,6 +9,7 @@ cwd=$(pwd)
 UIKIT_ROOT=${PROJECT_ROOT}/theme/uikit-3.6.20/
 
 cd ${UIKIT_ROOT}
+mkdir -p custom
 cp ../elevenbits.less custom
 yarn
 yarn compile
