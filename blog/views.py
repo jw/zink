@@ -101,6 +101,9 @@ def blog(request, page=1):
                   'menus': menus,
                   'tags': tags}
 
+    for entry in all_entries:
+        logger.info(f"{entry.pk}: {entry.body}")
+
     return render(request, 'blog.html', attributes)
 
 

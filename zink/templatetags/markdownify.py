@@ -15,10 +15,11 @@ register = template.Library()
 class HighlightRenderer(mistune.Renderer):
     def block_code(self, code, lang):
         logger.warning(f"code: [{code}]")
+        logger.warning(f"lang: [{lang}]")
         first_line, _, code = code.partition('\n')
         name = first_line.replace(":", "")
         try:
-            lexer = get_lexer_by_name(name)
+            lexer = get_lexer_by_name(name, stripall=True)
             formatter = html.HtmlFormatter()
             return highlight(code, lexer, formatter)
         except ClassNotFound as e:
@@ -27,5 +28,6 @@ class HighlightRenderer(mistune.Renderer):
 
 @register.filter
 def markdown(value):
+    logger.warning(f"value: {value}")
     markdown = mistune.Markdown(renderer=HighlightRenderer())
     return markdown(value)
