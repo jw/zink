@@ -14,8 +14,6 @@ register = template.Library()
 
 class HighlightRenderer(mistune.Renderer):
     def block_code(self, code, lang):
-        logger.warning(f"code: [{code}]")
-        logger.warning(f"lang: [{lang}]")
         if not lang:
             first_line, _, code = code.partition('\n')
             name = first_line.replace(":", "")
@@ -32,6 +30,5 @@ class HighlightRenderer(mistune.Renderer):
 
 @register.filter
 def markdown(value):
-    logger.warning(f"value: {value}")
     markdown = mistune.Markdown(renderer=HighlightRenderer())
     return markdown(value)
