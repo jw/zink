@@ -96,13 +96,11 @@ def blog(request, page=1):
 
     attributes = {
         # 'deployment': deployment,
-                  'assets': static,
-                  'page_entries': paginator.get_page(page),
-                  'menus': menus,
-                  'tags': tags}
-
-    for entry in all_entries:
-        logger.info(f"{entry.pk}: {entry.body}")
+        'assets': static,
+        'page_entries': paginator.get_page(page),
+        'menus': menus,
+        'tags': tags,
+    }
 
     return render(request, 'blog.html', attributes)
 
@@ -180,10 +178,11 @@ def detail(request, id):
 
     attributes = {
         # 'deployment': deployment,
-                  'assets': static,
-                  'tags': tags,
-                  'menus': menus,
-                  'entry': entry}
+        'assets': static,
+        'tags': tags,
+        'menus': menus,
+        'entry': entry,
+    }
 
     return render(request, 'detail.html', attributes)
 
