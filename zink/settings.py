@@ -197,5 +197,6 @@ COMPRESS_PRECOMPILERS = (
 
 logger.info('')  # cleanup
 
-
 SLUG_LENGTH = 200
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
