@@ -31,18 +31,30 @@ $ mypy zink
 
 ### Test coverage
 
-To run the tests, check your test coverage, and generate an HTML coverage report:
+To run the tests, check your test coverage:
 
 ```
-$ coverage run -m pytest
+$ coverage run --source='.' manage.py test
+$ coverage report
+```
+
+To get and see the report in HTML:
+
+```
 $ coverage html
 $ open htmlcov/index.html
 ```
 
-### Running tests with py.test
+To clear the coverage database:
 
 ```
-$ pytest
+$ coverage erase
+```
+
+### Running tests
+
+```
+$ python manage.py test
 ```
 
 ### Live reloading and Sass CSS compilation
@@ -149,4 +161,3 @@ web:
 docker build -t zink-web .
 docker run -p 5000:5000 -e PORT=5000 -e DATABASE_URL=postgres://zink:s3cr3t@192.168.0.185:43210/zink -e DEBUG=1 --name zink-web zink-web
 ```
-
