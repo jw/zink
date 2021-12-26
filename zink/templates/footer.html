@@ -19,6 +19,9 @@
                     Running on Python {% version 'python' %} and
                     Django {% version 'Django' %}.
                 </div>
+                <div>
+                    {% block deployent %}{% include "deployment.html" %}{% endblock %}                    {% load deployment %}
+                </div>
             </div>
         </div>
 
