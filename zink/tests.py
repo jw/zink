@@ -4,7 +4,7 @@ from django.urls import reverse
 
 class HomeViewTests(TestCase):
 
-    fixtures = ["blog.json"]
+    fixtures = ["blog.json", "deployment.json"]
 
     def test_home(self):
         response = self.client.get(reverse("home"))
