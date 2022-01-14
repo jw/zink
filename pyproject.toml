@@ -13,7 +13,7 @@ django = "==3.2.9"
 django-allauth = "==0.44.0"
 django-anymail = {version = "==8.2", extras = ["mailgun"]}
 django-crispy-forms = "==1.11.2"
-django-environ = "==0.4.5"
+django-environ = "==0.8.1"
 django-model-utils = "==4.1.1"
 django-redis = "==4.12.1"
 django-storages = {version = "==1.11.1", extras = ["boto3"]}
