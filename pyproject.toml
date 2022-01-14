@@ -15,7 +15,7 @@ django-anymail = {version = "==8.2", extras = ["mailgun"]}
 django-crispy-forms = "==1.11.2"
 django-environ = "==0.4.5"
 django-model-utils = "==4.1.1"
-django-redis = "==4.12.1"
+django-redis = "==5.2.0"
 django-storages = {version = "==1.11.1", extras = ["boto3"]}
 gunicorn = "==20.0.4"
 hiredis = "==1.1.0"
