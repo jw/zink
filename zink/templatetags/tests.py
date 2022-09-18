@@ -10,7 +10,7 @@ class VersionTestCase(TestCase):
         self.assertEqual(version("python"), "3.10.2")
 
     def test_version_django(self):
-        self.assertEqual(version("Django"), "3.2.9")
+        self.assertEqual(version("Django"), "4.1.1")
 
     def test_version_unknown(self):
         self.assertEqual(version("foobar"), "unknown")
