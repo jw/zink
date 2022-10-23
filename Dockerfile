@@ -59,7 +59,6 @@ RUN poetry install --no-interaction --no-cache --without dev
 # create statics and build search index
 RUN poetry run python manage.py collectstatic --noinput --clear
 # RUN poetry run python manage.py compress
-
 # RUN poetry run python manage.py deployment
 
-CMD poetry run gunicorn zink.wsgi:application --bind 0.0.0.0:$PORT
+CMD [ "poetry", "run", "gunicorn", "zink.wsgi:application", "--bind 0.0.0.0:$PORT" ]
