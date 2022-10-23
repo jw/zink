@@ -46,7 +46,7 @@ ENV DJANGO_SETTINGS_MODULE=zink.settings
 ENV WEB_CONCURRENCY=3
 ENV DEBUG=False
 
-COPY . .
+COPY . /app
 
 # install yarn and zinks javascript dependencies and run lessc -v
 RUN npm install -g yarn && yarn
@@ -54,7 +54,7 @@ ENV PATH /app/node_modules/.bin:$PATH
 RUN lessc -v
 
 # install dependencies
-RUN POETRY_VIRTUALENVS_CREATE=false poetry install --no-interaction --no-cache --without dev
+RUN poetry install --no-interaction --no-cache --without dev
 
 # create statics and build search index
 RUN poetry run python manage.py collectstatic --noinput --clear
