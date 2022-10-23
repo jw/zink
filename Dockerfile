@@ -22,10 +22,10 @@ RUN mkdir /node && \
 ENV PATH /node/bin:$PATH
 RUN node --version
 
-# install latest poetry
-RUN pip install -U pip \
-    && curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
-ENV PATH="${PATH}:/root/.poetry/bin"
+# install poetry 1.2.2
+RUN python -m pip install -U pip
+RUN python -m install --user pipx
+RUN pipx install poetry==1.2.2
 RUN poetry --version
 
 # python stuff
