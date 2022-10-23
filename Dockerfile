@@ -53,4 +53,6 @@ RUN POETRY_VIRTUALENVS_CREATE=false poetry install --no-interaction
 RUN python manage.py collectstatic --noinput --clear
 # RUN python manage.py compress
 
+RUN python manage.py deployment --git
+
 CMD gunicorn zink.wsgi:application --bind 0.0.0.0:$PORT

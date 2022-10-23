@@ -105,6 +105,7 @@ INSTALLED_APPS = [
     "haystack",
     "zink",
     "blog",
+    "deployment",
     "compressor",
 ]
 
@@ -141,12 +142,10 @@ TEMPLATES = [
 WSGI_APPLICATION = "zink.wsgi.application"
 
 if HAS_DB_URL:
-    logger.warning(
-        f"The default database is in {env.dj_db_url('DATABASE_URL')['HOST']}."
-    )
+    logger.info(f"The default database is in {env.dj_db_url('DATABASE_URL')['HOST']}.")
     DATABASES = {"default": env.dj_db_url("DATABASE_URL")}
 else:
-    logger.warning("No database available! Use the DATABASE_URL environment variable.")
+    logger.warning("No database specified! Use the DATABASE_URL environment variable.")
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -202,5 +201,3 @@ logger.info("")  # cleanup
 SLUG_LENGTH = 200
 
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
-
-BLOG_PAGE_SIZE = 5

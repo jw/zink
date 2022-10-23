@@ -6,19 +6,17 @@ from zink.templatetags.version import version
 
 
 class VersionTestCase(TestCase):
-
     def test_version_python(self):
-        self.assertEqual(version("python"), "3.9.9")
+        self.assertEqual(version("python"), "3.10.2")
 
     def test_version_django(self):
-        self.assertEqual(version("Django"), "3.2.9")
+        self.assertEqual(version("Django"), "4.1.1")
 
     def test_version_unknown(self):
         self.assertEqual(version("foobar"), "unknown")
 
 
 class LookupTestCase(TestCase):
-
     def setUp(self):
         self.d = {"abd": "def", "foo": "bar"}
 
@@ -30,7 +28,6 @@ class LookupTestCase(TestCase):
 
 
 class MarkdownifyTestCase(TestCase):
-
     def test_markdown_python(self):
         text = """
     ::::python
@@ -39,9 +36,9 @@ class MarkdownifyTestCase(TestCase):
             print(f"{foo}")
 """
         result = markdown(text)
-        self.assertTrue("<span class=\"k\">def</span>" in result)
-        self.assertTrue("<span class=\"sa\">f</span>" in result)
-        self.assertTrue("<span class=\"s2\">&quot;</span>" in result)
+        self.assertTrue('<span class="k">def</span>' in result)
+        self.assertTrue('<span class="sa">f</span>' in result)
+        self.assertTrue('<span class="s2">&quot;</span>' in result)
 
     def test_markdown_html(self):
         text = """
