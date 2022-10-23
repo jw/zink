@@ -54,7 +54,7 @@ ENV PATH /app/node_modules/.bin:$PATH
 RUN lessc -v
 
 # install dependencies
-RUN poetry install --no-interaction --no-cache --without dev
+RUN POETRY_VIRTUALENVS_CREATE=false poetry install --no-interaction --no-cache --without dev
 
 # create statics and build search index
 RUN poetry run python manage.py collectstatic --noinput --clear
