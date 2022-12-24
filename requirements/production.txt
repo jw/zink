@@ -10,3 +10,4 @@ sentry-sdk==0.20.3  # https://github.com/getsentry/sentry-python
 # ------------------------------------------------------------------------------
 django-storages[boto3]==1.11.1  # https://github.com/jschneier/django-storages
 django-anymail[mailgun]==8.2  # https://github.com/anymail/django-anymail
+setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
