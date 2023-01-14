@@ -16,6 +16,7 @@ docs/_*
 
 # environment settings
 .env
+elevenbits/.env
 
 # coverage
 **/coverage.xml
