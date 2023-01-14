@@ -45,7 +45,6 @@ exclude = '''
 [tool.coverage.run]
 omit = [
     "**/tests/*",
-    "bms_interface/drivers/bacnet/write_test.py",
 ]
 
 [build-system]
