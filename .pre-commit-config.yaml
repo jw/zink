@@ -1,28 +1,34 @@
-exclude: 'docs|node_modules|migrations|.git|.tox'
-default_stages: [commit]
-fail_fast: true
-
 repos:
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v3.4.0
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.3.0
     hooks:
-      - id: trailing-whitespace
-      - id: end-of-file-fixer
-      - id: check-yaml
-
-  - repo: https://github.com/psf/black
-    rev: 20.8b1
+    -   id: check-toml
+    -   id: end-of-file-fixer
+    -   id: trailing-whitespace
+-   repo: https://github.com/PyCQA/isort
+    rev: 5.10.1
     hooks:
-      - id: black
-
-  - repo: https://github.com/timothycrosley/isort
-    rev: 5.8.0
+    -   id: isort
+        name: Sorting import statements
+-   repo: https://github.com/psf/black
+    rev: 21.9b0
     hooks:
-      - id: isort
-
-  - repo: https://gitlab.com/pycqa/flake8
-    rev: 3.9.0
+    -   id: black
+        additional_dependencies: ['click==8.0.4']
+-   repo: https://github.com/pycqa/flake8
+    rev: 4.0.1
     hooks:
       - id: flake8
-        args: ['--config=setup.cfg']
-        additional_dependencies: [flake8-isort]
+        additional_dependencies:
+          - flake8-annotations==2.7.0
+          - flake8-broken-line==0.4.0
+          - flake8-bugbear==21.9.2
+          - flake8-comprehensions==3.7.0
+          - flake8-eradicate==1.2.0
+          - flake8-no-pep420==1.2.0
+          - flake8-quotes==3.3.1
+          - flake8-simplify==0.14.2
+          - flake8-tidy-imports==4.5.0
+          - flake8-use-fstring==1.3
+          - pep8-naming==0.12.1
+          - flake8-use-fstring
