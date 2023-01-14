@@ -18,6 +18,7 @@ DEBUG = env("DEBUG")
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
+    "simple_menu",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
