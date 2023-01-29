@@ -15,3 +15,14 @@ Run the website via:
 $ python manage.py migrate
 $ python manage.py runserver
 ```
+
+## Tailwind
+
+Download the cli to the $BASEDIR/bin.
+
+```bash
+$ cd BASE_DIR / bin
+$ curl -sLO https://github.com/tailwindlabs/tailwindcss/releases/download/v3.2.4/tailwindcss-linux-x64
+$ chmod +x tailwindcss-linux-x64
+$ mv tailwindcss-linux-x64 tailwindcss
+```
