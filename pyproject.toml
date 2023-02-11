@@ -10,13 +10,15 @@ readme = "README.md"
 python = "^3.11"
 Django = "^4.1.5"
 django-environ = "^0.9.0"
-psycopg2 = "^2.9.5"
+psycopg2-binary  = "^2.9.5"
 django-simple-menu = "^2.1.0"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^2.21.0"
 pytest = "^7.2.1"
 pytest-cov = "^4.0.0"
+ipython = "^8.9.0"
+httpie = "^3.2.1"
 
 [tool.isort]
 multi_line_output = 3
