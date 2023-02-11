@@ -34,7 +34,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "elevenbits.urls"
+ROOT_URLCONF = "main.urls"
 
 TEMPLATES = [
     {
@@ -52,7 +52,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "elevenbits.wsgi.application"
+WSGI_APPLICATION = "main.wsgi.application"
 
 DATABASES = {
     "default": env.db(),
