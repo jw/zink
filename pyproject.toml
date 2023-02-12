@@ -17,7 +17,7 @@ django-simple-menu = "^2.1.0"
 pre-commit = "^2.21.0"
 pytest = "^7.2.1"
 pytest-cov = "^4.0.0"
-ipython = "^8.9.0"
+ipython = "^8.10.0"
 httpie = "^3.2.1"
 
 [tool.isort]
