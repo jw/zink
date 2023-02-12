@@ -1,6 +1,0 @@
-[run]
-branch = True
-omit =
-        docs/*
-        theme/*
-        merge_production_dotenvs_in_dotenv.py
