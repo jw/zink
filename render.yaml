@@ -1,0 +1,21 @@
+databases:
+  - name: zink
+    databaseName: zink
+    user: zink
+
+services:
+  - type: web
+    name: zink
+    region: frankfurt
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn elevenbits.wsgi:application"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: zink
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
