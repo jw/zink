@@ -15,4 +15,4 @@ ENV PATH="/app/.venv/bin:$PATH"
 COPY --from=poetry /app /app
 EXPOSE 8000
 WORKDIR /app/elevenbits
-#CMD python manage.py runserver
+CMD python manage.py runserver
