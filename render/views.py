@@ -3,4 +3,4 @@ from django.shortcuts import render
 
 
 def index(request) -> HttpResponse:  # noqa: ANN001
-    return render(request, "render/index.html", {})
+    return render(request, "index.html", {})
