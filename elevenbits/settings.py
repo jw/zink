@@ -76,8 +76,10 @@ WSGI_APPLICATION = "elevenbits.wsgi.application"
 DATABASES = {
     "default": dj_database_url.config(
         default=(
-            f"postgresql://{os.environ['POSTGRES_USER']}:{os.environ['POSTGRES_PASSWORD']}"
-            f"@localhost:{os.environ['POSTGRES_PORT']}/{os.environ['POSTGRES_NAME']}"
+            f"postgresql://{os.getenv('POSTGRES_USER', default='zink')}:"
+            f"{os.getenv('POSTGRES_PASSWORD', default='secret')}@localhost:"
+            f"{os.getenv('POSTGRES_PORT', default=5432)}/"
+            f"{os.getenv('POSTGRES_NAME', default='zink')}"
         ),
         conn_max_age=600,
     )
