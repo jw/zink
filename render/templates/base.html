@@ -20,8 +20,10 @@
       <link rel="stylesheet" href="{% static 'tailwind/output.css' %}">
 
   </head>
-  <body class="bg-blue-100">
-    {% block content %}
-    {% endblock content %}
+  <body class="bg-blue-100"
+    <header class="fixed w-full">
+        {% block content %}
+        {% endblock content %}
+    </header>
   </body>
 </html>
