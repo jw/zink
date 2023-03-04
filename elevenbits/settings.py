@@ -10,7 +10,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ["SECRET_KEY"]
 
-DEBUG = "RENDER" not in os.environ
+if "RENDER" in os.environ:
+    DEBUG = False
+else:
+    DEBUG = os.environ.get("DEBUG", False)
 
 ALLOWED_HOSTS = []
 
