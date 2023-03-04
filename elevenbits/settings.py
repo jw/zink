@@ -6,18 +6,14 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ["SECRET_KEY"]
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = "RENDER" not in os.environ
+if "RENDER" in os.environ:
+    DEBUG = False
+else:
+    DEBUG = os.environ.get("DEBUG", False)
 
 ALLOWED_HOSTS = []
 
@@ -28,9 +24,6 @@ if RENDER_EXTERNAL_HOSTNAME:
 ALLOWED_HOST = os.environ.get("ALLOWED_HOST")
 if ALLOWED_HOST:
     ALLOWED_HOSTS.append(ALLOWED_HOST)
-
-
-# Application definition
 
 INSTALLED_APPS = [
     "render.apps.RenderConfig",
@@ -73,10 +66,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "elevenbits.wsgi.application"
 
-
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
 DATABASES = {
     "default": dj_database_url.config(
         default=(
@@ -88,10 +77,6 @@ DATABASES = {
         conn_max_age=600,
     )
 }
-
-
-# Password validation
-# https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
