@@ -19,5 +19,9 @@ services:
         generateValue: true
       - key: PYTHON_VERSION
         value: 3.11.1
+      - key: NODE_VERSION
+        value: 18.15.0
       - key: WEB_CONCURRENCY
         value: 4
+      - key: ALLOWED_HOST
+        value: .elevenbits.com
