@@ -7,7 +7,9 @@ services:
   - type: web
     name: zink
     region: frankfurt
-    env: docker
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn elevenbits.wsgi:application"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
