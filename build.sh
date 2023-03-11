@@ -2,7 +2,7 @@
 set -o errexit
 
 pip install -U pip
-pip install poetry==1.3.2
+pip install poetry==1.4.0
 
 poetry install
 
@@ -12,8 +12,6 @@ chmod +x tailwindcss-linux-x64
 mv tailwindcss-linux-x64 tailwindcss
 
 ./tailwindcss -i render/static/tailwind/input.css -o render/static/tailwind/output.css --minify
-
-node -v
 
 python manage.py collectstatic --no-input
 python manage.py migrate
