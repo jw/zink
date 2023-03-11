@@ -13,5 +13,7 @@ mv tailwindcss-linux-x64 tailwindcss
 
 ./tailwindcss -i render/static/tailwind/input.css -o render/static/tailwind/output.css --minify
 
+node -v
+
 python manage.py collectstatic --no-input
 python manage.py migrate
