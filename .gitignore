@@ -24,10 +24,9 @@ elevenbits/.env
 .coverage*
 report.xml
 
-# tailwind
-tailwindcss-linux-arm64
-tailwindcss
-**/output.css
+# tailwind daisyui
+node_modules
+render/static/tailwind/output.css
 
 # vi
 .swp
