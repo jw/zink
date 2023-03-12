@@ -1,7 +1,10 @@
 {
+  "name": "zink",
+  "packageManager": "yarn@3.4.1",
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
     "daisyui": "^2.51.3",
+    "postcss": "^8.4.21",
     "tailwindcss": "^3.2.7"
   }
 }

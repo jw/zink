@@ -24,9 +24,18 @@ elevenbits/.env
 .coverage*
 report.xml
 
-# tailwind daisyui
+# yarn
 node_modules
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# tailwindcss and daisyui output
 render/static/tailwind/output.css
 
-# vi
+# nvim
 .swp
