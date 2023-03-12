@@ -1,12 +1,25 @@
 
-docker run --name zink -e POSTGRES_PASSWORD=zink -e POSTGRES_USER=zink -d -p 7777:5432 postgres
+# ElevenBits
 
-.env
+## Development
 
+Both Python and Node are used.  Python runs the Django, the Javascript is used to create the css files (the css is based on tailwindcss and daisyui).
+The system runs on a render.com blueprint envrinonment.
 
-TAILWIND
+### Database
 
-https://github.com/tailwindlabs/tailwindcss/releases/download/v3.2.7/tailwindcss-linux-arm64
+Make sure to start the database on your local machine:
 
+```bash
+❯ docker run --name zink -e POSTGRES_PASSWORD=zink -e POSTGRES_USER=zink -d -p 7777:5432 postgres
+```
+
+Several environment variables need to be added to the `.env` file.  This `.env` file needs to remain private to you.  It should not be part of the repo!  See the `.env-example` for mare information.
+
+### CSS
+
+Best to automatically generate the tailwind/daisy css.
+
+```bash
 ❯ ./tailwindcss -i render/static/tailwind/input.css -o render/static/tailwind/output.css --watch
-❯ ./tailwindcss -i render/static/tailwind/input.css -o render/static/tailwind/output.css --minify
+```
