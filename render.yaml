@@ -6,8 +6,11 @@ databases:
 services:
   - type: web
     name: zink
-    region: frankfurt
     env: python
+    region: frankfurt
+    plan: starter
+    repo: https://github.com/jw/zink.git
+    branch: master
     buildCommand: "./build.sh"
     startCommand: "gunicorn elevenbits.wsgi:application"
     envVars:
