@@ -23,5 +23,12 @@ Several environment variables need to be added to the `.env` file.  This `.env` 
 Best to automatically generate the tailwind/daisy css.
 
 ```bash
-❯ ./tailwindcss -i render/static/tailwind/input.css -o render/static/tailwind/output.css --watch
+❯ yarn tailwindcss -i render/static/tailwind/input.css -o render/static/tailwind/output.css --watch
+```
+
+Yarn 3.4.1 is used.  First make sure you're using the latest Node LTS.  Best to install yarn via:
+
+```bash
+❯ corepack enable
+❯ corepack prepare yarn@3.4.1 --activate
 ```
