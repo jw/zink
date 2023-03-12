@@ -6,9 +6,9 @@ pip install poetry==1.4.0
 
 poetry install
 
-yarn add -D tailwind
-yarn add -D daisyui
-yarn add -D @tailwindcss/typography
+corepack enable
+corepack prepare yarn@3.4.1 --activate
+yarn
 
 yarn tailwindcss -i render/static/tailwind/input.css -o render/static/tailwind/output.css --minify
 
