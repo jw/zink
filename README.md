@@ -1,6 +1,8 @@
 
 # ElevenBits
 
+This is the elevenbits website project.
+
 ## Development
 
 Both Python and Node are used.  Python runs the Django, the Javascript is used to create the css files (the css is based on tailwindcss and daisyui).
