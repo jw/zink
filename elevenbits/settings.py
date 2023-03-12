@@ -4,7 +4,11 @@ from pathlib import Path
 import dj_database_url
 from dotenv import load_dotenv
 
-load_dotenv()
+SECRET_ENV = Path("/") / "etc" / "secret" / ".env"
+if SECRET_ENV.exists():
+    load_dotenv(SECRET_ENV)
+else:
+    load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
