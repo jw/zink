@@ -2,39 +2,40 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-      <title>ElevenBits</title>
+    <title>ElevenBits</title>
 
-      <!-- Meta SEO -->
-      <meta name="title" content="ElevenBits">
-      <meta name="description" content="ElevenBits">
-      <meta name="robots" content="index, follow">
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-      <meta name="language" content="English">
-      <meta name="author" content="Jan Willems <jw@elevenbits.com>">
+    <!-- Meta SEO -->
+    <meta name="title" content="ElevenBits">
+    <meta name="description" content="ElevenBits">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="English">
+    <meta name="author" content="Jan Willems <jw@elevenbits.com>">
 
-      <link rel="stylesheet" href="{% static 'tailwind/output.css' %}">
+    <link rel="stylesheet" href="{% static 'tailwind/output.css' %}">
 
-  </head>
-  <body>
+</head>
+<body>
 
     {% block content %}
     {% endblock content %}
 
     <footer class="bg-white" aria-labelledby="footerHeading">
-      <h2 id="footerHeading" class="sr-only">Footer</h2>
-      <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
-        <div class="border-t border-gray-200 pt-8 md:flex md:items-center md:justify-between">
-          <p class="mt-4 text-base text-gray-400 md:mt-0 md:order-1">
-            This is the footer ;)
-          </p>
+        <h2 id="footerHeading" class="sr-only">Footer</h2>
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
+            <div class="border-t border-gray-200 pt-8 md:flex md:items-center md:justify-between">
+                <p class="mt-4 text-base text-gray-400 md:mt-0 md:order-1">
+                    {% block footer %}
+                    {% endblock footer %}
+                </p>
+            </div>
         </div>
-      </div>
     </footer>
 
-  </body>
+</body>
 </html>

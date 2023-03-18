@@ -20,3 +20,8 @@
         </p>
     </div>
 {% endblock content %}
+
+{% block footer %}
+    {% load version %}
+    Running on Python {% version 'python' %} and Django {% version 'Django' %}.
+{% endblock %}
