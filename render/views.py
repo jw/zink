@@ -1,6 +1,13 @@
-from django.http import HttpResponse
+import logging
+
 from django.shortcuts import render
 
+from blog.models import Entry
 
-def index(request) -> HttpResponse:  # noqa: ANN001
+logger = logging.getLogger("zink")
+
+
+def index(request):  # noqa: ANN001
+    entry_list = Entry.objects.filter(page=Entry.BLOG, active=True).reverse()
+    logger.warning(f"Retrieved {len(entry_list)} blog entries.")
     return render(request, "index.html", {})
