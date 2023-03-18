@@ -1,6 +1,9 @@
 {
   "name": "zink",
   "packageManager": "yarn@3.4.1",
+  "scripts": {
+    "watch": "yarn tailwindcss -i render/static/tailwind/input.css -o render/static/tailwind/output.css --watch"
+  },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
     "autoprefixer": "^10.4.14",
