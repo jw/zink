@@ -27,4 +27,5 @@ per-file-ignores =
     tests/test_*:ANN201,ANN001,D103,D100
     tests/**/test_*:ANN201,ANN001,D103,D100
     **/tests.py:ANN201,ANN001,D103,D100
+    **/views.py:ANN201,ANN001,D103,D100
 # exclude = some stuff

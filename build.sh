@@ -14,3 +14,4 @@ yarn tailwindcss -i render/static/tailwind/input.css -o render/static/tailwind/o
 
 python manage.py collectstatic --no-input
 python manage.py migrate
+python manage.py loaddata blog

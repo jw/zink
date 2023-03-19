@@ -1,0 +1,6 @@
+
+This directory structure contains all the static elements of the website.
+So it includes logos, images (for example those in the blog), css and
+Javascript files.
+
+Note: also the admin look and feel components are part of this structure.
