@@ -17,6 +17,7 @@ django-treenode = "^0.19.0"
 pillow = "^9.4.0"
 mistune = "^2.0.5"
 pygments = "^2.14.0"
+uvicorn = "^0.23.2"
 
 
 [build-system]
