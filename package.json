@@ -1,6 +1,6 @@
 {
   "name": "zink",
-  "packageManager": "yarn@3.4.1",
+  "packageManager": "yarn@4.0.2",
   "scripts": {
     "watch": "yarn tailwindcss -i render/static/tailwind/input.css -o render/static/tailwind/output.css --watch"
   },

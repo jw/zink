@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
 set -o errexit
 
-pip install -U pip
-pip install poetry==1.4.0
+python -m pip install -U pip
+python -m pip install pipx
+python -m pipx install poetry
 
-poetry install
+poetry install --no-root
 
 corepack enable
-corepack prepare yarn@3.4.1 --activate
+corepack prepare yarn@stable --activate
+yarn set version stable
 yarn
 
 yarn tailwindcss -i render/static/tailwind/input.css -o render/static/tailwind/output.css --minify
