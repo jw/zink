@@ -4,7 +4,7 @@ services:
     name: zink
     runtime: docker
     repo: https://github.com/jw/zink.git
-    region: frankfurt
+    region: oregon
     plan: starter
     branch: master
     envVars:
