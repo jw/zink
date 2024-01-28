@@ -1,18 +1,12 @@
-databases:
-  - name: zink
-    databaseName: zink
-    user: zink
 
 services:
   - type: web
     name: zink
-    env: python
+    runtime: docker
+    repo: https://github.com/jw/zink.git
     region: frankfurt
     plan: starter
-    repo: https://github.com/jw/zink.git
     branch: master
-    buildCommand: "./build.sh"
-    startCommand: "gunicorn elevenbits.wsgi:application"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -24,3 +18,8 @@ services:
         value: 18.15.0
       - key: WEB_CONCURRENCY
         value: 4
+
+databases:
+  - name: zink
+    databaseName: zink
+    user: zink
