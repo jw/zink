@@ -73,18 +73,22 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "elevenbits.wsgi.application"
 
-DATABASES = {
-    "default": dj_database_url.config(
-        default=(
-            f"postgresql://{os.getenv('POSTGRES_USER', default='zink')}:"
-            f"{os.getenv('POSTGRES_PASSWORD', default='secret')}@"
-            f"{os.getenv('POSTGRES_HOST', default='localhost')}:"
-            f"{os.getenv('POSTGRES_PORT', default=5432)}/"
-            f"{os.getenv('POSTGRES_DB', default='zink')}"
-        ),
-        conn_max_age=600,
-    )
-}
+
+DEFAULT_DATABASE_FOO = None
+
+default_database = dj_database_url.config(
+    default=(
+        f"postgresql://{os.getenv('POSTGRES_USER', default='zink')}:"
+        f"{os.getenv('POSTGRES_PASSWORD', default='secret')}@"
+        f"{os.getenv('POSTGRES_HOST', default='localhost')}:"
+        f"{os.getenv('POSTGRES_PORT', default=5432)}/"
+        f"{os.getenv('POSTGRES_DB', default='zink')}"
+    ),
+    conn_max_age=600,
+)
+
+print(f"{default_database=}")
+DATABASES = {"default": default_database}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
