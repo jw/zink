@@ -14,10 +14,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ["SECRET_KEY"]
 
-if "RENDER" in os.environ:
-    DEBUG = False
-else:
-    DEBUG = os.environ.get("DEBUG", False)
+# if "RENDER" in os.environ:  # noqa: E800
+#     DEBUG = False  # noqa: E800
+# else:  # noqa: E800
+#     DEBUG = os.environ.get("DEBUG", False)  # noqa: E800
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
