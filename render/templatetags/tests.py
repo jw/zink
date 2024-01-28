@@ -14,7 +14,7 @@ class VersionTest(TestCase):
 
     def test_version_django(self):
         rendered = render_template("{% load version %}{% version 'django' %}")
-        self.assertEqual(rendered, "4.1.7")
+        self.assertEqual(rendered, "5.0.1")
 
     def test_version_invalid(self):
         rendered = render_template("{% load version %}{% version 'djangofoobar42' %}")
