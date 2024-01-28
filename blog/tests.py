@@ -20,7 +20,7 @@ class IndexTest(TestCase):
         """Test the home page."""
         client = Client()
         response = client.get("/")
-        self.assertContains(response, "I like to cycle.")
+        self.assertContains(response, "I love to cycle.")
 
 
 class TagTestCase(TestCase):
