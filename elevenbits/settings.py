@@ -87,6 +87,7 @@ default_database = dj_database_url.config(
     conn_max_age=600,
 )
 
+print(os.environ.get("DATABASE_URL"))
 print(f"{default_database=}")
 DATABASES = {"default": default_database}
 
