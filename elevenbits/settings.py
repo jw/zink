@@ -88,7 +88,9 @@ default_database = dj_database_url.config(
 )
 
 print(os.environ.get("DATABASE_URL"))
+default_database["HOST"] = f"{default_database['HOST']}.frankfurt-postgres.render.com"
 print(f"{default_database=}")
+
 DATABASES = {"default": default_database}
 
 AUTH_PASSWORD_VALIDATORS = [
