@@ -18,6 +18,7 @@ if "RENDER" in os.environ:  # noqa: E800
     DEBUG = False  # noqa: E800
 else:  # noqa: E800
     DEBUG = os.environ.get("DEBUG", False)  # noqa: E800
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -87,7 +88,7 @@ default_database = dj_database_url.config(
     conn_max_age=600,
 )
 
-print(os.environ.get("DATABASE_URL"))
+print(f'{os.environ.get("DATABASE_URL")=}')
 print(f"{default_database=}")
 
 DATABASES = {"default": default_database}
