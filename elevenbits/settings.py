@@ -14,14 +14,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ["SECRET_KEY"]
 
-# if "RENDER" in os.environ:  # noqa: E800
-#     DEBUG = False  # noqa: E800
-# else:  # noqa: E800
-#     DEBUG = os.environ.get("DEBUG", False)  # noqa: E800
-DEBUG = True  # noqa: E800
+if "RENDER" in os.environ:  # noqa: E800
+    DEBUG = False  # noqa: E800
+else:  # noqa: E800
+    DEBUG = os.environ.get("DEBUG", False)  # noqa: E800
 
 ALLOWED_HOSTS = []
 
+# postgres://zink:yrbQVrlA7b60JsSbHidfxmZLOxrI9dWV@dpg-cmrb0ged3nmc73eflp6g-a/zink_nxld
 RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
@@ -88,7 +88,6 @@ default_database = dj_database_url.config(
 )
 
 print(os.environ.get("DATABASE_URL"))
-default_database["HOST"] = f"{default_database['HOST']}.frankfurt-postgres.render.com"
 print(f"{default_database=}")
 
 DATABASES = {"default": default_database}
