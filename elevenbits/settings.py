@@ -21,7 +21,6 @@ else:  # noqa: E800
 
 ALLOWED_HOSTS = []
 
-# postgres://zink:yrbQVrlA7b60JsSbHidfxmZLOxrI9dWV@dpg-cmrb0ged3nmc73eflp6g-a/zink_nxld
 RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
@@ -73,23 +72,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "elevenbits.wsgi.application"
 
-
-DEFAULT_DATABASE_FOO = None
-
 default_database = dj_database_url.config(
     default=(
         f"postgresql://{os.getenv('POSTGRES_USER', default='zink')}:"
-        f"{os.getenv('POSTGRES_PASSWORD', default='secret')}@"
+        f"{os.getenv('POSTGRES_PASSWORD', default='zink')}@"
         f"{os.getenv('POSTGRES_HOST', default='localhost')}:"
         f"{os.getenv('POSTGRES_PORT', default=5432)}/"
         f"{os.getenv('POSTGRES_DB', default='zink')}"
     ),
     conn_max_age=600,
 )
-
-print(f'{os.environ.get("DATABASE_URL")=}')
-print(f"{default_database=}")
-
 DATABASES = {"default": default_database}
 
 AUTH_PASSWORD_VALIDATORS = [
