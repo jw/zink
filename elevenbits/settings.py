@@ -18,7 +18,6 @@ if "RENDER" in os.environ:  # noqa: E800
     DEBUG = False  # noqa: E800
 else:  # noqa: E800
     DEBUG = os.environ.get("DEBUG", False)  # noqa: E800
-DEBUG = True
 
 ALLOWED_HOSTS = []
 
