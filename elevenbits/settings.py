@@ -22,6 +22,8 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 DEBUG = os.environ.get("DEBUG", False)  # noqa: E800
 RENDER = os.environ.get("RENDER", False)  # noqa: E800
 
+print(f"Starting {RENDER=} with {DEBUG=}.")
+
 ALLOWED_HOSTS = []
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
