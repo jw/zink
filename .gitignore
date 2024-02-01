@@ -35,7 +35,7 @@ node_modules
 !.yarn/versions
 
 # tailwindcss and daisyui output
-render/static/tailwind/output.css
+core/static/tailwind/output.css
 
 # nvim
 .swp
