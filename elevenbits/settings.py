@@ -19,7 +19,7 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 # else:  # noqa: E800
 #     DEBUG = os.environ.get("DEBUG", False)  # noqa: E800
 
-DEBUG = os.environ.get("DEBUG", False)  # noqa: E800
+DEBUG = bool(os.environ.get("DEBUG", False))  # noqa: E800
 RENDER = os.environ.get("RENDER", False)  # noqa: E800
 
 print(f"Starting {RENDER=} with {DEBUG=}.")
@@ -35,7 +35,7 @@ if ALLOWED_HOST:
     ALLOWED_HOSTS.append(ALLOWED_HOST)
 
 INSTALLED_APPS = [
-    "render.apps.RenderConfig",
+    "core.apps.CoreConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

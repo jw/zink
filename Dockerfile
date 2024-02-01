@@ -17,6 +17,6 @@ COPY . .
 RUN corepack enable
 RUN corepack prepare yarn@4.0.2 --activate
 RUN yarn
-RUN yarn tailwindcss -i render/static/tailwind/input.css -o render/static/tailwind/output.css --minify
+RUN yarn tailwindcss -i core/static/tailwind/input.css -o core/static/tailwind/output.css --minify
 
 CMD ["uvicorn", "elevenbits.asgi:application", "--proxy-headers", "--host", "0.0.0.0", "--port", "80"]

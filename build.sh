@@ -12,7 +12,7 @@ corepack prepare yarn@stable --activate
 yarn set version stable
 yarn
 
-yarn tailwindcss -i render/static/tailwind/input.css -o render/static/tailwind/output.css --minify
+yarn tailwindcss -i core/static/tailwind/input.css -o core/static/tailwind/output.css --minify
 
 python manage.py collectstatic --no-input
 python manage.py migrate

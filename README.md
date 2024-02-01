@@ -6,7 +6,7 @@ This is the elevenbits website project.
 ## Development
 
 Both Python and Node are used.  Python runs the Django, the Javascript is used to create the css files (the css is based on tailwindcss and daisyui).
-The system runs on a render.com blueprint environment.
+The system runs on a render.com Dockerfile environment.
 
 ### Database
 
@@ -23,7 +23,7 @@ Several environment variables need to be added to the `.env` file.  This `.env` 
 Best to automatically generate the tailwind/daisy css via [yarn](https://yarnpkg.com/):
 
 ```bash
-❯ yarn tailwindcss -i render/static/tailwind/input.css -o render/static/tailwind/output.css --watch
+❯ yarn tailwindcss -i core/static/tailwind/input.css -o core/static/tailwind/output.css --watch
 ```
 
 Yarn 3.4.1 is used.  First make sure you're using the latest Node LTS (use [nvm](https://github.com/nvm-sh/nvm) to do so).  Best to install yarn via:
