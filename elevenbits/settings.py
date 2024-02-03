@@ -18,6 +18,7 @@ DEBUG = bool(os.environ.get("DEBUG", False))
 RENDER = os.environ.get("RENDER", False)
 
 ALLOWED_HOSTS = []
+CSRF_TRUSTED_ORIGINS = []
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
 if RENDER_EXTERNAL_HOSTNAME:
@@ -26,6 +27,10 @@ if RENDER_EXTERNAL_HOSTNAME:
 ALLOWED_HOST = os.environ.get("ALLOWED_HOST")
 if ALLOWED_HOST:
     ALLOWED_HOSTS.append(ALLOWED_HOST)
+    CSRF_TRUSTED_ORIGINS.append(f"https://{ALLOWED_HOST[1:]}")
+
+print(f"{ALLOWED_HOST=}")
+print(f"{CSRF_TRUSTED_ORIGINS=}")
 
 INSTALLED_APPS = [
     "core.apps.CoreConfig",

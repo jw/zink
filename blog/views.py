@@ -59,7 +59,7 @@ def home(request):
 
 
 def empty(request):
-    return render(request, "ebtry.html")
+    return render(request, "entry.html")
 
 
 def stilus(request):
