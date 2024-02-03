@@ -8,11 +8,11 @@ logger = logging.getLogger("zink")
 
 
 def index(request):  # noqa: ANN001
-    entry_list = Entry.objects.filter(page=Entry.BLOG, active=True).reverse()
-    logger.warning(f"Retrieved {len(entry_list)} blog entries.")
+    entries = Entry.objects.filter(page=Entry.BLOG, active=True).reverse()
+    logger.warning(f"Retrieved {len(entries)} blog entries.")
 
     attributes = {
-        "entry": entry_list[0],
+        "entries": entries,
     }
 
     return render(request, "index.html", attributes)
