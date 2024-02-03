@@ -8,7 +8,7 @@ register = template.Library()
 
 
 class HighlightRenderer(mistune.HTMLRenderer):
-    def block_code(self, code: str, lang: str) -> str:
+    def block_code(self, code: str, lang: str = None) -> str:
         if lang:
             lexer = get_lexer_by_name(lang, stripall=True)
             formatter = html.HtmlFormatter()
@@ -18,7 +18,7 @@ class HighlightRenderer(mistune.HTMLRenderer):
 
 @register.filter
 def markdown(value: str) -> str:
-    markdown = mistune.Markdown(renderer=HighlightRenderer())
+    markdown = mistune.create_markdown(renderer=HighlightRenderer())
     return markdown(value)
 
 

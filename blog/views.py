@@ -3,11 +3,13 @@ import logging
 from django.conf import settings
 from django.core.paginator import EmptyPage, InvalidPage, Paginator
 from django.shortcuts import get_object_or_404, render
-from reading.models import Text
 
 from blog.models import Entry, Menu, Tag
 from elevenbits.generic import get_assets
 from util.deployment import get_deployment
+
+# from reading.models import Text  # noqa: E800
+
 
 logger = logging.getLogger("elevenbits")
 
@@ -34,11 +36,11 @@ def home(request):
     entry_list = Entry.objects.filter(page=Entry.BLOG, active=True).reverse()
     logger.info(f"Retrieved {len(entry_list)} blog entries.")
 
-    books = list(Text.objects.filter(reading=True))
-    if books:
-        logger.info(f"Reading one (or more) books: {books}.")
-    else:
-        logger.info("Not reading any book! So sad.")
+    # books = list(Text.objects.filter(reading=True))  # noqa: E800
+    # if books:  # noqa: E800
+    #     logger.info(f"Reading one (or more) books: {books}.")  # noqa: E800
+    # else:  # noqa: E800
+    #     logger.info("Not reading any book! So sad.")  # noqa: E800
 
     try:
         entry = entry_list.first()
@@ -48,7 +50,7 @@ def home(request):
     attributes = {
         "entry": entry,
         "entries": entry_list[1:],
-        "books": books,
+        # "books": books,  # noqa: E800
         "menus": menus,
         "assets": assets,
     }

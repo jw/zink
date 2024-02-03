@@ -2,12 +2,12 @@
   "name": "zink",
   "packageManager": "yarn@4.0.2",
   "scripts": {
-    "watch": "yarn tailwindcss -i render/static/tailwind/input.css -o render/static/tailwind/output.css --watch"
+    "watch": "yarn tailwindcss -i core/static/tailwind/input.css -o core/static/tailwind/output.css --watch"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.10",
-    "autoprefixer": "^10.4.16",
-    "daisyui": "^4.5.0",
+    "autoprefixer": "^10.4.17",
+    "daisyui": "^4.6.1",
     "postcss": "^8.4.33",
     "tailwindcss": "^3.4.1"
   }

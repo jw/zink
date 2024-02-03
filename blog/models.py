@@ -69,7 +69,7 @@ class Entry(models.Model):
     )
 
     posted = models.DateTimeField(
-        "posted", help_text="Date and time when this " "entry went public", blank=True
+        "posted", help_text="Date and time when this entry went public", blank=True
     )
 
     tags = models.ManyToManyField(Tag, blank=True)

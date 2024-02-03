@@ -4,15 +4,25 @@
 {% load version %}
 
 {% block content %}
-    <div class="hero min-h-screen bg-base-200">
-        <div class="hero-content flex-col lg:flex-row-reverse">
-            {#            <img src="{% static 'me.jpeg' %}" class="max-w-sm rounded-lg shadow-2xl"/>#}
-            <div>
-                <h1 class="text-5xl font-bold">ElevenBits</h1>
-                <p class="text-4xl py-6">
-                    I am a freelance programmer and consultant. I love to cycle. And I like coffee.
-                </p>
-            </div>
-        </div>
+    <div class="prose">
+        <h2>ElevenBits</h2>
+    </div>
+    <div>
+        <p>
+            Hello!  I am a freelance programmer and consultant.
+            I love to cycle.  And I like coffee.
+        </p>
+        <p>
+            Here I leave things I should not forget.
+        </p>
+    </div>
+    <div class="prose">
+        {% for entry in entries %}
+            <p>
+                <a class="link link-hover" href="{% url 'blog:detail' entry.pk %}">
+                    {{ entry.title }}
+                </a>
+            </p>
+        {% endfor %}
     </div>
 {% endblock content %}
