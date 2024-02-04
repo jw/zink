@@ -29,9 +29,6 @@ if ALLOWED_HOST:
     ALLOWED_HOSTS.append(ALLOWED_HOST)
     CSRF_TRUSTED_ORIGINS.append(f"https://{ALLOWED_HOST[1:]}")
 
-print(f"{ALLOWED_HOST=}")
-print(f"{CSRF_TRUSTED_ORIGINS=}")
-
 INSTALLED_APPS = [
     "core.apps.CoreConfig",
     "django.contrib.admin",
@@ -126,7 +123,7 @@ if RENDER:
     STATIC_ROOT = BASE_DIR / "staticfiles"
 
     # Turn on WhiteNoise storage backend that takes care of compressing static files
-    # and creating unique names for each version so they can safely be cached forever.
+    # and creating unique names for each version, so they can safely be cached forever.
     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Default primary key field type
