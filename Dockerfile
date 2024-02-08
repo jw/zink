@@ -6,6 +6,7 @@ RUN python -m pip install -U pip poetry==1.7.1
 
 COPY ./pyproject.toml ./poetry.lock* /tmp/
 
+RUN poetry self add poetry-plugin-export
 RUN poetry export -f requirements.txt --output requirements.txt --without-hashes
 
 FROM nikolaik/python-nodejs:python3.11-nodejs20-bullseye
