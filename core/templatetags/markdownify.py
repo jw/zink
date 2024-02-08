@@ -1,25 +1,13 @@
-import mistune
+import markdown as markdownify
 from django import template
-from pygments import highlight
-from pygments.formatters import html
-from pygments.lexers import get_lexer_by_name
+from django.template.defaultfilters import stringfilter
+from django.utils.safestring import mark_safe
 
 register = template.Library()
 
 
-class HighlightRenderer(mistune.HTMLRenderer):
-    def block_code(self, code: str, lang: str = None) -> str:
-        if lang:
-            lexer = get_lexer_by_name(lang, stripall=True)
-            formatter = html.HtmlFormatter()
-            return highlight(code, lexer, formatter)
-        return f"<pre><code>{mistune.escape(code)}</code></pre>"
-
-
 @register.filter
+@stringfilter
 def markdown(value: str) -> str:
-    markdown = mistune.create_markdown(renderer=HighlightRenderer())
-    return markdown(value)
-
-
-register.filter(markdown)
+    md = markdownify.Markdown(extensions=["fenced_code", "codehilite"])
+    return mark_safe(md.convert(value))
