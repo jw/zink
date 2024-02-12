@@ -1,11 +1,7 @@
 {% load markdownify %}
 
-<article>
-    <h4>
-        <a href="{% url 'blog:detail' entry.pk %}">
-            {{ entry.title }}
-        </a>
-    </h4>
+<div class="prose max-w-none">
+    <h4>{{ entry.title }}</h4>
     <p>
         <span uk-icon="calendar"></span>
         {{ entry.posted | date:"l, jS F Y, Hi\h\r\s" }}
@@ -20,4 +16,4 @@
     <p>
         {{ entry.body | markdown | safe }}
     </p>
-</article>
+</div>
