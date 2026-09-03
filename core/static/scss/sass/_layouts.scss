@@ -1,0 +1,173 @@
+/* ----------------------------------------------------------------
+
+	Layouts.scss
+
+-----------------------------------------------------------------*/
+
+/* ----------------------------------------------------------------
+	Bootstrap Adjustments
+-----------------------------------------------------------------*/
+
+@use 'sass:map';
+
+@media (prefers-reduced-motion: no-preference) {
+	:root {
+		scroll-behavior: auto;
+	}
+}
+
+[class*="col-"]:not([class*="sticky-"]):not([class*="position-"]) {
+	position: relative;
+}
+
+@include media-breakpoint-down(sm) {
+	.card-columns {
+		-webkit-column-count: 3;
+		-moz-column-count: 3;
+		column-count: 3;
+		-webkit-column-gap: 1.25rem;
+		-moz-column-gap: 1.25rem;
+		column-gap: 1.25rem;
+		orphans: 1;
+		widows: 1;
+		&.grid-2 {
+			-webkit-column-count: 2;
+			-moz-column-count: 2;
+			column-count: 2;
+		}
+		> * {
+			display: inline-block;
+			width: 100%;
+		}
+	}
+}
+
+.form-group {
+	margin-bottom: 1rem;
+}
+
+/*	Custom Bootstap Columns */
+@each $breakpoint in map.keys($grid-breakpoints) {
+	@include media-breakpoint-up($breakpoint) {
+		$infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+		.col#{$infix}-1-5 {
+			flex: 0 0 auto;
+			width: 20%;
+		}
+	}
+}
+
+#wrapper {
+	position: relative;
+	float: none;
+	width: 100%;
+	margin: 0 auto;
+	background-color: var(--#{$cnvs-prefix}body-bg);
+	box-shadow: 0 0 10px rgba($black, 0.1);
+	body:not(.stretched) & {
+		@include media-breakpoint-up(xl) {
+			max-width: map.get($grid-breakpoints, "xl");
+		}
+		@include media-breakpoint-up(xxl) {
+			max-width: map.get($grid-breakpoints, "xxl");
+		}
+	}
+	.stretched & {
+		width: 100%;
+		margin: 0;
+		box-shadow: none;
+	}
+}
+
+/* ----------------------------------------------------------------
+	Sections
+-----------------------------------------------------------------*/
+
+.section {
+	position: relative;
+	width: 100%;
+	margin: var(--#{$cnvs-prefix}section-margin) 0;
+	padding: var(--#{$cnvs-prefix}section-padding) 0;
+	background-color: var(--#{$cnvs-prefix}section-bg);
+	overflow: hidden;
+	.container {
+		z-index: 2;
+		+ .video-wrap {
+			z-index: 1;
+		}
+	}
+}
+
+.parallax {
+	--#{$cnvs-prefix}parallax-ratio: 2;
+	--#{$cnvs-prefix}parallax-width: 100%;
+	--#{$cnvs-prefix}parallax-height: calc(1px * (var(--#{$cnvs-prefix}scroll-height) + ((var(--#{$cnvs-prefix}parallax-ratio) * 100))));
+	--#{$cnvs-prefix}parallax-factor: -1px;
+	--#{$cnvs-prefix}parallax-value: calc(var(--#{$cnvs-prefix}parallax-factor) * var(--#{$cnvs-prefix}parallax-ratio) * var(--#{$cnvs-prefix}scroll-percent));
+	overflow: hidden;
+	will-change: transform;
+	position: relative;
+	&-bg {
+		position: absolute !important;
+		z-index: -1;
+		left: 0;
+		top: 0;
+		max-width: none !important;
+		width: var(--#{$cnvs-prefix}parallax-width) !important;
+		height: var(--#{$cnvs-prefix}parallax-height) !important;
+		object-fit: cover;
+		transform: translate3d(0px,var(--#{$cnvs-prefix}parallax-value),0px);
+		transition: transform .1s linear;
+		will-change: transform;
+	}
+
+	&[data-parallax-to="bottom"] {
+		--#{$cnvs-prefix}parallax-factor: 1px;
+		.parallax-bg {
+			top: auto;
+			bottom: 0;
+		}
+	}
+
+	&[data-parallax-direction="horizontal"] {
+		--#{$cnvs-prefix}parallax-width: calc(1px * (var(--#{$cnvs-prefix}scroll-width) + ((var(--#{$cnvs-prefix}parallax-ratio) * 100))));
+		--#{$cnvs-prefix}parallax-height: 100%;
+		.parallax-bg {
+			transform: translate3d(var(--#{$cnvs-prefix}parallax-value),0px,0px);
+		}
+
+		&[data-parallax-to="right"] {
+			--#{$cnvs-prefix}parallax-factor: 1px;
+			.parallax-bg {
+				left: auto;
+				right: 0;
+			}
+		}
+	}
+}
+
+.mobile-parallax,
+.video-placeholder {
+	background-size: cover !important;
+	background-attachment: scroll !important;
+	background-position: center center !important;
+}
+
+.revealer-image {
+	position: relative;
+	bottom: -100px;
+	@include transition(bottom 0.3s ease-in-out);
+
+	.section:hover & {
+		bottom: -50px;
+	}
+}
+
+/* ----------------------------------------------------------------
+	Columns & Grids
+-----------------------------------------------------------------*/
+
+.postcontent,
+.sidebar {
+	position: relative;
+}

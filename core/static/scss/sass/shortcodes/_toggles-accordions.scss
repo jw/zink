@@ -1,0 +1,250 @@
+/*-----------------------------------------------------------------------------------
+
+	Shortcodes: toggles-accordions.scss
+
+-----------------------------------------------------------------------------------*/
+
+/* ----------------------------------------------------------------
+	Toggle
+-----------------------------------------------------------------*/
+$toggle-prefix: toggle;
+$accordion-prefix: accordion;
+
+.#{$toggle-prefix},
+.#{$accordion-prefix} {
+	--#{$cnvs-prefix}toggle-base-color :     		#{$toggle-base-color};
+	--#{$cnvs-prefix}toggle-font-size  :     		#{$toggle-font-size};
+
+	--#{$cnvs-prefix}toggle-border-size   :     	#{$toggle-border-size};
+	--#{$cnvs-prefix}toggle-border-style   :     	solid;
+	--#{$cnvs-prefix}toggle-border-color  :     	#{$toggle-border-color};
+	--#{$cnvs-prefix}toggle-border-radius :     	#{$toggle-border-radius};
+	--#{$cnvs-prefix}toggle-border:					var(--#{$cnvs-prefix}toggle-border-size) var(--#{$cnvs-prefix}toggle-border-style) var(--#{$cnvs-prefix}toggle-border-color);
+
+	--#{$cnvs-prefix}toggle-bg-color    :     		#{$toggle-bg-color};
+	--#{$cnvs-prefix}toggle-title-color :     		#{$toggle-title-color};
+
+	--#{$cnvs-prefix}toggle-header-margin :			0px;
+	--#{$cnvs-prefix}toggle-header-padding :		0px;
+	--#{$cnvs-prefix}toggle-header-bg :				transparent;
+	--#{$cnvs-prefix}toggle-header-border-size:		#{$toggle-border-size};
+	--#{$cnvs-prefix}toggle-header-border-style:	solid;
+	--#{$cnvs-prefix}toggle-header-border-color:	var(--#{$cnvs-prefix}toggle-border-color);
+	--#{$cnvs-prefix}toggle-header-border:			var(--#{$cnvs-prefix}toggle-header-border-size) var(--#{$cnvs-prefix}toggle-header-border-style) var(--#{$cnvs-prefix}toggle-header-border-color);
+	--#{$cnvs-prefix}toggle-header-elements-padding: .3125rem;
+	--#{$cnvs-prefix}toggle-header-border-radius :	0;
+
+	--#{$cnvs-prefix}toggle-content-padding-y:		#{$toggle-content-padding};
+	--#{$cnvs-prefix}toggle-content-padding-x:		calc(var(--#{$cnvs-prefix}toggle-header-padding) + var(--#{$cnvs-prefix}toggle-header-elements-padding));
+	--#{$cnvs-prefix}toggle-bottom-margin	:		1.5rem;
+
+	display: block;
+	position: relative;
+	margin-bottom: var(--#{$cnvs-prefix}toggle-bottom-margin);
+	transition: all .3s ease;
+
+	&.#{$toggle-prefix}-active {
+
+	}
+
+	&-header {
+		--#{$cnvs-prefix}toggle-header-border: 0;
+
+		position: relative;
+		display: -ms-flexbox;
+		display: flex;
+		-ms-flex-wrap: wrap;
+		flex-wrap: wrap;
+		margin: var(--#{$cnvs-prefix}toggle-header-margin);
+		padding: var(--#{$cnvs-prefix}toggle-header-padding);
+		cursor: pointer;
+		color: var(--#{$cnvs-prefix}toggle-title-color);
+		font-size: var(--#{$cnvs-prefix}toggle-font-size);
+		font-weight: 700;
+		background-color: var(--#{$cnvs-prefix}toggle-header-bg);
+		border: var(--#{$cnvs-prefix}toggle-header-border);
+		border-radius: var(--#{$cnvs-prefix}toggle-header-border-radius);
+	}
+}
+
+.#{$toggle-prefix},
+.#{$accordion-prefix} {
+	&-icon {
+		-ms-flex: 0 0 auto;
+		flex: 0 0 auto;
+		width: auto;
+		max-width: 100%;
+		padding: 0 var(--#{$cnvs-prefix}toggle-header-elements-padding);
+		text-align: center;
+	}
+}
+
+.#{$toggle-prefix}-icon {
+	i,
+	span {
+		width: var(--#{$cnvs-prefix}toggle-font-size);
+	}
+}
+
+.#{$toggle-prefix},
+.#{$accordion-prefix} {
+	&-title {
+		-ms-flex-preferred-size: 0;
+		flex-basis: 0;
+		-ms-flex-positive: 1;
+		flex-grow: 1;
+		max-width: 100%;
+		padding: 0 var(--#{$cnvs-prefix}toggle-header-elements-padding);
+	}
+}
+
+.#{$toggle-prefix} {
+	&:not(.#{$toggle-prefix}-active) .#{$toggle-prefix}-open,
+	&-active .#{$toggle-prefix}-closed {
+		display: none;
+	}
+}
+
+.#{$toggle-prefix}-active .#{$toggle-prefix}-open {
+	display: inline-block;
+}
+
+
+/* Toggle - Content
+-----------------------------------------------------------------*/
+
+.#{$toggle-prefix},
+.#{$accordion-prefix} {
+	&-content {
+		display: none;
+		position: relative;
+		padding: var(--#{$cnvs-prefix}toggle-content-padding-y) var(--#{$cnvs-prefix}toggle-content-padding-x);
+	}
+
+	&.toggle-padding .#{$toggle-prefix}-content {
+		padding-left: calc(var(--#{$cnvs-prefix}toggle-content-padding-x) + (var(--#{$cnvs-prefix}toggle-header-elements-padding)*2) + var(--#{$cnvs-prefix}toggle-font-size));
+	}
+}
+
+
+/* Toggle - with Title Background
+-----------------------------------------------------------------*/
+
+.#{$toggle-prefix}-bg {
+	--#{$cnvs-prefix}toggle-header-bg: var(--#{$cnvs-prefix}toggle-bg-color);
+	--#{$cnvs-prefix}toggle-header-margin: 0px;
+	--#{$cnvs-prefix}toggle-header-padding: var(--#{$cnvs-prefix}toggle-content-padding-y);
+	--#{$cnvs-prefix}toggle-header-border-radius: 0.25rem;
+
+	.#{$toggle-prefix}-content {
+		--#{$cnvs-prefix}toggle-content-padding-y: 1rem;
+	}
+}
+
+/* Toggle - Bordered
+-----------------------------------------------------------------*/
+
+.#{$toggle-prefix}-border {
+	--#{$cnvs-prefix}toggle-header-padding: var(--#{$cnvs-prefix}toggle-content-padding-y);
+	--#{$cnvs-prefix}toggle-header-margin: 0px;
+	border: var(--#{$cnvs-prefix}toggle-border);
+	@include border-radius(var(--#{$cnvs-prefix}toggle-border-radius));
+
+	.#{$toggle-prefix}-content {
+		--#{$cnvs-prefix}toggle-content-padding-y: 1rem;
+		padding-top: 0;
+	}
+}
+
+
+/* Toggle - FAQs
+-----------------------------------------------------------------*/
+
+.faqs {
+	.#{$toggle-prefix} {
+		border-bottom: 1px solid var(--#{$cnvs-prefix}toggle-bg-color);
+		padding-bottom: 12px;
+		margin-bottom: 12px;
+		&-content {
+			padding-bottom: 10px;
+		}
+	}
+}
+
+/* ----------------------------------------------------------------
+	Accordions
+-----------------------------------------------------------------*/
+
+.#{$accordion-prefix} {
+	--#{$cnvs-prefix}accordion-border-size  :   #{$accordion-border-size};
+	--#{$cnvs-prefix}accordion-border-color :   #{$accordion-border-color};
+
+	--#{$cnvs-prefix}toggle-content-padding    :   #{$toggle-content-padding};
+	--#{$cnvs-prefix}accordion-content-padding :   #{$accordion-content-padding};
+	margin-bottom: 20px;
+	&-header {
+		padding: var(--#{$cnvs-prefix}toggle-content-padding) 0;
+		border-top: var(--#{$cnvs-prefix}accordion-border-size) dotted var(--#{$cnvs-prefix}accordion-border-color);
+		cursor: pointer;
+		&:first-child {
+			border-top: none;
+		}
+	}
+	&:not([data-collapsible="true"])
+		.#{$accordion-prefix}-header.#{$accordion-prefix}-active {
+		cursor: auto;
+	}
+
+	&-header:not(.#{$accordion-prefix}-active) .#{$accordion-prefix}-open,
+	&-active .#{$accordion-prefix}-closed {
+		display: none;
+	}
+	&-active .#{$accordion-prefix}-open {
+		display: inline-block;
+	}
+	&-content {
+		padding-top: 0;
+		padding-bottom: var(--#{$cnvs-prefix}toggle-content-padding);
+	}
+}
+
+/* Accordion - with Title Background
+-----------------------------------------------------------------*/
+
+.#{$accordion-prefix}-bg {
+	.#{$accordion-prefix}-header {
+		background-color: var(--#{$cnvs-prefix}toggle-bg-color);
+		padding: var(--#{$cnvs-prefix}toggle-content-padding);
+		border-radius: 2px;
+		margin: 0;
+		margin-bottom: 5px;
+		border-top: 0;
+	}
+	.#{$accordion-prefix}-content {
+		padding: var(--#{$cnvs-prefix}toggle-content-padding) var(--#{$cnvs-prefix}toggle-content-padding)
+			var(--#{$cnvs-prefix}toggle-content-padding);
+	}
+}
+
+/* Accordion - Bordered
+-----------------------------------------------------------------*/
+
+.#{$accordion-prefix}-border {
+	border: var(--#{$cnvs-prefix}accordion-border-size) dotted var(--#{$cnvs-prefix}accordion-border-color);
+	border-radius: var(--#{$cnvs-prefix}toggle-border-radius);
+	.#{$accordion-prefix}-header {
+		border-color: var(--#{$cnvs-prefix}contrast-300);
+		padding: var(--#{$cnvs-prefix}toggle-content-padding);
+		margin: 0;
+	}
+	.#{$accordion-prefix}-content {
+		padding: 0 1.125rem var(--#{$cnvs-prefix}toggle-content-padding);
+	}
+}
+
+/* Accordion - Large
+-----------------------------------------------------------------*/
+
+.#{$accordion-prefix}-lg {
+	--#{$cnvs-prefix}toggle-font-size: 1.25rem;
+}

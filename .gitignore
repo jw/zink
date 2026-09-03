@@ -37,6 +37,11 @@ node_modules
 # tailwindcss and daisyui output
 core/static/tailwind/output.css
 
+# compiled canvas scss output
+core/static/css/style.css
+core/static/css/style-rtl.css
+core/static/css/style*.css.map
+
 # nvim
 .swp
 
