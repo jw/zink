@@ -40,5 +40,6 @@ core/static/tailwind/output.css
 # nvim
 .swp
 
-#
+# canvas
 canvas
+examples
