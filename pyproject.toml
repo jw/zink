@@ -1,7 +1,7 @@
 [project]
 name = "zink"
 version = "4.0.0"
-description = ""
+description = "The elevenbits website"
 authors = [{ name = "Jan Willems", email = "jan.willems@elevenbits.com" }]
 requires-python = ">=3.14"
 readme = "README.md"
