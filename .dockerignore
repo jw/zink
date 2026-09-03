@@ -1,0 +1,27 @@
+# python
+.venv
+__pycache__
+*.py[cod]
+.pytest_cache
+
+# vcs
+.git
+.jj
+
+# node
+node_modules
+
+# design/content reference material, never shipped
+canvas
+examples
+
+# build artifacts (built fresh inside the image)
+core/static/tailwind/output.css
+core/static/css/style.css
+core/static/css/style-rtl.css
+core/static/css/style*.css.map
+
+# local-only
+.env
+.idea
+.vscode

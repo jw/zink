@@ -1,23 +1,31 @@
-FROM python:3.11 as requirements-stage
+FROM node:20-bookworm-slim AS assets
 
-WORKDIR /tmp
-
-RUN python -m pip install -U pip poetry==1.7.1
-
-COPY ./pyproject.toml ./poetry.lock* /tmp/
-
-RUN poetry self add poetry-plugin-export
-RUN poetry export -f requirements.txt --output requirements.txt --without-hashes
-
-FROM nikolaik/python-nodejs:python3.11-nodejs20-bullseye
 WORKDIR /code
-COPY --from=requirements-stage /tmp/requirements.txt /code/requirements.txt
-RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 COPY . .
 
-RUN corepack enable
-RUN corepack prepare yarn@4.0.2 --activate
-RUN yarn
+RUN corepack enable && corepack prepare yarn@4.0.2 --activate
+RUN yarn install --immutable
 RUN yarn tailwindcss -i core/static/tailwind/input.css -o core/static/tailwind/output.css --minify
+RUN yarn build:canvas-css
 
-CMD ["uvicorn", "elevenbits.asgi:application", "--lifespan", "off", "--proxy-headers", "--host", "0.0.0.0", "--port", "80"]
+FROM python:3.14.2 AS pydeps
+
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+WORKDIR /code
+
+COPY pyproject.toml uv.lock ./
+RUN uv sync --locked --no-install-project
+
+COPY . .
+RUN uv sync --locked
+
+FROM python:3.14.2-slim
+
+WORKDIR /code
+COPY --from=pydeps /code /code
+COPY --from=assets /code/core/static/tailwind/output.css core/static/tailwind/output.css
+COPY --from=assets /code/core/static/css/style.css /code/core/static/css/style-rtl.css core/static/css/
+
+ENV PATH="/code/.venv/bin:$PATH"
+
+CMD ["sh", "-c", "python manage.py collectstatic --no-input && python manage.py migrate --no-input && python manage.py loaddata blog && exec uvicorn elevenbits.asgi:application --lifespan off --proxy-headers --host 0.0.0.0 --port 80"]
