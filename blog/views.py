@@ -82,14 +82,8 @@ def stilus(request):
 def blog(request, page=1):
     """Get all blog entries for a specific page."""
 
-    static = get_assets()
-    deployment = get_deployment()
-
     tags = Tag.objects.all()
     logger.info(f"Retrieved {len(tags)} tags.")
-
-    menus = create_menus(Menu.roots[0], "blog")
-    logger.info(f"Retrieved {len(menus)} menu items.")
 
     all_entries = Entry.objects.filter(page=Entry.BLOG, active=True).reverse()
     logger.info(f"Retrieved total of {len(all_entries)} blog entries.")
@@ -101,10 +95,8 @@ def blog(request, page=1):
     paginator = Paginator(all_entries, size)
 
     attributes = {
-        "deployment": deployment,
-        "assets": static,
         "page_entries": paginator.get_page(page),
-        "menus": menus,
+        "recent_entries": all_entries[:3],
         "tags": tags,
     }
 
