@@ -34,6 +34,11 @@ class Image(models.Model):
     def __str__(self) -> str:
         return f"{self.image.name} ({self.description})"
 
+    @property
+    def exists(self) -> bool:
+        """Whether the underlying file is actually present in storage."""
+        return bool(self.image) and self.image.storage.exists(self.image.name)
+
 
 class Entry(models.Model):
     """The blog entry."""
