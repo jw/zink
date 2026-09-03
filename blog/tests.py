@@ -40,7 +40,6 @@ class BlogTest(TestCase):
 
     fixtures = ["blog"]
 
-    @skipIf(True, "I don't want to run this test yet")
     def test_blog(self):
         """Test the full blog."""
         client = Client()
