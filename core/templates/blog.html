@@ -23,7 +23,7 @@
                 {% for entry in page_entries %}
                     <article class="card bg-base-100 border border-base-300">
                         {% with image=entry.images.first %}
-                            {% if image %}
+                            {% if image and image.exists %}
                                 <figure>
                                     <img src="{{ image.image.url }}" alt="{{ image.description }}">
                                 </figure>
@@ -45,7 +45,7 @@
                             </div>
                             <p class="mt-2">{{ entry.body|markdown|striptags|truncatewords:40 }}</p>
                             <div class="card-actions justify-end">
-                                <a class="link link-hover font-semibold" href="{% url 'blog:detail' entry.pk %}">Read More &rarr;</a>
+                                <a class="more-link" href="{% url 'blog:detail' entry.pk %}">Read More &rarr;</a>
                             </div>
                         </div>
                     </article>
@@ -75,7 +75,7 @@
                             {% for entry in recent_entries %}
                                 <div class="flex gap-3 items-start">
                                     {% with image=entry.images.first %}
-                                        {% if image %}
+                                        {% if image and image.exists %}
                                             <div class="avatar">
                                                 <div class="w-14 rounded">
                                                     <img src="{{ image.image.url }}" alt="{{ image.description }}">
