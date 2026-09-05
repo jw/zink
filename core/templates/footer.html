@@ -1,0 +1,32 @@
+{% load version %}
+
+<footer class="border-top bg-light">
+    <div class="container py-5">
+        <div class="row gy-4">
+            <div class="col-md-8">
+                <ul class="nav gap-3 mb-3">
+                    <li class="nav-item"><a class="nav-link p-0" href="{% url 'index' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link p-0" href="{% url 'projects' %}">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link p-0" href="{% url 'blog:blog' %}">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link p-0" href="{% url 'contact' %}">Contact</a></li>
+                </ul>
+                <address class="text-muted mb-0">
+                    ElevenBits, Zénobe Grammestraat 22, 2018 Antwerp, Belgium<br>
+                    +32.472.96.99.96 &middot; <a href="mailto:jw@elevenbits.com">jw@elevenbits.com</a><br>
+                    VAT BE 0865.637.502
+                </address>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <a href="/about">About</a> &middot; <a href="/cookies">Cookies</a>
+            </div>
+        </div>
+    </div>
+    <div class="border-top py-3">
+        <div class="container d-flex flex-wrap justify-content-between gap-2 small text-muted">
+            <span>&copy; {% now "Y" %} ElevenBits</span>
+            <a class="text-muted" href="/">
+                Running on Python {% version 'python' %} and Django {% version 'Django' %}.
+            </a>
+        </div>
+    </div>
+</footer>
