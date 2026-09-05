@@ -1,0 +1,26 @@
+{% load static %}
+
+<header class="border-bottom">
+    <div class="container d-flex flex-wrap align-items-center justify-content-between gap-3 py-3">
+        <a href="{% url 'index' %}" class="d-flex align-items-center gap-2 text-body text-decoration-none">
+            <img src="{% static 'logo.png' %}" alt="" height="64">
+            <span class="fs-5 fw-bold">ElevenBits</span>
+        </a>
+        <nav>
+            <ul class="nav gap-1">
+                <li class="nav-item">
+                    <a class="nav-link{% if request.path == '/' %} fw-bold{% endif %}" href="{% url 'index' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link{% if request.resolver_match.url_name == 'projects' %} fw-bold{% endif %}" href="{% url 'projects' %}">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link{% if request.resolver_match.app_name == 'blog' %} fw-bold{% endif %}" href="{% url 'blog:blog' %}">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link{% if request.resolver_match.url_name == 'contact' %} fw-bold{% endif %}" href="{% url 'contact' %}">Contact</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
