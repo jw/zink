@@ -40,7 +40,7 @@ uv run pre-commit run --all-files
 ## Architecture
 
 - `elevenbits/` — Django project config: `settings.py`, root `urls.py` (includes `core.urls`), `asgi.py`/`wsgi.py`.
-- `core/` — the main site app: static pages (index, about, cookies, and the page-in-progress: contact) live in `core/views.py` / `core/urls.py` / `core/templates/*.html`. `core/templatetags/` has the `version` tag used in `base.html`'s footer.
+- `core/` — the main site app: static pages (index, about, cookies, and the page-in-progress: projects, contact) live in `core/views.py` / `core/urls.py` / `core/templates/*.html`. `core/templatetags/` has the `version` tag used in `base.html`'s footer. `base.html` also defines the site header (logo + `home`/`projects`/`blog`/`contact` nav).
 - `blog/` — the blog app, namespaced under `/blog/` (`app_name = "blog"`), own `models.py`/`views.py`/`urls.py`.
 - `deployment/` — tracks deployment metadata (tag/version/timestamp/deployer) shown via the `version` templatetag; not a page, no URLs.
 - `core/static/scss/` — vendored copy of Canvas's Bootstrap-based SCSS, compiled via gulp/sass to `core/static/css/style.css` (gitignored, not committed; also `code.css` for syntax highlighting).

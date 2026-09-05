@@ -26,3 +26,13 @@ def about(request):
 def cookies(request):
     logger.warning("Cookies!")
     return render(request, "cookies.html", {})
+
+
+def projects(request):
+    logger.warning("Projects!")
+    return render(request, "projects.html", {})
+
+
+def contact(request):
+    logger.warning("Contact!")
+    return render(request, "contact.html", {})
