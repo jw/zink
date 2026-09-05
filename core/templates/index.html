@@ -4,25 +4,16 @@
 {% load version %}
 
 {% block content %}
-    <div>
-        <h2>ElevenBits</h2>
-    </div>
-    <div>
-        <p>
-            Hello!  I am a freelance programmer and consultant.
-            I love to cycle.  And I like coffee.
-        </p>
-        <p>
+    <div class="text-center">
+        <h5>Hello!  I am a freelance programmer and consultant.</h5>
+        <p class="fst-italic lh-sm">
+            I love to cycle.  And I like coffee.</br>
             Here I leave things I should not forget.
         </p>
     </div>
-    <div>
-        {% for entry in entries %}
-            <p>
-                <a href="{% url 'blog:detail' entry.pk %}">
-                    {{ entry.title }}
-                </a>
-            </p>
-        {% endfor %}
-    </div>
+    {% if latest_entry %}
+        <h3 class="text-uppercase small fw-semibold mb-3">Latest blog entry</h3>
+        <hr>
+        {% include "entry.html" with entry=latest_entry %}
+    {% endif %}
 {% endblock content %}

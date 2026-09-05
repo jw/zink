@@ -8,11 +8,13 @@ logger = logging.getLogger("zink")
 
 
 def index(request):  # noqa: ANN001
-    entries = Entry.objects.filter(page=Entry.BLOG, active=True).reverse()
-    logger.warning(f"Retrieved {len(entries)} blog entries.")
+    latest_entry = (
+        Entry.objects.filter(page=Entry.BLOG, active=True).order_by("-posted").first()
+    )
+    logger.warning(f"Retrieved latest blog entry: {latest_entry}.")
 
     attributes = {
-        "entries": entries,
+        "latest_entry": latest_entry,
     }
 
     return render(request, "index.html", attributes)
