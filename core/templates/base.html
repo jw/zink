@@ -2,7 +2,7 @@
 {% load version %}
 
 <!DOCTYPE html>
-<html data-theme="wireframe" lang="en">
+<html lang="en">
 
 <head>
 
@@ -22,19 +22,18 @@
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/code.css' %}">
-    <link rel="stylesheet" href="{% static 'tailwind/output.css' %}">
 
 </head>
 
 <body>
 
-    <div class="grid grid-cols-1 gap-4 p-8">
+    <div class="container py-4">
         {% block content %}
         {% endblock content %}
     </div>
 
     {% block footer %}
-        <footer class="footer footer-center pt-4 pb-4 bg-base-200 text-base-content border-base-300">
+        <footer class="text-center py-4 bg-light border-top">
             <div>
                 <a href="/">
                     Running on Python {% version 'python' %} and Django {% version 'Django' %}.

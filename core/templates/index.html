@@ -4,7 +4,7 @@
 {% load version %}
 
 {% block content %}
-    <div class="prose">
+    <div>
         <h2>ElevenBits</h2>
     </div>
     <div>
@@ -16,10 +16,10 @@
             Here I leave things I should not forget.
         </p>
     </div>
-    <div class="prose">
+    <div>
         {% for entry in entries %}
             <p>
-                <a class="link link-hover" href="{% url 'blog:detail' entry.pk %}">
+                <a href="{% url 'blog:detail' entry.pk %}">
                     {{ entry.title }}
                 </a>
             </p>

@@ -16,7 +16,6 @@ canvas
 examples
 
 # build artifacts (built fresh inside the image)
-core/static/tailwind/output.css
 core/static/css/style.css
 core/static/css/style-rtl.css
 core/static/css/style*.css.map

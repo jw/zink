@@ -4,108 +4,98 @@
 
 {% block content %}
 
-    <div class="max-w-5xl mx-auto w-full">
+    <div class="mb-5 text-center">
+        <h1 class="display-5 fw-bold">Blog</h1>
+        <p class="mt-2 text-muted">Our Latest News</p>
+        <nav aria-label="breadcrumb" class="d-flex justify-content-center mt-3">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Blog</li>
+            </ol>
+        </nav>
+    </div>
 
-        <div class="mb-10 text-center">
-            <h1 class="text-4xl font-bold">Blog</h1>
-            <p class="mt-2 opacity-70">Our Latest News</p>
-            <div class="breadcrumbs text-sm justify-center mt-4">
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li>Blog</li>
-                </ul>
-            </div>
-        </div>
+    <div class="row gy-5">
 
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-10">
-
-            <div class="lg:col-span-3 flex flex-col gap-8">
-                {% for entry in page_entries %}
-                    <article class="card bg-base-100 border border-base-300">
-                        {% with image=entry.images.first %}
-                            {% if image and image.exists %}
-                                <figure>
-                                    <img src="{{ image.image.url }}" alt="{{ image.description }}">
-                                </figure>
+        <div class="col-lg-9 d-flex flex-column gap-4">
+            {% for entry in page_entries %}
+                <article class="card">
+                    {% with image=entry.images.first %}
+                        {% if image and image.exists %}
+                            <img class="card-img-top" src="{{ image.image.url }}" alt="{{ image.description }}">
+                        {% endif %}
+                    {% endwith %}
+                    <div class="card-body">
+                        <h2 class="card-title h4">
+                            <a href="{% url 'blog:detail' entry.pk %}">{{ entry.title }}</a>
+                        </h2>
+                        <div class="d-flex flex-wrap gap-3 small text-muted mb-2">
+                            <span>{{ entry.posted|date:"jS F Y" }}</span>
+                            {% if entry.tags.all %}
+                                <span>
+                                    {% for tag in entry.tags.all %}
+                                        <a href="{% url 'blog:tag' tag.pk %}">{{ tag.tag }}</a>{% if not forloop.last %}, {% endif %}
+                                    {% endfor %}
+                                </span>
                             {% endif %}
-                        {% endwith %}
-                        <div class="card-body">
-                            <h2 class="card-title">
-                                <a class="link link-hover" href="{% url 'blog:detail' entry.pk %}">{{ entry.title }}</a>
-                            </h2>
-                            <div class="flex flex-wrap gap-x-4 gap-y-1 text-sm opacity-70">
-                                <span>{{ entry.posted|date:"jS F Y" }}</span>
-                                {% if entry.tags.all %}
-                                    <span>
-                                        {% for tag in entry.tags.all %}
-                                            <a class="link link-hover" href="{% url 'blog:tag' tag.pk %}">{{ tag.tag }}</a>{% if not forloop.last %}, {% endif %}
-                                        {% endfor %}
-                                    </span>
-                                {% endif %}
-                            </div>
-                            <p class="mt-2">{{ entry.body|markdown|striptags|truncatewords:40 }}</p>
-                            <div class="card-actions justify-end">
-                                <a class="more-link" href="{% url 'blog:detail' entry.pk %}">Read More &rarr;</a>
-                            </div>
                         </div>
-                    </article>
-                {% empty %}
-                    <p>No blog entries yet.</p>
-                {% endfor %}
+                        <p>{{ entry.body|markdown|striptags|truncatewords:40 }}</p>
+                        <a class="more-link" href="{% url 'blog:detail' entry.pk %}">Read More &rarr;</a>
+                    </div>
+                </article>
+            {% empty %}
+                <p>No blog entries yet.</p>
+            {% endfor %}
 
-                <div class="flex justify-between mt-4">
-                    <div>
-                        {% if page_entries.has_previous %}
-                            <a class="btn btn-outline" href="{% url 'blog:page' page_entries.previous_page_number %}">&larr; Newer</a>
-                        {% endif %}
-                    </div>
-                    <div>
-                        {% if page_entries.has_next %}
-                            <a class="btn btn-outline" href="{% url 'blog:page' page_entries.next_page_number %}">Older &rarr;</a>
-                        {% endif %}
-                    </div>
+            <div class="d-flex justify-content-between mt-4">
+                <div>
+                    {% if page_entries.has_previous %}
+                        <a class="btn btn-outline-secondary" href="{% url 'blog:page' page_entries.previous_page_number %}">&larr; Newer</a>
+                    {% endif %}
+                </div>
+                <div>
+                    {% if page_entries.has_next %}
+                        <a class="btn btn-outline-secondary" href="{% url 'blog:page' page_entries.next_page_number %}">Older &rarr;</a>
+                    {% endif %}
                 </div>
             </div>
-
-            <aside class="flex flex-col gap-8">
-                {% if recent_entries %}
-                    <div>
-                        <h3 class="font-semibold uppercase text-sm tracking-wide mb-3">Recent Posts</h3>
-                        <div class="flex flex-col gap-4">
-                            {% for entry in recent_entries %}
-                                <div class="flex gap-3 items-start">
-                                    {% with image=entry.images.first %}
-                                        {% if image and image.exists %}
-                                            <div class="avatar">
-                                                <div class="w-14 rounded">
-                                                    <img src="{{ image.image.url }}" alt="{{ image.description }}">
-                                                </div>
-                                            </div>
-                                        {% endif %}
-                                    {% endwith %}
-                                    <div>
-                                        <a class="link link-hover font-medium" href="{% url 'blog:detail' entry.pk %}">{{ entry.title }}</a>
-                                        <div class="text-xs opacity-70">{{ entry.posted|date:"jS F Y" }}</div>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                {% endif %}
-
-                {% if tags %}
-                    <div>
-                        <h3 class="font-semibold uppercase text-sm tracking-wide mb-3">Tag Cloud</h3>
-                        <div class="flex flex-wrap gap-2">
-                            {% for tag in tags %}
-                                <a class="badge badge-outline" href="{% url 'blog:tag' tag.pk %}">{{ tag.tag }}</a>
-                            {% endfor %}
-                        </div>
-                    </div>
-                {% endif %}
-            </aside>
-
         </div>
+
+        <aside class="col-lg-3 d-flex flex-column gap-4">
+            {% if recent_entries %}
+                <div>
+                    <h3 class="text-uppercase small fw-semibold mb-3">Recent Posts</h3>
+                    <div class="d-flex flex-column gap-3">
+                        {% for entry in recent_entries %}
+                            <div class="d-flex gap-3 align-items-start">
+                                {% with image=entry.images.first %}
+                                    {% if image and image.exists %}
+                                        <img class="rounded" style="width: 3.5rem; height: 3.5rem; object-fit: cover;"
+                                             src="{{ image.image.url }}" alt="{{ image.description }}">
+                                    {% endif %}
+                                {% endwith %}
+                                <div>
+                                    <a class="fw-medium" href="{% url 'blog:detail' entry.pk %}">{{ entry.title }}</a>
+                                    <div class="small text-muted">{{ entry.posted|date:"jS F Y" }}</div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if tags %}
+                <div>
+                    <h3 class="text-uppercase small fw-semibold mb-3">Tag Cloud</h3>
+                    <div class="d-flex flex-wrap gap-2">
+                        {% for tag in tags %}
+                            <a class="badge text-bg-secondary" href="{% url 'blog:tag' tag.pk %}">{{ tag.tag }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        </aside>
+
     </div>
 
 {% endblock content %}

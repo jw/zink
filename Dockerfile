@@ -5,7 +5,6 @@ COPY . .
 
 RUN corepack enable && corepack prepare yarn@4.0.2 --activate
 RUN yarn install --immutable
-RUN yarn tailwindcss -i core/static/tailwind/input.css -o core/static/tailwind/output.css --minify
 RUN yarn build:canvas-css
 
 FROM python:3.14.2 AS pydeps
@@ -23,7 +22,6 @@ FROM python:3.14.2-slim
 
 WORKDIR /code
 COPY --from=pydeps /code /code
-COPY --from=assets /code/core/static/tailwind/output.css core/static/tailwind/output.css
 COPY --from=assets /code/core/static/css/style.css /code/core/static/css/style-rtl.css core/static/css/
 
 ENV PATH="/code/.venv/bin:$PATH"

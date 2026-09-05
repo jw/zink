@@ -2,14 +2,11 @@
   "name": "zink",
   "packageManager": "yarn@4.0.2",
   "scripts": {
-    "watch": "yarn tailwindcss -i core/static/tailwind/input.css -o core/static/tailwind/output.css --watch",
     "build:canvas-css": "gulp scsscompile",
     "watch:canvas-css": "gulp watch"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.10",
     "autoprefixer": "^10.4.17",
-    "daisyui": "^4.6.1",
     "gulp": "^5.0.1",
     "gulp-clean-css": "^4.3.0",
     "gulp-concat": "^2.6.1",
@@ -19,7 +16,6 @@
     "gulp-rtlcss": "^2.0.0",
     "gulp-sass": "^6.0.1",
     "postcss": "^8.4.33",
-    "sass": "^1.100.0",
-    "tailwindcss": "^3.4.1"
+    "sass": "^1.100.0"
   }
 }
