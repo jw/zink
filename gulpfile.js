@@ -17,7 +17,7 @@ const silencedSassDeprecations = [
   "color-functions",
   "global-builtin",
   "import",
-  "mixed-decls",
+  "if-function",
   "abs-percent",
 ];
 
