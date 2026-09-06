@@ -21,6 +21,9 @@ uv run manage.py makemigrations / migrate
 # CSS build (watch mode while developing)
 yarn watch:canvas-css
 
+# Or run the dev server and the CSS watcher together
+./dev.sh
+
 # Local Postgres
 docker run --name zink -e POSTGRES_PASSWORD=zink -e POSTGRES_USER=zink -d -p 7777:5432 postgres
 
