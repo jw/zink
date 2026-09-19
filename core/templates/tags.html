@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% load markdownify %}
+
+{% block content %}
+
+    <div class="mb-5 text-center">
+        <h1 class="display-5 fw-bold">Blog</h1>
+        <p class="mt-2 text-muted">{{ assets.header }}</p>
+        <nav aria-label="breadcrumb" class="d-flex justify-content-center mt-3">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'blog:blog' %}">Blog</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Tag</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="row gy-5">
+
+        <div class="col-lg-9 d-flex flex-column gap-4">
+            {% for entry in entries %}
+                <article class="card">
+                    {% with image=entry.images.first %}
+                        {% if image and image.exists %}
+                            <img class="card-img-top" src="{{ image.image.url }}" alt="{{ image.description }}">
+                        {% endif %}
+                    {% endwith %}
+                    <div class="card-body">
+                        <h2 class="card-title h4">
+                            <a href="{% url 'blog:detail' entry.pk %}">{{ entry.title }}</a>
+                        </h2>
+                        <div class="d-flex flex-wrap gap-3 small text-muted mb-2">
+                            <span>{{ entry.posted|date:"jS F Y" }}</span>
+                            {% if entry.tags.all %}
+                                <span>
+                                    {% for tag in entry.tags.all %}
+                                        <a href="{% url 'blog:tag' tag.pk %}">{{ tag.tag }}</a>{% if not forloop.last %}, {% endif %}
+                                    {% endfor %}
+                                </span>
+                            {% endif %}
+                        </div>
+                        <p>{{ entry.body|markdown|striptags|truncatewords:40 }}</p>
+                        <a class="more-link" href="{% url 'blog:detail' entry.pk %}">Read More &rarr;</a>
+                    </div>
+                </article>
+            {% empty %}
+                <p>No blog entries for this tag yet.</p>
+            {% endfor %}
+
+            <div class="d-flex justify-content-between mt-4">
+                <div>
+                    {% if entries.has_previous %}
+                        <a class="btn btn-outline-secondary" href="{% url 'blog:tagpage' tag_id entries.previous_page_number %}">&larr; Newer</a>
+                    {% endif %}
+                </div>
+                <div>
+                    {% if entries.has_next %}
+                        <a class="btn btn-outline-secondary" href="{% url 'blog:tagpage' tag_id entries.next_page_number %}">Older &rarr;</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <aside class="col-lg-3 d-flex flex-column gap-4">
+            {% if tags %}
+                <div>
+                    <h3 class="text-uppercase small fw-semibold mb-3">Tag Cloud</h3>
+                    <div class="d-flex flex-wrap gap-2">
+                        {% for tag in tags %}
+                            <a class="badge {% if tag.pk == tag_id %}text-bg-primary{% else %}text-bg-secondary{% endif %}"
+                               href="{% url 'blog:tag' tag.pk %}">{{ tag.tag }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        </aside>
+
+    </div>
+
+{% endblock content %}

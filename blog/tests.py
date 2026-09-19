@@ -48,16 +48,14 @@ class BlogTest(TestCase):
         self.assertContains(response, "/blog")
         self.assertContains(response, "Running on")
 
-    @skipIf(True, "I don't want to run this test yet")
     def test_tag(self):
         """Test one tag."""
         client = Client()
         response = client.get(reverse("blog:tag", args=[4]))  # django
-        self.assertContains(response, "<title>Tags - elevenbits</title>")
         self.assertContains(response, "2 entries tagged with")
-        self.assertContains(response, "Django")
-        self.assertContains(response, "Blog Categories")
-        self.assertContains(response, "Java (2)")
+        self.assertContains(response, "My first own blog!")
+        self.assertContains(response, "Eclipse and Django development setup")
+        self.assertContains(response, "Tag Cloud")
 
     @skipIf(True, "I don't want to run this test yet")
     def test_detail(self):
