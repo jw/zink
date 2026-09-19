@@ -5,7 +5,7 @@ This is the elevenbits website project.
 
 ## Development
 
-Both Python and Node are used.  Python runs the Django, the Javascript is used to create the css files (a vendored copy of the Canvas template's Bootstrap-based SCSS, compiled with gulp/sass).
+Both Python and Node are used.  Python runs the Django, the JavaScript is used to create the CSS files (a vendored copy of the Canvas template's Bootstrap-based SCSS, compiled with gulp/sass).
 The system runs on a render.com Dockerfile environment.
 
 ### Database
@@ -20,13 +20,13 @@ Several environment variables need to be added to the `.env` file.  This `.env` 
 
 ### CSS
 
-Best to automatically generate the css via [yarn](https://yarnpkg.com/):
+Best to automatically generate the CSS via [yarn](https://yarnpkg.com/):
 
 ```bash
 ❯ yarn watch:canvas-css
 ```
 
-Yarn 3.4.1 is used.  First make sure you're using the latest Node LTS (use [nvm](https://github.com/nvm-sh/nvm) to do so).  Best to install yarn via:
+Yarn 3.4.1 is used. First, make sure you're using the latest Node LTS (use [nvm](https://github.com/nvm-sh/nvm) to do so).  Best to install yarn via:
 
 ```bash
 ❯ corepack enable
