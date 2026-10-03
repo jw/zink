@@ -40,7 +40,11 @@ core/static/css/style-rtl.css
 core/static/css/style*.css.map
 
 # nvim
-.swp
+*.swp
+
+# local database dumps (see export-render-db.sh)
+/dump
+/dump.sql
 
 # canvas
 canvas
