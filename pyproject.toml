@@ -25,3 +25,10 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/foo"]
+
+[tool.isort]
+# Without this, isort's default 79-char line length disagrees with black's 88-char
+# default, so the two hooks can fight over how to wrap any import line in between
+# (isort wraps it, black unwraps it, forever) - see
+# https://pycqa.github.io/isort/docs/configuration/black_compatibility.html
+profile = "black"
