@@ -6,7 +6,7 @@ Django site for elevenbits.com. Python backend, Bootstrap-based (Canvas template
 
 - Python 3.14, Django 6.1, managed with **uv** (not poetry/pip).
 - Postgres (local dev via Docker), `whitenoise` serves static files in prod, `gunicorn`/`uvicorn` for serving.
-- Frontend CSS is a vendored copy of the Canvas template's Bootstrap-based SCSS (`core/static/scss/`), compiled with **gulp**/**sass** (run via **yarn**, yarn 3.4.1 via corepack) to `core/static/css/style.css`. No Tailwind/daisyUI.
+- Frontend CSS is a vendored copy of the Canvas template's Bootstrap-based SCSS (`core/static/scss/`), compiled with **gulp**/**sass** (run via **yarn**, yarn 4.17.1 via corepack) to `core/static/css/style.css`. No Tailwind/daisyUI.
 - VCS: **jj** (Jujutsu), git backend. Use `jj`, not `git`, for day-to-day work in this repo.
 
 ## Commands

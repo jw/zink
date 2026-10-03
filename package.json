@@ -1,6 +1,6 @@
 {
   "name": "zink",
-  "packageManager": "yarn@4.0.2",
+  "packageManager": "yarn@4.17.1",
   "scripts": {
     "build:canvas-css": "gulp scsscompile",
     "watch:canvas-css": "gulp watch"

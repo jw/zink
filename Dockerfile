@@ -3,7 +3,7 @@ FROM node:20-bookworm-slim AS assets
 WORKDIR /code
 COPY . .
 
-RUN corepack enable && corepack prepare yarn@4.0.2 --activate
+RUN corepack enable && corepack prepare yarn@4.17.1 --activate
 RUN yarn install --immutable
 RUN yarn build:canvas-css
 

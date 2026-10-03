@@ -26,9 +26,9 @@ Best to automatically generate the CSS via [yarn](https://yarnpkg.com/):
 ❯ yarn watch:canvas-css
 ```
 
-Yarn 3.4.1 is used. First, make sure you're using the latest Node LTS (use [nvm](https://github.com/nvm-sh/nvm) to do so).  Best to install yarn via:
+Yarn 4.17.1 is used. First, make sure you're using the latest Node LTS (use [nvm](https://github.com/nvm-sh/nvm) to do so).  Best to install yarn via:
 
 ```bash
 ❯ corepack enable
-❯ corepack prepare yarn@3.4.1 --activate
+❯ corepack prepare yarn@4.17.1 --activate
 ```
