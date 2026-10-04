@@ -24,10 +24,15 @@ RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
-ALLOWED_HOST = os.environ.get("ALLOWED_HOST")
-if ALLOWED_HOST:
-    ALLOWED_HOSTS.append(ALLOWED_HOST)
-    CSRF_TRUSTED_ORIGINS.append(f"https://{ALLOWED_HOST[1:]}")
+for allowed_host in os.environ.get("ALLOWED_HOST", "").split(","):
+    allowed_host = allowed_host.strip()
+    if not allowed_host:
+        continue
+    ALLOWED_HOSTS.append(allowed_host)
+    if allowed_host.startswith("."):
+        CSRF_TRUSTED_ORIGINS.append(f"https://{allowed_host[1:]}")
+    else:
+        CSRF_TRUSTED_ORIGINS.append(f"https://{allowed_host}")
 
 INSTALLED_APPS = [
     "core.apps.CoreConfig",
