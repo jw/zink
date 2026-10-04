@@ -6,7 +6,7 @@ authors = [{ name = "Jan Willems", email = "jan.willems@elevenbits.com" }]
 requires-python = ">=3.14"
 readme = "README.md"
 dependencies = [
-    "django==6.1",
+    "django>=6.1.1,<6.2",
     "python-dotenv>=1.2.3",
     "dj-database-url>=3.1.2",
     "psycopg2-binary>=2.9.12",

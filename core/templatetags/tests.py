@@ -1,4 +1,5 @@
 import os
+from importlib import metadata
 from unittest import TestCase, mock
 
 from django.template import Context, Template
@@ -15,7 +16,7 @@ class VersionTest(TestCase):
 
     def test_version_django(self):
         rendered = render_template("{% load version %}{% version 'django' %}")
-        self.assertEqual(rendered, "6.1")
+        self.assertEqual(rendered, metadata.version("django"))
 
     def test_version_invalid(self):
         rendered = render_template("{% load version %}{% version 'djangofoobar42' %}")
